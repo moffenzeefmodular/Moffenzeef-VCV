@@ -8,6 +8,7 @@ void init(Plugin* p) {
 	pluginInstance = p;
 
 	// Add modules here
+	p->addModel(modelBadIdea9);
 	p->addModel(modelBadIdea1800);
 	p->addModel(modelBobcat);
 	p->addModel(modelBusMult);

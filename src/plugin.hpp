@@ -8,6 +8,7 @@ using namespace rack;
 extern Plugin* pluginInstance;
 
 // Declare each Model, defined in each module source file
+extern Model* modelBadIdea9;
 extern Model* modelBadIdea1800;
 extern Model* modelBobcat;
 extern Model* modelBusMult;
@@ -22,5 +23,12 @@ extern Model* modelMongrel;
 extern Model* modelMuskrat;
 extern Model* modelSimplify;
 
+struct CKSSHorizontal : app::SvgSwitch {
+	CKSSHorizontal() {
+		shadow->opacity = 0.0;
+		addFrame(Svg::load(asset::system("res/ComponentLibrary/CKSSThreeHorizontal_0.svg")));
+		addFrame(Svg::load(asset::system("res/ComponentLibrary/CKSSThreeHorizontal_2.svg")));
+	}
+};
 
 

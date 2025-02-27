@@ -14,6 +14,14 @@
   "changelogUrl": "",
   "modules": [
     {
+      "slug": "BadIdea9",
+      "name": "Bad Idea #9",
+      "description": "Power starved glitch oscillator",
+      "modularGridUrl": "https://modulargrid.net/e/moffenzeef-modular-bad-idea-9",
+      "manualUrl": "https://www.moffenzeefmodular.com/s/MOF-BAD-IDEA-QS.pdf",
+      "tags": ["oscillator", "noise", "drum"]
+    },
+    {
       "slug": "BadIdea1800",
       "name": "Bad Idea #1800-Call-Yer-Mum",
       "description": "DTMF tone generator",

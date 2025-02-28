@@ -1,37 +1,33 @@
 #include "plugin.hpp"
 
-template <int OVERSAMPLE, int QUALITY, typename T>
 struct VoltageControlledOscillator {
     bool analog = false;
-    T phase = 0.f;
-    T freq = 0.f;
-    T pulseWidth = 0.5f;
+    float phase = 0.f; 
+    float freq = 0.f;
+    float pulseWidth = 0.5f;
 
-    dsp::MinBlepGenerator<QUALITY, OVERSAMPLE, T> sqrMinBlep;
+    float sqrValue = 0.f;
 
-    T sqrValue = 0.f;
-
-    void setPulseWidth(T pulseWidth) {
+    void setPulseWidth(float pulseWidth) {
         const float pwMin = 0.01f;
         this->pulseWidth = simd::clamp(pulseWidth, pwMin, 1.f - pwMin);
     }
 
     void process(float deltaTime) {
         // Advance phase with oversampling for smoother transitions
-        T deltaPhase = simd::clamp(freq * deltaTime, 0.f, 0.35f);
+        float deltaPhase = simd::clamp(freq * deltaTime, 0.f, 0.35f);
         phase += deltaPhase;
         phase -= simd::floor(phase); // Wrap phase
 
-        // Use the smoother MinBlep approach for square wave
+        // Direct square wave calculation based on the pulse width
         sqrValue = sqr(phase);
-        sqrValue += sqrMinBlep.process();
     }
 
-    T sqr(T phase) {
+    float sqr(float phase) {
         return simd::ifelse(phase < pulseWidth, 1.f, -1.f);
     }
 
-    T sqr() {
+    float sqr() {
         return sqrValue;
     }
 };
@@ -62,8 +58,7 @@ struct Kriket : Module {
         LIGHTS_LEN
     };
 
-    // Replace float_4 with float, and use higher oversampling (e.g., 16)
-    VoltageControlledOscillator<16, 16, float> vco1, vco2, vco3, vco4;
+    VoltageControlledOscillator vco1, vco2, vco3, vco4;
 
     // High-pass filter variables
     float hpFilterPrevInput1 = 0.0f;

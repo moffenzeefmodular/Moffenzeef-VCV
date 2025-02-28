@@ -1,0 +1,64 @@
+{
+	"MetaModulePluginMaintainer": "Moffenzeef",
+	"MetaModulePluginMaintainerEmail": "moffenzeefmodular@gmail.com",
+	"MetaModulePluginMaintainerUrl": "moffenzeefmodular.com",
+	"MetaModuleDescription": "Glitchy lo-fi drum modules and division based sequencing",
+	"MetaModuleIncludedModules": [
+	{
+		"slug": "BadIdea9",
+		"name": "Bad Idea #9"
+	},
+	{
+		"slug": "BadIdea1800",
+		"name": "Bad Idea 1800-Call-Yer-Mum"
+	},
+    {
+		"slug": "Bobcat",
+		"name": "Bobcat"
+	},
+    {
+		"slug": "BusMult",
+		"name": "Bus Mult"
+	},
+    {
+		"slug": "Count",
+		"name": "Count"
+	},
+    {
+		"slug": "Deviant",
+		"name": "Deviant"
+	},
+    {
+		"slug": "DialUp",
+		"name": "Dial Up"
+	},
+    {
+		"slug": "GMO",
+		"name": "Genetically Modified Oscillator"
+	},
+    {
+		"slug": "Kriket",
+		"name": "Kriket"
+	},
+    {
+		"slug": "Mito",
+		"name": "Mito"
+	},
+    {
+		"slug": "Moffenmix",
+		"name": "Moffenmix"
+	},    
+    {
+		"slug": "Mongrel",
+		"name": "Mongrel"
+	},
+    {
+		"slug": "Muskrat",
+		"name": "Muskrat"
+	},
+    {
+		"slug": "Simplify",
+		"name": "Simplify"
+	}
+]
+}

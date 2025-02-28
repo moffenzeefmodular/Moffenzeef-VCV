@@ -15,7 +15,7 @@ void init(Plugin* p) {
 	p->addModel(modelCount);
 	p->addModel(modelDeviant);
 	p->addModel(modelDialUp);
-	//p->addModel(modelGMO);
+	p->addModel(modelGMO);
 	p->addModel(modelKriket);
 	p->addModel(modelMito);
 	p->addModel(modelMoffenmix);

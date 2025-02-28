@@ -16,7 +16,7 @@ target_sources(Moffenzeef PRIVATE
     ${SOURCE_DIR}/src/Count.cpp
     ${SOURCE_DIR}/src/Deviant.cpp
     ${SOURCE_DIR}/src/DialUp.cpp
-    #${SOURCE_DIR}/src/GMO.cpp
+    ${SOURCE_DIR}/src/GMO.cpp
     ${SOURCE_DIR}/src/Kriket.cpp
     ${SOURCE_DIR}/src/Mito.cpp
     ${SOURCE_DIR}/src/Moffenmix.cpp

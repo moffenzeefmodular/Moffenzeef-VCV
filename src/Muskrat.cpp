@@ -1,8 +1,8 @@
 #include "rack.hpp"
 #include <vector>
 #include "plugin.hpp"
+#include <random> 
 #include "dsp/digital.hpp"  // For utilities like `mix` and other DSP-related functions
-#include <random>
 
 using namespace rack;
 

@@ -1,7 +1,6 @@
 #pragma once
 #include <rack.hpp>
 
-
 using namespace rack;
 
 // Declare the Plugin, defined in plugin.cpp
@@ -30,5 +29,3 @@ struct CKSSHorizontal : app::SvgSwitch {
 		addFrame(Svg::load(asset::system("res/ComponentLibrary/CKSSThreeHorizontal_2.svg")));
 	}
 };
-
-

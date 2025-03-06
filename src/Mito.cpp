@@ -6,30 +6,30 @@ struct Mito : Module {
 		KNOB1_PARAM,
 		KNOB2_PARAM,
 		KNOB3_PARAM,
-		SWING_PARAM,
+		KNOB4_PARAM,
+		KNOB5_PARAM,
+		KNOB6_PARAM,
 		MUTE1_PARAM,
 		MUTE2_PARAM,
 		MUTE3_PARAM,
-		KNOB5_PARAM,
-		KNOB6_PARAM,
-		WIDTH_PARAM,
 		MUTE4_PARAM,
 		MUTE5_PARAM,
 		MUTE6_PARAM,
-		KNOB4_PARAM,
+		SWING_PARAM,
+		WIDTH_PARAM,
 		PARAMS_LEN
 	};
 	enum InputId {
-		SWING_CVINPUT,
-		WIDTH_CVINPUT,
 		BANG_INPUT,
+		RESET_INPUT,
 		CH1_CVINPUT,
 		CH2_CVINPUT,
 		CH3_CVINPUT,
-		RESET_INPUT,
 		CH4_CVINPUT,
 		CH5_CVINPUT,
 		CH6_CVINPUT,
+		SWING_CVINPUT,
+		WIDTH_CVINPUT,
 		INPUTS_LEN
 	};
 	enum OutputId {
@@ -56,9 +56,9 @@ struct Mito : Module {
 		configParam(KNOB1_PARAM, 0.f, 1.f, 1.f, "Division 1");
 		configParam(KNOB2_PARAM, 0.f, 1.f, 1.f, "Division 2");
 		configParam(KNOB3_PARAM, 0.f, 1.f, 1.f, "Division 3");
+		configParam(KNOB4_PARAM, 0.f, 1.f, 1.f, "Division 6");
 		configParam(KNOB5_PARAM, 0.f, 1.f, 1.f, "Division 4");
 		configParam(KNOB6_PARAM, 0.f, 1.f, 1.f, "Division 5");
-		configParam(KNOB4_PARAM, 0.f, 1.f, 1.f, "Division 6");
 
 		configParam(MUTE1_PARAM, 0.f, 1.f, 1.f, "Mute 1");
 		configParam(MUTE2_PARAM, 0.f, 1.f, 1.f, "Mute 2");
@@ -70,9 +70,6 @@ struct Mito : Module {
 		configParam(SWING_PARAM, 0.f, 1.f, 0., "Swing amount");
 		configParam(WIDTH_PARAM, 0.f, 1.f, 0.5f, "Width");
 
-		configInput(SWING_CVINPUT, "Swing CV");
-		configInput(WIDTH_CVINPUT, "Width CV");
-
 		configInput(BANG_INPUT, "Bang!");
 		configInput(RESET_INPUT, "Reset");
 
@@ -82,6 +79,9 @@ struct Mito : Module {
 		configInput(CH4_CVINPUT, "Division 4 CV");
 		configInput(CH5_CVINPUT, "Division 5 CV");
 		configInput(CH6_CVINPUT, "Division 6 CV");
+
+		configInput(SWING_CVINPUT, "Swing CV");
+		configInput(WIDTH_CVINPUT, "Width CV");
 
 		configOutput(CH1_OUTPUT, "1");
 		configOutput(CH2_OUTPUT, "2");
@@ -142,61 +142,43 @@ struct Mito : Module {
 
 	float cvInput = 0.0f;
     float normalizedCV = 0.0f;
-    float knob1Param = 0.0f;
-    float knob1Value = 0.0f;
+    float knob1Param = 1.0f;
+    float knob1Value = 1.0f;
 
 	float cvInput2 = 0.0f;
 	float normalizedCV2 = 0.0f;
-	float knob2Param = 0.0f;
-	float knob2Value = 0.0f;
+	float knob2Param = 1.0f;
+	float knob2Value = 1.0f;
 
 	float cvInput3 = 0.0f;
 	float normalizedCV3 = 0.0f;
-	float knob3Param = 0.0f;
-	float knob3Value = 0.0f;
+	float knob3Param = 1.0f;
+	float knob3Value = 1.0f;
 
 	float cvInput4 = 0.0f;
 	float normalizedCV4 = 0.0f;
-	float knob4Param = 0.0f;
-	float knob4Value = 0.0f;
+	float knob4Param = 1.0f;
+	float knob4Value = 1.0f;
 
 	float cvInput5 = 0.0f;
 	float normalizedCV5 = 0.0f;
-	float knob5Param = 0.0f;
-	float knob5Value = 0.0f;
+	float knob5Param = 1.0f;
+	float knob5Value = 1.0f;
 
 	float cvInput6 = 0.0f;
 	float normalizedCV6 = 0.0f;
-	float knob6Param = 0.0f;
-	float knob6Value = 0.0f;
+	float knob6Param = 1.0f;
+	float knob6Value = 1.0f;
 
-	bool mute1 = false; 
-	bool mute2 = false; 
-	bool mute3 = false; 
-	bool mute4 = false; 
-	bool mute5 = false; 
-	bool mute6 = false; 
+	bool mute1 = true; 
+	bool mute2 = true; 
+	bool mute3 = true; 
+	bool mute4 = true; 
+	bool mute5 = true; 
+	bool mute6 = true; 
 
 
 	void process(const ProcessArgs& args) override {
-
-		// Pulsewidth CV and knob scale
-        pulseWidthParam = params[WIDTH_PARAM].getValue() * 0.2f + 0.05f;
-		widthCvInput = inputs[WIDTH_CVINPUT].getVoltage();  // Read CV input for WIDTH
-		normalizedWidthCV = (widthCvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-		widthParam = params[WIDTH_PARAM].getValue();  // Original WIDTH_PARAM value
-		widthValue = widthParam + (normalizedWidthCV - 0.5f);  // Apply the CV input as an offset
-		widthValue = clamp(widthValue, 0.0f, 1.0f);
-		pulseWidthParam = widthValue * 0.2f + 0.05f;  // Scale pulse width
-		pw = (clockDuration * pulseWidthParam);
-        
-		// Swing CV and knob scale 
-        swingCvInput = inputs[SWING_CVINPUT].getVoltage();  // Read CV input for SWING
-        normalizedSwingCV = (swingCvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-        swingValue = params[SWING_PARAM].getValue();  // Original SWING_PARAM value
-        swingParamValue = swingValue + (normalizedSwingCV - 0.5f);  // Apply the CV input as an offset
-        swingParamValue = clamp(swingParamValue, 0.0f, 1.0f);
-        swingParam = swingParamValue * 100.0f; // The max value of the swing parameter is scaled to 100ms
 
         // CH 1 CV
         cvInput = inputs[CH1_CVINPUT].getVoltage();  // Read CV input
@@ -245,6 +227,24 @@ struct Mito : Module {
 		knob6Value = knob6Param + (normalizedCV6 - 0.5f);  // Apply the CV input as an offset
 		knob6Value = clamp(knob6Value, 0.0f, 1.0f);
 		divisionAmount6 = 1 + (1.0 - knob6Value) * 15;  // Update division based on knob and CV input
+
+				// Pulsewidth CV and knob scale
+		pulseWidthParam = params[WIDTH_PARAM].getValue() * 0.2f + 0.05f;
+		widthCvInput = inputs[WIDTH_CVINPUT].getVoltage();  // Read CV input for WIDTH
+		normalizedWidthCV = (widthCvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+		widthParam = params[WIDTH_PARAM].getValue();  // Original WIDTH_PARAM value
+		widthValue = widthParam + (normalizedWidthCV - 0.5f);  // Apply the CV input as an offset
+		widthValue = clamp(widthValue, 0.0f, 1.0f);
+		pulseWidthParam = widthValue * 0.2f + 0.05f;  // Scale pulse width
+		pw = (clockDuration * pulseWidthParam);
+				
+		// Swing CV and knob scale 
+		swingCvInput = inputs[SWING_CVINPUT].getVoltage();  // Read CV input for SWING
+		normalizedSwingCV = (swingCvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+		swingValue = params[SWING_PARAM].getValue();  // Original SWING_PARAM value
+		swingParamValue = swingValue + (normalizedSwingCV - 0.5f);  // Apply the CV input as an offset
+		swingParamValue = clamp(swingParamValue, 0.0f, 1.0f);
+		swingParam = swingParamValue * 100.0f; // The max value of the swing parameter is scaled to 100ms
 		   
 		// Update clock timer (accumulate time in samples)
 		sinceClock += args.sampleTime * 1000.0f;
@@ -282,7 +282,6 @@ struct Mito : Module {
 			sinceOut4 = 0;     
 			sinceOut5 = 0;     
 			sinceOut6 = 0;     
-
 			}
 			clockDuration = sinceClock; 
 			sinceClock = 0;

@@ -165,6 +165,19 @@ struct Mito : Module {
 	float knob5Param = 0.0f;
 	float knob5Value = 0.0f;
 
+	float cvInput6 = 0.0f;
+	float normalizedCV6 = 0.0f;
+	float knob6Param = 0.0f;
+	float knob6Value = 0.0f;
+
+	bool mute1 = false; 
+	bool mute2 = false; 
+	bool mute3 = false; 
+	bool mute4 = false; 
+	bool mute5 = false; 
+	bool mute6 = false; 
+
+
 	void process(const ProcessArgs& args) override {
 
 		// Pulsewidth CV and knob scale
@@ -226,10 +239,10 @@ struct Mito : Module {
 		divisionAmount5 = 1 + (1.0 - knob5Value) * 15;  // Update division based on knob and CV input
 	   
 		// CH 6 CV
-		float cvInput6 = inputs[CH_6_CV_INPUT].getVoltage();  // Read CV input
-		float normalizedCV6 = (cvInput6 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-		float knob6Param = params[KNOB_6_PARAM].getValue();  // Original knob value
-		float knob6Value = knob6Param + (normalizedCV6 - 0.5f);  // Apply the CV input as an offset
+		cvInput6 = inputs[CH_6_CV_INPUT].getVoltage();  // Read CV input
+		normalizedCV6 = (cvInput6 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+		knob6Param = params[KNOB_6_PARAM].getValue();  // Original knob value
+		knob6Value = knob6Param + (normalizedCV6 - 0.5f);  // Apply the CV input as an offset
 		knob6Value = clamp(knob6Value, 0.0f, 1.0f);
 		divisionAmount6 = 1 + (1.0 - knob6Value) * 15;  // Update division based on knob and CV input
 		   
@@ -292,7 +305,7 @@ struct Mito : Module {
        
 
 	    // Out channel 1 
-		bool mute1 = params[MUTE_1_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
+		mute1 = params[MUTE_1_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 		if (!mute1) {
 			outputs[CH_1_OUTPUT].setVoltage(0.0f);  // Mute CH_1 (output off)
 			lights[LED_1_LIGHT].setBrightness(0.0f); // Turn off the LED for CH_1
@@ -311,7 +324,7 @@ struct Mito : Module {
 		}
 
 			    // Out channel 2
-				bool mute2 = params[MUTE_2_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
+				mute2 = params[MUTE_2_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 				if (!mute2) {
 					outputs[CH_2_OUTPUT].setVoltage(0.0f);  // Mute CH_1 (output off)
 					lights[LED_2_LIGHT].setBrightness(0.0f); // Turn off the LED for CH_1
@@ -330,7 +343,7 @@ struct Mito : Module {
 				}
 
 			    // Out channel 3
-				bool mute3 = params[MUTE_3_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
+				mute3 = params[MUTE_3_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 				if (!mute3) {
 					outputs[CH_3_OUTPUT].setVoltage(0.0f);  // Mute CH_1 (output off)
 					lights[LED_3_LIGHT].setBrightness(0.0f); // Turn off the LED for CH_1
@@ -348,7 +361,7 @@ struct Mito : Module {
 					}
 				}
 					    // Out channel 4
-						bool mute4 = params[MUTE_4_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
+						mute4 = params[MUTE_4_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 						if (!mute4) {
 							outputs[CH_4_OUTPUT].setVoltage(0.0f);  // Mute CH_1 (output off)
 							lights[LED_4_LIGHT].setBrightness(0.0f); // Turn off the LED for CH_1
@@ -367,7 +380,7 @@ struct Mito : Module {
 						}
 
 						   // Out channel 5
-						   bool mute5 = params[MUTE_5_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
+						   mute5 = params[MUTE_5_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 						   if (!mute5) {
 							   outputs[CH_5_OUTPUT].setVoltage(0.0f);  // Mute CH_1 (output off)
 							   lights[LED_5_LIGHT].setBrightness(0.0f); // Turn off the LED for CH_1
@@ -386,7 +399,7 @@ struct Mito : Module {
 						   }
 
 						     // Out channel 6
-							 bool mute6 = params[MUTE_6_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
+							 mute6 = params[MUTE_6_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 							 if (!mute6) {
 								 outputs[CH_6_OUTPUT].setVoltage(0.0f);  // Mute CH_1 (output off)
 								 lights[LED_6_LIGHT].setBrightness(0.0f); // Turn off the LED for CH_1

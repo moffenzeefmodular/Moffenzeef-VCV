@@ -88,12 +88,18 @@ void process(const ProcessArgs& args) override {
     float knob3Value = knob3Param + (normalizedCV3 - 0.5f);
     float growlAmount = clamp(knob3Value, 0.0f, 1.0f);
 
+	float cvInput4 = inputs[TAIL_CV_INPUT].getVoltage();
+    float normalizedCV4 = (cvInput4 + 5.0f) / 10.0f;
+    float knob4Param = params[TAIL_PARAM].getValue() + 0.05;
+    float knob4Value = knob4Param + (normalizedCV4 - 0.5f);
+    float tailValue = clamp(knob4Value, 0.0f, 1.0f);
+
     static bool lastBangState = false;
     bool currentBangState = inputs[BANG_CV_INPUT].getVoltage() > 0.5f;
     bool bangRisingEdge = !lastBangState && currentBangState;
     lastBangState = currentBangState;
 
-    float decayTime = 5.0f + (params[TAIL_PARAM].getValue() * 295.0f);
+    float decayTime = 5.0f + (tailValue * 295.0f);
     float decayAlpha = exp(-1.0f / (args.sampleRate * (decayTime / 1000.0f)));
 
     static bool pulseTriggered = false;

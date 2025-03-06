@@ -127,64 +127,101 @@ struct Mito : Module {
 	float clockDuration = 1000.f;
 	float pulseWidth = 0.5f; 
 	float swing = 0.0f;
-	
+
+	float pulseWidthParam = 0.0f;
+	float widthCvInput = 0.0f;
+	float normalizedWidthCV = 0.0f;
+	float widthParam = 0.0f;
+	float widthValue = 0.0f;
+
+	float swingCvInput = 0.0f;
+	float normalizedSwingCV = 0.0f;
+	float swingValue = 0.0f;
+	float swingParamValue = 0.0f;
+	float swingParam = 0.0f;
+
+	float cvInput = 0.0f;
+    float normalizedCV = 0.0f;
+    float knob1Param = 0.0f;
+    float knob1Value = 0.0f;
+
+	float cvInput2 = 0.0f;
+	float normalizedCV2 = 0.0f;
+	float knob2Param = 0.0f;
+	float knob2Value = 0.0f;
+
+	float cvInput3 = 0.0f;
+	float normalizedCV3 = 0.0f;
+	float knob3Param = 0.0f;
+	float knob3Value = 0.0f;
+
+	float cvInput4 = 0.0f;
+	float normalizedCV4 = 0.0f;
+	float knob4Param = 0.0f;
+	float knob4Value = 0.0f;
+
+	float cvInput5 = 0.0f;
+	float normalizedCV5 = 0.0f;
+	float knob5Param = 0.0f;
+	float knob5Value = 0.0f;
+
 	void process(const ProcessArgs& args) override {
 
 		// Pulsewidth CV and knob scale
-        float pulseWidthParam = params[WIDTH_PARAM].getValue() * 0.2f + 0.05f;
-		float widthCvInput = inputs[WIDTH_CV_INPUT].getVoltage();  // Read CV input for WIDTH
-		float normalizedWidthCV = (widthCvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-		float widthParam = params[WIDTH_PARAM].getValue();  // Original WIDTH_PARAM value
-		float widthValue = widthParam + (normalizedWidthCV - 0.5f);  // Apply the CV input as an offset
+        pulseWidthParam = params[WIDTH_PARAM].getValue() * 0.2f + 0.05f;
+		widthCvInput = inputs[WIDTH_CV_INPUT].getVoltage();  // Read CV input for WIDTH
+		normalizedWidthCV = (widthCvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+		widthParam = params[WIDTH_PARAM].getValue();  // Original WIDTH_PARAM value
+		widthValue = widthParam + (normalizedWidthCV - 0.5f);  // Apply the CV input as an offset
 		widthValue = clamp(widthValue, 0.0f, 1.0f);
 		pulseWidthParam = widthValue * 0.2f + 0.05f;  // Scale pulse width
 		pw = (clockDuration * pulseWidthParam);
         
 		// Swing CV and knob scale 
-        float swingCvInput = inputs[SWING_CV_INPUT].getVoltage();  // Read CV input for SWING
-        float normalizedSwingCV = (swingCvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-        float swingValue = params[SWING_PARAM].getValue();  // Original SWING_PARAM value
-        float swingParamValue = swingValue + (normalizedSwingCV - 0.5f);  // Apply the CV input as an offset
+        swingCvInput = inputs[SWING_CV_INPUT].getVoltage();  // Read CV input for SWING
+        normalizedSwingCV = (swingCvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+        swingValue = params[SWING_PARAM].getValue();  // Original SWING_PARAM value
+        swingParamValue = swingValue + (normalizedSwingCV - 0.5f);  // Apply the CV input as an offset
         swingParamValue = clamp(swingParamValue, 0.0f, 1.0f);
-        float swingParam = swingParamValue * 100.0f; // The max value of the swing parameter is scaled to 100ms
+        swingParam = swingParamValue * 100.0f; // The max value of the swing parameter is scaled to 100ms
 
         // CH 1 CV
-        float cvInput = inputs[CH_1_CV_INPUT].getVoltage();  // Read CV input
-        float normalizedCV = (cvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-        float knob1Param = params[KNOB_1_PARAM].getValue();  // Original knob value
-        float knob1Value = knob1Param + (normalizedCV - 0.5f);  // Apply the CV input as an offset
+        cvInput = inputs[CH_1_CV_INPUT].getVoltage();  // Read CV input
+        normalizedCV = (cvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+        knob1Param = params[KNOB_1_PARAM].getValue();  // Original knob value
+        knob1Value = knob1Param + (normalizedCV - 0.5f);  // Apply the CV input as an offset
         knob1Value = clamp(knob1Value, 0.0f, 1.0f);
         divisionAmount = 1 + (1.0 - knob1Value) * 15;  // Update division based on knob and CV input
 
 		// CH 2 CV
-		float cvInput2 = inputs[CH_2_CV_INPUT].getVoltage();  // Read CV input
-		float normalizedCV2 = (cvInput2 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-		float knob2Param = params[KNOB_2_PARAM].getValue();  // Original knob value
-		float knob2Value = knob2Param + (normalizedCV2 - 0.5f);  // Apply the CV input as an offset
+		cvInput2 = inputs[CH_2_CV_INPUT].getVoltage();  // Read CV input
+		normalizedCV2 = (cvInput2 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+		knob2Param = params[KNOB_2_PARAM].getValue();  // Original knob value
+		knob2Value = knob2Param + (normalizedCV2 - 0.5f);  // Apply the CV input as an offset
 		knob2Value = clamp(knob2Value, 0.0f, 1.0f);
 		divisionAmount2 = 1 + (1.0 - knob2Value) * 15;  // Update division based on knob and CV input
 
 		// CH 3 CV
-		float cvInput3 = inputs[CH_3_CV_INPUT].getVoltage();  // Read CV input
-		float normalizedCV3 = (cvInput3 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-		float knob3Param = params[KNOB_3_PARAM].getValue();  // Original knob value
-		float knob3Value = knob3Param + (normalizedCV3 - 0.5f);  // Apply the CV input as an offset
+		cvInput3 = inputs[CH_3_CV_INPUT].getVoltage();  // Read CV input
+		normalizedCV3 = (cvInput3 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+		knob3Param = params[KNOB_3_PARAM].getValue();  // Original knob value
+		knob3Value = knob3Param + (normalizedCV3 - 0.5f);  // Apply the CV input as an offset
 		knob3Value = clamp(knob3Value, 0.0f, 1.0f);
 		divisionAmount3 = 1 + (1.0 - knob3Value) * 15;  // Update division based on knob and CV input
 	   
        // CH 4 CV
-	   float cvInput4 = inputs[CH_4_CV_INPUT].getVoltage();  // Read CV input
-	   float normalizedCV4 = (cvInput4 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-	   float knob4Param = params[KNOB_4_PARAM].getValue();  // Original knob value
-	   float knob4Value = knob4Param + (normalizedCV4 - 0.5f);  // Apply the CV input as an offset
+	   cvInput4 = inputs[CH_4_CV_INPUT].getVoltage();  // Read CV input
+	   normalizedCV4 = (cvInput4 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+	   knob4Param = params[KNOB_4_PARAM].getValue();  // Original knob value
+	   knob4Value = knob4Param + (normalizedCV4 - 0.5f);  // Apply the CV input as an offset
 	   knob4Value = clamp(knob4Value, 0.0f, 1.0f);
 	   divisionAmount4 = 1 + (1.0 - knob4Value) * 15;  // Update division based on knob and CV input
 
 	    // CH 5 CV
-		float cvInput5 = inputs[CH_5_CV_INPUT].getVoltage();  // Read CV input
-		float normalizedCV5 = (cvInput5 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-		float knob5Param = params[KNOB_5_PARAM].getValue();  // Original knob value
-		float knob5Value = knob5Param + (normalizedCV5 - 0.5f);  // Apply the CV input as an offset
+		cvInput5 = inputs[CH_5_CV_INPUT].getVoltage();  // Read CV input
+		normalizedCV5 = (cvInput5 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+		knob5Param = params[KNOB_5_PARAM].getValue();  // Original knob value
+		knob5Value = knob5Param + (normalizedCV5 - 0.5f);  // Apply the CV input as an offset
 		knob5Value = clamp(knob5Value, 0.0f, 1.0f);
 		divisionAmount5 = 1 + (1.0 - knob5Value) * 15;  // Update division based on knob and CV input
 	   

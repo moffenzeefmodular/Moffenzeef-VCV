@@ -199,7 +199,7 @@ struct Bobcat : Module {
 				float knob4Value = knob4Param + (normalizedCV4 - 0.5f);
 				float controlValue4 = clamp(knob4Value, 0.0f, 1.0f);
 
-		bool snarlSwitch = params[SNARL_PARAM].getValue();
+		bool snarlSwitch = params[SNARL_PARAM].getValue() > 0.5f;
 		if(!snarlSwitch){
 		maxTail = 100.0f;
 		}

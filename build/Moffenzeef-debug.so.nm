@@ -1,6 +1,6 @@
-Moffenzeef-debug.so:000f51c8 r Zero
-Moffenzeef-debug.so:000f88d0 a _DYNAMIC
-Moffenzeef-debug.so:000f8970 a _GLOBAL_OFFSET_TABLE_
+Moffenzeef-debug.so:000f5208 r Zero
+Moffenzeef-debug.so:000f8910 a _DYNAMIC
+Moffenzeef-debug.so:000f89b0 a _GLOBAL_OFFSET_TABLE_
 Moffenzeef-debug.so:00019158 t _GLOBAL__sub_I_BadIdea1800.cpp
 Moffenzeef-debug.so:000190e0 t _GLOBAL__sub_I_BadIdea9.cpp
 Moffenzeef-debug.so:000191d0 t _GLOBAL__sub_I_Bobcat.cpp
@@ -15,18 +15,18 @@ Moffenzeef-debug.so:00019570 t _GLOBAL__sub_I_Moffenmix.cpp
 Moffenzeef-debug.so:000195e8 t _GLOBAL__sub_I_Mongrel.cpp
 Moffenzeef-debug.so:00019660 t _GLOBAL__sub_I_Muskrat.cpp
 Moffenzeef-debug.so:000196d8 t _GLOBAL__sub_I_Simplify.cpp
-Moffenzeef-debug.so:000e3234 T MetaModule::sdk_version()
+Moffenzeef-debug.so:000e3274 T MetaModule::sdk_version()
 Moffenzeef-debug.so:000d5000 W MitoWidget::MitoWidget(Mito*)
 Moffenzeef-debug.so:000d5000 W MitoWidget::MitoWidget(Mito*)
 Moffenzeef-debug.so:000d33e8 W MitoWidget::~MitoWidget()
 Moffenzeef-debug.so:000d33b4 W MitoWidget::~MitoWidget()
 Moffenzeef-debug.so:000d33b4 W MitoWidget::~MitoWidget()
-Moffenzeef-debug.so:000e4bbc T __cxxabiv1::__class_type_info::~__class_type_info()
-Moffenzeef-debug.so:000e4b88 T __cxxabiv1::__class_type_info::~__class_type_info()
-Moffenzeef-debug.so:000e4b88 T __cxxabiv1::__class_type_info::~__class_type_info()
-Moffenzeef-debug.so:000e4d24 T __cxxabiv1::__si_class_type_info::~__si_class_type_info()
-Moffenzeef-debug.so:000e4cf0 T __cxxabiv1::__si_class_type_info::~__si_class_type_info()
-Moffenzeef-debug.so:000e4cf0 T __cxxabiv1::__si_class_type_info::~__si_class_type_info()
+Moffenzeef-debug.so:000e4bfc T __cxxabiv1::__class_type_info::~__class_type_info()
+Moffenzeef-debug.so:000e4bc8 T __cxxabiv1::__class_type_info::~__class_type_info()
+Moffenzeef-debug.so:000e4bc8 T __cxxabiv1::__class_type_info::~__class_type_info()
+Moffenzeef-debug.so:000e4d64 T __cxxabiv1::__si_class_type_info::~__si_class_type_info()
+Moffenzeef-debug.so:000e4d30 T __cxxabiv1::__si_class_type_info::~__si_class_type_info()
+Moffenzeef-debug.so:000e4d30 T __cxxabiv1::__si_class_type_info::~__si_class_type_info()
 Moffenzeef-debug.so:0001c960 W BadIdea1800::process(VCVModuleWrapper::ProcessArgs const&)
 Moffenzeef-debug.so:0001d2e0 W BadIdea1800::BadIdea1800()
 Moffenzeef-debug.so:0001d2e0 W BadIdea1800::BadIdea1800()
@@ -54,7 +54,7 @@ Moffenzeef-debug.so:000d2150 W KriketWidget::KriketWidget(Kriket*)
 Moffenzeef-debug.so:000cfea4 W KriketWidget::~KriketWidget()
 Moffenzeef-debug.so:000cfe70 W KriketWidget::~KriketWidget()
 Moffenzeef-debug.so:000cfe70 W KriketWidget::~KriketWidget()
-Moffenzeef-debug.so:000f8ec4 b (anonymous namespace)::__new_handler
+Moffenzeef-debug.so:000f8f04 b (anonymous namespace)::__new_handler
 Moffenzeef-debug.so:00024f90 W BusMultWidget::BusMultWidget(BusMult*)
 Moffenzeef-debug.so:00024f90 W BusMultWidget::BusMultWidget(BusMult*)
 Moffenzeef-debug.so:00023b34 W BusMultWidget::~BusMultWidget()
@@ -66,16 +66,16 @@ Moffenzeef-debug.so:0002ccc8 W DeviantWidget::DeviantWidget(Deviant*)
 Moffenzeef-debug.so:0002a1f0 W DeviantWidget::~DeviantWidget()
 Moffenzeef-debug.so:0002a1bc W DeviantWidget::~DeviantWidget()
 Moffenzeef-debug.so:0002a1bc W DeviantWidget::~DeviantWidget()
-Moffenzeef-debug.so:000dbe00 W MongrelWidget::MongrelWidget(Mongrel*)
-Moffenzeef-debug.so:000dbe00 W MongrelWidget::MongrelWidget(Mongrel*)
-Moffenzeef-debug.so:000d9be0 W MongrelWidget::~MongrelWidget()
-Moffenzeef-debug.so:000d9bac W MongrelWidget::~MongrelWidget()
-Moffenzeef-debug.so:000d9bac W MongrelWidget::~MongrelWidget()
-Moffenzeef-debug.so:000df1b0 W MuskratWidget::MuskratWidget(Muskrat*)
-Moffenzeef-debug.so:000df1b0 W MuskratWidget::MuskratWidget(Muskrat*)
-Moffenzeef-debug.so:000dcd80 W MuskratWidget::~MuskratWidget()
-Moffenzeef-debug.so:000dcd4c W MuskratWidget::~MuskratWidget()
-Moffenzeef-debug.so:000dcd4c W MuskratWidget::~MuskratWidget()
+Moffenzeef-debug.so:000dbe40 W MongrelWidget::MongrelWidget(Mongrel*)
+Moffenzeef-debug.so:000dbe40 W MongrelWidget::MongrelWidget(Mongrel*)
+Moffenzeef-debug.so:000d9c20 W MongrelWidget::~MongrelWidget()
+Moffenzeef-debug.so:000d9bec W MongrelWidget::~MongrelWidget()
+Moffenzeef-debug.so:000d9bec W MongrelWidget::~MongrelWidget()
+Moffenzeef-debug.so:000df1f0 W MuskratWidget::MuskratWidget(Muskrat*)
+Moffenzeef-debug.so:000df1f0 W MuskratWidget::MuskratWidget(Muskrat*)
+Moffenzeef-debug.so:000dcdc0 W MuskratWidget::~MuskratWidget()
+Moffenzeef-debug.so:000dcd8c W MuskratWidget::~MuskratWidget()
+Moffenzeef-debug.so:000dcd8c W MuskratWidget::~MuskratWidget()
 Moffenzeef-debug.so:0001bd80 W BadIdea9Widget::BadIdea9Widget(BadIdea9*)
 Moffenzeef-debug.so:0001bd80 W BadIdea9Widget::BadIdea9Widget(BadIdea9*)
 Moffenzeef-debug.so:00019b5c W BadIdea9Widget::~BadIdea9Widget()
@@ -84,11 +84,11 @@ Moffenzeef-debug.so:00019b28 W BadIdea9Widget::~BadIdea9Widget()
 Moffenzeef-debug.so:0002054c W CKSSHorizontal::~CKSSHorizontal()
 Moffenzeef-debug.so:00020518 W CKSSHorizontal::~CKSSHorizontal()
 Moffenzeef-debug.so:00020518 W CKSSHorizontal::~CKSSHorizontal()
-Moffenzeef-debug.so:000e22e8 W SimplifyWidget::SimplifyWidget(Simplify*)
-Moffenzeef-debug.so:000e22e8 W SimplifyWidget::SimplifyWidget(Simplify*)
-Moffenzeef-debug.so:000e121c W SimplifyWidget::~SimplifyWidget()
-Moffenzeef-debug.so:000e11e8 W SimplifyWidget::~SimplifyWidget()
-Moffenzeef-debug.so:000e11e8 W SimplifyWidget::~SimplifyWidget()
+Moffenzeef-debug.so:000e2328 W SimplifyWidget::SimplifyWidget(Simplify*)
+Moffenzeef-debug.so:000e2328 W SimplifyWidget::SimplifyWidget(Simplify*)
+Moffenzeef-debug.so:000e125c W SimplifyWidget::~SimplifyWidget()
+Moffenzeef-debug.so:000e1228 W SimplifyWidget::~SimplifyWidget()
+Moffenzeef-debug.so:000e1228 W SimplifyWidget::~SimplifyWidget()
 Moffenzeef-debug.so:000d8640 W MoffenmixWidget::MoffenmixWidget(Moffenmix*)
 Moffenzeef-debug.so:000d8640 W MoffenmixWidget::MoffenmixWidget(Moffenmix*)
 Moffenzeef-debug.so:000d60e0 W MoffenmixWidget::~MoffenmixWidget()
@@ -135,10 +135,10 @@ Moffenzeef-debug.so:0002fbb0 W rack::plugin::Model* rack::createModel<DialUp, Di
 Moffenzeef-debug.so:000d2800 W rack::plugin::Model* rack::createModel<Kriket, KriketWidget>(std::basic_string_view<char, std::char_traits<char> >)
 Moffenzeef-debug.so:000257f4 W rack::plugin::Model* rack::createModel<BusMult, BusMultWidget>(std::basic_string_view<char, std::char_traits<char> >)
 Moffenzeef-debug.so:0002d450 W rack::plugin::Model* rack::createModel<Deviant, DeviantWidget>(std::basic_string_view<char, std::char_traits<char> >)
-Moffenzeef-debug.so:000dc91c W rack::plugin::Model* rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)
-Moffenzeef-debug.so:000dfe34 W rack::plugin::Model* rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)
+Moffenzeef-debug.so:000dc95c W rack::plugin::Model* rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)
+Moffenzeef-debug.so:000dfe74 W rack::plugin::Model* rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)
 Moffenzeef-debug.so:0001c5a0 W rack::plugin::Model* rack::createModel<BadIdea9, BadIdea9Widget>(std::basic_string_view<char, std::char_traits<char> >)
-Moffenzeef-debug.so:000e2d04 W rack::plugin::Model* rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)
+Moffenzeef-debug.so:000e2d44 W rack::plugin::Model* rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)
 Moffenzeef-debug.so:000d9424 W rack::plugin::Model* rack::createModel<Moffenmix, MoffenmixWidget>(std::basic_string_view<char, std::char_traits<char> >)
 Moffenzeef-debug.so:0001ec3c W rack::componentlibrary::ScrewSilver* rack::createWidget<rack::componentlibrary::ScrewSilver>(rack::math::Vec)
 Moffenzeef-debug.so:00019cb8 W rack::componentlibrary::PJ301MPort::~PJ301MPort()
@@ -165,9 +165,9 @@ Moffenzeef-debug.so:000262bc W rack::componentlibrary::RoundSmallBlackKnob::~Rou
 Moffenzeef-debug.so:00026364 W rack::componentlibrary::CKSS::~CKSS()
 Moffenzeef-debug.so:00026330 W rack::componentlibrary::CKSS::~CKSS()
 Moffenzeef-debug.so:00026330 W rack::componentlibrary::CKSS::~CKSS()
-Moffenzeef-debug.so:000dcdf4 W rack::componentlibrary::CKSSThree::~CKSSThree()
-Moffenzeef-debug.so:000dcdc0 W rack::componentlibrary::CKSSThree::~CKSSThree()
-Moffenzeef-debug.so:000dcdc0 W rack::componentlibrary::CKSSThree::~CKSSThree()
+Moffenzeef-debug.so:000dce34 W rack::componentlibrary::CKSSThree::~CKSSThree()
+Moffenzeef-debug.so:000dce00 W rack::componentlibrary::CKSSThree::~CKSSThree()
+Moffenzeef-debug.so:000dce00 W rack::componentlibrary::CKSSThree::~CKSSThree()
 Moffenzeef-debug.so:00019e14 W rack::componentlibrary::RoundKnob::~RoundKnob()
 Moffenzeef-debug.so:00019de0 W rack::componentlibrary::RoundKnob::~RoundKnob()
 Moffenzeef-debug.so:00019de0 W rack::componentlibrary::RoundKnob::~RoundKnob()
@@ -177,19 +177,19 @@ Moffenzeef-debug.so:0001a014 W rack::componentlibrary::TRedLight<rack::component
 Moffenzeef-debug.so:0001a1b0 W rack::componentlibrary::TSvgLight<rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> > >::~TSvgLight()
 Moffenzeef-debug.so:0001a078 W rack::componentlibrary::TSvgLight<rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> > >::~TSvgLight()
 Moffenzeef-debug.so:0001a078 W rack::componentlibrary::TSvgLight<rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> > >::~TSvgLight()
-Moffenzeef-debug.so:000f8e00 b rack::componentlibrary::SCHEME_RED
-Moffenzeef-debug.so:000f8d68 b rack::componentlibrary::SCHEME_RED
-Moffenzeef-debug.so:000f8e18 b rack::componentlibrary::SCHEME_RED
-Moffenzeef-debug.so:000f8e30 b rack::componentlibrary::SCHEME_RED
-Moffenzeef-debug.so:000f8de8 b rack::componentlibrary::SCHEME_RED
-Moffenzeef-debug.so:000f8dd0 b rack::componentlibrary::SCHEME_RED
-Moffenzeef-debug.so:000f8e48 b rack::componentlibrary::SCHEME_RED
-Moffenzeef-debug.so:000f8d98 b rack::componentlibrary::SCHEME_RED
-Moffenzeef-debug.so:000f8e60 b rack::componentlibrary::SCHEME_RED
-Moffenzeef-debug.so:000f8e80 b rack::componentlibrary::SCHEME_RED
-Moffenzeef-debug.so:000f8e98 b rack::componentlibrary::SCHEME_RED
-Moffenzeef-debug.so:000f8eb0 b rack::componentlibrary::SCHEME_RED
-Moffenzeef-debug.so:000f8d80 b rack::componentlibrary::SCHEME_RED
+Moffenzeef-debug.so:000f8e40 b rack::componentlibrary::SCHEME_RED
+Moffenzeef-debug.so:000f8da8 b rack::componentlibrary::SCHEME_RED
+Moffenzeef-debug.so:000f8e58 b rack::componentlibrary::SCHEME_RED
+Moffenzeef-debug.so:000f8e70 b rack::componentlibrary::SCHEME_RED
+Moffenzeef-debug.so:000f8e28 b rack::componentlibrary::SCHEME_RED
+Moffenzeef-debug.so:000f8e10 b rack::componentlibrary::SCHEME_RED
+Moffenzeef-debug.so:000f8e88 b rack::componentlibrary::SCHEME_RED
+Moffenzeef-debug.so:000f8dd8 b rack::componentlibrary::SCHEME_RED
+Moffenzeef-debug.so:000f8ea0 b rack::componentlibrary::SCHEME_RED
+Moffenzeef-debug.so:000f8ec0 b rack::componentlibrary::SCHEME_RED
+Moffenzeef-debug.so:000f8ed8 b rack::componentlibrary::SCHEME_RED
+Moffenzeef-debug.so:000f8ef0 b rack::componentlibrary::SCHEME_RED
+Moffenzeef-debug.so:000f8dc0 b rack::componentlibrary::SCHEME_RED
 Moffenzeef-debug.so:0001ec18 W std::unique_ptr<CoreProcessor, std::default_delete<CoreProcessor> > rack::create_vcv_module<BadIdea1800>()
 Moffenzeef-debug.so:000285f0 W std::unique_ptr<CoreProcessor, std::default_delete<CoreProcessor> > rack::create_vcv_module<ClockModule>()
 Moffenzeef-debug.so:000ceefc W std::unique_ptr<CoreProcessor, std::default_delete<CoreProcessor> > rack::create_vcv_module<GMO>()
@@ -199,10 +199,10 @@ Moffenzeef-debug.so:0002f150 W std::unique_ptr<CoreProcessor, std::default_delet
 Moffenzeef-debug.so:000d212c W std::unique_ptr<CoreProcessor, std::default_delete<CoreProcessor> > rack::create_vcv_module<Kriket>()
 Moffenzeef-debug.so:00024de0 W std::unique_ptr<CoreProcessor, std::default_delete<CoreProcessor> > rack::create_vcv_module<BusMult>()
 Moffenzeef-debug.so:0002cca0 W std::unique_ptr<CoreProcessor, std::default_delete<CoreProcessor> > rack::create_vcv_module<Deviant>()
-Moffenzeef-debug.so:000dbddc W std::unique_ptr<CoreProcessor, std::default_delete<CoreProcessor> > rack::create_vcv_module<Mongrel>()
-Moffenzeef-debug.so:000df188 W std::unique_ptr<CoreProcessor, std::default_delete<CoreProcessor> > rack::create_vcv_module<Muskrat>()
+Moffenzeef-debug.so:000dbe1c W std::unique_ptr<CoreProcessor, std::default_delete<CoreProcessor> > rack::create_vcv_module<Mongrel>()
+Moffenzeef-debug.so:000df1c8 W std::unique_ptr<CoreProcessor, std::default_delete<CoreProcessor> > rack::create_vcv_module<Muskrat>()
 Moffenzeef-debug.so:0001b5a0 W std::unique_ptr<CoreProcessor, std::default_delete<CoreProcessor> > rack::create_vcv_module<BadIdea9>()
-Moffenzeef-debug.so:000e22c4 W std::unique_ptr<CoreProcessor, std::default_delete<CoreProcessor> > rack::create_vcv_module<Simplify>()
+Moffenzeef-debug.so:000e2304 W std::unique_ptr<CoreProcessor, std::default_delete<CoreProcessor> > rack::create_vcv_module<Simplify>()
 Moffenzeef-debug.so:000d82d4 W std::unique_ptr<CoreProcessor, std::default_delete<CoreProcessor> > rack::create_vcv_module<Moffenmix>()
 Moffenzeef-debug.so:0001ed90 W rack::componentlibrary::PJ301MPort* rack::createInputCentered<rack::componentlibrary::PJ301MPort>(rack::math::Vec, rack::engine::Module*, int)
 Moffenzeef-debug.so:0001b908 W rack::componentlibrary::MediumLight<rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> > >* rack::createLightCentered<rack::componentlibrary::MediumLight<rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> > > >(rack::math::Vec, rack::engine::Module*, int)
@@ -265,7 +265,7 @@ Moffenzeef-debug.so:0001983c W rack::engine::Module::onUnBypass(rack::engine::Mo
 Moffenzeef-debug.so:         U rack::engine::Module::save_state[abi:cxx11]()
 Moffenzeef-debug.so:000d3b08 t rack::engine::PortInfo* rack::engine::Module::configInput<rack::engine::PortInfo>(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [clone .isra.0]
 Moffenzeef-debug.so:000d6990 t rack::engine::PortInfo* rack::engine::Module::configInput<rack::engine::PortInfo>(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) [clone .isra.0]
-Moffenzeef-debug.so:000dd318 t rack::engine::ParamQuantity* rack::engine::Module::configParam<rack::engine::ParamQuantity>(int, float, float, float, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, float, float, float) [clone .isra.0]
+Moffenzeef-debug.so:000dd358 t rack::engine::ParamQuantity* rack::engine::Module::configParam<rack::engine::ParamQuantity>(int, float, float, float, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, float, float, float) [clone .isra.0]
 Moffenzeef-debug.so:00026888 t rack::engine::ParamQuantity* rack::engine::Module::configParam<rack::engine::ParamQuantity>(int, float, float, float, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, float, float, float) [clone .isra.0]
 Moffenzeef-debug.so:000d3d04 t rack::engine::ParamQuantity* rack::engine::Module::configParam<rack::engine::ParamQuantity>(int, float, float, float, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, float, float, float) [clone .isra.0]
 Moffenzeef-debug.so:000d6b8c t rack::engine::ParamQuantity* rack::engine::Module::configParam<rack::engine::ParamQuantity>(int, float, float, float, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, float, float, float) [clone .isra.0]
@@ -393,29 +393,29 @@ Moffenzeef-debug.so:0002a17c W Deviant::~Deviant()
 Moffenzeef-debug.so:0002a148 W Deviant::~Deviant()
 Moffenzeef-debug.so:0002a148 W Deviant::~Deviant()
 Moffenzeef-debug.so:000d97e0 W Mongrel::process(VCVModuleWrapper::ProcessArgs const&)
-Moffenzeef-debug.so:000da104 W Mongrel::Mongrel()
-Moffenzeef-debug.so:000da104 W Mongrel::Mongrel()
-Moffenzeef-debug.so:000d9b6c W Mongrel::~Mongrel()
-Moffenzeef-debug.so:000d9b38 W Mongrel::~Mongrel()
-Moffenzeef-debug.so:000d9b38 W Mongrel::~Mongrel()
-Moffenzeef-debug.so:000e0470 W Muskrat::process(VCVModuleWrapper::ProcessArgs const&)
-Moffenzeef-debug.so:000dd628 W Muskrat::Muskrat()
-Moffenzeef-debug.so:000dd628 W Muskrat::Muskrat()
-Moffenzeef-debug.so:000dcd0c W Muskrat::~Muskrat()
-Moffenzeef-debug.so:000dccd8 W Muskrat::~Muskrat()
-Moffenzeef-debug.so:000dccd8 W Muskrat::~Muskrat()
+Moffenzeef-debug.so:000da144 W Mongrel::Mongrel()
+Moffenzeef-debug.so:000da144 W Mongrel::Mongrel()
+Moffenzeef-debug.so:000d9bac W Mongrel::~Mongrel()
+Moffenzeef-debug.so:000d9b78 W Mongrel::~Mongrel()
+Moffenzeef-debug.so:000d9b78 W Mongrel::~Mongrel()
+Moffenzeef-debug.so:000e04b0 W Muskrat::process(VCVModuleWrapper::ProcessArgs const&)
+Moffenzeef-debug.so:000dd668 W Muskrat::Muskrat()
+Moffenzeef-debug.so:000dd668 W Muskrat::Muskrat()
+Moffenzeef-debug.so:000dcd4c W Muskrat::~Muskrat()
+Moffenzeef-debug.so:000dcd18 W Muskrat::~Muskrat()
+Moffenzeef-debug.so:000dcd18 W Muskrat::~Muskrat()
 Moffenzeef-debug.so:000198ac W BadIdea9::process(VCVModuleWrapper::ProcessArgs const&)
 Moffenzeef-debug.so:0001aed4 W BadIdea9::BadIdea9()
 Moffenzeef-debug.so:0001aed4 W BadIdea9::BadIdea9()
 Moffenzeef-debug.so:00019ae8 W BadIdea9::~BadIdea9()
 Moffenzeef-debug.so:00019ab4 W BadIdea9::~BadIdea9()
 Moffenzeef-debug.so:00019ab4 W BadIdea9::~BadIdea9()
-Moffenzeef-debug.so:000e0fc8 W Simplify::process(VCVModuleWrapper::ProcessArgs const&)
-Moffenzeef-debug.so:000e1740 W Simplify::Simplify()
-Moffenzeef-debug.so:000e1740 W Simplify::Simplify()
-Moffenzeef-debug.so:000e11a8 W Simplify::~Simplify()
-Moffenzeef-debug.so:000e1174 W Simplify::~Simplify()
-Moffenzeef-debug.so:000e1174 W Simplify::~Simplify()
+Moffenzeef-debug.so:000e1008 W Simplify::process(VCVModuleWrapper::ProcessArgs const&)
+Moffenzeef-debug.so:000e1780 W Simplify::Simplify()
+Moffenzeef-debug.so:000e1780 W Simplify::Simplify()
+Moffenzeef-debug.so:000e11e8 W Simplify::~Simplify()
+Moffenzeef-debug.so:000e11b4 W Simplify::~Simplify()
+Moffenzeef-debug.so:000e11b4 W Simplify::~Simplify()
 Moffenzeef-debug.so:000cef28 W GMOWidget::GMOWidget(GMO*)
 Moffenzeef-debug.so:000cef28 W GMOWidget::GMOWidget(GMO*)
 Moffenzeef-debug.so:00030390 W GMOWidget::~GMOWidget()
@@ -427,256 +427,256 @@ Moffenzeef-debug.so:000d6e9c W Moffenmix::Moffenmix()
 Moffenzeef-debug.so:000d606c W Moffenmix::~Moffenmix()
 Moffenzeef-debug.so:000d6038 W Moffenmix::~Moffenmix()
 Moffenzeef-debug.so:000d6038 W Moffenmix::~Moffenmix()
-Moffenzeef-debug.so:000ed220 W bool __gnu_cxx::operator==<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&)
-Moffenzeef-debug.so:000ed208 W bool __gnu_cxx::operator==<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >(__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&)
-Moffenzeef-debug.so:000e4c70 T __cxxabiv1::__class_type_info::__do_catch(std::type_info const*, void**, unsigned int) const
-Moffenzeef-debug.so:000e4c44 T __cxxabiv1::__class_type_info::__do_upcast(__cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__upcast_result&) const
-Moffenzeef-debug.so:000e4b18 T __cxxabiv1::__class_type_info::__do_upcast(__cxxabiv1::__class_type_info const*, void**) const
-Moffenzeef-debug.so:000e4bdc T __cxxabiv1::__class_type_info::__do_dyncast(int, __cxxabiv1::__class_type_info::__sub_kind, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__dyncast_result&) const
-Moffenzeef-debug.so:000e4b74 T __cxxabiv1::__class_type_info::__do_find_public_src(int, void const*, __cxxabiv1::__class_type_info const*, void const*) const
-Moffenzeef-debug.so:000e4e8c T __cxxabiv1::__si_class_type_info::__do_upcast(__cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__upcast_result&) const
-Moffenzeef-debug.so:000e4db0 T __cxxabiv1::__si_class_type_info::__do_dyncast(int, __cxxabiv1::__class_type_info::__sub_kind, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__dyncast_result&) const
-Moffenzeef-debug.so:000e4d44 T __cxxabiv1::__si_class_type_info::__do_find_public_src(int, void const*, __cxxabiv1::__class_type_info const*, void const*) const
+Moffenzeef-debug.so:000ed260 W bool __gnu_cxx::operator==<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&)
+Moffenzeef-debug.so:000ed248 W bool __gnu_cxx::operator==<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >(__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > const&)
+Moffenzeef-debug.so:000e4cb0 T __cxxabiv1::__class_type_info::__do_catch(std::type_info const*, void**, unsigned int) const
+Moffenzeef-debug.so:000e4c84 T __cxxabiv1::__class_type_info::__do_upcast(__cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__upcast_result&) const
+Moffenzeef-debug.so:000e4b58 T __cxxabiv1::__class_type_info::__do_upcast(__cxxabiv1::__class_type_info const*, void**) const
+Moffenzeef-debug.so:000e4c1c T __cxxabiv1::__class_type_info::__do_dyncast(int, __cxxabiv1::__class_type_info::__sub_kind, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__dyncast_result&) const
+Moffenzeef-debug.so:000e4bb4 T __cxxabiv1::__class_type_info::__do_find_public_src(int, void const*, __cxxabiv1::__class_type_info const*, void const*) const
+Moffenzeef-debug.so:000e4ecc T __cxxabiv1::__si_class_type_info::__do_upcast(__cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__upcast_result&) const
+Moffenzeef-debug.so:000e4df0 T __cxxabiv1::__si_class_type_info::__do_dyncast(int, __cxxabiv1::__class_type_info::__sub_kind, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__dyncast_result&) const
+Moffenzeef-debug.so:000e4d84 T __cxxabiv1::__si_class_type_info::__do_find_public_src(int, void const*, __cxxabiv1::__class_type_info const*, void const*) const
 Moffenzeef-debug.so:         U VCVModuleWrapper::get_output(int) const
 Moffenzeef-debug.so:         U VCVModuleWrapper::get_led_brightness(int) const
-Moffenzeef-debug.so:000e5130 T std::random_device::_M_getentropy() const
-Moffenzeef-debug.so:000e5538 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_disjunct(char const*) const
-Moffenzeef-debug.so:000e533c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_is_local() const
-Moffenzeef-debug.so:000ec114 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_last_of(char const*, unsigned int) const
-Moffenzeef-debug.so:000ec0b0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_last_of(char const*, unsigned int, unsigned int) const
-Moffenzeef-debug.so:000ec04c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_last_of(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int) const
-Moffenzeef-debug.so:000ec188 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_last_of(char, unsigned int) const
-Moffenzeef-debug.so:000e5318 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_local_data() const
-Moffenzeef-debug.so:000ebfa8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_first_of(char const*, unsigned int) const
-Moffenzeef-debug.so:000ebf50 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_first_of(char const*, unsigned int, unsigned int) const
-Moffenzeef-debug.so:000ebef4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_first_of(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int) const
-Moffenzeef-debug.so:000ec008 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_first_of(char, unsigned int) const
-Moffenzeef-debug.so:000ebb1c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::get_allocator() const
-Moffenzeef-debug.so:000e5500 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_check_length(unsigned int, unsigned int, char const*) const
-Moffenzeef-debug.so:000e54c0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_get_allocator() const
-Moffenzeef-debug.so:000ec484 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_last_not_of(char const*, unsigned int) const
-Moffenzeef-debug.so:000ec420 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_last_not_of(char const*, unsigned int, unsigned int) const
-Moffenzeef-debug.so:000ec3bc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_last_not_of(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int) const
-Moffenzeef-debug.so:000ec4f4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_last_not_of(char, unsigned int) const
-Moffenzeef-debug.so:000ec2d4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_first_not_of(char const*, unsigned int) const
-Moffenzeef-debug.so:000ec254 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_first_not_of(char const*, unsigned int, unsigned int) const
-Moffenzeef-debug.so:000ec1d4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_first_not_of(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int) const
-Moffenzeef-debug.so:000ec360 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_first_not_of(char, unsigned int) const
-Moffenzeef-debug.so:000e6a2c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::at(unsigned int) const
-Moffenzeef-debug.so:000e664c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::end() const
-Moffenzeef-debug.so:000e6aa4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::back() const
-Moffenzeef-debug.so:000e6698 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::cend() const
-Moffenzeef-debug.so:000eb918 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::copy(char*, unsigned int, unsigned int) const
-Moffenzeef-debug.so:000ebb14 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::data() const
-Moffenzeef-debug.so:000ebc70 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find(char const*, unsigned int) const
-Moffenzeef-debug.so:000ebb20 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find(char const*, unsigned int, unsigned int) const
-Moffenzeef-debug.so:000ebbc4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int) const
-Moffenzeef-debug.so:000ebd28 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find(char, unsigned int) const
-Moffenzeef-debug.so:000e6684 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::rend() const
-Moffenzeef-debug.so:000e66c0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::size() const
-Moffenzeef-debug.so:000e6638 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::begin() const
-Moffenzeef-debug.so:000ebb0c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::c_str() const
-Moffenzeef-debug.so:000e66b4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::crend() const
-Moffenzeef-debug.so:000e6a04 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::empty() const
-Moffenzeef-debug.so:000e6a8c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::front() const
-Moffenzeef-debug.so:000ebe34 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::rfind(char const*, unsigned int) const
-Moffenzeef-debug.so:000ebdd0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::rfind(char const*, unsigned int, unsigned int) const
-Moffenzeef-debug.so:000ebd6c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::rfind(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int) const
-Moffenzeef-debug.so:000ebea8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::rfind(char, unsigned int) const
-Moffenzeef-debug.so:000e6690 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::cbegin() const
-Moffenzeef-debug.so:000e66c8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::length() const
-Moffenzeef-debug.so:000e6668 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::rbegin() const
-Moffenzeef-debug.so:000ec53c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::substr(unsigned int, unsigned int) const
-Moffenzeef-debug.so:000e5308 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data() const
-Moffenzeef-debug.so:000ec774 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::compare(char const*) const
-Moffenzeef-debug.so:000ec5fc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::compare(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const
-Moffenzeef-debug.so:000ec7c0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::compare(unsigned int, unsigned int, char const*) const
-Moffenzeef-debug.so:000ec84c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::compare(unsigned int, unsigned int, char const*, unsigned int) const
-Moffenzeef-debug.so:000ec638 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::compare(unsigned int, unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const
-Moffenzeef-debug.so:000ec6b4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::compare(unsigned int, unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int) const
-Moffenzeef-debug.so:000e66a4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::crbegin() const
-Moffenzeef-debug.so:000e54cc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_check(unsigned int, char const*) const
-Moffenzeef-debug.so:000e5520 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_limit(unsigned int, unsigned int) const
-Moffenzeef-debug.so:000e68bc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::capacity() const
-Moffenzeef-debug.so:000e66d0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::max_size() const
-Moffenzeef-debug.so:000e6a14 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator[](unsigned int) const
-Moffenzeef-debug.so:000e4f50 T std::type_info::__do_catch(std::type_info const*, void**, unsigned int) const
-Moffenzeef-debug.so:000e4edc T std::type_info::__do_upcast(__cxxabiv1::__class_type_info const*, void**) const
-Moffenzeef-debug.so:000e4ed4 T std::type_info::__is_pointer_p() const
-Moffenzeef-debug.so:000e4ed4 T std::type_info::__is_function_p() const
-Moffenzeef-debug.so:000e4f04 T std::type_info::__equal(std::type_info const&) const
-Moffenzeef-debug.so:000e4f04 T std::type_info::operator==(std::type_info const&) const
-Moffenzeef-debug.so:000e4f64 T std::random_device::_M_init_pretr1(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-Moffenzeef-debug.so:000e52f4 T std::random_device::_M_getval_pretr1()
-Moffenzeef-debug.so:000e512c T std::random_device::_M_fini()
-Moffenzeef-debug.so:000e504c T std::random_device::_M_init(char const*, unsigned int)
-Moffenzeef-debug.so:000e5048 T std::random_device::_M_init(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-Moffenzeef-debug.so:000e529c T std::random_device::_M_getval()
+Moffenzeef-debug.so:000e5170 T std::random_device::_M_getentropy() const
+Moffenzeef-debug.so:000e5578 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_disjunct(char const*) const
+Moffenzeef-debug.so:000e537c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_is_local() const
+Moffenzeef-debug.so:000ec154 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_last_of(char const*, unsigned int) const
+Moffenzeef-debug.so:000ec0f0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_last_of(char const*, unsigned int, unsigned int) const
+Moffenzeef-debug.so:000ec08c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_last_of(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int) const
+Moffenzeef-debug.so:000ec1c8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_last_of(char, unsigned int) const
+Moffenzeef-debug.so:000e5358 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_local_data() const
+Moffenzeef-debug.so:000ebfe8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_first_of(char const*, unsigned int) const
+Moffenzeef-debug.so:000ebf90 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_first_of(char const*, unsigned int, unsigned int) const
+Moffenzeef-debug.so:000ebf34 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_first_of(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int) const
+Moffenzeef-debug.so:000ec048 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_first_of(char, unsigned int) const
+Moffenzeef-debug.so:000ebb5c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::get_allocator() const
+Moffenzeef-debug.so:000e5540 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_check_length(unsigned int, unsigned int, char const*) const
+Moffenzeef-debug.so:000e5500 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_get_allocator() const
+Moffenzeef-debug.so:000ec4c4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_last_not_of(char const*, unsigned int) const
+Moffenzeef-debug.so:000ec460 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_last_not_of(char const*, unsigned int, unsigned int) const
+Moffenzeef-debug.so:000ec3fc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_last_not_of(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int) const
+Moffenzeef-debug.so:000ec534 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_last_not_of(char, unsigned int) const
+Moffenzeef-debug.so:000ec314 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_first_not_of(char const*, unsigned int) const
+Moffenzeef-debug.so:000ec294 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_first_not_of(char const*, unsigned int, unsigned int) const
+Moffenzeef-debug.so:000ec214 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_first_not_of(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int) const
+Moffenzeef-debug.so:000ec3a0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find_first_not_of(char, unsigned int) const
+Moffenzeef-debug.so:000e6a6c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::at(unsigned int) const
+Moffenzeef-debug.so:000e668c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::end() const
+Moffenzeef-debug.so:000e6ae4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::back() const
+Moffenzeef-debug.so:000e66d8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::cend() const
+Moffenzeef-debug.so:000eb958 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::copy(char*, unsigned int, unsigned int) const
+Moffenzeef-debug.so:000ebb54 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::data() const
+Moffenzeef-debug.so:000ebcb0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find(char const*, unsigned int) const
+Moffenzeef-debug.so:000ebb60 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find(char const*, unsigned int, unsigned int) const
+Moffenzeef-debug.so:000ebc04 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int) const
+Moffenzeef-debug.so:000ebd68 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::find(char, unsigned int) const
+Moffenzeef-debug.so:000e66c4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::rend() const
+Moffenzeef-debug.so:000e6700 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::size() const
+Moffenzeef-debug.so:000e6678 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::begin() const
+Moffenzeef-debug.so:000ebb4c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::c_str() const
+Moffenzeef-debug.so:000e66f4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::crend() const
+Moffenzeef-debug.so:000e6a44 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::empty() const
+Moffenzeef-debug.so:000e6acc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::front() const
+Moffenzeef-debug.so:000ebe74 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::rfind(char const*, unsigned int) const
+Moffenzeef-debug.so:000ebe10 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::rfind(char const*, unsigned int, unsigned int) const
+Moffenzeef-debug.so:000ebdac W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::rfind(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int) const
+Moffenzeef-debug.so:000ebee8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::rfind(char, unsigned int) const
+Moffenzeef-debug.so:000e66d0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::cbegin() const
+Moffenzeef-debug.so:000e6708 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::length() const
+Moffenzeef-debug.so:000e66a8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::rbegin() const
+Moffenzeef-debug.so:000ec57c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::substr(unsigned int, unsigned int) const
+Moffenzeef-debug.so:000e5348 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data() const
+Moffenzeef-debug.so:000ec7b4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::compare(char const*) const
+Moffenzeef-debug.so:000ec63c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::compare(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const
+Moffenzeef-debug.so:000ec800 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::compare(unsigned int, unsigned int, char const*) const
+Moffenzeef-debug.so:000ec88c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::compare(unsigned int, unsigned int, char const*, unsigned int) const
+Moffenzeef-debug.so:000ec678 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::compare(unsigned int, unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const
+Moffenzeef-debug.so:000ec6f4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::compare(unsigned int, unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int) const
+Moffenzeef-debug.so:000e66e4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::crbegin() const
+Moffenzeef-debug.so:000e550c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_check(unsigned int, char const*) const
+Moffenzeef-debug.so:000e5560 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_limit(unsigned int, unsigned int) const
+Moffenzeef-debug.so:000e68fc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::capacity() const
+Moffenzeef-debug.so:000e6710 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::max_size() const
+Moffenzeef-debug.so:000e6a54 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator[](unsigned int) const
+Moffenzeef-debug.so:000e4f90 T std::type_info::__do_catch(std::type_info const*, void**, unsigned int) const
+Moffenzeef-debug.so:000e4f1c T std::type_info::__do_upcast(__cxxabiv1::__class_type_info const*, void**) const
+Moffenzeef-debug.so:000e4f14 T std::type_info::__is_pointer_p() const
+Moffenzeef-debug.so:000e4f14 T std::type_info::__is_function_p() const
+Moffenzeef-debug.so:000e4f44 T std::type_info::__equal(std::type_info const&) const
+Moffenzeef-debug.so:000e4f44 T std::type_info::operator==(std::type_info const&) const
+Moffenzeef-debug.so:000e4fa4 T std::random_device::_M_init_pretr1(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+Moffenzeef-debug.so:000e5334 T std::random_device::_M_getval_pretr1()
+Moffenzeef-debug.so:000e516c T std::random_device::_M_fini()
+Moffenzeef-debug.so:000e508c T std::random_device::_M_init(char const*, unsigned int)
+Moffenzeef-debug.so:000e5088 T std::random_device::_M_init(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+Moffenzeef-debug.so:000e52dc T std::random_device::_M_getval()
 Moffenzeef-debug.so:00019750 W std::_Sp_counted_ptr<decltype(nullptr), (__gnu_cxx::_Lock_policy)0>::_M_dispose()
 Moffenzeef-debug.so:000198a0 W std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)0>::_M_destroy()
-Moffenzeef-debug.so:000f5038 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::shift_size
-Moffenzeef-debug.so:000f503c V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::state_size
-Moffenzeef-debug.so:000e01f0 W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::_M_gen_rand()
-Moffenzeef-debug.so:000f5020 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::tempering_b
-Moffenzeef-debug.so:000f5018 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::tempering_c
-Moffenzeef-debug.so:000f5028 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::tempering_d
-Moffenzeef-debug.so:000f5014 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::tempering_l
-Moffenzeef-debug.so:000f5024 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::tempering_s
-Moffenzeef-debug.so:000f501c V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::tempering_t
-Moffenzeef-debug.so:000f502c V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::tempering_u
-Moffenzeef-debug.so:000f500c V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::default_seed
-Moffenzeef-debug.so:000f5010 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::initialization_multiplier
-Moffenzeef-debug.so:000e51e4 W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::max()
-Moffenzeef-debug.so:000e51dc W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::min()
-Moffenzeef-debug.so:000e51a8 W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::seed(unsigned int)
-Moffenzeef-debug.so:000e51ec W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::discard(unsigned long long)
-Moffenzeef-debug.so:000f5030 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::xor_mask
-Moffenzeef-debug.so:000f5034 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::mask_bits
-Moffenzeef-debug.so:000f5040 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::word_size
-Moffenzeef-debug.so:000e5174 W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::mersenne_twister_engine(unsigned int)
-Moffenzeef-debug.so:000e5138 W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::mersenne_twister_engine()
-Moffenzeef-debug.so:000e5174 W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::mersenne_twister_engine(unsigned int)
-Moffenzeef-debug.so:000e5138 W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::mersenne_twister_engine()
-Moffenzeef-debug.so:000e5244 W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::operator()()
-Moffenzeef-debug.so:000e53bc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_destroy(unsigned int)
-Moffenzeef-debug.so:000e53a8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
-Moffenzeef-debug.so:000eb5ec W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned int, unsigned int, char const*, unsigned int)
-Moffenzeef-debug.so:000e566c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_compare(unsigned int, unsigned int)
-Moffenzeef-debug.so:000e5320 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_capacity(unsigned int)
-Moffenzeef-debug.so:000ec8d0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider::_Alloc_hider(char*, std::allocator<char>&&)
-Moffenzeef-debug.so:000ec8c8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider::_Alloc_hider(char*, std::allocator<char> const&)
-Moffenzeef-debug.so:000ec8d0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider::_Alloc_hider(char*, std::allocator<char>&&)
-Moffenzeef-debug.so:000ec8c8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider::_Alloc_hider(char*, std::allocator<char> const&)
-Moffenzeef-debug.so:000e5440 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct(unsigned int, char)
-Moffenzeef-debug.so:000ed070 W void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::forward_iterator_tag)
-Moffenzeef-debug.so:000ecfe8 W void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >(__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::forward_iterator_tag)
-Moffenzeef-debug.so:000ed180 W void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag)
-Moffenzeef-debug.so:000ed0f8 W void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)
-Moffenzeef-debug.so:000e5310 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_local_data()
-Moffenzeef-debug.so:000e5328 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_set_length(unsigned int)
-Moffenzeef-debug.so:000e5600 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >)
-Moffenzeef-debug.so:000e55dc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >)
-Moffenzeef-debug.so:000e5648 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, char const*, char const*)
-Moffenzeef-debug.so:000e5624 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, char*, char*)
-Moffenzeef-debug.so:000e6868 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::shrink_to_fit()
-Moffenzeef-debug.so:000eb4c8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace_aux(unsigned int, unsigned int, unsigned int, char)
-Moffenzeef-debug.so:000e54bc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_get_allocator()
-Moffenzeef-debug.so:000e54c4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_use_local_data()
-Moffenzeef-debug.so:000e53c4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux_2(unsigned int, char)
-Moffenzeef-debug.so:000e6a58 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::at(unsigned int)
-Moffenzeef-debug.so:000e6640 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::end()
-Moffenzeef-debug.so:000e6a94 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::back()
-Moffenzeef-debug.so:000f51c4 V std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::npos
-Moffenzeef-debug.so:000e6678 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::rend()
-Moffenzeef-debug.so:000eb994 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::swap(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
-Moffenzeef-debug.so:000e6630 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::begin()
-Moffenzeef-debug.so:000e69f0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::clear()
-Moffenzeef-debug.so:000e8fe0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::erase(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >)
-Moffenzeef-debug.so:000e9054 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::erase(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >)
-Moffenzeef-debug.so:000e8efc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::erase(unsigned int, unsigned int)
-Moffenzeef-debug.so:000e6a84 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::front()
-Moffenzeef-debug.so:000e7054 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*)
-Moffenzeef-debug.so:000e6fa0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned int)
-Moffenzeef-debug.so:000e6df0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-Moffenzeef-debug.so:000e6eac W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int)
-Moffenzeef-debug.so:000e71d0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(std::initializer_list<char>)
-Moffenzeef-debug.so:000e7118 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(unsigned int, char)
-Moffenzeef-debug.so:000e7464 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
-Moffenzeef-debug.so:000e7930 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::assign(char const*)
-Moffenzeef-debug.so:000e776c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::assign(char const*, unsigned int)
-Moffenzeef-debug.so:000e7388 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-Moffenzeef-debug.so:000e7548 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int)
-Moffenzeef-debug.so:000e7bdc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::assign(std::initializer_list<char>)
-Moffenzeef-debug.so:000e7b30 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::assign(unsigned int, char)
-Moffenzeef-debug.so:000e7ecc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::initializer_list<char>)
-Moffenzeef-debug.so:000e8e28 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, char)
-Moffenzeef-debug.so:000e7dc8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, unsigned int, char)
-Moffenzeef-debug.so:000e8128 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::initializer_list<char>)
-Moffenzeef-debug.so:000e8aa4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(unsigned int, char const*)
-Moffenzeef-debug.so:000e8858 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(unsigned int, char const*, unsigned int)
-Moffenzeef-debug.so:000e837c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-Moffenzeef-debug.so:000e85cc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int)
-Moffenzeef-debug.so:000e8cf8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(unsigned int, unsigned int, char)
-Moffenzeef-debug.so:000e6658 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::rbegin()
-Moffenzeef-debug.so:000e67a0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::resize(unsigned int)
-Moffenzeef-debug.so:000e66d8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::resize(unsigned int, char)
-Moffenzeef-debug.so:000e52f8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data(char*)
-Moffenzeef-debug.so:000e5564 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy(char*, char const*, unsigned int)
-Moffenzeef-debug.so:000e558c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_move(char*, char const*, unsigned int)
-Moffenzeef-debug.so:000eacb0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >)
-Moffenzeef-debug.so:000ea750 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, char*, char*)
-Moffenzeef-debug.so:000e9e2c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-Moffenzeef-debug.so:000ea37c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, char const*)
-Moffenzeef-debug.so:000eaa00 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, char const*, char const*)
-Moffenzeef-debug.so:000ea0d4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, char const*, unsigned int)
-Moffenzeef-debug.so:000eaf60 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >)
-Moffenzeef-debug.so:000eb210 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::initializer_list<char>)
-Moffenzeef-debug.so:000ea628 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, unsigned int, char)
-Moffenzeef-debug.so:000e9a04 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(unsigned int, unsigned int, char const*)
-Moffenzeef-debug.so:000e973c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(unsigned int, unsigned int, char const*, unsigned int)
-Moffenzeef-debug.so:000e911c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(unsigned int, unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-Moffenzeef-debug.so:000e93e4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(unsigned int, unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int)
-Moffenzeef-debug.so:000e9cd8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(unsigned int, unsigned int, unsigned int, char)
-Moffenzeef-debug.so:000e68d4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::reserve(unsigned int)
-Moffenzeef-debug.so:000e699c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::reserve()
-Moffenzeef-debug.so:000e58a4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_erase(unsigned int, unsigned int)
-Moffenzeef-debug.so:000e9104 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::pop_back()
-Moffenzeef-debug.so:000eb888 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_append(char const*, unsigned int)
-Moffenzeef-debug.so:000e5674 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-Moffenzeef-debug.so:000e5350 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned int&, unsigned int)
-Moffenzeef-debug.so:000e5300 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_length(unsigned int)
-Moffenzeef-debug.so:000e574c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_mutate(unsigned int, unsigned int, char const*, unsigned int)
-Moffenzeef-debug.so:000e55b4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_assign(char*, unsigned int, char)
-Moffenzeef-debug.so:000e728c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::push_back(char)
-Moffenzeef-debug.so:000e5df4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
-Moffenzeef-debug.so:000e5f78 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, std::allocator<char> const&)
-Moffenzeef-debug.so:000e5cc4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)
-Moffenzeef-debug.so:000e5c14 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, unsigned int, std::allocator<char> const&)
-Moffenzeef-debug.so:000e5938 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::allocator<char> const&)
-Moffenzeef-debug.so:000e5950 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-Moffenzeef-debug.so:000e5ef0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::allocator<char> const&)
-Moffenzeef-debug.so:000e59d8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, std::allocator<char> const&)
-Moffenzeef-debug.so:000e5a94 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int)
-Moffenzeef-debug.so:000e5b54 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int, std::allocator<char> const&)
-Moffenzeef-debug.so:000e5e58 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::initializer_list<char>, std::allocator<char> const&)
-Moffenzeef-debug.so:000e5d70 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(unsigned int, char, std::allocator<char> const&)
-Moffenzeef-debug.so:000e5920 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()
-Moffenzeef-debug.so:000ecf58 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, void>(__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<char> const&)
-Moffenzeef-debug.so:000ecec8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char const*, void>(char const*, char const*, std::allocator<char> const&)
-Moffenzeef-debug.so:000ece38 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&)
-Moffenzeef-debug.so:000e5df4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
-Moffenzeef-debug.so:000e5f78 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, std::allocator<char> const&)
-Moffenzeef-debug.so:000e5cc4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)
-Moffenzeef-debug.so:000e5c14 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, unsigned int, std::allocator<char> const&)
-Moffenzeef-debug.so:000e5938 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::allocator<char> const&)
-Moffenzeef-debug.so:000e5950 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-Moffenzeef-debug.so:000e5ef0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::allocator<char> const&)
-Moffenzeef-debug.so:000e59d8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, std::allocator<char> const&)
-Moffenzeef-debug.so:000e5a94 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int)
-Moffenzeef-debug.so:000e5b54 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int, std::allocator<char> const&)
-Moffenzeef-debug.so:000e5e58 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::initializer_list<char>, std::allocator<char> const&)
-Moffenzeef-debug.so:000e5d70 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(unsigned int, char, std::allocator<char> const&)
-Moffenzeef-debug.so:000e5920 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()
-Moffenzeef-debug.so:000ecf58 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, void>(__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<char> const&)
-Moffenzeef-debug.so:000ecec8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char const*, void>(char const*, char const*, std::allocator<char> const&)
-Moffenzeef-debug.so:000ece38 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&)
-Moffenzeef-debug.so:000e5fec W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()
-Moffenzeef-debug.so:000e5fec W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()
-Moffenzeef-debug.so:000e6360 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
-Moffenzeef-debug.so:000e60ec W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(char const*)
-Moffenzeef-debug.so:000e6010 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-Moffenzeef-debug.so:000e6444 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::initializer_list<char>)
-Moffenzeef-debug.so:000e62ec W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(char)
-Moffenzeef-debug.so:000e6a20 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator[](unsigned int)
-Moffenzeef-debug.so:000e6b70 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator+=(char const*)
-Moffenzeef-debug.so:000e6ab4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator+=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-Moffenzeef-debug.so:000e6d34 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator+=(std::initializer_list<char>)
-Moffenzeef-debug.so:000e6c34 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator+=(char)
-Moffenzeef-debug.so:000e4ee4 T std::type_info::~type_info()
-Moffenzeef-debug.so:000e4ed0 T std::type_info::~type_info()
-Moffenzeef-debug.so:000e4ed0 T std::type_info::~type_info()
-Moffenzeef-debug.so:000eddb4 T std::get_new_handler()
-Moffenzeef-debug.so:000edd88 T std::set_new_handler(void (*)())
+Moffenzeef-debug.so:000f5078 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::shift_size
+Moffenzeef-debug.so:000f507c V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::state_size
+Moffenzeef-debug.so:000e0230 W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::_M_gen_rand()
+Moffenzeef-debug.so:000f5060 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::tempering_b
+Moffenzeef-debug.so:000f5058 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::tempering_c
+Moffenzeef-debug.so:000f5068 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::tempering_d
+Moffenzeef-debug.so:000f5054 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::tempering_l
+Moffenzeef-debug.so:000f5064 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::tempering_s
+Moffenzeef-debug.so:000f505c V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::tempering_t
+Moffenzeef-debug.so:000f506c V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::tempering_u
+Moffenzeef-debug.so:000f504c V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::default_seed
+Moffenzeef-debug.so:000f5050 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::initialization_multiplier
+Moffenzeef-debug.so:000e5224 W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::max()
+Moffenzeef-debug.so:000e521c W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::min()
+Moffenzeef-debug.so:000e51e8 W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::seed(unsigned int)
+Moffenzeef-debug.so:000e522c W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::discard(unsigned long long)
+Moffenzeef-debug.so:000f5070 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::xor_mask
+Moffenzeef-debug.so:000f5074 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::mask_bits
+Moffenzeef-debug.so:000f5080 V std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::word_size
+Moffenzeef-debug.so:000e51b4 W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::mersenne_twister_engine(unsigned int)
+Moffenzeef-debug.so:000e5178 W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::mersenne_twister_engine()
+Moffenzeef-debug.so:000e51b4 W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::mersenne_twister_engine(unsigned int)
+Moffenzeef-debug.so:000e5178 W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::mersenne_twister_engine()
+Moffenzeef-debug.so:000e5284 W std::mersenne_twister_engine<unsigned int, 32u, 624u, 397u, 31u, 2567483615u, 11u, 4294967295u, 7u, 2636928640u, 15u, 4022730752u, 18u, 1812433253u>::operator()()
+Moffenzeef-debug.so:000e53fc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_destroy(unsigned int)
+Moffenzeef-debug.so:000e53e8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()
+Moffenzeef-debug.so:000eb62c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned int, unsigned int, char const*, unsigned int)
+Moffenzeef-debug.so:000e56ac W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_compare(unsigned int, unsigned int)
+Moffenzeef-debug.so:000e5360 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_capacity(unsigned int)
+Moffenzeef-debug.so:000ec910 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider::_Alloc_hider(char*, std::allocator<char>&&)
+Moffenzeef-debug.so:000ec908 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider::_Alloc_hider(char*, std::allocator<char> const&)
+Moffenzeef-debug.so:000ec910 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider::_Alloc_hider(char*, std::allocator<char>&&)
+Moffenzeef-debug.so:000ec908 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider::_Alloc_hider(char*, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5480 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct(unsigned int, char)
+Moffenzeef-debug.so:000ed0b0 W void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::forward_iterator_tag)
+Moffenzeef-debug.so:000ed028 W void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >(__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::forward_iterator_tag)
+Moffenzeef-debug.so:000ed1c0 W void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag)
+Moffenzeef-debug.so:000ed138 W void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char*>(char*, char*, std::forward_iterator_tag)
+Moffenzeef-debug.so:000e5350 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_local_data()
+Moffenzeef-debug.so:000e5368 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_set_length(unsigned int)
+Moffenzeef-debug.so:000e5640 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >)
+Moffenzeef-debug.so:000e561c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >)
+Moffenzeef-debug.so:000e5688 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, char const*, char const*)
+Moffenzeef-debug.so:000e5664 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy_chars(char*, char*, char*)
+Moffenzeef-debug.so:000e68a8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::shrink_to_fit()
+Moffenzeef-debug.so:000eb508 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace_aux(unsigned int, unsigned int, unsigned int, char)
+Moffenzeef-debug.so:000e54fc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_get_allocator()
+Moffenzeef-debug.so:000e5504 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_use_local_data()
+Moffenzeef-debug.so:000e5404 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct_aux_2(unsigned int, char)
+Moffenzeef-debug.so:000e6a98 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::at(unsigned int)
+Moffenzeef-debug.so:000e6680 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::end()
+Moffenzeef-debug.so:000e6ad4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::back()
+Moffenzeef-debug.so:000f5204 V std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::npos
+Moffenzeef-debug.so:000e66b8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::rend()
+Moffenzeef-debug.so:000eb9d4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::swap(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)
+Moffenzeef-debug.so:000e6670 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::begin()
+Moffenzeef-debug.so:000e6a30 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::clear()
+Moffenzeef-debug.so:000e9020 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::erase(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >)
+Moffenzeef-debug.so:000e9094 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::erase(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >)
+Moffenzeef-debug.so:000e8f3c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::erase(unsigned int, unsigned int)
+Moffenzeef-debug.so:000e6ac4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::front()
+Moffenzeef-debug.so:000e7094 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*)
+Moffenzeef-debug.so:000e6fe0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(char const*, unsigned int)
+Moffenzeef-debug.so:000e6e30 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+Moffenzeef-debug.so:000e6eec W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int)
+Moffenzeef-debug.so:000e7210 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(std::initializer_list<char>)
+Moffenzeef-debug.so:000e7158 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::append(unsigned int, char)
+Moffenzeef-debug.so:000e74a4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
+Moffenzeef-debug.so:000e7970 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::assign(char const*)
+Moffenzeef-debug.so:000e77ac W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::assign(char const*, unsigned int)
+Moffenzeef-debug.so:000e73c8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+Moffenzeef-debug.so:000e7588 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int)
+Moffenzeef-debug.so:000e7c1c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::assign(std::initializer_list<char>)
+Moffenzeef-debug.so:000e7b70 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::assign(unsigned int, char)
+Moffenzeef-debug.so:000e7f0c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::initializer_list<char>)
+Moffenzeef-debug.so:000e8e68 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, char)
+Moffenzeef-debug.so:000e7e08 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, unsigned int, char)
+Moffenzeef-debug.so:000e8168 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::initializer_list<char>)
+Moffenzeef-debug.so:000e8ae4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(unsigned int, char const*)
+Moffenzeef-debug.so:000e8898 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(unsigned int, char const*, unsigned int)
+Moffenzeef-debug.so:000e83bc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+Moffenzeef-debug.so:000e860c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int)
+Moffenzeef-debug.so:000e8d38 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::insert(unsigned int, unsigned int, char)
+Moffenzeef-debug.so:000e6698 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::rbegin()
+Moffenzeef-debug.so:000e67e0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::resize(unsigned int)
+Moffenzeef-debug.so:000e6718 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::resize(unsigned int, char)
+Moffenzeef-debug.so:000e5338 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data(char*)
+Moffenzeef-debug.so:000e55a4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_copy(char*, char const*, unsigned int)
+Moffenzeef-debug.so:000e55cc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_move(char*, char const*, unsigned int)
+Moffenzeef-debug.so:000eacf0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >)
+Moffenzeef-debug.so:000ea790 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, char*, char*)
+Moffenzeef-debug.so:000e9e6c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+Moffenzeef-debug.so:000ea3bc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, char const*)
+Moffenzeef-debug.so:000eaa40 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, char const*, char const*)
+Moffenzeef-debug.so:000ea114 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, char const*, unsigned int)
+Moffenzeef-debug.so:000eafa0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >)
+Moffenzeef-debug.so:000eb250 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::initializer_list<char>)
+Moffenzeef-debug.so:000ea668 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(__gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, unsigned int, char)
+Moffenzeef-debug.so:000e9a44 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(unsigned int, unsigned int, char const*)
+Moffenzeef-debug.so:000e977c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(unsigned int, unsigned int, char const*, unsigned int)
+Moffenzeef-debug.so:000e915c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(unsigned int, unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+Moffenzeef-debug.so:000e9424 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(unsigned int, unsigned int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int)
+Moffenzeef-debug.so:000e9d18 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::replace(unsigned int, unsigned int, unsigned int, char)
+Moffenzeef-debug.so:000e6914 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::reserve(unsigned int)
+Moffenzeef-debug.so:000e69dc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::reserve()
+Moffenzeef-debug.so:000e58e4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_erase(unsigned int, unsigned int)
+Moffenzeef-debug.so:000e9144 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::pop_back()
+Moffenzeef-debug.so:000eb8c8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_append(char const*, unsigned int)
+Moffenzeef-debug.so:000e56b4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+Moffenzeef-debug.so:000e5390 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_create(unsigned int&, unsigned int)
+Moffenzeef-debug.so:000e5340 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_length(unsigned int)
+Moffenzeef-debug.so:000e578c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_mutate(unsigned int, unsigned int, char const*, unsigned int)
+Moffenzeef-debug.so:000e55f4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_assign(char*, unsigned int, char)
+Moffenzeef-debug.so:000e72cc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::push_back(char)
+Moffenzeef-debug.so:000e5e34 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
+Moffenzeef-debug.so:000e5fb8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5d04 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5c54 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, unsigned int, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5978 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::allocator<char> const&)
+Moffenzeef-debug.so:000e5990 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+Moffenzeef-debug.so:000e5f30 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5a18 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5ad4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int)
+Moffenzeef-debug.so:000e5b94 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5e98 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::initializer_list<char>, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5db0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(unsigned int, char, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5960 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()
+Moffenzeef-debug.so:000ecf98 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, void>(__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<char> const&)
+Moffenzeef-debug.so:000ecf08 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char const*, void>(char const*, char const*, std::allocator<char> const&)
+Moffenzeef-debug.so:000ece78 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5e34 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
+Moffenzeef-debug.so:000e5fb8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5d04 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5c54 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(char const*, unsigned int, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5978 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::allocator<char> const&)
+Moffenzeef-debug.so:000e5990 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+Moffenzeef-debug.so:000e5f30 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5a18 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5ad4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int)
+Moffenzeef-debug.so:000e5b94 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, unsigned int, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5e98 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(std::initializer_list<char>, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5db0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string(unsigned int, char, std::allocator<char> const&)
+Moffenzeef-debug.so:000e5960 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()
+Moffenzeef-debug.so:000ecf98 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, void>(__gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, __gnu_cxx::__normal_iterator<char*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<char> const&)
+Moffenzeef-debug.so:000ecf08 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char const*, void>(char const*, char const*, std::allocator<char> const&)
+Moffenzeef-debug.so:000ece78 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string<char*, void>(char*, char*, std::allocator<char> const&)
+Moffenzeef-debug.so:000e602c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()
+Moffenzeef-debug.so:000e602c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()
+Moffenzeef-debug.so:000e63a0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)
+Moffenzeef-debug.so:000e612c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(char const*)
+Moffenzeef-debug.so:000e6050 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+Moffenzeef-debug.so:000e6484 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::initializer_list<char>)
+Moffenzeef-debug.so:000e632c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(char)
+Moffenzeef-debug.so:000e6a60 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator[](unsigned int)
+Moffenzeef-debug.so:000e6bb0 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator+=(char const*)
+Moffenzeef-debug.so:000e6af4 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator+=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+Moffenzeef-debug.so:000e6d74 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator+=(std::initializer_list<char>)
+Moffenzeef-debug.so:000e6c74 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator+=(char)
+Moffenzeef-debug.so:000e4f24 T std::type_info::~type_info()
+Moffenzeef-debug.so:000e4f10 T std::type_info::~type_info()
+Moffenzeef-debug.so:000e4f10 T std::type_info::~type_info()
+Moffenzeef-debug.so:000eddf4 T std::get_new_handler()
+Moffenzeef-debug.so:000eddc8 T std::set_new_handler(void (*)())
 Moffenzeef-debug.so:00019088 T std::__throw_bad_cast()
 Moffenzeef-debug.so:00019078 T std::__throw_bad_alloc()
 Moffenzeef-debug.so:00019090 T std::__throw_bad_typeid()
@@ -690,228 +690,228 @@ Moffenzeef-debug.so:000190c0 T std::__throw_runtime_error(char const*)
 Moffenzeef-debug.so:000190d0 T std::__throw_overflow_error(char const*)
 Moffenzeef-debug.so:000190d8 T std::__throw_underflow_error(char const*)
 Moffenzeef-debug.so:000190a8 T std::__throw_invalid_argument(char const*)
-Moffenzeef-debug.so:000e4f54 T std::__throw_out_of_range_fmt(char const*, ...)
+Moffenzeef-debug.so:000e4f94 T std::__throw_out_of_range_fmt(char const*, ...)
 Moffenzeef-debug.so:00019080 T std::__throw_bad_array_new_length()
-Moffenzeef-debug.so:000f5300 R std::nothrow
-Moffenzeef-debug.so:000ec8d8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-Moffenzeef-debug.so:000eccf8 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-Moffenzeef-debug.so:000ecafc W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
-Moffenzeef-debug.so:000f7f64 V typeinfo for MitoWidget
-Moffenzeef-debug.so:000f6e80 V typeinfo for BadIdea1800
-Moffenzeef-debug.so:000f7510 V typeinfo for ClockModule
-Moffenzeef-debug.so:000f705c V typeinfo for BobcatWidget
-Moffenzeef-debug.so:000f79d0 V typeinfo for DialUpWidget
-Moffenzeef-debug.so:000f7dc4 V typeinfo for KriketWidget
-Moffenzeef-debug.so:000f7364 V typeinfo for BusMultWidget
-Moffenzeef-debug.so:000f7824 V typeinfo for DeviantWidget
-Moffenzeef-debug.so:000f82a4 V typeinfo for MongrelWidget
-Moffenzeef-debug.so:000f8450 V typeinfo for MuskratWidget
-Moffenzeef-debug.so:000f64f4 V typeinfo for BadIdea9Widget
-Moffenzeef-debug.so:000f7044 V typeinfo for CKSSHorizontal
-Moffenzeef-debug.so:000f86a4 V typeinfo for SimplifyWidget
-Moffenzeef-debug.so:000f8104 V typeinfo for MoffenmixWidget
-Moffenzeef-debug.so:000f6e8c V typeinfo for BadIdea1800Widget
-Moffenzeef-debug.so:000f751c V typeinfo for ClockModuleWidget
-Moffenzeef-debug.so:000f7c18 V typeinfo for GMO
-Moffenzeef-debug.so:000f7f58 V typeinfo for Mito
-Moffenzeef-debug.so:000f7050 V typeinfo for Bobcat
-Moffenzeef-debug.so:000f79c4 V typeinfo for DialUp
-Moffenzeef-debug.so:000f7db8 V typeinfo for Kriket
-Moffenzeef-debug.so:000f7358 V typeinfo for BusMult
-Moffenzeef-debug.so:000f7818 V typeinfo for Deviant
-Moffenzeef-debug.so:000f8298 V typeinfo for Mongrel
-Moffenzeef-debug.so:000f8444 V typeinfo for Muskrat
-Moffenzeef-debug.so:000f64e8 V typeinfo for BadIdea9
-Moffenzeef-debug.so:000f8698 V typeinfo for Simplify
-Moffenzeef-debug.so:000f7c24 V typeinfo for GMOWidget
-Moffenzeef-debug.so:000f80f8 V typeinfo for Moffenmix
-Moffenzeef-debug.so:000f8838 D typeinfo for __cxxabiv1::__class_type_info
-Moffenzeef-debug.so:000f8870 D typeinfo for __cxxabiv1::__si_class_type_info
-Moffenzeef-debug.so:000f64d0 V typeinfo for rack::componentlibrary::PJ301MPort
-Moffenzeef-debug.so:000f6524 V typeinfo for rack::componentlibrary::MediumLight<rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> > >
-Moffenzeef-debug.so:000f64dc V typeinfo for rack::componentlibrary::ScrewSilver
-Moffenzeef-debug.so:000f64c4 V typeinfo for rack::componentlibrary::RoundBlackKnob
-Moffenzeef-debug.so:000f7038 V typeinfo for rack::componentlibrary::RoundBigBlackKnob
-Moffenzeef-debug.so:000f79b8 V typeinfo for rack::componentlibrary::CKSSThreeHorizontal
-Moffenzeef-debug.so:000f74f8 V typeinfo for rack::componentlibrary::RoundSmallBlackKnob
-Moffenzeef-debug.so:000f6500 V typeinfo for rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget>
-Moffenzeef-debug.so:000f7504 V typeinfo for rack::componentlibrary::CKSS
-Moffenzeef-debug.so:000f8438 V typeinfo for rack::componentlibrary::CKSSThree
-Moffenzeef-debug.so:000f64b8 V typeinfo for rack::componentlibrary::RoundKnob
-Moffenzeef-debug.so:000f650c V typeinfo for rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> >
-Moffenzeef-debug.so:000f6518 V typeinfo for rack::componentlibrary::TSvgLight<rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> > >
-Moffenzeef-debug.so:000f64a0 V typeinfo for rack::app::PortWidget
-Moffenzeef-debug.so:000f6468 V typeinfo for rack::app::LightWidget
+Moffenzeef-debug.so:000f5340 R std::nothrow
+Moffenzeef-debug.so:000ec918 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+Moffenzeef-debug.so:000ecd38 W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+Moffenzeef-debug.so:000ecb3c W std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(char, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+Moffenzeef-debug.so:000f7fa4 V typeinfo for MitoWidget
+Moffenzeef-debug.so:000f6ec0 V typeinfo for BadIdea1800
+Moffenzeef-debug.so:000f7550 V typeinfo for ClockModule
+Moffenzeef-debug.so:000f709c V typeinfo for BobcatWidget
+Moffenzeef-debug.so:000f7a10 V typeinfo for DialUpWidget
+Moffenzeef-debug.so:000f7e04 V typeinfo for KriketWidget
+Moffenzeef-debug.so:000f73a4 V typeinfo for BusMultWidget
+Moffenzeef-debug.so:000f7864 V typeinfo for DeviantWidget
+Moffenzeef-debug.so:000f82e4 V typeinfo for MongrelWidget
+Moffenzeef-debug.so:000f8490 V typeinfo for MuskratWidget
+Moffenzeef-debug.so:000f6534 V typeinfo for BadIdea9Widget
+Moffenzeef-debug.so:000f7084 V typeinfo for CKSSHorizontal
+Moffenzeef-debug.so:000f86e4 V typeinfo for SimplifyWidget
+Moffenzeef-debug.so:000f8144 V typeinfo for MoffenmixWidget
+Moffenzeef-debug.so:000f6ecc V typeinfo for BadIdea1800Widget
+Moffenzeef-debug.so:000f755c V typeinfo for ClockModuleWidget
+Moffenzeef-debug.so:000f7c58 V typeinfo for GMO
+Moffenzeef-debug.so:000f7f98 V typeinfo for Mito
+Moffenzeef-debug.so:000f7090 V typeinfo for Bobcat
+Moffenzeef-debug.so:000f7a04 V typeinfo for DialUp
+Moffenzeef-debug.so:000f7df8 V typeinfo for Kriket
+Moffenzeef-debug.so:000f7398 V typeinfo for BusMult
+Moffenzeef-debug.so:000f7858 V typeinfo for Deviant
+Moffenzeef-debug.so:000f82d8 V typeinfo for Mongrel
+Moffenzeef-debug.so:000f8484 V typeinfo for Muskrat
+Moffenzeef-debug.so:000f6528 V typeinfo for BadIdea9
+Moffenzeef-debug.so:000f86d8 V typeinfo for Simplify
+Moffenzeef-debug.so:000f7c64 V typeinfo for GMOWidget
+Moffenzeef-debug.so:000f8138 V typeinfo for Moffenmix
+Moffenzeef-debug.so:000f8878 D typeinfo for __cxxabiv1::__class_type_info
+Moffenzeef-debug.so:000f88b0 D typeinfo for __cxxabiv1::__si_class_type_info
+Moffenzeef-debug.so:000f6510 V typeinfo for rack::componentlibrary::PJ301MPort
+Moffenzeef-debug.so:000f6564 V typeinfo for rack::componentlibrary::MediumLight<rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> > >
+Moffenzeef-debug.so:000f651c V typeinfo for rack::componentlibrary::ScrewSilver
+Moffenzeef-debug.so:000f6504 V typeinfo for rack::componentlibrary::RoundBlackKnob
+Moffenzeef-debug.so:000f7078 V typeinfo for rack::componentlibrary::RoundBigBlackKnob
+Moffenzeef-debug.so:000f79f8 V typeinfo for rack::componentlibrary::CKSSThreeHorizontal
+Moffenzeef-debug.so:000f7538 V typeinfo for rack::componentlibrary::RoundSmallBlackKnob
+Moffenzeef-debug.so:000f6540 V typeinfo for rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget>
+Moffenzeef-debug.so:000f7544 V typeinfo for rack::componentlibrary::CKSS
+Moffenzeef-debug.so:000f8478 V typeinfo for rack::componentlibrary::CKSSThree
+Moffenzeef-debug.so:000f64f8 V typeinfo for rack::componentlibrary::RoundKnob
+Moffenzeef-debug.so:000f654c V typeinfo for rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> >
+Moffenzeef-debug.so:000f6558 V typeinfo for rack::componentlibrary::TSvgLight<rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> > >
+Moffenzeef-debug.so:000f64e0 V typeinfo for rack::app::PortWidget
+Moffenzeef-debug.so:000f64a8 V typeinfo for rack::app::LightWidget
 Moffenzeef-debug.so:         U typeinfo for rack::app::ModuleWidget
-Moffenzeef-debug.so:000f6474 V typeinfo for rack::app::MultiLightWidget
-Moffenzeef-debug.so:000f6488 V typeinfo for rack::app::ModuleLightWidget
+Moffenzeef-debug.so:000f64b4 V typeinfo for rack::app::MultiLightWidget
+Moffenzeef-debug.so:000f64c8 V typeinfo for rack::app::ModuleLightWidget
 Moffenzeef-debug.so:         U typeinfo for rack::app::Knob
-Moffenzeef-debug.so:000f6494 V typeinfo for rack::app::SvgKnob
-Moffenzeef-debug.so:000f64ac V typeinfo for rack::app::SvgPort
+Moffenzeef-debug.so:000f64d4 V typeinfo for rack::app::SvgKnob
+Moffenzeef-debug.so:000f64ec V typeinfo for rack::app::SvgPort
 Moffenzeef-debug.so:         U typeinfo for rack::app::SvgScrew
 Moffenzeef-debug.so:         U typeinfo for rack::app::SvgSwitch
 Moffenzeef-debug.so:         U typeinfo for rack::engine::Module
-Moffenzeef-debug.so:000f6e78 V typeinfo for rack::engine::PortInfo
-Moffenzeef-debug.so:000f6480 V typeinfo for rack::plugin::Model
-Moffenzeef-debug.so:000f6444 V typeinfo for rack::widget::OpaqueWidget
-Moffenzeef-debug.so:000f6450 V typeinfo for rack::widget::TransparentWidget
+Moffenzeef-debug.so:000f6eb8 V typeinfo for rack::engine::PortInfo
+Moffenzeef-debug.so:000f64c0 V typeinfo for rack::plugin::Model
+Moffenzeef-debug.so:000f6484 V typeinfo for rack::widget::OpaqueWidget
+Moffenzeef-debug.so:000f6490 V typeinfo for rack::widget::TransparentWidget
 Moffenzeef-debug.so:         U typeinfo for rack::widget::Widget
-Moffenzeef-debug.so:000f645c V typeinfo for rack::widget::SvgWidget
-Moffenzeef-debug.so:000f88a8 D typeinfo for std::type_info
-Moffenzeef-debug.so:000f6e98 V typeinfo for rack::createModel<BadIdea1800, BadIdea1800Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f7528 V typeinfo for rack::createModel<ClockModule, ClockModuleWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f7c30 V typeinfo for rack::createModel<GMO, GMOWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f7f70 V typeinfo for rack::createModel<Mito, MitoWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f7068 V typeinfo for rack::createModel<Bobcat, BobcatWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f79dc V typeinfo for rack::createModel<DialUp, DialUpWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f7dd0 V typeinfo for rack::createModel<Kriket, KriketWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f7370 V typeinfo for rack::createModel<BusMult, BusMultWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f7830 V typeinfo for rack::createModel<Deviant, DeviantWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f82b0 V typeinfo for rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f845c V typeinfo for rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f6530 V typeinfo for rack::createModel<BadIdea9, BadIdea9Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f86b0 V typeinfo for rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f8110 V typeinfo for rack::createModel<Moffenmix, MoffenmixWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000ef224 V typeinfo name for MitoWidget
-Moffenzeef-debug.so:000ee6cc V typeinfo name for BadIdea1800
-Moffenzeef-debug.so:000eec44 V typeinfo name for ClockModule
-Moffenzeef-debug.so:000ee954 V typeinfo name for BobcatWidget
-Moffenzeef-debug.so:000eeeb8 V typeinfo name for DialUpWidget
-Moffenzeef-debug.so:000ef078 V typeinfo name for KriketWidget
-Moffenzeef-debug.so:000ee9fc V typeinfo name for BusMultWidget
-Moffenzeef-debug.so:000eed90 V typeinfo name for DeviantWidget
-Moffenzeef-debug.so:000ef44c V typeinfo name for MongrelWidget
-Moffenzeef-debug.so:000ef5e8 V typeinfo name for MuskratWidget
-Moffenzeef-debug.so:000ee454 V typeinfo name for BadIdea9Widget
-Moffenzeef-debug.so:000ee938 V typeinfo name for CKSSHorizontal
-Moffenzeef-debug.so:000f1f4c V typeinfo name for SimplifyWidget
-Moffenzeef-debug.so:000ef364 V typeinfo name for MoffenmixWidget
-Moffenzeef-debug.so:000ee6dc V typeinfo name for BadIdea1800Widget
-Moffenzeef-debug.so:000eec54 V typeinfo name for ClockModuleWidget
-Moffenzeef-debug.so:000eef98 V typeinfo name for GMO
-Moffenzeef-debug.so:000ef21c V typeinfo name for Mito
-Moffenzeef-debug.so:000ee94c V typeinfo name for Bobcat
-Moffenzeef-debug.so:000eeeb0 V typeinfo name for DialUp
-Moffenzeef-debug.so:000ef070 V typeinfo name for Kriket
-Moffenzeef-debug.so:000ee9f0 V typeinfo name for BusMult
-Moffenzeef-debug.so:000eed84 V typeinfo name for Deviant
-Moffenzeef-debug.so:000ef440 V typeinfo name for Mongrel
-Moffenzeef-debug.so:000ef5dc V typeinfo name for Muskrat
-Moffenzeef-debug.so:000ee448 V typeinfo name for BadIdea9
-Moffenzeef-debug.so:000f1f40 V typeinfo name for Simplify
-Moffenzeef-debug.so:000eefa0 V typeinfo name for GMOWidget
-Moffenzeef-debug.so:000ef358 V typeinfo name for Moffenmix
-Moffenzeef-debug.so:000f4f38 R typeinfo name for __cxxabiv1::__class_type_info
-Moffenzeef-debug.so:000f4f5c R typeinfo name for __cxxabiv1::__si_class_type_info
-Moffenzeef-debug.so:000ee3f8 V typeinfo name for rack::componentlibrary::PJ301MPort
-Moffenzeef-debug.so:000ee58c V typeinfo name for rack::componentlibrary::MediumLight<rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> > >
-Moffenzeef-debug.so:000ee420 V typeinfo name for rack::componentlibrary::ScrewSilver
-Moffenzeef-debug.so:000ee3cc V typeinfo name for rack::componentlibrary::RoundBlackKnob
-Moffenzeef-debug.so:000ee908 V typeinfo name for rack::componentlibrary::RoundBigBlackKnob
-Moffenzeef-debug.so:000eee80 V typeinfo name for rack::componentlibrary::CKSSThreeHorizontal
-Moffenzeef-debug.so:000eebf4 V typeinfo name for rack::componentlibrary::RoundSmallBlackKnob
-Moffenzeef-debug.so:000ee468 V typeinfo name for rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget>
-Moffenzeef-debug.so:000eec24 V typeinfo name for rack::componentlibrary::CKSS
-Moffenzeef-debug.so:000ef5b8 V typeinfo name for rack::componentlibrary::CKSSThree
-Moffenzeef-debug.so:000ee3a8 V typeinfo name for rack::componentlibrary::RoundKnob
-Moffenzeef-debug.so:000ee4b8 V typeinfo name for rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> >
-Moffenzeef-debug.so:000ee518 V typeinfo name for rack::componentlibrary::TSvgLight<rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> > >
-Moffenzeef-debug.so:000ee37c V typeinfo name for rack::app::PortWidget
-Moffenzeef-debug.so:000ee2f4 V typeinfo name for rack::app::LightWidget
-Moffenzeef-debug.so:000ee310 V typeinfo name for rack::app::MultiLightWidget
-Moffenzeef-debug.so:000ee348 V typeinfo name for rack::app::ModuleLightWidget
-Moffenzeef-debug.so:000ee368 V typeinfo name for rack::app::SvgKnob
-Moffenzeef-debug.so:000ee394 V typeinfo name for rack::app::SvgPort
-Moffenzeef-debug.so:000ee6b4 V typeinfo name for rack::engine::PortInfo
-Moffenzeef-debug.so:000ee330 V typeinfo name for rack::plugin::Model
-Moffenzeef-debug.so:000ee294 V typeinfo name for rack::widget::OpaqueWidget
-Moffenzeef-debug.so:000ee2b4 V typeinfo name for rack::widget::TransparentWidget
-Moffenzeef-debug.so:000ee2d8 V typeinfo name for rack::widget::SvgWidget
-Moffenzeef-debug.so:000f4f84 R typeinfo name for std::type_info
-Moffenzeef-debug.so:000ee6f0 V typeinfo name for rack::createModel<BadIdea1800, BadIdea1800Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000eec68 V typeinfo name for rack::createModel<ClockModule, ClockModuleWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000eefac V typeinfo name for rack::createModel<GMO, GMOWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000ef234 V typeinfo name for rack::createModel<Mito, MitoWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000ee964 V typeinfo name for rack::createModel<Bobcat, BobcatWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000eeec8 V typeinfo name for rack::createModel<DialUp, DialUpWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000ef088 V typeinfo name for rack::createModel<Kriket, KriketWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000eea0c V typeinfo name for rack::createModel<BusMult, BusMultWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000eeda0 V typeinfo name for rack::createModel<Deviant, DeviantWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000ef45c V typeinfo name for rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000ef5f8 V typeinfo name for rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000ee600 V typeinfo name for rack::createModel<BadIdea9, BadIdea9Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f1f60 V typeinfo name for rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000ef378 V typeinfo name for rack::createModel<Moffenmix, MoffenmixWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f8030 V vtable for MitoWidget
-Moffenzeef-debug.so:000f6ebc V vtable for BadIdea1800
-Moffenzeef-debug.so:000f769c V vtable for ClockModule
-Moffenzeef-debug.so:000f7290 V vtable for BobcatWidget
-Moffenzeef-debug.so:000f7b50 V vtable for DialUpWidget
-Moffenzeef-debug.so:000f7e90 V vtable for KriketWidget
-Moffenzeef-debug.so:000f7430 V vtable for BusMultWidget
-Moffenzeef-debug.so:000f78f0 V vtable for DeviantWidget
-Moffenzeef-debug.so:000f8370 V vtable for MongrelWidget
-Moffenzeef-debug.so:000f85d0 V vtable for MuskratWidget
-Moffenzeef-debug.so:000f6b88 V vtable for BadIdea9Widget
-Moffenzeef-debug.so:000f7128 V vtable for CKSSHorizontal
-Moffenzeef-debug.so:000f8770 V vtable for SimplifyWidget
-Moffenzeef-debug.so:000f81d0 V vtable for MoffenmixWidget
-Moffenzeef-debug.so:000f6f70 V vtable for BadIdea1800Widget
-Moffenzeef-debug.so:000f7750 V vtable for ClockModuleWidget
-Moffenzeef-debug.so:000f7c3c V vtable for GMO
-Moffenzeef-debug.so:000f7f7c V vtable for Mito
-Moffenzeef-debug.so:000f71dc V vtable for Bobcat
-Moffenzeef-debug.so:000f7a9c V vtable for DialUp
-Moffenzeef-debug.so:000f7ddc V vtable for Kriket
-Moffenzeef-debug.so:000f737c V vtable for BusMult
-Moffenzeef-debug.so:000f783c V vtable for Deviant
-Moffenzeef-debug.so:000f82bc V vtable for Mongrel
-Moffenzeef-debug.so:000f851c V vtable for Muskrat
-Moffenzeef-debug.so:000f6ad4 V vtable for BadIdea9
-Moffenzeef-debug.so:000f86bc V vtable for Simplify
-Moffenzeef-debug.so:000f7cf0 V vtable for GMOWidget
-Moffenzeef-debug.so:000f811c V vtable for Moffenmix
-Moffenzeef-debug.so:000f8844 D vtable for __cxxabiv1::__class_type_info
-Moffenzeef-debug.so:000f887c D vtable for __cxxabiv1::__si_class_type_info
-Moffenzeef-debug.so:000f6978 V vtable for rack::componentlibrary::PJ301MPort
-Moffenzeef-debug.so:000f6da8 V vtable for rack::componentlibrary::MediumLight<rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> > >
-Moffenzeef-debug.so:000f6a28 V vtable for rack::componentlibrary::ScrewSilver
-Moffenzeef-debug.so:000f68c4 V vtable for rack::componentlibrary::RoundBlackKnob
-Moffenzeef-debug.so:000f7074 V vtable for rack::componentlibrary::RoundBigBlackKnob
-Moffenzeef-debug.so:000f79e8 V vtable for rack::componentlibrary::CKSSThreeHorizontal
-Moffenzeef-debug.so:000f7534 V vtable for rack::componentlibrary::RoundSmallBlackKnob
-Moffenzeef-debug.so:000f75e8 V vtable for rack::componentlibrary::CKSS
-Moffenzeef-debug.so:000f8468 V vtable for rack::componentlibrary::CKSSThree
-Moffenzeef-debug.so:000f6810 V vtable for rack::componentlibrary::RoundKnob
-Moffenzeef-debug.so:000f6c38 V vtable for rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> >
-Moffenzeef-debug.so:000f6cf0 V vtable for rack::componentlibrary::TSvgLight<rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> > >
-Moffenzeef-debug.so:000f6740 V vtable for rack::app::MultiLightWidget
+Moffenzeef-debug.so:000f649c V typeinfo for rack::widget::SvgWidget
+Moffenzeef-debug.so:000f88e8 D typeinfo for std::type_info
+Moffenzeef-debug.so:000f6ed8 V typeinfo for rack::createModel<BadIdea1800, BadIdea1800Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f7568 V typeinfo for rack::createModel<ClockModule, ClockModuleWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f7c70 V typeinfo for rack::createModel<GMO, GMOWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f7fb0 V typeinfo for rack::createModel<Mito, MitoWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f70a8 V typeinfo for rack::createModel<Bobcat, BobcatWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f7a1c V typeinfo for rack::createModel<DialUp, DialUpWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f7e10 V typeinfo for rack::createModel<Kriket, KriketWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f73b0 V typeinfo for rack::createModel<BusMult, BusMultWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f7870 V typeinfo for rack::createModel<Deviant, DeviantWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f82f0 V typeinfo for rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f849c V typeinfo for rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f6570 V typeinfo for rack::createModel<BadIdea9, BadIdea9Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f86f0 V typeinfo for rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f8150 V typeinfo for rack::createModel<Moffenmix, MoffenmixWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000ef264 V typeinfo name for MitoWidget
+Moffenzeef-debug.so:000ee70c V typeinfo name for BadIdea1800
+Moffenzeef-debug.so:000eec84 V typeinfo name for ClockModule
+Moffenzeef-debug.so:000ee994 V typeinfo name for BobcatWidget
+Moffenzeef-debug.so:000eeef8 V typeinfo name for DialUpWidget
+Moffenzeef-debug.so:000ef0b8 V typeinfo name for KriketWidget
+Moffenzeef-debug.so:000eea3c V typeinfo name for BusMultWidget
+Moffenzeef-debug.so:000eedd0 V typeinfo name for DeviantWidget
+Moffenzeef-debug.so:000ef48c V typeinfo name for MongrelWidget
+Moffenzeef-debug.so:000ef628 V typeinfo name for MuskratWidget
+Moffenzeef-debug.so:000ee494 V typeinfo name for BadIdea9Widget
+Moffenzeef-debug.so:000ee978 V typeinfo name for CKSSHorizontal
+Moffenzeef-debug.so:000f1f8c V typeinfo name for SimplifyWidget
+Moffenzeef-debug.so:000ef3a4 V typeinfo name for MoffenmixWidget
+Moffenzeef-debug.so:000ee71c V typeinfo name for BadIdea1800Widget
+Moffenzeef-debug.so:000eec94 V typeinfo name for ClockModuleWidget
+Moffenzeef-debug.so:000eefd8 V typeinfo name for GMO
+Moffenzeef-debug.so:000ef25c V typeinfo name for Mito
+Moffenzeef-debug.so:000ee98c V typeinfo name for Bobcat
+Moffenzeef-debug.so:000eeef0 V typeinfo name for DialUp
+Moffenzeef-debug.so:000ef0b0 V typeinfo name for Kriket
+Moffenzeef-debug.so:000eea30 V typeinfo name for BusMult
+Moffenzeef-debug.so:000eedc4 V typeinfo name for Deviant
+Moffenzeef-debug.so:000ef480 V typeinfo name for Mongrel
+Moffenzeef-debug.so:000ef61c V typeinfo name for Muskrat
+Moffenzeef-debug.so:000ee488 V typeinfo name for BadIdea9
+Moffenzeef-debug.so:000f1f80 V typeinfo name for Simplify
+Moffenzeef-debug.so:000eefe0 V typeinfo name for GMOWidget
+Moffenzeef-debug.so:000ef398 V typeinfo name for Moffenmix
+Moffenzeef-debug.so:000f4f78 R typeinfo name for __cxxabiv1::__class_type_info
+Moffenzeef-debug.so:000f4f9c R typeinfo name for __cxxabiv1::__si_class_type_info
+Moffenzeef-debug.so:000ee438 V typeinfo name for rack::componentlibrary::PJ301MPort
+Moffenzeef-debug.so:000ee5cc V typeinfo name for rack::componentlibrary::MediumLight<rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> > >
+Moffenzeef-debug.so:000ee460 V typeinfo name for rack::componentlibrary::ScrewSilver
+Moffenzeef-debug.so:000ee40c V typeinfo name for rack::componentlibrary::RoundBlackKnob
+Moffenzeef-debug.so:000ee948 V typeinfo name for rack::componentlibrary::RoundBigBlackKnob
+Moffenzeef-debug.so:000eeec0 V typeinfo name for rack::componentlibrary::CKSSThreeHorizontal
+Moffenzeef-debug.so:000eec34 V typeinfo name for rack::componentlibrary::RoundSmallBlackKnob
+Moffenzeef-debug.so:000ee4a8 V typeinfo name for rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget>
+Moffenzeef-debug.so:000eec64 V typeinfo name for rack::componentlibrary::CKSS
+Moffenzeef-debug.so:000ef5f8 V typeinfo name for rack::componentlibrary::CKSSThree
+Moffenzeef-debug.so:000ee3e8 V typeinfo name for rack::componentlibrary::RoundKnob
+Moffenzeef-debug.so:000ee4f8 V typeinfo name for rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> >
+Moffenzeef-debug.so:000ee558 V typeinfo name for rack::componentlibrary::TSvgLight<rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> > >
+Moffenzeef-debug.so:000ee3bc V typeinfo name for rack::app::PortWidget
+Moffenzeef-debug.so:000ee334 V typeinfo name for rack::app::LightWidget
+Moffenzeef-debug.so:000ee350 V typeinfo name for rack::app::MultiLightWidget
+Moffenzeef-debug.so:000ee388 V typeinfo name for rack::app::ModuleLightWidget
+Moffenzeef-debug.so:000ee3a8 V typeinfo name for rack::app::SvgKnob
+Moffenzeef-debug.so:000ee3d4 V typeinfo name for rack::app::SvgPort
+Moffenzeef-debug.so:000ee6f4 V typeinfo name for rack::engine::PortInfo
+Moffenzeef-debug.so:000ee370 V typeinfo name for rack::plugin::Model
+Moffenzeef-debug.so:000ee2d4 V typeinfo name for rack::widget::OpaqueWidget
+Moffenzeef-debug.so:000ee2f4 V typeinfo name for rack::widget::TransparentWidget
+Moffenzeef-debug.so:000ee318 V typeinfo name for rack::widget::SvgWidget
+Moffenzeef-debug.so:000f4fc4 R typeinfo name for std::type_info
+Moffenzeef-debug.so:000ee730 V typeinfo name for rack::createModel<BadIdea1800, BadIdea1800Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000eeca8 V typeinfo name for rack::createModel<ClockModule, ClockModuleWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000eefec V typeinfo name for rack::createModel<GMO, GMOWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000ef274 V typeinfo name for rack::createModel<Mito, MitoWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000ee9a4 V typeinfo name for rack::createModel<Bobcat, BobcatWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000eef08 V typeinfo name for rack::createModel<DialUp, DialUpWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000ef0c8 V typeinfo name for rack::createModel<Kriket, KriketWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000eea4c V typeinfo name for rack::createModel<BusMult, BusMultWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000eede0 V typeinfo name for rack::createModel<Deviant, DeviantWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000ef49c V typeinfo name for rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000ef638 V typeinfo name for rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000ee640 V typeinfo name for rack::createModel<BadIdea9, BadIdea9Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f1fa0 V typeinfo name for rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000ef3b8 V typeinfo name for rack::createModel<Moffenmix, MoffenmixWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f8070 V vtable for MitoWidget
+Moffenzeef-debug.so:000f6efc V vtable for BadIdea1800
+Moffenzeef-debug.so:000f76dc V vtable for ClockModule
+Moffenzeef-debug.so:000f72d0 V vtable for BobcatWidget
+Moffenzeef-debug.so:000f7b90 V vtable for DialUpWidget
+Moffenzeef-debug.so:000f7ed0 V vtable for KriketWidget
+Moffenzeef-debug.so:000f7470 V vtable for BusMultWidget
+Moffenzeef-debug.so:000f7930 V vtable for DeviantWidget
+Moffenzeef-debug.so:000f83b0 V vtable for MongrelWidget
+Moffenzeef-debug.so:000f8610 V vtable for MuskratWidget
+Moffenzeef-debug.so:000f6bc8 V vtable for BadIdea9Widget
+Moffenzeef-debug.so:000f7168 V vtable for CKSSHorizontal
+Moffenzeef-debug.so:000f87b0 V vtable for SimplifyWidget
+Moffenzeef-debug.so:000f8210 V vtable for MoffenmixWidget
+Moffenzeef-debug.so:000f6fb0 V vtable for BadIdea1800Widget
+Moffenzeef-debug.so:000f7790 V vtable for ClockModuleWidget
+Moffenzeef-debug.so:000f7c7c V vtable for GMO
+Moffenzeef-debug.so:000f7fbc V vtable for Mito
+Moffenzeef-debug.so:000f721c V vtable for Bobcat
+Moffenzeef-debug.so:000f7adc V vtable for DialUp
+Moffenzeef-debug.so:000f7e1c V vtable for Kriket
+Moffenzeef-debug.so:000f73bc V vtable for BusMult
+Moffenzeef-debug.so:000f787c V vtable for Deviant
+Moffenzeef-debug.so:000f82fc V vtable for Mongrel
+Moffenzeef-debug.so:000f855c V vtable for Muskrat
+Moffenzeef-debug.so:000f6b14 V vtable for BadIdea9
+Moffenzeef-debug.so:000f86fc V vtable for Simplify
+Moffenzeef-debug.so:000f7d30 V vtable for GMOWidget
+Moffenzeef-debug.so:000f815c V vtable for Moffenmix
+Moffenzeef-debug.so:000f8884 D vtable for __cxxabiv1::__class_type_info
+Moffenzeef-debug.so:000f88bc D vtable for __cxxabiv1::__si_class_type_info
+Moffenzeef-debug.so:000f69b8 V vtable for rack::componentlibrary::PJ301MPort
+Moffenzeef-debug.so:000f6de8 V vtable for rack::componentlibrary::MediumLight<rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> > >
+Moffenzeef-debug.so:000f6a68 V vtable for rack::componentlibrary::ScrewSilver
+Moffenzeef-debug.so:000f6904 V vtable for rack::componentlibrary::RoundBlackKnob
+Moffenzeef-debug.so:000f70b4 V vtable for rack::componentlibrary::RoundBigBlackKnob
+Moffenzeef-debug.so:000f7a28 V vtable for rack::componentlibrary::CKSSThreeHorizontal
+Moffenzeef-debug.so:000f7574 V vtable for rack::componentlibrary::RoundSmallBlackKnob
+Moffenzeef-debug.so:000f7628 V vtable for rack::componentlibrary::CKSS
+Moffenzeef-debug.so:000f84a8 V vtable for rack::componentlibrary::CKSSThree
+Moffenzeef-debug.so:000f6850 V vtable for rack::componentlibrary::RoundKnob
+Moffenzeef-debug.so:000f6c78 V vtable for rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> >
+Moffenzeef-debug.so:000f6d30 V vtable for rack::componentlibrary::TSvgLight<rack::componentlibrary::TRedLight<rack::componentlibrary::TGrayModuleLightWidget<rack::app::ModuleLightWidget> > >
+Moffenzeef-debug.so:000f6780 V vtable for rack::app::MultiLightWidget
 Moffenzeef-debug.so:         U vtable for rack::engine::ParamQuantity
-Moffenzeef-debug.so:000f6ea4 V vtable for rack::engine::PortInfo
-Moffenzeef-debug.so:000f67f8 V vtable for rack::plugin::Model
-Moffenzeef-debug.so:000f653c V vtable for rack::widget::OpaqueWidget
+Moffenzeef-debug.so:000f6ee4 V vtable for rack::engine::PortInfo
+Moffenzeef-debug.so:000f6838 V vtable for rack::plugin::Model
+Moffenzeef-debug.so:000f657c V vtable for rack::widget::OpaqueWidget
 Moffenzeef-debug.so:         U vtable for rack::widget::FramebufferWidget
-Moffenzeef-debug.so:000f65e8 V vtable for rack::widget::TransparentWidget
-Moffenzeef-debug.so:000f6694 V vtable for rack::widget::SvgWidget
-Moffenzeef-debug.so:000f88b0 D vtable for std::type_info
-Moffenzeef-debug.so:000f7020 V vtable for rack::createModel<BadIdea1800, BadIdea1800Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f7800 V vtable for rack::createModel<ClockModule, ClockModuleWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f7da0 V vtable for rack::createModel<GMO, GMOWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f80e0 V vtable for rack::createModel<Mito, MitoWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f7340 V vtable for rack::createModel<Bobcat, BobcatWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f7c00 V vtable for rack::createModel<DialUp, DialUpWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f7f40 V vtable for rack::createModel<Kriket, KriketWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f74e0 V vtable for rack::createModel<BusMult, BusMultWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f79a0 V vtable for rack::createModel<Deviant, DeviantWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f8420 V vtable for rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f8680 V vtable for rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f6e60 V vtable for rack::createModel<BadIdea9, BadIdea9Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f8820 V vtable for rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f8280 V vtable for rack::createModel<Moffenmix, MoffenmixWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
-Moffenzeef-debug.so:000f8db4 V ClockModule::process(VCVModuleWrapper::ProcessArgs const&)::oneShotTimer
-Moffenzeef-debug.so:000f8db8 V ClockModule::process(VCVModuleWrapper::ProcessArgs const&)::prevStartStop
-Moffenzeef-debug.so:000f8db1 V ClockModule::process(VCVModuleWrapper::ProcessArgs const&)::pulseSent
-Moffenzeef-debug.so:000f8db0 V ClockModule::process(VCVModuleWrapper::ProcessArgs const&)::resetFlag
+Moffenzeef-debug.so:000f6628 V vtable for rack::widget::TransparentWidget
+Moffenzeef-debug.so:000f66d4 V vtable for rack::widget::SvgWidget
+Moffenzeef-debug.so:000f88f0 D vtable for std::type_info
+Moffenzeef-debug.so:000f7060 V vtable for rack::createModel<BadIdea1800, BadIdea1800Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f7840 V vtable for rack::createModel<ClockModule, ClockModuleWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f7de0 V vtable for rack::createModel<GMO, GMOWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f8120 V vtable for rack::createModel<Mito, MitoWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f7380 V vtable for rack::createModel<Bobcat, BobcatWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f7c40 V vtable for rack::createModel<DialUp, DialUpWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f7f80 V vtable for rack::createModel<Kriket, KriketWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f7520 V vtable for rack::createModel<BusMult, BusMultWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f79e0 V vtable for rack::createModel<Deviant, DeviantWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f8460 V vtable for rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f86c0 V vtable for rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f6ea0 V vtable for rack::createModel<BadIdea9, BadIdea9Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f8860 V vtable for rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f82c0 V vtable for rack::createModel<Moffenmix, MoffenmixWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT
+Moffenzeef-debug.so:000f8df4 V ClockModule::process(VCVModuleWrapper::ProcessArgs const&)::oneShotTimer
+Moffenzeef-debug.so:000f8df8 V ClockModule::process(VCVModuleWrapper::ProcessArgs const&)::prevStartStop
+Moffenzeef-debug.so:000f8df1 V ClockModule::process(VCVModuleWrapper::ProcessArgs const&)::pulseSent
+Moffenzeef-debug.so:000f8df0 V ClockModule::process(VCVModuleWrapper::ProcessArgs const&)::resetFlag
 Moffenzeef-debug.so:0001ebf4 W rack::createModel<BadIdea1800, BadIdea1800Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModule()
 Moffenzeef-debug.so:0001fa48 W rack::createModel<BadIdea1800, BadIdea1800Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModuleWidget(rack::engine::Module*)
 Moffenzeef-debug.so:0001d068 W rack::createModel<BadIdea1800, BadIdea1800Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
@@ -957,133 +957,133 @@ Moffenzeef-debug.so:0002d420 W rack::createModel<Deviant, DeviantWidget>(std::ba
 Moffenzeef-debug.so:0002a910 W rack::createModel<Deviant, DeviantWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
 Moffenzeef-debug.so:0002a6a4 W rack::createModel<Deviant, DeviantWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
 Moffenzeef-debug.so:0002a6a4 W rack::createModel<Deviant, DeviantWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
-Moffenzeef-debug.so:000dbdb8 W rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModule()
-Moffenzeef-debug.so:000dc8ec W rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModuleWidget(rack::engine::Module*)
-Moffenzeef-debug.so:000d9e8c W rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
-Moffenzeef-debug.so:000d9c20 W rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
-Moffenzeef-debug.so:000d9c20 W rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
-Moffenzeef-debug.so:000df164 W rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModule()
-Moffenzeef-debug.so:000dfe04 W rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModuleWidget(rack::engine::Module*)
-Moffenzeef-debug.so:000dd0a0 W rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
-Moffenzeef-debug.so:000dce34 W rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
-Moffenzeef-debug.so:000dce34 W rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
+Moffenzeef-debug.so:000dbdf8 W rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModule()
+Moffenzeef-debug.so:000dc92c W rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModuleWidget(rack::engine::Module*)
+Moffenzeef-debug.so:000d9ecc W rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
+Moffenzeef-debug.so:000d9c60 W rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
+Moffenzeef-debug.so:000d9c60 W rack::createModel<Mongrel, MongrelWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
+Moffenzeef-debug.so:000df1a4 W rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModule()
+Moffenzeef-debug.so:000dfe44 W rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModuleWidget(rack::engine::Module*)
+Moffenzeef-debug.so:000dd0e0 W rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
+Moffenzeef-debug.so:000dce74 W rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
+Moffenzeef-debug.so:000dce74 W rack::createModel<Muskrat, MuskratWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
 Moffenzeef-debug.so:0001b57c W rack::createModel<BadIdea9, BadIdea9Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModule()
 Moffenzeef-debug.so:0001c570 W rack::createModel<BadIdea9, BadIdea9Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModuleWidget(rack::engine::Module*)
 Moffenzeef-debug.so:0001ac5c W rack::createModel<BadIdea9, BadIdea9Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
 Moffenzeef-debug.so:0001a778 W rack::createModel<BadIdea9, BadIdea9Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
 Moffenzeef-debug.so:0001a778 W rack::createModel<BadIdea9, BadIdea9Widget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
-Moffenzeef-debug.so:000e22a0 W rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModule()
-Moffenzeef-debug.so:000e2cd4 W rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModuleWidget(rack::engine::Module*)
-Moffenzeef-debug.so:000e14c8 W rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
-Moffenzeef-debug.so:000e125c W rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
-Moffenzeef-debug.so:000e125c W rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
+Moffenzeef-debug.so:000e22e0 W rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModule()
+Moffenzeef-debug.so:000e2d14 W rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModuleWidget(rack::engine::Module*)
+Moffenzeef-debug.so:000e1508 W rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
+Moffenzeef-debug.so:000e129c W rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
+Moffenzeef-debug.so:000e129c W rack::createModel<Simplify, SimplifyWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
 Moffenzeef-debug.so:000d82b0 W rack::createModel<Moffenmix, MoffenmixWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModule()
 Moffenzeef-debug.so:000d93f4 W rack::createModel<Moffenmix, MoffenmixWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::createModuleWidget(rack::engine::Module*)
 Moffenzeef-debug.so:000d6718 W rack::createModel<Moffenmix, MoffenmixWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
 Moffenzeef-debug.so:000d64ac W rack::createModel<Moffenmix, MoffenmixWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
 Moffenzeef-debug.so:000d64ac W rack::createModel<Moffenmix, MoffenmixWidget>(std::basic_string_view<char, std::char_traits<char> >)::ModelT::~ModelT()
-Moffenzeef-debug.so:000f8d95 V Bobcat::process(VCVModuleWrapper::ProcessArgs const&)::lastBangState1
-Moffenzeef-debug.so:000f8d94 V Bobcat::process(VCVModuleWrapper::ProcessArgs const&)::lastBangState2
-Moffenzeef-debug.so:000f8e74 V Mongrel::process(VCVModuleWrapper::ProcessArgs const&)::envelopeValue
-Moffenzeef-debug.so:000f8e79 V Mongrel::process(VCVModuleWrapper::ProcessArgs const&)::lastBangState
-Moffenzeef-debug.so:000f8e78 V Mongrel::process(VCVModuleWrapper::ProcessArgs const&)::pulseTriggered
-Moffenzeef-debug.so:000f8e94 V Muskrat::process(VCVModuleWrapper::ProcessArgs const&)::previousOutput
-Moffenzeef-debug.so:000f8d5c V BadIdea9::process(VCVModuleWrapper::ProcessArgs const&)::prevOutput
-Moffenzeef-debug.so:000f8d60 V BadIdea9::process(VCVModuleWrapper::ProcessArgs const&)::lastCvInput
-Moffenzeef-debug.so:000edd84 T operator delete(void*)
-Moffenzeef-debug.so:000e4cb4 T operator delete(void*, unsigned int)
-Moffenzeef-debug.so:000e4cb8 T operator new(unsigned int)
-Moffenzeef-debug.so:000eddd4 t __adddf3
-Moffenzeef-debug.so:000eddd4 t __aeabi_dadd
-Moffenzeef-debug.so:000eddc8 t __aeabi_drsub
-Moffenzeef-debug.so:000eddd0 t __aeabi_dsub
-Moffenzeef-debug.so:000ee090 t __aeabi_f2d
-Moffenzeef-debug.so:000ee06c t __aeabi_i2d
-Moffenzeef-debug.so:000ee0e4 t __aeabi_l2d
-Moffenzeef-debug.so:000ee04c t __aeabi_ui2d
-Moffenzeef-debug.so:000ee0d4 t __aeabi_ul2d
-Moffenzeef-debug.so:000e425c t __errno
-Moffenzeef-debug.so:000f4cb0 r __exp2f_data
-Moffenzeef-debug.so:000f4440 r __exp_data
-Moffenzeef-debug.so:000ee090 t __extendsfdf2
-Moffenzeef-debug.so:000ee0e4 t __floatdidf
-Moffenzeef-debug.so:000ee06c t __floatsidf
-Moffenzeef-debug.so:000ee0d4 t __floatundidf
-Moffenzeef-debug.so:000ee04c t __floatunsidf
-Moffenzeef-debug.so:000e3610 t __fpclassifyf
-Moffenzeef-debug.so:000ed238 t __ieee754_fmod
-Moffenzeef-debug.so:000f4df8 r __inv_pio4
-Moffenzeef-debug.so:000e3548 t __math_check_oflow
-Moffenzeef-debug.so:000e3530 t __math_check_uflow
-Moffenzeef-debug.so:000e401c t __math_divzerof
-Moffenzeef-debug.so:000e4040 t __math_invalidf
-Moffenzeef-debug.so:000e4004 t __math_may_uflowf
-Moffenzeef-debug.so:000e3520 t __math_oflow
-Moffenzeef-debug.so:000e4010 t __math_oflowf
-Moffenzeef-debug.so:000e3510 t __math_uflow
-Moffenzeef-debug.so:000e3ff8 t __math_uflowf
-Moffenzeef-debug.so:000f51d8 r __powf_log2_data
-Moffenzeef-debug.so:000f4e58 r __sincosf_table
-Moffenzeef-debug.so:000eddd0 t __subdf3
-Moffenzeef-debug.so:000f5308 r _ctype_
+Moffenzeef-debug.so:000f8dd5 V Bobcat::process(VCVModuleWrapper::ProcessArgs const&)::lastBangState1
+Moffenzeef-debug.so:000f8dd4 V Bobcat::process(VCVModuleWrapper::ProcessArgs const&)::lastBangState2
+Moffenzeef-debug.so:000f8eb4 V Mongrel::process(VCVModuleWrapper::ProcessArgs const&)::envelopeValue
+Moffenzeef-debug.so:000f8eb9 V Mongrel::process(VCVModuleWrapper::ProcessArgs const&)::lastBangState
+Moffenzeef-debug.so:000f8eb8 V Mongrel::process(VCVModuleWrapper::ProcessArgs const&)::pulseTriggered
+Moffenzeef-debug.so:000f8ed4 V Muskrat::process(VCVModuleWrapper::ProcessArgs const&)::previousOutput
+Moffenzeef-debug.so:000f8d9c V BadIdea9::process(VCVModuleWrapper::ProcessArgs const&)::prevOutput
+Moffenzeef-debug.so:000f8da0 V BadIdea9::process(VCVModuleWrapper::ProcessArgs const&)::lastCvInput
+Moffenzeef-debug.so:000eddc4 T operator delete(void*)
+Moffenzeef-debug.so:000e4cf4 T operator delete(void*, unsigned int)
+Moffenzeef-debug.so:000e4cf8 T operator new(unsigned int)
+Moffenzeef-debug.so:000ede14 t __adddf3
+Moffenzeef-debug.so:000ede14 t __aeabi_dadd
+Moffenzeef-debug.so:000ede08 t __aeabi_drsub
+Moffenzeef-debug.so:000ede10 t __aeabi_dsub
+Moffenzeef-debug.so:000ee0d0 t __aeabi_f2d
+Moffenzeef-debug.so:000ee0ac t __aeabi_i2d
+Moffenzeef-debug.so:000ee124 t __aeabi_l2d
+Moffenzeef-debug.so:000ee08c t __aeabi_ui2d
+Moffenzeef-debug.so:000ee114 t __aeabi_ul2d
+Moffenzeef-debug.so:000e429c t __errno
+Moffenzeef-debug.so:000f4cf0 r __exp2f_data
+Moffenzeef-debug.so:000f4480 r __exp_data
+Moffenzeef-debug.so:000ee0d0 t __extendsfdf2
+Moffenzeef-debug.so:000ee124 t __floatdidf
+Moffenzeef-debug.so:000ee0ac t __floatsidf
+Moffenzeef-debug.so:000ee114 t __floatundidf
+Moffenzeef-debug.so:000ee08c t __floatunsidf
+Moffenzeef-debug.so:000e3650 t __fpclassifyf
+Moffenzeef-debug.so:000ed278 t __ieee754_fmod
+Moffenzeef-debug.so:000f4e38 r __inv_pio4
+Moffenzeef-debug.so:000e3588 t __math_check_oflow
+Moffenzeef-debug.so:000e3570 t __math_check_uflow
+Moffenzeef-debug.so:000e405c t __math_divzerof
+Moffenzeef-debug.so:000e4080 t __math_invalidf
+Moffenzeef-debug.so:000e4044 t __math_may_uflowf
+Moffenzeef-debug.so:000e3560 t __math_oflow
+Moffenzeef-debug.so:000e4050 t __math_oflowf
+Moffenzeef-debug.so:000e3550 t __math_uflow
+Moffenzeef-debug.so:000e4038 t __math_uflowf
+Moffenzeef-debug.so:000f5218 r __powf_log2_data
+Moffenzeef-debug.so:000f4e98 r __sincosf_table
+Moffenzeef-debug.so:000ede10 t __subdf3
+Moffenzeef-debug.so:000f5348 r _ctype_
 Moffenzeef-debug.so:         U _impure_ptr
 Moffenzeef-debug.so:00080000 B _stack
-Moffenzeef-debug.so:000edb88 t _strtoul_l.constprop.0
+Moffenzeef-debug.so:000edbc8 t _strtoul_l.constprop.0
 Moffenzeef-debug.so:         U abort
-Moffenzeef-debug.so:000f8d48 D ch1
-Moffenzeef-debug.so:000f8d44 D ch2
-Moffenzeef-debug.so:000f8d40 D ch3
-Moffenzeef-debug.so:000f8d3c D ch4
-Moffenzeef-debug.so:000f8d54 D clockDelay
-Moffenzeef-debug.so:000f8dc8 B clockTimer
-Moffenzeef-debug.so:000e3d88 t cosf
-Moffenzeef-debug.so:000e32c0 t exp
-Moffenzeef-debug.so:000e366c t expf
-Moffenzeef-debug.so:000e4060 t floor
-Moffenzeef-debug.so:000e41a0 t floorf
-Moffenzeef-debug.so:000e3570 t fmaxf
-Moffenzeef-debug.so:000e35c0 t fminf
-Moffenzeef-debug.so:000e325c t fmod
+Moffenzeef-debug.so:000f8d88 D ch1
+Moffenzeef-debug.so:000f8d84 D ch2
+Moffenzeef-debug.so:000f8d80 D ch3
+Moffenzeef-debug.so:000f8d7c D ch4
+Moffenzeef-debug.so:000f8d94 D clockDelay
+Moffenzeef-debug.so:000f8e08 B clockTimer
+Moffenzeef-debug.so:000e3dc8 t cosf
+Moffenzeef-debug.so:000e3300 t exp
+Moffenzeef-debug.so:000e36ac t expf
+Moffenzeef-debug.so:000e40a0 t floor
+Moffenzeef-debug.so:000e41e0 t floorf
+Moffenzeef-debug.so:000e35b0 t fmaxf
+Moffenzeef-debug.so:000e3600 t fminf
+Moffenzeef-debug.so:000e329c t fmod
 Moffenzeef-debug.so:         U free
-Moffenzeef-debug.so:000f8dc4 B gate2High
-Moffenzeef-debug.so:000f8dc3 B gate3High
-Moffenzeef-debug.so:000f8dc2 B gate4High
-Moffenzeef-debug.so:000f8dc1 B gate5High
-Moffenzeef-debug.so:000f8dc5 B gateHigh
-Moffenzeef-debug.so:000e30c0 T init
+Moffenzeef-debug.so:000f8e04 B gate2High
+Moffenzeef-debug.so:000f8e03 B gate3High
+Moffenzeef-debug.so:000f8e02 B gate4High
+Moffenzeef-debug.so:000f8e01 B gate5High
+Moffenzeef-debug.so:000f8e05 B gateHigh
+Moffenzeef-debug.so:000e3100 T init
 Moffenzeef-debug.so:         U malloc
-Moffenzeef-debug.so:000f8d4c D masterCount
-Moffenzeef-debug.so:000f8d38 D masterDivide
-Moffenzeef-debug.so:000ed960 t memchr
-Moffenzeef-debug.so:000eda48 t memcmp
-Moffenzeef-debug.so:000e427c t memcpy
-Moffenzeef-debug.so:000e4504 t memmove
-Moffenzeef-debug.so:000e4968 t memset
-Moffenzeef-debug.so:000f8d78 B modelBadIdea1800
-Moffenzeef-debug.so:000f8d58 B modelBadIdea9
-Moffenzeef-debug.so:000f8d90 B modelBobcat
-Moffenzeef-debug.so:000f8da8 B modelBusMult
-Moffenzeef-debug.so:000f8dac B modelCount
-Moffenzeef-debug.so:000f8de0 B modelDeviant
-Moffenzeef-debug.so:000f8df8 B modelDialUp
-Moffenzeef-debug.so:000f8e10 B modelGMO
-Moffenzeef-debug.so:000f8e28 B modelKriket
-Moffenzeef-debug.so:000f8e40 B modelMito
-Moffenzeef-debug.so:000f8e58 B modelMoffenmix
-Moffenzeef-debug.so:000f8e70 B modelMongrel
-Moffenzeef-debug.so:000f8e90 B modelMuskrat
-Moffenzeef-debug.so:000f8ea8 B modelSimplify
-Moffenzeef-debug.so:000f8ec0 B pluginInstance
-Moffenzeef-debug.so:000e3778 t powf
-Moffenzeef-debug.so:000f8dc0 B pulseActive
-Moffenzeef-debug.so:000f8dbc B pulseTimer
-Moffenzeef-debug.so:000f8d50 D pulseWidth
-Moffenzeef-debug.so:000e4ac0 t rand
-Moffenzeef-debug.so:000e3b30 t sinf
-Moffenzeef-debug.so:000ed73c T strcmp
-Moffenzeef-debug.so:000edaf8 t strlen
-Moffenzeef-debug.so:000edd48 t strtoul
-Moffenzeef-debug.so:000e34c4 t with_errno
-Moffenzeef-debug.so:000e3fbc t with_errnof
-Moffenzeef-debug.so:000e34e8 t xflow
-Moffenzeef-debug.so:000e3fe0 t xflowf
+Moffenzeef-debug.so:000f8d8c D masterCount
+Moffenzeef-debug.so:000f8d78 D masterDivide
+Moffenzeef-debug.so:000ed9a0 t memchr
+Moffenzeef-debug.so:000eda88 t memcmp
+Moffenzeef-debug.so:000e42bc t memcpy
+Moffenzeef-debug.so:000e4544 t memmove
+Moffenzeef-debug.so:000e49a8 t memset
+Moffenzeef-debug.so:000f8db8 B modelBadIdea1800
+Moffenzeef-debug.so:000f8d98 B modelBadIdea9
+Moffenzeef-debug.so:000f8dd0 B modelBobcat
+Moffenzeef-debug.so:000f8de8 B modelBusMult
+Moffenzeef-debug.so:000f8dec B modelCount
+Moffenzeef-debug.so:000f8e20 B modelDeviant
+Moffenzeef-debug.so:000f8e38 B modelDialUp
+Moffenzeef-debug.so:000f8e50 B modelGMO
+Moffenzeef-debug.so:000f8e68 B modelKriket
+Moffenzeef-debug.so:000f8e80 B modelMito
+Moffenzeef-debug.so:000f8e98 B modelMoffenmix
+Moffenzeef-debug.so:000f8eb0 B modelMongrel
+Moffenzeef-debug.so:000f8ed0 B modelMuskrat
+Moffenzeef-debug.so:000f8ee8 B modelSimplify
+Moffenzeef-debug.so:000f8f00 B pluginInstance
+Moffenzeef-debug.so:000e37b8 t powf
+Moffenzeef-debug.so:000f8e00 B pulseActive
+Moffenzeef-debug.so:000f8dfc B pulseTimer
+Moffenzeef-debug.so:000f8d90 D pulseWidth
+Moffenzeef-debug.so:000e4b00 t rand
+Moffenzeef-debug.so:000e3b70 t sinf
+Moffenzeef-debug.so:000ed77c T strcmp
+Moffenzeef-debug.so:000edb38 t strlen
+Moffenzeef-debug.so:000edd88 t strtoul
+Moffenzeef-debug.so:000e3504 t with_errno
+Moffenzeef-debug.so:000e3ffc t with_errnof
+Moffenzeef-debug.so:000e3528 t xflow
+Moffenzeef-debug.so:000e4020 t xflowf

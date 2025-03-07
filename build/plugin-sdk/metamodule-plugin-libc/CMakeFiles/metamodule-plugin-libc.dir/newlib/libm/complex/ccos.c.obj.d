@@ -1,5 +1,5 @@
 plugin-sdk/metamodule-plugin-libc/CMakeFiles/metamodule-plugin-libc.dir/newlib/libm/complex/ccos.c.obj: \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libm/complex/ccos.c \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libm/complex/ccos.c \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/complex.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/cdefs.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/machine/_default_types.h \
@@ -16,4 +16,4 @@ plugin-sdk/metamodule-plugin-libc/CMakeFiles/metamodule-plugin-libc.dir/newlib/l
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/machine/_types.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/lock.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/_ansi.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libm/complex/cephes_subr.h
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libm/complex/cephes_subr.h

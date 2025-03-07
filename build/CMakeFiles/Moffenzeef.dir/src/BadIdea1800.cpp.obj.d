@@ -1,8 +1,8 @@
 CMakeFiles/Moffenzeef.dir/src/BadIdea1800.cpp.obj: \
  /Users/ross/documents/Moffenzeef-VCV/src/BadIdea1800.cpp \
  /Users/ross/documents/Moffenzeef-VCV/src/plugin.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/rack.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/asset.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/rack.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/asset.hpp \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/string \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/arm-none-eabi/thumb/v7ve+simd/hard/bits/c++config.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/arm-none-eabi/thumb/v7ve+simd/hard/bits/os_defines.h \
@@ -102,7 +102,7 @@ CMakeFiles/Moffenzeef.dir/src/BadIdea1800.cpp.obj: \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/errno.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/charconv.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/basic_string.tcc \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/audio.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/audio.hpp \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/vector \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/stl_uninitialized.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/stl_vector.h \
@@ -115,10 +115,10 @@ CMakeFiles/Moffenzeef.dir/src/BadIdea1800.cpp.obj: \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/stl_set.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/stl_multiset.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/erase_if.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/jansson.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/jansson.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/stdlib.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/jansson_config.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/common.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/jansson_config.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/common.hpp \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/cstddef \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/cinttypes \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/inttypes.h \
@@ -153,14 +153,14 @@ CMakeFiles/Moffenzeef.dir/src/BadIdea1800.cpp.obj: \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/cxxabi_init_exception.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/typeinfo \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/nested_exception.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/logger.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/context.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/componentlibrary.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/AudioDisplay.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/MidiDisplay.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/LedDisplay.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/common.hpp \
- /Users/ross/Documents/metamodule-plugin-sdk/metamodule-rack-interface/include/math.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/logger.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/context.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/componentlibrary.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/AudioDisplay.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/MidiDisplay.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/LedDisplay.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/common.hpp \
+ /Users/ross/Documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/math.hpp \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/complex \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/sstream \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/istream \
@@ -200,17 +200,17 @@ CMakeFiles/Moffenzeef.dir/src/BadIdea1800.cpp.obj: \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/ranges_util.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/pstl/glue_algorithm_defs.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/pstl/execution_defs.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/common.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/blendish.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/nanovg.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/color.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/string.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/TextField.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/widget/OpaqueWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/widget/Widget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-core-interface/./CoreModules/elements/elements.hh \
- /Users/ross/Documents/metamodule-plugin-sdk/metamodule-core-interface/CoreModules/elements/base_element.hh \
- /Users/ross/documents/metamodule-plugin-sdk/cpputil/./util/colors_rgb565.hh \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/common.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/blendish.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/nanovg.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/color.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/string.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/TextField.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/widget/OpaqueWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/widget/Widget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-core-interface/./CoreModules/elements/elements.hh \
+ /Users/ross/Documents/metamodule-plugin-sdk-2.0-dev/metamodule-core-interface/CoreModules/elements/base_element.hh \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/cpputil/./util/colors_rgb565.hh \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/array \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/variant \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/enable_special_members.h \
@@ -219,9 +219,9 @@ CMakeFiles/Moffenzeef.dir/src/BadIdea1800.cpp.obj: \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/stl_list.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/allocated_ptr.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/list.tcc \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/weakptr.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/widget/event.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/window/Window.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/weakptr.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/widget/event.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/window/Window.hpp \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/map \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/stl_map.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/tuple \
@@ -243,72 +243,72 @@ CMakeFiles/Moffenzeef.dir/src/BadIdea1800.cpp.obj: \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/ranges_uninitialized.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/uses_allocator_args.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/pstl/glue_memory_defs.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/window/Svg.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/nanosvg.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/GL/glew.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/GLFW/glfw3.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/nanovg_gl.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/SvgButton.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/CircularShadow.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/widget/TransparentWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/widget/FramebufferWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/widget/SvgWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/midi.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/Menu.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/MenuEntry.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/ModuleLightWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/MultiLightWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/LightWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/engine/Module.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/metamodule/VCV_module_wrapper.hh \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-core-interface/./CoreModules/CoreProcessor.hh \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/window/Svg.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/nanosvg.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/GL/glew.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/GLFW/glfw3.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/nanovg_gl.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/SvgButton.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/CircularShadow.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/widget/TransparentWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/widget/FramebufferWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/widget/SvgWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/midi.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/Menu.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/MenuEntry.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/ModuleLightWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/MultiLightWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/LightWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/engine/Module.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/metamodule/VCV_module_wrapper.hh \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-core-interface/./CoreModules/CoreProcessor.hh \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/span \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/engine/Light.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/engine/Param.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/engine/ParamQuantity.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/Quantity.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/random.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/engine/Port.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/engine/Light.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/engine/Param.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/engine/ParamQuantity.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/Quantity.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/random.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/engine/Port.hpp \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/numeric \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/stl_numeric.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/pstl/glue_numeric_defs.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/engine/LightInfo.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/engine/PortInfo.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/plugin/Model.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-core-interface/./CoreModules/elements/element_counter.hh \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/engine/LightInfo.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/engine/PortInfo.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/plugin/Model.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-core-interface/./CoreModules/elements/element_counter.hh \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/optional \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/deque \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/stl_deque.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/deque.tcc \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/plugin/Plugin.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/SvgKnob.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/Knob.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/ParamWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/Tooltip.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/widget/TransformWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/SvgPort.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/PortWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/settings.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/SvgScrew.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/SvgSlider.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/SliderKnob.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/SvgSwitch.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/Switch.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/metamodule/VCVTextDisplay.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/helpers.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/metamodule/create_model.hh \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/ModuleWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/SvgPanel.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/history.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/plugin/Plugin.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/SvgKnob.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/Knob.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/ParamWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/Tooltip.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/widget/TransformWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/SvgPort.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/PortWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/settings.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/SvgScrew.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/SvgSlider.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/SliderKnob.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/SvgSwitch.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/Switch.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/metamodule/VCVTextDisplay.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/helpers.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/metamodule/create_model.hh \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/ModuleWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/SvgPanel.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/history.hpp \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/functional \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/std_function.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/unordered_map \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/hashtable.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/hashtable_policy.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/unordered_map.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/MenuItem.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/MenuLabel.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/mutex.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/MenuItem.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/MenuLabel.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/mutex.hpp \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/pthread.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/unistd.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/unistd.h \
@@ -323,81 +323,81 @@ CMakeFiles/Moffenzeef.dir/src/BadIdea1800.cpp.obj: \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_pthreadtypes.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/sched.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/machine/types.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/network.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/system.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/widget/OpenGlWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/widget/ZoomWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/Button.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/ChoiceButton.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/Label.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/List.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/MenuOverlay.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/MenuSeparator.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/OptionButton.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/RadioButton.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/ProgressBar.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/ScrollWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/Scrollbar.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/SequentialLayout.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/Slider.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/ui/TooltipOverlay.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/CableWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/engine/Cable.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/RackScrollWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/RackWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/RailWidget.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/app/Scene.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/engine/Engine.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/engine/ParamHandle.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/plugin/callbacks.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/dsp/approx.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/dsp/common.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/simd/functions.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/simd/Vector.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/simd/common.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/x86/sse4.2.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/x86/sse4.1.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/x86/sse.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/x86/mmx.h \
- /Users/ross/Documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/simde-common.h \
- /Users/ross/Documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/hedley.h \
- /Users/ross/Documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/simde-detect-clang.h \
- /Users/ross/Documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/simde-arch.h \
- /Users/ross/Documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/simde-features.h \
- /Users/ross/Documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/simde-diagnostic.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/network.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/system.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/widget/OpenGlWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/widget/ZoomWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/Button.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/ChoiceButton.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/Label.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/List.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/MenuOverlay.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/MenuSeparator.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/OptionButton.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/RadioButton.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/ProgressBar.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/ScrollWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/Scrollbar.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/SequentialLayout.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/Slider.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/ui/TooltipOverlay.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/CableWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/engine/Cable.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/RackScrollWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/RackWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/RailWidget.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/app/Scene.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/engine/Engine.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/engine/ParamHandle.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/plugin/callbacks.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/dsp/approx.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/dsp/common.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/simd/functions.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/simd/Vector.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/simd/common.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/x86/sse4.2.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/x86/sse4.1.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/x86/sse.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/x86/mmx.h \
+ /Users/ross/Documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/simde-common.h \
+ /Users/ross/Documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/hedley.h \
+ /Users/ross/Documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/simde-detect-clang.h \
+ /Users/ross/Documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/simde-arch.h \
+ /Users/ross/Documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/simde-features.h \
+ /Users/ross/Documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/simde-diagnostic.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/12.3.1/include/arm_neon.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/12.3.1/include/arm_fp16.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/12.3.1/include/arm_bf16.h \
- /Users/ross/Documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/simde-math.h \
- /Users/ross/Documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/simde-constify.h \
- /Users/ross/Documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/simde-align.h \
+ /Users/ross/Documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/simde-math.h \
+ /Users/ross/Documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/simde-constify.h \
+ /Users/ross/Documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/simde-align.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/fenv.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/fenv.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/fenv.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/cfenv \
- /Users/ross/Documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/check.h \
- /Users/ross/Documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/debug-trap.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/x86/ssse3.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/x86/sse3.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/simde/x86/sse2.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/simd/sse_mathfun_extension.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/simd/sse_mathfun.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/dsp/convert.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/dsp/digital.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/dsp/fft.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/pffft.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/dsp/filter.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/dsp/fir.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/dsp/midi.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/dsp/minblep.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/dsp/minblep_4_32.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/dsp/minblep_16_16.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/dsp/ode.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/dsp/resampler.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/speex/speex_resampler.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/speex/speexdsp_types.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include/speex/speexdsp_config_types.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/dsp/ringbuffer.hpp \
+ /Users/ross/Documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/check.h \
+ /Users/ross/Documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/debug-trap.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/x86/ssse3.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/x86/sse3.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/simde/x86/sse2.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/simd/sse_mathfun_extension.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/simd/sse_mathfun.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/dsp/convert.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/dsp/digital.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/dsp/fft.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/pffft.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/dsp/filter.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/dsp/fir.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/dsp/midi.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/dsp/minblep.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/dsp/minblep_4_32.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/dsp/minblep_16_16.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/dsp/ode.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/dsp/resampler.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/speex/speex_resampler.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/speex/speexdsp_types.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include/speex/speexdsp_config_types.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/dsp/ringbuffer.hpp \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/atomic \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/dsp/window.hpp \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include/dsp/vumeter.hpp
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/dsp/window.hpp \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include/dsp/vumeter.hpp

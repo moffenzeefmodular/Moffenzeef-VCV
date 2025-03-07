@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/ross/documents/metamodule-plugin-sdk/cpputil/util/int_to_str.cc" "plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/int_to_str.cc.obj" "gcc" "plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/int_to_str.cc.obj.d"
-  "/Users/ross/documents/metamodule-plugin-sdk/cpputil/util/math_tables.cc" "plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/math_tables.cc.obj" "gcc" "plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/math_tables.cc.obj.d"
+  "/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/cpputil/util/int_to_str.cc" "plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/int_to_str.cc.obj" "gcc" "plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/int_to_str.cc.obj.d"
+  "/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/cpputil/util/math_tables.cc" "plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/math_tables.cc.obj" "gcc" "plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/math_tables.cc.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

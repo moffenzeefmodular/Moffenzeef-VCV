@@ -1,5 +1,5 @@
 plugin-sdk/metamodule-plugin-libc/CMakeFiles/metamodule-plugin-libc.dir/newlib/libc/time/strptime.c.obj: \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/time/strptime.c \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/time/strptime.c \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/12.3.1/include/stddef.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/stdio.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/_ansi.h \
@@ -46,6 +46,6 @@ plugin-sdk/metamodule-plugin-libc/CMakeFiles/metamodule-plugin-libc.dir/newlib/l
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/12.3.1/include/stdint.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/stdint.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/12.3.1/include-fixed/limits.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/time/../locale/setlocale.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/time/../locale/setlocale.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/wchar.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/locale.h

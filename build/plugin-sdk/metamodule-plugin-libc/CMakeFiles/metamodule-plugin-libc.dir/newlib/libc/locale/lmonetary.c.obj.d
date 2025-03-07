@@ -1,5 +1,5 @@
 plugin-sdk/metamodule-plugin-libc/CMakeFiles/metamodule-plugin-libc.dir/newlib/libc/locale/lmonetary.c.obj: \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/locale/lmonetary.c \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/locale/lmonetary.c \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/cdefs.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/machine/_default_types.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/features.h \
@@ -18,7 +18,7 @@ plugin-sdk/metamodule-plugin-libc/CMakeFiles/metamodule-plugin-libc.dir/newlib/l
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/lock.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/machine/stdlib.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/alloca.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/locale/setlocale.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/locale/setlocale.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/string.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_locale.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/strings.h \

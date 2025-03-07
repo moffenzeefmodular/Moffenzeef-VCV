@@ -220,29 +220,29 @@ cpputil/fast:
 	$(MAKE) $(MAKESILENT) -f plugin-sdk/cpputil/CMakeFiles/cpputil.dir/build.make plugin-sdk/cpputil/CMakeFiles/cpputil.dir/build
 .PHONY : cpputil/fast
 
-Users/ross/documents/metamodule-plugin-sdk/version.obj: Users/ross/documents/metamodule-plugin-sdk/version.cc.obj
-.PHONY : Users/ross/documents/metamodule-plugin-sdk/version.obj
+Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.obj: Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.obj
+.PHONY : Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.obj
 
 # target to build an object file
-Users/ross/documents/metamodule-plugin-sdk/version.cc.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Moffenzeef.dir/build.make CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.obj
-.PHONY : Users/ross/documents/metamodule-plugin-sdk/version.cc.obj
+Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Moffenzeef.dir/build.make CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.obj
+.PHONY : Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.obj
 
-Users/ross/documents/metamodule-plugin-sdk/version.i: Users/ross/documents/metamodule-plugin-sdk/version.cc.i
-.PHONY : Users/ross/documents/metamodule-plugin-sdk/version.i
+Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.i: Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.i
+.PHONY : Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.i
 
 # target to preprocess a source file
-Users/ross/documents/metamodule-plugin-sdk/version.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Moffenzeef.dir/build.make CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.i
-.PHONY : Users/ross/documents/metamodule-plugin-sdk/version.cc.i
+Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Moffenzeef.dir/build.make CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.i
+.PHONY : Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.i
 
-Users/ross/documents/metamodule-plugin-sdk/version.s: Users/ross/documents/metamodule-plugin-sdk/version.cc.s
-.PHONY : Users/ross/documents/metamodule-plugin-sdk/version.s
+Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.s: Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.s
+.PHONY : Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.s
 
 # target to generate assembly for a file
-Users/ross/documents/metamodule-plugin-sdk/version.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Moffenzeef.dir/build.make CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.s
-.PHONY : Users/ross/documents/metamodule-plugin-sdk/version.cc.s
+Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Moffenzeef.dir/build.make CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.s
+.PHONY : Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.s
 
 src/BadIdea1800.obj: src/BadIdea1800.cpp.obj
 .PHONY : src/BadIdea1800.obj
@@ -620,9 +620,9 @@ help:
 	@echo "... libstdcpp11"
 	@echo "... libstdcpp98"
 	@echo "... metamodule-plugin-libc"
-	@echo "... Users/ross/documents/metamodule-plugin-sdk/version.obj"
-	@echo "... Users/ross/documents/metamodule-plugin-sdk/version.i"
-	@echo "... Users/ross/documents/metamodule-plugin-sdk/version.s"
+	@echo "... Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.obj"
+	@echo "... Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.i"
+	@echo "... Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.s"
 	@echo "... src/BadIdea1800.obj"
 	@echo "... src/BadIdea1800.i"
 	@echo "... src/BadIdea1800.s"

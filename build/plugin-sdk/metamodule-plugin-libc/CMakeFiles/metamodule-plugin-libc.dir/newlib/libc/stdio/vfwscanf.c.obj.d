@@ -1,5 +1,5 @@
 plugin-sdk/metamodule-plugin-libc/CMakeFiles/metamodule-plugin-libc.dir/newlib/libc/stdio/vfwscanf.c.obj: \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/stdio/vfwscanf.c \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/stdio/vfwscanf.c \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/_ansi.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/newlib.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/_newlib_version.h \
@@ -35,7 +35,7 @@ plugin-sdk/metamodule-plugin-libc/CMakeFiles/metamodule-plugin-libc.dir/newlib/l
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/string.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/errno.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/errno.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/stdio/local.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/stdio/local.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/unistd.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/unistd.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/types.h \
@@ -52,4 +52,4 @@ plugin-sdk/metamodule-plugin-libc/CMakeFiles/metamodule-plugin-libc.dir/newlib/l
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/math.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/12.3.1/include/float.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/locale.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/stdio/floatio.h
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/stdio/floatio.h

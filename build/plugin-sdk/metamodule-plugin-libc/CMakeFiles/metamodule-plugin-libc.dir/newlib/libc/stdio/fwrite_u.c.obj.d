@@ -1,6 +1,6 @@
 plugin-sdk/metamodule-plugin-libc/CMakeFiles/metamodule-plugin-libc.dir/newlib/libc/stdio/fwrite_u.c.obj: \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/stdio/fwrite_u.c \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/stdio/fwrite.c \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/stdio/fwrite_u.c \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/stdio/fwrite.c \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/_ansi.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/newlib.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/_newlib_version.h \
@@ -22,7 +22,7 @@ plugin-sdk/metamodule-plugin-libc/CMakeFiles/metamodule-plugin-libc.dir/newlib/l
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_locale.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/strings.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/string.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/stdio/local.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/stdio/local.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/reent.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/stdlib.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/machine/stdlib.h \
@@ -41,4 +41,4 @@ plugin-sdk/metamodule-plugin-libc/CMakeFiles/metamodule-plugin-libc.dir/newlib/l
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_pthreadtypes.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/sys/sched.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/machine/types.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/stdio/fvwrite.h
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/stdio/fvwrite.h

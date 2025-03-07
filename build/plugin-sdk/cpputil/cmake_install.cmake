@@ -1,4 +1,4 @@
-# Install script for directory: /Users/ross/documents/metamodule-plugin-sdk/cpputil
+# Install script for directory: /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/cpputil
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -251,7 +251,7 @@ Metamodule-SDK_BINARY_DIR:STATIC=/Users/ross/documents/Moffenzeef-VCV/build/plug
 Metamodule-SDK_IS_TOP_LEVEL:STATIC=OFF
 
 //Value Computed by CMake
-Metamodule-SDK_SOURCE_DIR:STATIC=/Users/ross/documents/metamodule-plugin-sdk
+Metamodule-SDK_SOURCE_DIR:STATIC=/Users/ross/documents/metamodule-plugin-sdk-2.0-dev
 
 //Value Computed by CMake
 Moffenzeef_BINARY_DIR:STATIC=/Users/ross/documents/Moffenzeef-VCV/build
@@ -275,7 +275,7 @@ cpputil_BINARY_DIR:STATIC=/Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/
 cpputil_IS_TOP_LEVEL:STATIC=OFF
 
 //Value Computed by CMake
-cpputil_SOURCE_DIR:STATIC=/Users/ross/documents/metamodule-plugin-sdk/cpputil
+cpputil_SOURCE_DIR:STATIC=/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/cpputil
 
 //Value Computed by CMake
 metamodule-core-interface_BINARY_DIR:STATIC=/Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/metamodule-core-interface
@@ -284,7 +284,7 @@ metamodule-core-interface_BINARY_DIR:STATIC=/Users/ross/documents/Moffenzeef-VCV
 metamodule-core-interface_IS_TOP_LEVEL:STATIC=OFF
 
 //Value Computed by CMake
-metamodule-core-interface_SOURCE_DIR:STATIC=/Users/ross/documents/metamodule-plugin-sdk/metamodule-core-interface
+metamodule-core-interface_SOURCE_DIR:STATIC=/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-core-interface
 
 
 ########################
@@ -397,28 +397,18 @@ CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_MODULE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO
 CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_NM
-CMAKE_NM-ADVANCED:INTERNAL=1
 //nm tool
 CMAKE_NM:INTERNAL=arm-none-eabi-nm
 //number of local generators
 CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=6
-//ADVANCED property for variable: CMAKE_OBJCOPY
-CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //objcopy tool
 CMAKE_OBJCOPY:INTERNAL=arm-none-eabi-objcopy
-//ADVANCED property for variable: CMAKE_OBJDUMP
-CMAKE_OBJDUMP-ADVANCED:INTERNAL=1
 //objdump tool
 CMAKE_OBJDUMP:INTERNAL=arm-none-eabi-objdump
 //Platform information initialized
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_RANLIB
-CMAKE_RANLIB-ADVANCED:INTERNAL=1
 //ranlib tool
 CMAKE_RANLIB:INTERNAL=arm-none-eabi-ranlib
-//ADVANCED property for variable: CMAKE_READELF
-CMAKE_READELF-ADVANCED:INTERNAL=1
 //readelf tool
 CMAKE_READELF:INTERNAL=arm-none-eabi-readelf
 //Path to CMake installation.
@@ -449,8 +439,6 @@ CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_STATIC_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_STRIP
-CMAKE_STRIP-ADVANCED:INTERNAL=1
 //strip tool
 CMAKE_STRIP:INTERNAL=arm-none-eabi-strip
 //ADVANCED property for variable: CMAKE_TAPI

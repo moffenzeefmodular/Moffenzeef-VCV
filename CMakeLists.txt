@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.19)
-include(../metamodule-plugin-sdk/plugin.cmake)
+include(../metamodule-plugin-sdk-2.0-dev/plugin.cmake)
 
 project(Moffenzeef VERSION 0.1 DESCRIPTION "Moffenzeef for MetaModule" LANGUAGES C CXX ASM)
 

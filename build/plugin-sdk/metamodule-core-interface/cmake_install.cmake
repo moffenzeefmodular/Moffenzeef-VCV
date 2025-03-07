@@ -1,4 +1,4 @@
-# Install script for directory: /Users/ross/documents/metamodule-plugin-sdk/metamodule-core-interface
+# Install script for directory: /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-core-interface
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -1,5 +1,5 @@
 plugin-sdk/metamodule-plugin-libc/CMakeFiles/metamodule-plugin-libc.dir/libstdc++-v3/libsupc++/pure.cc.obj: \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/libstdc++-v3/libsupc++/pure.cc \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/libstdc++-v3/libsupc++/pure.cc \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/arm-none-eabi/thumb/v7ve+simd/hard/bits/c++config.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/arm-none-eabi/thumb/v7ve+simd/hard/bits/os_defines.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/arm-none-eabi/thumb/v7ve+simd/hard/bits/cpu_defines.h \
@@ -12,7 +12,7 @@ plugin-sdk/metamodule-plugin-libc/CMakeFiles/metamodule-plugin-libc.dir/libstdc+
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/typeinfo \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/exception.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/hash_bytes.h \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/libstdc++-v3/libsupc++/unwind-cxx.h \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/libstdc++-v3/libsupc++/unwind-cxx.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/exception \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/exception_ptr.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/bits/exception_defines.h \

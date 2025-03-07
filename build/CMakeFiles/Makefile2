@@ -205,10 +205,10 @@ plugin-sdk/metamodule-rack-interface/clean:
 # Target rules for target CMakeFiles/Moffenzeef.dir
 
 # All Build rule for target.
+CMakeFiles/Moffenzeef.dir/all: plugin-sdk/cpputil/CMakeFiles/cpputil.dir/all
 CMakeFiles/Moffenzeef.dir/all: plugin-sdk/metamodule-plugin-libc/CMakeFiles/metamodule-plugin-libc.dir/all
 CMakeFiles/Moffenzeef.dir/all: plugin-sdk/metamodule-plugin-libc/CMakeFiles/libstdcpp98.dir/all
 CMakeFiles/Moffenzeef.dir/all: plugin-sdk/metamodule-plugin-libc/CMakeFiles/libstdcpp11.dir/all
-CMakeFiles/Moffenzeef.dir/all: plugin-sdk/cpputil/CMakeFiles/cpputil.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Moffenzeef.dir/build.make CMakeFiles/Moffenzeef.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Moffenzeef.dir/build.make CMakeFiles/Moffenzeef.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/ross/documents/Moffenzeef-VCV/build/CMakeFiles --progress-num=1 "Built target Moffenzeef"

@@ -6,135 +6,135 @@
 
 #IncludeRegexTransform: 
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/include/arm-acle-compat.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/include/arm-acle-compat.h
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memcpy-armv7a.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memcpy-armv7a.S
 ../../../../include/arm-acle-compat.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/include/arm-acle-compat.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/include/arm-acle-compat.h
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memmove-arm.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memmove-arm.S
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memmove-soft.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memmove-soft.S
 aeabi_memmove-thumb2.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memmove-thumb2.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memmove-thumb2.S
 aeabi_memmove-thumb.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memmove-thumb.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memmove-thumb.S
 aeabi_memmove-arm.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memmove-arm.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memmove-arm.S
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memmove-thumb.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memmove-thumb.S
 arm-acle-compat.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/arm-acle-compat.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/arm-acle-compat.h
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memmove-thumb2.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memmove-thumb2.S
 arm_asm.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memset-arm.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memset-arm.S
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memset-soft.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memset-soft.S
 aeabi_memset-thumb2.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memset-thumb2.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memset-thumb2.S
 aeabi_memset-thumb.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memset-thumb.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memset-thumb.S
 aeabi_memset-arm.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memset-arm.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memset-arm.S
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memset-thumb.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memset-thumb.S
 arm-acle-compat.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/arm-acle-compat.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/arm-acle-compat.h
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memset-thumb2.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/aeabi_memset-thumb2.S
 arm_asm.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
 ../../../../include/arm-acle-compat.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/include/arm-acle-compat.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/include/arm-acle-compat.h
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/memchr.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/memchr.S
 ../../../../include/arm-acle-compat.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/include/arm-acle-compat.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/include/arm-acle-compat.h
 arm_asm.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/memcpy-armv7a.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/memcpy-armv7a.S
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/memcpy-armv7m.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/memcpy-armv7m.S
 arm_asm.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/memcpy.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/memcpy.S
 ../../../../include/arm-acle-compat.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/include/arm-acle-compat.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/include/arm-acle-compat.h
 memcpy-armv7a.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/memcpy-armv7a.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/memcpy-armv7a.S
 memcpy-armv7m.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/memcpy-armv7m.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/memcpy-armv7m.S
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/setjmp.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/setjmp.S
 ../../../../include/arm-acle-compat.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/include/arm-acle-compat.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/include/arm-acle-compat.h
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-arm-tiny.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-arm-tiny.S
 arm_asm.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv4.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv4.S
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv4t.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv4t.S
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv6.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv6.S
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv6m.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv6m.S
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv7.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv7.S
 arm_asm.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv7m.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv7m.S
 arm_asm.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp.S
 ../../../../include/arm-acle-compat.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/include/arm-acle-compat.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/include/arm-acle-compat.h
 strcmp-armv4t.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv4t.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv4t.S
 strcmp-armv6m.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv6m.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv6m.S
 strcmp-arm-tiny.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-arm-tiny.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-arm-tiny.S
 strcmp-armv7.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv7.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv7.S
 strcmp-armv7m.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv7m.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv7m.S
 strcmp-armv6.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv6.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv6.S
 strcmp-armv4.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv4.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strcmp-armv4.S
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strlen-armv7.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strlen-armv7.S
 arm-acle-compat.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/arm-acle-compat.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/arm-acle-compat.h
 arm_asm.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strlen-thumb1-Os.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strlen-thumb1-Os.S
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strlen-thumb2-Os.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strlen-thumb2-Os.S
 arm-acle-compat.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/arm-acle-compat.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/arm-acle-compat.h
 arm_asm.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/arm_asm.h
 
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strlen.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strlen.S
 ../../../../include/arm-acle-compat.h
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/include/arm-acle-compat.h
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/include/arm-acle-compat.h
 strlen-thumb2-Os.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strlen-thumb2-Os.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strlen-thumb2-Os.S
 strlen-thumb1-Os.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strlen-thumb1-Os.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strlen-thumb1-Os.S
 strlen-armv7.S
-/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/newlib/libc/machine/arm/strlen-armv7.S
+/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/newlib/libc/machine/arm/strlen-armv7.S
 

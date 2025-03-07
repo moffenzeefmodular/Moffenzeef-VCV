@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/ross/documents/metamodule-plugin-sdk/version.cc" "CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.obj" "gcc" "CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.obj.d"
+  "/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc" "CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.obj" "gcc" "CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.obj.d"
   "/Users/ross/documents/Moffenzeef-VCV/src/BadIdea1800.cpp" "CMakeFiles/Moffenzeef.dir/src/BadIdea1800.cpp.obj" "gcc" "CMakeFiles/Moffenzeef.dir/src/BadIdea1800.cpp.obj.d"
   "/Users/ross/documents/Moffenzeef-VCV/src/BadIdea9.cpp" "CMakeFiles/Moffenzeef.dir/src/BadIdea9.cpp.obj" "gcc" "CMakeFiles/Moffenzeef.dir/src/BadIdea9.cpp.obj.d"
   "/Users/ross/documents/Moffenzeef-VCV/src/Bobcat.cpp" "CMakeFiles/Moffenzeef.dir/src/Bobcat.cpp.obj" "gcc" "CMakeFiles/Moffenzeef.dir/src/Bobcat.cpp.obj.d"

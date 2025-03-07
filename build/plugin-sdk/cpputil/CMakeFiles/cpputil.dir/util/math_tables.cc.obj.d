@@ -1,6 +1,6 @@
 plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/math_tables.cc.obj: \
- /Users/ross/documents/metamodule-plugin-sdk/cpputil/util/math_tables.cc \
- /Users/ross/documents/metamodule-plugin-sdk/cpputil/./util/interp_array.hh \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/cpputil/util/math_tables.cc \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/cpputil/./util/interp_array.hh \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/array \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/compare \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/concepts \

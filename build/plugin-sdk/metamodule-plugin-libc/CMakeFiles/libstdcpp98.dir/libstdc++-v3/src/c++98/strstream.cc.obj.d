@@ -1,5 +1,5 @@
 plugin-sdk/metamodule-plugin-libc/CMakeFiles/libstdcpp98.dir/libstdc++-v3/src/c++98/strstream.cc.obj: \
- /Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/libstdc++-v3/src/c++98/strstream.cc \
+ /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/libstdc++-v3/src/c++98/strstream.cc \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/backward/strstream \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/backward/backward_warning.h \
  /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/arm-none-eabi/include/c++/12.3.1/iosfwd \

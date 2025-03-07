@@ -4,7 +4,7 @@
 # compile CXX with /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++
 CXX_DEFINES = -DMETAMODULE
 
-CXX_INCLUDES = -I/Users/ross/documents/Moffenzeef-VCV/./src -I/Users/ross/documents/metamodule-plugin-sdk/metamodule-core-interface/. -I/Users/ross/documents/metamodule-plugin-sdk/metamodule-plugin-libc/include -I/Users/ross/documents/metamodule-plugin-sdk/cpputil/. -isystem /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/include -isystem /Users/ross/documents/metamodule-plugin-sdk/metamodule-rack-interface/dep/include
+CXX_INCLUDES = -I/Users/ross/documents/Moffenzeef-VCV/./src -I/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-core-interface/. -I/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-plugin-libc/include -I/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/cpputil/. -isystem /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/include -isystem /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/metamodule-rack-interface/dep/include
 
 CXX_FLAGS = -O2 -g -DNDEBUG -std=gnu++20 -fno-exceptions -fno-math-errno -mcpu=cortex-a7 -mlittle-endian -mfpu=neon-vfpv4 -mfloat-abi=hard -mthumb-interwork -mno-unaligned-access -mtune=cortex-a7 -mvectorize-with-neon-quad --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=256 -O3 -g3 -fno-common -fdata-sections -ffunction-sections -nostdlib -nostartfiles -fno-unwind-tables -Wall -Werror=return-type -Wno-psabi -Wno-double-promotion -Wno-attributes -shared -fPIC -Wno-register -Wno-volatile -ffold-simple-inlines -fno-threadsafe-statics
 

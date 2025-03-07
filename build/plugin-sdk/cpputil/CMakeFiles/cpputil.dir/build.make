@@ -73,32 +73,32 @@ plugin-sdk/cpputil/CMakeFiles/cpputil.dir/codegen:
 .PHONY : plugin-sdk/cpputil/CMakeFiles/cpputil.dir/codegen
 
 plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/math_tables.cc.obj: plugin-sdk/cpputil/CMakeFiles/cpputil.dir/flags.make
-plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/math_tables.cc.obj: /Users/ross/documents/metamodule-plugin-sdk/cpputil/util/math_tables.cc
+plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/math_tables.cc.obj: /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/cpputil/util/math_tables.cc
 plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/math_tables.cc.obj: plugin-sdk/cpputil/CMakeFiles/cpputil.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ross/documents/Moffenzeef-VCV/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/math_tables.cc.obj"
-	cd /Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/cpputil && /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/math_tables.cc.obj -MF CMakeFiles/cpputil.dir/util/math_tables.cc.obj.d -o CMakeFiles/cpputil.dir/util/math_tables.cc.obj -c /Users/ross/documents/metamodule-plugin-sdk/cpputil/util/math_tables.cc
+	cd /Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/cpputil && /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/math_tables.cc.obj -MF CMakeFiles/cpputil.dir/util/math_tables.cc.obj.d -o CMakeFiles/cpputil.dir/util/math_tables.cc.obj -c /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/cpputil/util/math_tables.cc
 
 plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/math_tables.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/cpputil.dir/util/math_tables.cc.i"
-	cd /Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/cpputil && /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ross/documents/metamodule-plugin-sdk/cpputil/util/math_tables.cc > CMakeFiles/cpputil.dir/util/math_tables.cc.i
+	cd /Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/cpputil && /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/cpputil/util/math_tables.cc > CMakeFiles/cpputil.dir/util/math_tables.cc.i
 
 plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/math_tables.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/cpputil.dir/util/math_tables.cc.s"
-	cd /Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/cpputil && /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ross/documents/metamodule-plugin-sdk/cpputil/util/math_tables.cc -o CMakeFiles/cpputil.dir/util/math_tables.cc.s
+	cd /Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/cpputil && /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/cpputil/util/math_tables.cc -o CMakeFiles/cpputil.dir/util/math_tables.cc.s
 
 plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/int_to_str.cc.obj: plugin-sdk/cpputil/CMakeFiles/cpputil.dir/flags.make
-plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/int_to_str.cc.obj: /Users/ross/documents/metamodule-plugin-sdk/cpputil/util/int_to_str.cc
+plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/int_to_str.cc.obj: /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/cpputil/util/int_to_str.cc
 plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/int_to_str.cc.obj: plugin-sdk/cpputil/CMakeFiles/cpputil.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ross/documents/Moffenzeef-VCV/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/int_to_str.cc.obj"
-	cd /Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/cpputil && /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/int_to_str.cc.obj -MF CMakeFiles/cpputil.dir/util/int_to_str.cc.obj.d -o CMakeFiles/cpputil.dir/util/int_to_str.cc.obj -c /Users/ross/documents/metamodule-plugin-sdk/cpputil/util/int_to_str.cc
+	cd /Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/cpputil && /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/int_to_str.cc.obj -MF CMakeFiles/cpputil.dir/util/int_to_str.cc.obj.d -o CMakeFiles/cpputil.dir/util/int_to_str.cc.obj -c /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/cpputil/util/int_to_str.cc
 
 plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/int_to_str.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/cpputil.dir/util/int_to_str.cc.i"
-	cd /Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/cpputil && /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ross/documents/metamodule-plugin-sdk/cpputil/util/int_to_str.cc > CMakeFiles/cpputil.dir/util/int_to_str.cc.i
+	cd /Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/cpputil && /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/cpputil/util/int_to_str.cc > CMakeFiles/cpputil.dir/util/int_to_str.cc.i
 
 plugin-sdk/cpputil/CMakeFiles/cpputil.dir/util/int_to_str.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/cpputil.dir/util/int_to_str.cc.s"
-	cd /Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/cpputil && /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ross/documents/metamodule-plugin-sdk/cpputil/util/int_to_str.cc -o CMakeFiles/cpputil.dir/util/int_to_str.cc.s
+	cd /Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/cpputil && /Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/cpputil/util/int_to_str.cc -o CMakeFiles/cpputil.dir/util/int_to_str.cc.s
 
 # Object files for target cpputil
 cpputil_OBJECTS = \
@@ -125,6 +125,6 @@ plugin-sdk/cpputil/CMakeFiles/cpputil.dir/clean:
 .PHONY : plugin-sdk/cpputil/CMakeFiles/cpputil.dir/clean
 
 plugin-sdk/cpputil/CMakeFiles/cpputil.dir/depend:
-	cd /Users/ross/documents/Moffenzeef-VCV/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/ross/documents/Moffenzeef-VCV /Users/ross/documents/metamodule-plugin-sdk/cpputil /Users/ross/documents/Moffenzeef-VCV/build /Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/cpputil /Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/cpputil/CMakeFiles/cpputil.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /Users/ross/documents/Moffenzeef-VCV/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/ross/documents/Moffenzeef-VCV /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/cpputil /Users/ross/documents/Moffenzeef-VCV/build /Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/cpputil /Users/ross/documents/Moffenzeef-VCV/build/plugin-sdk/cpputil/CMakeFiles/cpputil.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : plugin-sdk/cpputil/CMakeFiles/cpputil.dir/depend
 

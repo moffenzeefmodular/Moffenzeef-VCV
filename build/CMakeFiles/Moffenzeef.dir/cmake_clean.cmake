@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.obj"
-  "CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.obj.d"
+  "CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.obj"
+  "CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.obj.d"
   "CMakeFiles/Moffenzeef.dir/src/BadIdea1800.cpp.obj"
   "CMakeFiles/Moffenzeef.dir/src/BadIdea1800.cpp.obj.d"
   "CMakeFiles/Moffenzeef.dir/src/BadIdea9.cpp.obj"

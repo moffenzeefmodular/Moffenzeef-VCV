@@ -282,19 +282,19 @@ CMakeFiles/Moffenzeef.dir/src/plugin.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Moffenzeef.dir/src/plugin.cpp.s"
 	/Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ross/documents/Moffenzeef-VCV/src/plugin.cpp -o CMakeFiles/Moffenzeef.dir/src/plugin.cpp.s
 
-CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.obj: CMakeFiles/Moffenzeef.dir/flags.make
-CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.obj: /Users/ross/documents/metamodule-plugin-sdk/version.cc
-CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.obj: CMakeFiles/Moffenzeef.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ross/documents/Moffenzeef-VCV/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.obj"
-	/Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.obj -MF CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.obj.d -o CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.obj -c /Users/ross/documents/metamodule-plugin-sdk/version.cc
+CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.obj: CMakeFiles/Moffenzeef.dir/flags.make
+CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.obj: /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc
+CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.obj: CMakeFiles/Moffenzeef.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ross/documents/Moffenzeef-VCV/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.obj"
+	/Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.obj -MF CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.obj.d -o CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.obj -c /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc
 
-CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.i"
-	/Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ross/documents/metamodule-plugin-sdk/version.cc > CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.i
+CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.i"
+	/Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc > CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.i
 
-CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.s"
-	/Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ross/documents/metamodule-plugin-sdk/version.cc -o CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.s
+CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.s"
+	/Users/ross/gcc/arm-gnu-toolchain-12.3.rel1-darwin-x86_64-arm-none-eabi/bin/arm-none-eabi-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc -o CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.s
 
 # Object files for target Moffenzeef
 Moffenzeef_OBJECTS = \
@@ -313,7 +313,7 @@ Moffenzeef_OBJECTS = \
 "CMakeFiles/Moffenzeef.dir/src/Muskrat.cpp.obj" \
 "CMakeFiles/Moffenzeef.dir/src/Simplify.cpp.obj" \
 "CMakeFiles/Moffenzeef.dir/src/plugin.cpp.obj" \
-"CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.obj"
+"CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.obj"
 
 # External object files for target Moffenzeef
 Moffenzeef_EXTERNAL_OBJECTS =
@@ -333,7 +333,7 @@ libMoffenzeef.a: CMakeFiles/Moffenzeef.dir/src/Mongrel.cpp.obj
 libMoffenzeef.a: CMakeFiles/Moffenzeef.dir/src/Muskrat.cpp.obj
 libMoffenzeef.a: CMakeFiles/Moffenzeef.dir/src/Simplify.cpp.obj
 libMoffenzeef.a: CMakeFiles/Moffenzeef.dir/src/plugin.cpp.obj
-libMoffenzeef.a: CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk/version.cc.obj
+libMoffenzeef.a: CMakeFiles/Moffenzeef.dir/Users/ross/documents/metamodule-plugin-sdk-2.0-dev/version.cc.obj
 libMoffenzeef.a: CMakeFiles/Moffenzeef.dir/build.make
 libMoffenzeef.a: CMakeFiles/Moffenzeef.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/ross/documents/Moffenzeef-VCV/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX static library libMoffenzeef.a"

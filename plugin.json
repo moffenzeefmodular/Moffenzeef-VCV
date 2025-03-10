@@ -2,13 +2,13 @@
   "slug": "Moffenzeef",
   "name": "Moffenzeef",
   "version": "2.0.0",
-  "license": "GPLv3+",
+  "license": "GPL-3.0+",
   "brand": "Moffenzeef",
   "author": "Ross Fish",
   "authorEmail": "moffenzeefmodular@gmail.com",
-  "authorUrl": "moffenzeefmodular.com",
-  "pluginUrl": "moffenzeefmodular.com",
-  "manualUrl": "moffenzeefmodular.com",
+  "authorUrl": "https://moffenzeefmodular.com",
+  "pluginUrl": "https://moffenzeefmodular.com",
+  "manualUrl": "https://moffenzeefmodular.com",
   "sourceUrl": "",
   "donateUrl": "https://www.paypal.com/ncp/payment/EABFTDFCHRLLS",
   "changelogUrl": "",
@@ -51,7 +51,7 @@
     "description": "Master clock with divided outputs",
     "modularGridUrl": "https://modulargrid.net/e/moffenzeef-modular-count",
     "manualUrl": "https://www.moffenzeefmodular.com/s/count_quickstart-83117.pdf",
-    "tags": ["clock generator", "clock divider", "utility"]
+    "tags": ["clock generator", "clock modulator", "utility"]
    },
    {
     "slug": "Deviant",
@@ -91,7 +91,7 @@
     "description": "6 channel clock divider sequencer with swing and pulsewidth control",
     "modularGridUrl": "https://modulargrid.net/e/moffenzeef-modular-mitO",
     "manualUrl": "https://www.moffenzeefmodular.com/s/mito_quickstart.pdf",
-    "tags": ["clock divider", "sequencer"]
+    "tags": ["clock modulator", "sequencer"]
    },
    {
     "slug": "Moffenmix",
@@ -123,7 +123,7 @@
     "description": "Dynamic mute module",
     "modularGridUrl": "https://modulargrid.net/e/moffenzeef-modular-simplify",
     "manualUrl": "https://www.moffenzeefmodular.com/s/MOF-SIMPLIFY-QUICKSTART-v10-892024.pdf",
-    "tags": ["sequencer", "clock divider", "mute"]
+    "tags": ["sequencer", "clock modulator", "mute"]
    }
   ]
 }

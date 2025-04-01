@@ -2,3 +2,5 @@
 build
 dist
 metamodule-plugins
+plugin.dylib
+plugin.so

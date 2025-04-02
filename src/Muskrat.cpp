@@ -1,7 +1,7 @@
-#include "rack.hpp"
 #include <vector>
-#include "plugin.hpp"
 #include <random> 
+#include "rack.hpp"
+#include "plugin.hpp"
 #include "dsp/digital.hpp"  // For utilities like `mix` and other DSP-related functions
 
 using namespace rack;
@@ -36,21 +36,22 @@ struct Muskrat : Module {
 
  // Constructor
  Muskrat() {
-	config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
-	configParam(TAIL_PARAM, 0.f, 1.f, 0.5f, "Tail");
-	configParam(RANGE_PARAM, 0.f, 2.f, 1.f, "Range");
-	configParam(SCRATCH_PARAM, 0.f, 1.f, 0.5f, "Scratch");
-	configParam(DIG_PARAM, 0.f, 1.f, 0.5f, "Dig");
-	configParam(CHEW_PARAM, 0.f, 1.f, 0.5f, "Chew");
-	configInput(BANG_INPUT, "Bang");
+  config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
+	configParam(TAIL_PARAM, 0.f, 1.f, 0.5f, "Decay Time", " %", 0.f, 100.f);
+	configSwitch(RANGE_PARAM, 0.f, 2.f, 1.f, "Decay Time Range", {"Fast", "Medium", "Slow"});
+	configParam(SCRATCH_PARAM, 0.f, 1.f, 0.5f, "Scratch", " %", 0.f, 100.f);
+	configParam(DIG_PARAM, 0.f, 1.f, 0.5f, "Dig", " %", 0.f, 100.f);
+	configParam(CHEW_PARAM, 0.f, 1.f, 0.5f, "Chew", " %", 0.f, 100.f);
+
+	configInput(BANG_INPUT, "Bang! Gate");
 	configInput(SCRATCH_CV_INPUT, "Scratch CV");
 	configInput(DIG_CV_INPUT, "Dig CV");
 	configInput(CHEW_CV_INPUT, "Chew CV");
-	configParam(RATSWITCH_PARAM, 0.f, 1.f, 0.f, "Ratswitch");
-	configInput(MUSKRAT_INPUT, "Ratswitch CV");
-	configOutput(AUDIO_OUTPUT, "Muskrat");
-  configParam(SELECT_PARAM, 0.f, 1.f, 0.f, "Algorithm");
+	configSwitch(RATSWITCH_PARAM, 0.f, 1.f, 0.f, "Ratswitch", {"Off", "On"});
+	configInput(MUSKRAT_INPUT, "Ratswitch Gate");
+	configOutput(AUDIO_OUTPUT, "Muskrat Audio");
 
+  configSwitch(SELECT_PARAM, 1.f, 4.f, 1.f, "Algorithm", {"Muskrat", "FM", "PD", "Granular"}); 
 }
 
 const static int WAVETABLE_SIZE = 238;
@@ -1060,51 +1061,49 @@ const unsigned char msgSixteen_wav[WAVETABLE_SIZE_GRANULAR]= {
   0xc1, 0x9e, 0x7d, 0x69, 0x5e, 0x5d
 };
   
+ 
   //Granular 
   float wavetablesGranular[WAVETABLE_SIZE_GRANULAR];
   float phaseGranular = 0.0f; // phaseGranular accumulator for oscillator
   //OG
   float wavetables[WAVETABLE_SIZE];
   float phase = 0.0f; // Phase accumulator for oscillator
-  float frequency = 440.0f; // Default frequency    
-  float currentVoltage = 0.0f;
-  float amplitude = 40.0f; 
-  std::random_device rd;
-  std::mt19937 gen{rd()};
-  std::uniform_real_distribution<float> dis{-amplitude, amplitude}; // Range -5V to +5V
+  
   // FM
   float phase1 = 0.0f;
   float phase2 = 0.0f;
-  float freq1 = 0.0f;
   float freq2 = 0.0f;
-  float minFreq = 900.0f;
-  float maxFreq = 920.0f;
-  float triangleWave(float phaseFM) {
-  phaseFM = phaseFM - floor(phaseFM);
-  return 2.0f * fabs(2.0f * phaseFM - 1.0f) - 1.0f;
-  }
-   //PD
-   float minFreqPD = 150.0f;
-   float maxFreqPD = 275.0f;
+
+  //PD
    float phase3 = 0.0f;
    float freq3 = 0.0f;
+
+  // Global 
+   float decayTime = 0.0f; 
+   bool lastBangState = false; 
+   bool pulseTriggered = false; 
+   float envelopeValue = 0.0f; 
+   float pulseTime = 0.0f; 
+   int ratSelect = 1; 
+
+   float triangleWave(float phaseFM) {
+    phaseFM = phaseFM - floor(phaseFM);
+    return 2.0f * fabs(2.0f * phaseFM - 1.0f) - 1.0f;
+    }
+  
    float triangleWave2(float phaseFM) {
    phaseFM = phaseFM - floor(phaseFM);
    return 2.0f * fabs(2.0f * phaseFM - 1.0f) - 1.0f;
    }
+
    float sawtoothWave(float phasePD) {
    return 2.0f * (phasePD - floor(phasePD + 0.5f)); 
    }
-
-	// Envelope control variables for decay
-  float envelopeValue = 1.0f;  // Envelope output value (for volume control)
-  float decayTime = 5.0f;      // Decay time in ms (5ms as requested)
-  float decayAlpha = 0.0f;     // Exponential decay coefficient
-  bool pulseTriggered = false; // Flag to check if pulse was triggered
-  float pulseTime = 0.0f;      // Time tracking for pulse duration
-  bool lastBangState = false;  // Previous state of the Bang input
-
-  int ratSelect = 1;
+   
+   float amplitude = 40.0f; 
+   std::random_device rd;
+   std::mt19937 gen{rd()};
+   std::uniform_real_distribution<float> dis{-amplitude, amplitude}; // Range -5V to +5V
 
 void process (const ProcessArgs &args) override {
   //Scratch param
@@ -1112,15 +1111,17 @@ void process (const ProcessArgs &args) override {
 	float normalizedCV2 = (cvInput2 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
 	float knob2Param = params[SCRATCH_PARAM].getValue() + 0.05;  // Original knob value
 	float knob2Value = knob2Param + (normalizedCV2 - 0.5f);  // Apply the CV input as an offset
-	float controlValue2 = clamp(knob2Value, 0.0f, 1.0f);
+	float controlValue2 = std::clamp(knob2Value, 0.0f, 1.0f);
 
   // DIG Param
 	float cvInput3 = inputs[DIG_CV_INPUT].getVoltage();  // Read CV input
 	float normalizedCV3 = (cvInput3 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
 	float knob3Param = params[DIG_PARAM].getValue() + 0.05;  // Original knob value
 	float knob3Value = knob3Param + (normalizedCV3 - 0.5f);  // Apply the CV input as an offset
-	float controlValue3 = clamp(knob3Value, 0.0f, 1.0f);
-	float WAVETABLE_LENGTH = std::min(controlValue3 * 318.0f + 10.0f, 318.0f);
+	float controlValue3 = std::clamp(knob3Value, 0.0f, 1.0f);
+
+  // NEED THIS TO BE 10 - 318 
+	int WAVETABLE_LENGTH = (controlValue3 * 308.0f) + 10.0f;
   float foldThreshold = 0.25f + (controlValue3 * 0.25);
 	float distortion = foldThreshold * 500; 
 	
@@ -1129,8 +1130,8 @@ void process (const ProcessArgs &args) override {
 	float normalizedCV = (cvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
 	float knob1Param = params[CHEW_PARAM].getValue() + 0.05;  // Original knob value
 	float knob1Value = knob1Param + (normalizedCV - 0.5f);  // Apply the CV input as an offset
-	float controlValue = clamp(knob1Value, 0.0f, 1.0f);
-	frequency = controlValue * args.sampleRate; // Scale the DIG_PARAM for frequency range
+	float controlValue = std::clamp(knob1Value, 0.0f, 1.0f);
+	float frequency = controlValue * args.sampleRate; // Scale the DIG_PARAM for frequency range
 
     // OG
     const unsigned char* wavetablesData[] = {
@@ -1178,7 +1179,7 @@ if (foldedSample > foldThreshold) {
  phase2 += freq2 / args.sampleRate;
  if (phase2 >= 1.0f) phase2 -= 1.0f;
  float modulator = triangleWave(phase2) * 10.0f;  // Increased amplitude for more modulation
- freq1 = pitch1 * (minFreq + (maxFreq - minFreq) * pitch1) + modulator * fmDepth * 100.0f; // Increased modulation depth
+ float freq1 = pitch1 * (920.0f * pitch1) + modulator * fmDepth * 100.0f; // Increased modulation depth
  phase1 += freq1 / args.sampleRate;
  if (phase1 >= 1.0f) phase1 -= 1.0f;
  float fmOutput = triangleWave(phase1) * 5.0f;  // Output of oscillator 1 (carrier)
@@ -1188,7 +1189,7 @@ float pdDrive = controlValue2 * 32.f;
 float pitch3 = controlValue; 
 int DIG = (int)(controlValue3 * 7.0f) + 1;  
 float octaveMultiplier = (float)DIG;  
-freq3 = pitch3 * octaveMultiplier * (minFreqPD + (maxFreqPD - minFreqPD) * pitch3);  
+freq3 = pitch3 * octaveMultiplier * (275.0f * pitch3);  
 phase3 += freq3 / args.sampleRate;
 if (phase3 >= 1.0f) phase3 -= 1.0f;
 float waveformOutput;
@@ -1210,14 +1211,14 @@ else{
   chaos = 1; 
   phaseGranular += phaseGranularIncrement;
   phaseGranular = fmod(phaseGranular, WAVETABLE_LENGTH);
-  freq2 = pitch2 * (minFreq + (maxFreq - minFreq) * pitch1);
+  freq2 = pitch2 * (900.0f + (920.0f - 900.0f) * pitch1);
   waveformOutput = sawtoothWave(phase3) * 5.0f;
 }	      
 
 //OG
 foldedSample = (foldedSample * distortion) + chaos;  // Increased amplification for more pronounced effect
 foldedSample += 1.0f;  // Apply offset to ensure the signal stays in a desired range
-foldedSample = clamp(foldedSample, -5.0f, 5.0f);
+foldedSample = std::clamp(foldedSample, -5.0f, 5.0f);
 const float cutoffFrequency = 8000.0f; // 10 kHz cutoff
 float alpha = 1.0f / (1.0f + (args.sampleRate / (2.0f * M_PI * cutoffFrequency)));
 static float previousOutput = 0.0f;
@@ -1235,7 +1236,7 @@ float outputSampleGranular = wavetablesGranular[phaseGranularIndex];
 
 // PD 
 float pdOutput = waveformOutput * pdDrive; 
-pdOutput = clamp(pdOutput, -5.0f, 5.0f);
+pdOutput = std::clamp(pdOutput, -5.0f, 5.0f);
 
 //Master decay 
 int range = (int)params[RANGE_PARAM].getValue(); // Read the RANGE_PARAM value
@@ -1250,7 +1251,7 @@ switch (range) {
 		decayTime = 200.0f + (params[TAIL_PARAM].getValue() * 3800.0f); // 200ms to 4000ms range
 		break;
 }
-decayAlpha = exp(-1.0f / (args.sampleRate * (decayTime / 1000.0f))); // Calculate decay coefficient based on decay time
+float decayAlpha = exp(-1.0f / (args.sampleRate * (decayTime / 1000.0f))); // Calculate decay coefficient based on decay time
 bool bangState = inputs[BANG_INPUT].getVoltage() > 0.5f;
 if (bangState && !lastBangState) {
 	pulseTriggered = true;
@@ -1270,7 +1271,7 @@ if (pulseTriggered) {
 
 // Granular
 float granularOutput = (((outputSampleGranular * 5.f) + 2.5f) * 5.0f) * envelopeValue; 
-granularOutput = clamp(granularOutput, -5.0f, 5.0f);
+granularOutput = std::clamp(granularOutput, -5.0f, 5.0f);
 
 float selectPot = params[SELECT_PARAM].getValue();
 
@@ -1306,7 +1307,7 @@ break;
 
 //LED 
 float ledBrightness = envelopeValue;  // Map -5V to +5V range to 0-1
-lights[LED_LIGHT].setBrightness(ledBrightness);  // Set LED brightness
+lights[LED_LIGHT].setBrightnessSmooth(ledBrightness, args.sampleTime);  // Set LED brightness
 }
 
 };

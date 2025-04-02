@@ -72,27 +72,27 @@ void process(const ProcessArgs& args) override {
     float normalizedCV = (cvInput + 5.0f) / 10.0f;
     float knob1Param = params[YIP_PARAM].getValue() + 0.05;
     float knob1Value = knob1Param + (normalizedCV - 0.5f);
-    float controlValue = clamp(knob1Value, 0.0f, 1.0f);
+    float controlValue = std::clamp(knob1Value, 0.0f, 1.0f);
     yipFrequency = mapToRange(controlValue, 0.0f, 1.0f, MIN_FREQUENCY, MAX_FREQUENCY);
 
     float cvInput2 = inputs[YAP_CV_INPUT].getVoltage();
     float normalizedCV2 = (cvInput2 + 5.0f) / 10.0f;
     float knob2Param = params[YAP_PARAM].getValue() + 0.05;
     float knob2Value = knob2Param + (normalizedCV2 - 0.5f);
-    float controlValue2 = clamp(knob2Value, 0.0f, 1.0f);
+    float controlValue2 = std::clamp(knob2Value, 0.0f, 1.0f);
     yapFrequency = mapToRange(controlValue2, 0.0f, 1.0f, MIN_FREQUENCY, MAX_FREQUENCY);
 
     float cvInput3 = inputs[GROWL_CV_INPUT].getVoltage();
     float normalizedCV3 = (cvInput3 + 5.0f) / 10.0f;
     float knob3Param = params[GROWL_PARAM].getValue() + 0.05;
     float knob3Value = knob3Param + (normalizedCV3 - 0.5f);
-    float growlAmount = clamp(knob3Value, 0.0f, 1.0f);
+    float growlAmount = std::clamp(knob3Value, 0.0f, 1.0f);
 
 	float cvInput4 = inputs[TAIL_CV_INPUT].getVoltage();
     float normalizedCV4 = (cvInput4 + 5.0f) / 10.0f;
     float knob4Param = params[TAIL_PARAM].getValue() + 0.05;
     float knob4Value = knob4Param + (normalizedCV4 - 0.5f);
-    float tailValue = clamp(knob4Value, 0.0f, 1.0f);
+    float tailValue = std::clamp(knob4Value, 0.0f, 1.0f);
 
     static bool lastBangState = false;
     bool currentBangState = inputs[BANG_CV_INPUT].getVoltage() > 0.5f;
@@ -131,8 +131,8 @@ void process(const ProcessArgs& args) override {
 
     float yipWave, yapWave;
     if (switchState || gateState) {
-        yipWave = squareWave(yipPhase);
-        yapWave = squareWave(yapPhase);
+        yipWave = (squareWave(yipPhase)) * 0.75f;
+        yapWave = (squareWave(yapPhase)) * 0.75f;
     } else {
         yipWave = sineWave(yipPhase);
         yapWave = sineWave(yapPhase);
@@ -146,7 +146,7 @@ void process(const ProcessArgs& args) override {
     float modulatedSignal = (1 - growlAmount) * drySignal + growlAmount * ringModulatedSignal;
 
     modulatedSignal *= envelopeValue;
-    modulatedSignal = clamp(modulatedSignal, -5.0f, 5.0f);
+    modulatedSignal = std::clamp(modulatedSignal, -5.0f, 5.0f);
 
     outputs[MONGREL_OUTPUT].setVoltage(modulatedSignal);
 

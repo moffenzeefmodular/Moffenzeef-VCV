@@ -1084,7 +1084,6 @@ const unsigned char msgSixteen_wav[WAVETABLE_SIZE_GRANULAR]= {
    bool pulseTriggered = false; 
    float envelopeValue = 0.0f; 
    float pulseTime = 0.0f; 
-   int ratSelect = 1; 
 
    float triangleWave(float phaseFM) {
     phaseFM = phaseFM - floor(phaseFM);
@@ -1273,22 +1272,8 @@ if (pulseTriggered) {
 float granularOutput = (((outputSampleGranular * 5.f) + 2.5f) * 5.0f) * envelopeValue; 
 granularOutput = std::clamp(granularOutput, -5.0f, 5.0f);
 
-float selectPot = params[SELECT_PARAM].getValue();
 
-
-if(selectPot < 0.43){
-ratSelect = 1;
-}
-if (selectPot > 0.43 && selectPot < 0.54){
-ratSelect = 2; 
-}
-if (selectPot > 0.54 && selectPot < 0.66){
-ratSelect = 3; 
-}
-if (selectPot > 0.66){
-ratSelect = 4; 
-}
-
+float ratSelect = params[SELECT_PARAM].getValue(); 
 
 switch (ratSelect){
 case 1: // Muskrat

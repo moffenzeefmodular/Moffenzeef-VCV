@@ -55,12 +55,12 @@ struct DialUp : Module {
     // Constructor for DialUp module
     DialUp() {
         config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
-        configParam(TAIL_PARAM, 0.f, 1.f, 0.f, "Tail");
-        configParam(RANGE_PARAM, 0.f, 2.f, 0.f, "Range");
-        configParam(MODEM_PARAM, 0.f, 1.f, 0.5f, "Modem");
-        configInput(BANG_INPUT, "Bang");
+        configParam(TAIL_PARAM, 0.f, 1.f, 0.f, "Decay Time", " %", 0.f, 100.f);
+        configSwitch(RANGE_PARAM, 0.f, 2.f, 0.f, "Decay Range", {"Fast", "Medium", "Slow"});
+        configParam(MODEM_PARAM, 0.f, 1.f, 0.5f, "Modem", " %", 0.f, 100.f);
+        configInput(BANG_INPUT, "Bang Gate");
         configInput(MODEM_CV_INPUT, "Modem CV");
-        configOutput(DIAL_UP_OUTPUT, "Dial-Up");
+        configOutput(DIAL_UP_OUTPUT, "Dial-Up Audio");
     }
 
     // Process function (audio generation logic)
@@ -69,20 +69,20 @@ struct DialUp : Module {
         float normalizedCV = (cvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
         float knob1Param = params[MODEM_PARAM].getValue() + 0.05;  // Original knob value
         float knob1Value = knob1Param + (normalizedCV - 0.5f);  // Apply the CV input as an offset
-        float controlValue = clamp(knob1Value, 0.0f, 1.0f);
+        float controlValue = std::clamp(knob1Value, 0.0f, 1.0f);
         
         jitterCounter++;
         if (jitterCounter >= jitterSpeed) {
             jitterCounter = 0; // Reset counter
             jitterValue += (random::uniform() * 2.0f - 1.0f) * noiseLevel; // Add random jitter
-            jitterValue = clamp(jitterValue, -1.0f, 1.0f); // Clamp jitter to stay within range
+            jitterValue = std::clamp(jitterValue, -1.0f, 1.0f); // Clamp jitter to stay within range
         }
 
         // Apply the jittered control value to the original parameter value
         controlValue += jitterValue;
 
         // Clamp the noisy control value to stay between 0 and 1
-        controlValue = clamp(controlValue, 0.0f, 1.0f);
+        controlValue = std::clamp(controlValue, 0.0f, 1.0f);
 
         float scaleFactor = args.sampleRate / 8000.0f; // Fix the output to 8kHz
 
@@ -159,14 +159,14 @@ struct DialUp : Module {
         // Final output is the filtered signal multiplied by the envelope value
         float finalOutput = highPassFilteredOutput * envelopeValue;
 
-        finalOutput = clamp(finalOutput, -5.0f, 5.0f);
+        finalOutput = std::clamp(finalOutput, -3.0f, 3.0f);
 
         // Output the result to the output port
         outputs[DIAL_UP_OUTPUT].setVoltage(finalOutput);  // Output audio as a control voltage
 
         // Map final output to LED light (0.0 to 1.0 range for LED)
         float ledBrightness = envelopeValue;  // Map -5V to +5V range to 0-1
-        lights[LED_LIGHT].setBrightness(ledBrightness);  // Set LED brightness
+        lights[LED_LIGHT].setBrightnessSmooth(ledBrightness, args.sampleTime);  // Set LED brightness
     }
 };
 

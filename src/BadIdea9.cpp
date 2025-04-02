@@ -1,4 +1,5 @@
 #include "plugin.hpp"
+#include <algorithm>
 
 struct BadIdea9 : Module {
 	enum ParamId {
@@ -41,7 +42,7 @@ struct BadIdea9 : Module {
 			float rate = 50.0f;
 			
 			float cvInput = inputs[PWR_INPUT].getVoltage();
-			cvInput = clamp(cvInput, 0.0f, 5.0f);
+			cvInput = std::clamp(cvInput, 0.0f, 5.0f);
 			
 			float delta = cvInput - lastCvInput;
 			
@@ -61,8 +62,8 @@ struct BadIdea9 : Module {
 			float summedValue1 = ruhParam + finalCvInput;
 			float summedValue2 = rohParam + finalCvInput;
 			
-			float controlValue1 = clamp(summedValue1, 0.0f, 5.0f);
-			float controlValue2 = clamp(summedValue2, 0.0f, 5.0f);
+			float controlValue1 = std::clamp(summedValue1, 0.0f, 5.0f);
+			float controlValue2 = std::clamp(summedValue2, 0.0f, 5.0f);
 			
 			float minFreq1 = 120.0f;
 			float maxFreq1 = 1885.0f;
@@ -72,8 +73,8 @@ struct BadIdea9 : Module {
 			float freq1 = maxFreq1 - (controlValue1 / 5.0f) * (maxFreq1 - minFreq1);
 			float freq2 = maxFreq2 - (controlValue2 / 5.0f) * (maxFreq2 - minFreq2);
 			
-			freq1 = clamp(freq1, minFreq1, maxFreq1);
-			freq2 = clamp(freq2, minFreq2, maxFreq2);
+			freq1 = std::clamp(freq1, minFreq1, maxFreq1);
+			freq2 = std::clamp(freq2, minFreq2, maxFreq2);
 			
 			if (freq1 < freq2) {
 				freq1 = freq2;  // Ensure main oscillator frequency is never lower than modulator frequency
@@ -91,7 +92,7 @@ struct BadIdea9 : Module {
 			}
 			
 			float mainOscOutput = (mainOscPhase < 0.5f) ? 5.0f : -5.0f;
-			mainOscOutput = clamp(mainOscOutput, -5.0f, 5.0f);
+			mainOscOutput = std::clamp(mainOscOutput, -5.0f, 5.0f);
 			
 			float f_cutoff = 1000.0f;
 			float fs = args.sampleRate;
@@ -103,6 +104,8 @@ struct BadIdea9 : Module {
 			prevOutput = filteredOutput;
 			
 			float finalOutput = filteredOutput * cvInput * 0.2f;
+			finalOutput = std::clamp(finalOutput, -3.5f, 3.5f);
+
 			float LED = cvInput * 0.2f;
 			
 			outputs[AUDIO_OUTPUT].setVoltage(finalOutput);

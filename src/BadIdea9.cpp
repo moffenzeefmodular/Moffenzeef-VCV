@@ -37,7 +37,6 @@ struct BadIdea9 : Module {
 			configParam(ROH_PARAM, 0.0f, 1.0f, 0.5f, "Sync Oscillator Frequency", " Hz", 300.f, 10.f); 
 			configInput(PWR_INPUT, "Voltage Starve CV");
 			configOutput(AUDIO_OUTPUT, "Bad Idea #9");
-	
 		}
 
 		void process(const ProcessArgs& args) override {

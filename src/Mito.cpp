@@ -59,13 +59,13 @@ struct Mito : Module {
 		configParam(KNOB5_PARAM, 0.f, 1.f, 1.f, "Division 4");
 		configParam(KNOB6_PARAM, 0.f, 1.f, 1.f, "Division 5");
 
-		configSwitch(MUTE1_PARAM, 0.f, 1.f, 1.f, "Enable 1", {"Off", "On"});
-		configSwitch(MUTE2_PARAM, 0.f, 1.f, 1.f, "Enable 2", {"Off", "On"});
-		configSwitch(MUTE3_PARAM, 0.f, 1.f, 1.f, "Enable 3", {"Off", "On"});
-		configSwitch(MUTE4_PARAM, 0.f, 1.f, 1.f, "Enable 4", {"Off", "On"});
-		configSwitch(MUTE5_PARAM, 0.f, 1.f, 1.f, "Enable 5", {"Off", "On"});
-		configSwitch(MUTE6_PARAM, 0.f, 1.f, 1.f, "Enable 6", {"Off", "On"});
-
+		configSwitch(MUTE1_PARAM, 0.f, 1.f, 1.f, "Mute 1", {"Muted", "UnMuted"});
+		configSwitch(MUTE2_PARAM, 0.f, 1.f, 1.f, "Mute 2", {"Muted", "UnMuted"});
+		configSwitch(MUTE3_PARAM, 0.f, 1.f, 1.f, "Mute 3", {"Muted", "UnMuted"});
+		configSwitch(MUTE4_PARAM, 0.f, 1.f, 1.f, "Mute 4", {"Muted", "UnMuted"});
+		configSwitch(MUTE5_PARAM, 0.f, 1.f, 1.f, "Mute 5", {"Muted", "UnMuted"});
+		configSwitch(MUTE6_PARAM, 0.f, 1.f, 1.f, "Mute 6", {"Muted", "UnMuted"});
+		
 		configParam(SWING_PARAM, 0.f, 1.f, 0.f, "Swing amount");
 		configParam(WIDTH_PARAM, 0.f, 1.f, 0.f, "Width");
 

@@ -46,18 +46,18 @@ struct Mongrel : Module {
 
 	Mongrel() {
 		config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
-		configParam(TAIL_PARAM, 0.f, 1.f, 0.f, "Tail");
-		configParam(YIP_PARAM, 0.f, 1.f, 0.f, "Yip");
-		configParam(SNARL__PARAM, 0.f, 1.f, 0.f, "Snarl");
-		configParam(GROWL_PARAM, 0.f, 1.f, 0.f, "Growl");
-		configParam(YAP_PARAM, 0.f, 1.f, 0.f, "Yap");
-		configInput(BANG_CV_INPUT, "Bang!");
+		configParam(TAIL_PARAM, 0.f, 1.f, 0.f, "Tail", " ms", 60.f, 5.f); // Decay Time find real value 
+		configParam(YIP_PARAM, 0.f, 1.f, 0.f, "Yip", " hz", 15.f, 20.f); // Freq 1 find real value 
+		configSwitch(SNARL__PARAM, 0.f, 1.f, 0.f, "Waveshape", {"Triangle", "Square"}); // Waveshape
+		configParam(GROWL_PARAM, 0.f, 1.f, 0.f, "Ringmod", " %", 0.f, 100.f ); // Ring mod 
+		configParam(YAP_PARAM, 0.f, 1.f, 0.f, "Yap", " hz", 15.f, 20.f); // Freq 2 find real vaule 
+		configInput(BANG_CV_INPUT, "Bang! Gate");
 		configInput(TAIL_CV_INPUT, "Tail CV");
 		configInput(YIP_CV_INPUT, "Yip CV");
 		configInput(GROWL_CV_INPUT, "Growl CV");
-		configInput(SNARL_CV_INPUT, "Snarl CV");
+		configInput(SNARL_CV_INPUT, "Snarl Gate");
 		configInput(YAP_CV_INPUT, "Yap CV");
-		configOutput(MONGREL_OUTPUT, "Mongrel");
+		configOutput(MONGREL_OUTPUT, "Mongrel Audio");
 	}
 
 

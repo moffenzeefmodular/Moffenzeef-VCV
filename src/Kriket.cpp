@@ -195,7 +195,7 @@ struct Kriket : Module {
         outputs[OUT_OUTPUT].setVoltage(finalOutput); 
 
         // LED feedback on Bang states
-        lights[LED_LIGHT].setBrightness(bang1 || bang2 || bang3 || bang4 ? 1.0f : 0.0f);
+        lights[LED_LIGHT].setBrightnessSmooth((bang1 || bang2 || bang3 || bang4 ? 1.0f : 0.0f), args.sampleTime);
     }
 };
 

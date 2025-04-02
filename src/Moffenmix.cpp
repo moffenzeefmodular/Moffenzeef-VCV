@@ -44,36 +44,36 @@ struct Moffenmix : Module {
 		config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
 	
 		// Set all Gain knobs to 100% (value 1.0)
-		configParam(GAIN_1_PARAM, 0.f, 1.f, 1.f, "Gain 1");
-		configParam(GAIN_2_PARAM, 0.f, 1.f, 1.f, "Gain 2");
-		configParam(GAIN_3_PARAM, 0.f, 1.f, 1.f, "Gain 3");
-		configParam(GAIN_4_PARAM, 0.f, 1.f, 1.f, "Gain 4");
+		configParam(GAIN_1_PARAM, 0.f, 1.f, 1.f, "Gain 1", " %", 0.f, 100.f);
+		configParam(GAIN_2_PARAM, 0.f, 1.f, 1.f, "Gain 2", " %", 0.f, 100.f);
+		configParam(GAIN_3_PARAM, 0.f, 1.f, 1.f, "Gain 3", " %", 0.f, 100.f);
+		configParam(GAIN_4_PARAM, 0.f, 1.f, 1.f, "Gain 4", " %", 0.f, 100.f);
 	
 		// Set all Volume knobs to 50% (value 0.5)
-		configParam(VOLUME_1_PARAM, 0.f, 1.f, 0.5f, "Volume 1");
-		configParam(VOLUME_2_PARAM, 0.f, 1.f, 0.5f, "Volume 2");
-		configParam(VOLUME_3_PARAM, 0.f, 1.f, 0.5f, "Volume 3");
-		configParam(VOLUME_4_PARAM, 0.f, 1.f, 0.5f, "Volume 4");
+		configParam(VOLUME_1_PARAM, 0.f, 1.f, 0.5f, "Volume 1", " %", 0.f, 100.f);
+		configParam(VOLUME_2_PARAM, 0.f, 1.f, 0.5f, "Volume 2", " %", 0.f, 100.f);
+		configParam(VOLUME_3_PARAM, 0.f, 1.f, 0.5f, "Volume 3", " %", 0.f, 100.f);
+		configParam(VOLUME_4_PARAM, 0.f, 1.f, 0.5f, "Volume 4", " %", 0.f, 100.f);
 	
 		// Set all Range switches to position 0 (value 0)
-		configParam(RANGE_1_PARAM, 0.f, 2.f, 0.f, "Range 1");
-		configParam(RANGE_2_PARAM, 0.f, 2.f, 0.f, "Range 2");
-		configParam(RANGE_3_PARAM, 0.f, 2.f, 0.f, "Range 3");
-		configParam(RANGE_4_PARAM, 0.f, 2.f, 0.f, "Range 4");
+		configSwitch(RANGE_1_PARAM, 0.f, 2.f, 0.f, "Gain Range 1", {"1x", "5x", "100x"});
+		configSwitch(RANGE_2_PARAM, 0.f, 2.f, 0.f, "Gain Range 2", {"1x", "5x", "100x"});
+		configSwitch(RANGE_3_PARAM, 0.f, 2.f, 0.f, "Gain Range 3", {"1x", "5x", "100x"});
+		configSwitch(RANGE_4_PARAM, 0.f, 2.f, 0.f, "Gain Range 4", {"1x", "5x", "100x"});
 	
 		// Set all Mute switches to engaged (value 0, muted)
-		configParam(MUTE_1_PARAM, 0.f, 1.f, 1.f, "Mute 1");
-		configParam(MUTE_2_PARAM, 0.f, 1.f, 1.f, "Mute 2");
-		configParam(MUTE_3_PARAM, 0.f, 1.f, 1.f, "Mute 3");
-		configParam(MUTE_4_PARAM, 0.f, 1.f, 1.f, "Mute 4");
+		configSwitch(MUTE_1_PARAM, 0.f, 1.f, 1.f, "Mute 1", {"Mute", "Unmute"});
+		configSwitch(MUTE_2_PARAM, 0.f, 1.f, 1.f, "Mute 2", {"Mute", "Unmute"});
+		configSwitch(MUTE_3_PARAM, 0.f, 1.f, 1.f, "Mute 3", {"Mute", "Unmute"});
+		configSwitch(MUTE_4_PARAM, 0.f, 1.f, 1.f, "Mute 4", {"Mute", "Unmute"});
 	
 		// Inputs and Outputs
-		configInput(CH_1_INPUT, "Ch. 1");
-		configInput(CH_2_INPUT, "Ch. 2");
-		configInput(CH_3_INPUT, "Ch. 3");
-		configInput(CH_4_INPUT, "Ch. 4");
-		configInput(LINK_INPUT, "Link");
-		configOutput(MIX_OUTPUT, "Mix");
+		configInput(CH_1_INPUT, "Ch.1 Audio");
+		configInput(CH_2_INPUT, "Ch.2 Audio");
+		configInput(CH_3_INPUT, "Ch.3 Audio");
+		configInput(CH_4_INPUT, "Ch.4 Audio");
+		configInput(LINK_INPUT, "Link Audio");
+		configOutput(MIX_OUTPUT, "Mix Audio");
 	}
 	
 	void process(const ProcessArgs& args) override {
@@ -102,7 +102,10 @@ struct Moffenmix : Module {
 		linkInput = applyVolume(linkInput, 0); // No range/gain for link input
 
 		// Update the LEDs based on the channel output (indicating audio level)
-		updateLEDs(output1, output2, output3, output4);
+		lights[LED_1_LIGHT].setBrightnessSmooth((fabs(output1) / 5.0f), args.sampleTime); // Normalize to 5V max
+		lights[LED_2_LIGHT].setBrightnessSmooth((fabs(output2) / 5.0f), args.sampleTime);  // Normalize to 5V max
+		lights[LED_3_LIGHT].setBrightnessSmooth((fabs(output3) / 5.0f), args.sampleTime);  // Normalize to 5V max
+		lights[LED_4_LIGHT].setBrightnessSmooth((fabs(output4) / 5.0f), args.sampleTime);  // Normalize to 5V max
 
 		// Combine all channels (after volume attenuation) and include the Link input at unity gain
 		float mixedSignal = output1 + output2 + output3 + output4 + linkInput;
@@ -179,14 +182,6 @@ struct Moffenmix : Module {
 		return signal;
 	}
 
-	// Function to update the LEDs based on audio levels
-	void updateLEDs(float output1, float output2, float output3, float output4) {
-		// Map the output level to the LED light intensity (0.0f to 1.0f)
-		lights[LED_1_LIGHT].setBrightness(fabs(output1) / 5.0f); // Normalize to 5V max
-		lights[LED_2_LIGHT].setBrightness(fabs(output2) / 5.0f); // Normalize to 5V max
-		lights[LED_3_LIGHT].setBrightness(fabs(output3) / 5.0f); // Normalize to 5V max
-		lights[LED_4_LIGHT].setBrightness(fabs(output4) / 5.0f); // Normalize to 5V max
-	}
 };
 
 struct MoffenmixWidget : ModuleWidget {

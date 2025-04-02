@@ -89,10 +89,10 @@ struct Kriket : Module {
         configParam(PITCH2_PARAM, 0.f, 1.f, 0.f, "Pitch 2");
         configParam(PITCH3_PARAM, 0.f, 1.f, 0.f, "Pitch 3");
         configParam(PITCH4_PARAM, 0.f, 1.f, 0.f, "Pitch 4");
-        configInput(BANG1_INPUT, "Bang 1");
-        configInput(BANG2_INPUT, "Bang 2");
-        configInput(BANG3_INPUT, "Bang 3");
-        configInput(BANG4_INPUT, "Bang 4");
+        configInput(BANG1_INPUT, "Bang! 1");
+        configInput(BANG2_INPUT, "Bang! 2");
+        configInput(BANG3_INPUT, "Bang! 3");
+        configInput(BANG4_INPUT, "Bang! 4");
         configInput(CVIN_INPUT, "CV");
         configOutput(OUT_OUTPUT, "Kriket");
     }
@@ -129,7 +129,7 @@ struct Kriket : Module {
 
     void process(const ProcessArgs& args) override {
         float cvInput = inputs[CVIN_INPUT].getVoltage();
-        cvInput = clamp(cvInput, 0.0f, 5.0f);
+        cvInput = std::clamp(cvInput, 0.0f, 5.0f);
 
         // Map parameters to frequency range of 1kHz to 5kHz
         float freq1 = 1000.0f + (4000.0f) * params[PITCH1_PARAM].getValue();
@@ -138,10 +138,10 @@ struct Kriket : Module {
         float freq4 = 1000.0f + (4000.0f) * params[PITCH4_PARAM].getValue();
 
         // Apply CV input as a 1V/octave offset
-        freq1 = clamp(freq1 * std::pow(2.0f, cvInput), 1000.0f, 5000.0f);
-        freq2 = clamp(freq2 * std::pow(2.0f, cvInput), 1000.0f, 5000.0f);
-        freq3 = clamp(freq3 * std::pow(2.0f, cvInput), 1000.0f, 5000.0f);
-        freq4 = clamp(freq4 * std::pow(2.0f, cvInput), 1000.0f, 5000.0f);
+        freq1 = std::clamp(freq1 * std::pow(2.0f, cvInput), 1000.0f, 5000.0f);
+        freq2 = std::clamp(freq2 * std::pow(2.0f, cvInput), 1000.0f, 5000.0f);
+        freq3 = std::clamp(freq3 * std::pow(2.0f, cvInput), 1000.0f, 5000.0f);
+        freq4 = std::clamp(freq4 * std::pow(2.0f, cvInput), 1000.0f, 5000.0f);
 
         bool bang1 = inputs[BANG1_INPUT].isConnected() && inputs[BANG1_INPUT].getVoltage() > 0.5f;
         bool bang2 = inputs[BANG2_INPUT].isConnected() && inputs[BANG2_INPUT].getVoltage() > 0.5f;
@@ -188,8 +188,11 @@ struct Kriket : Module {
         output += bang3 ? output3 : 0.0f;
         output += bang4 ? output4 : 0.0f;
 
+        float finalOutput = output * 4.0f; 
+        finalOutput = std::clamp(finalOutput, -3.0f, 3.0f);
+
         // Send the output signal
-        outputs[OUT_OUTPUT].setVoltage(output * 4.f);  // 16Vpp scaled output
+        outputs[OUT_OUTPUT].setVoltage(finalOutput); 
 
         // LED feedback on Bang states
         lights[LED_LIGHT].setBrightness(bang1 || bang2 || bang3 || bang4 ? 1.0f : 0.0f);

@@ -1,5 +1,4 @@
 #include "plugin.hpp"
-#include <algorithm>
 
 struct BadIdea9 : Module {
 	enum ParamId {
@@ -28,16 +27,20 @@ struct BadIdea9 : Module {
 		float mainOscPhase = 0.0f;
 		float syncOscPhase = 0.0f;
 	
+		float lastCvInput = 0.0f;
+		float prevOutput = 0.0f;
+		
 		// Constructor
 	BadIdea9() {
 			config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
-			configParam(RUH_PARAM, 0.0f, 1.0f, 0.5f, "Main Oscillator Frequency", " Hz");
-			configParam(ROH_PARAM, 0.0f, 1.0f, 0.5f, "Sync Oscillator Frequency", " Hz");
+			configParam(RUH_PARAM, 0.0f, 1.0f, 0.5f, "Main Oscillator Frequency", " Hz", 11.781f, 160.f); 
+			configParam(ROH_PARAM, 0.0f, 1.0f, 0.5f, "Sync Oscillator Frequency", " Hz", 300.f, 10.f); 
+			configInput(PWR_INPUT, "Voltage Starve CV");
+			configOutput(AUDIO_OUTPUT, "Bad Idea #9");
+	
 		}
 
 		void process(const ProcessArgs& args) override {
-			static float lastCvInput = 0.0f;
-			static float prevOutput = 0.0f;
 			
 			float rate = 50.0f;
 			
@@ -105,11 +108,10 @@ struct BadIdea9 : Module {
 			
 			float finalOutput = filteredOutput * cvInput * 0.2f;
 			finalOutput = std::clamp(finalOutput, -3.5f, 3.5f);
-
 			float LED = cvInput * 0.2f;
 			
 			outputs[AUDIO_OUTPUT].setVoltage(finalOutput);
-			lights[LED_LIGHT].setBrightness(LED);
+			lights[LED_LIGHT].setBrightnessSmooth(LED, args.sampleTime);
 		}					
 	};
 		

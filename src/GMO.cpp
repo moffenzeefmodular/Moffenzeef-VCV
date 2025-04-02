@@ -30,116 +30,177 @@ struct GMO : Module {
 
 
 GMO() {
-		config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
-		configParam(SPECIMEN_PARAM, 0.f, 1.f, 0.f, "Specimen");
-		configParam(SPEED_PARAM, 0.f, 1.f, 0.5f, "Speed");
-		configParam(LOOP_PARAM, 0.f, 1.f, 0.f, "Loop");
-		configParam(HEAD_PARAM, 0.f, 1.f, 0.f, "Head");
-		configParam(TAIL_PARAM, 0.f, 1.f, 1.f, "Tail");
-		configInput(BANG_INPUT, "Bang!");
-		configInput(SPECIMEN_CV_INPUT, "Specimen CV");
-		configInput(SPEED_CV_INPUT, "Speed CV");
-		configInput(LOOP_CV_INPUT, "Loop CV");
-		configInput(HEAD_CV_INPUT, "Head CV");
-		configInput(TAIL_CV_INPUT, "Tail CV");
-		configOutput(GMO_OUTPUT, "GMO");
+	config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
+	configParam(SPECIMEN_PARAM, 1.f, 8.f, 1.f, "Sample Select");
+	paramQuantities[SPECIMEN_PARAM]->snapEnabled = true; 
+
+	configParam(SPEED_PARAM, 0.f, 1.f, 0.5f, "Pitch", " %", 0.f, 100.f);
+	configSwitch(LOOP_PARAM, 0.f, 1.f, 0.f, "Loop", {"Off", "On"});
+	configParam(HEAD_PARAM, 0.f, 1.f, 0.f, "Start Time", " %", 0.f, 100.f);
+	configParam(TAIL_PARAM, 0.f, 1.f, 1.f, "End Time", " %", 0.f, 100.f);
+	configInput(BANG_INPUT, "Bang! Gate");
+	configInput(SPECIMEN_CV_INPUT, "Specimen CV");
+	configInput(SPEED_CV_INPUT, "Speed CV");
+	configInput(LOOP_CV_INPUT, "Loop Gate");
+	configInput(HEAD_CV_INPUT, "Head CV");
+	configInput(TAIL_CV_INPUT, "Tail CV");
+	configOutput(GMO_OUTPUT, "GMO Audio");
     }
 
     float speed = 1.0f;  // Default speed value
     float wavetableIndex = 0.0f;
     float outputSignal = 0.0f;
 	int8_t sample;  
+	int headIndex = 0;
+	int tailIndex = 0; 
+	float finalOutput = 0;
 
 	bool previousBangState = false; 
+
+	float previousInput = 0.0f;
+	float previousOutput = 0.0f;
+
+	bool isPlaying = false; 
+	bool isLooping = false; 
+	bool isBanged = false; 
 
 	void process(const ProcessArgs &args) override {
         using namespace GMOTables;
 		const int GAP = 200; // Define the gap between HEAD and TAIL (can be adjusted)
-	    
+	
 		//Speed
 		float cvInput = inputs[SPEED_CV_INPUT].getVoltage();
 		float normalizedCV = (cvInput + 5.0f) / 10.0f;
 		float knob1Param = params[SPEED_PARAM].getValue() + 0.05;
 		float knob1Value = knob1Param + (normalizedCV - 0.5f);
-		float controlValue = clamp(knob1Value, 0.0f, 1.0f);
+		float controlValue = std::clamp(knob1Value, 0.0f, 1.0f);
 		speed = (controlValue * 3.f) + 0.05f;
-	    
+	
 		//Specimen
 		float cvInput2 = inputs[SPECIMEN_CV_INPUT].getVoltage();
 		float normalizedCV2 = (cvInput2 + 5.0f) / 10.0f;
-		float knob2Param = params[SPECIMEN_PARAM].getValue();
+		float knob2Param = params[SPECIMEN_PARAM].getValue() / 8.f;
 		float knob2Value = knob2Param + (normalizedCV2 - 0.5f);
-		float controlValue2 = clamp(knob2Value, 0.0f, 1.0f);
+		float controlValue2 = std::clamp(knob2Value, 0.0f, 1.0f);
 		int sampleSelect = (controlValue2 * 7) + 1;
-        
+	
 		//Head
 		float cvInput3 = inputs[HEAD_CV_INPUT].getVoltage();
 		float normalizedCV3 = (cvInput3 + 5.0f) / 10.0f;
 		float knob3Param = params[HEAD_PARAM].getValue();
 		float knob3Value = knob3Param + (normalizedCV3 - 0.5f);
-		float controlValue3 = clamp(knob3Value, 0.0f, 1.0f);
-		int headIndex = (int)(controlValue3 * WAVETABLE_SIZE);
-
+		float controlValue3 = std::clamp(knob3Value, 0.0f, 1.0f);
+	
 		//Tail
 		float cvInput4 = inputs[TAIL_CV_INPUT].getVoltage();
 		float normalizedCV4 = (cvInput4 + 5.0f) / 10.0f;
 		float knob4Param = params[TAIL_PARAM].getValue();
 		float knob4Value = knob4Param + (normalizedCV4 - 0.5f);
-		float controlValue4 = clamp(knob4Value, 0.0f, 1.0f);
-		int tailIndex = (int)(controlValue4 * WAVETABLE_SIZE);
-
-		// Don't let knobs cross 
-		if (tailIndex <= headIndex + GAP) {
-			tailIndex = headIndex + GAP;
-		}
-		if (headIndex >= tailIndex) {
-			headIndex = tailIndex - GAP;
-		}
-	    
+		float controlValue4 = std::clamp(knob4Value, 0.0f, 1.0f);
+	
 		// LOOP SWITCH
 		bool switchState = params[LOOP_PARAM].getValue() > 0.5f;
 		bool gateState = inputs[LOOP_CV_INPUT].getVoltage() > 0.5f;
-        
+	
 		// One shot states
-		bool bangState = inputs[BANG_INPUT].getVoltage() < 0.5f;  
-
+		bool bangState = inputs[BANG_INPUT].getVoltage() < 0.5f;
+	
 		if(switchState || gateState){ // LOOPING MODE
-		if (wavetableIndex >= WAVETABLE_SIZE) {
+			isLooping = true; 
+			headIndex = (int)(controlValue3 * WAVETABLE_SIZE);
+			tailIndex = (int)(controlValue4 * WAVETABLE_SIZE);
+			// Don't let knobs cross 
+			if (tailIndex <= headIndex + GAP) {
+				tailIndex = headIndex + GAP;
+			}
+			if (headIndex >= tailIndex) {
+				headIndex = tailIndex - GAP;
+			}
+	
+			if (wavetableIndex >= WAVETABLE_SIZE) {
 				wavetableIndex -= WAVETABLE_SIZE;
 			}
-			wavetableIndex = clamp(wavetableIndex, (float)headIndex, (float)tailIndex);
+			wavetableIndex = std::clamp(wavetableIndex, (float)headIndex, (float)tailIndex);
 			if (wavetableIndex >= tailIndex) {
 				wavetableIndex = (float)headIndex;  // Reset to HEAD index when TAIL is reached
-				}		
 			}
-		else{	
-		if (bangState < previousBangState) { 
-		wavetableIndex = headIndex; 
-		}
-		previousBangState = bangState; 
-	    } 
+			}
+			else{
+			isLooping = false; 
+			}
+			
+			if (bangState < previousBangState) { 
+				isBanged = true;
+				headIndex = (int)(controlValue3 * WAVETABLE_SIZE);
+				tailIndex = (int)(controlValue4 * WAVETABLE_SIZE);
+				// Don't let knobs cross 
+				if (tailIndex <= headIndex + GAP) {
+					tailIndex = headIndex + GAP;
+				}
+				if (headIndex >= tailIndex) {
+					headIndex = tailIndex - GAP;
+				}
+				wavetableIndex = headIndex; 
+			} 
 
-		wavetableIndex = clamp(wavetableIndex, (float)headIndex, (float)tailIndex);
+			previousBangState = bangState;		
+
+		wavetableIndex = std::clamp(wavetableIndex, (float)headIndex, (float)tailIndex);
 		wavetableIndex += speed * args.sampleTime * WAVETABLE_SIZE;
-		
-		
-switch(sampleSelect) {
-			case 1: sample = wavetable[(int)wavetableIndex]; break;
-			case 2: sample = wavetable2[(int)wavetableIndex]; break;
-			case 3: sample = wavetable3[(int)wavetableIndex]; break;
-			case 4: sample = wavetable4[(int)wavetableIndex]; break;
-			case 5: sample = wavetable5[(int)wavetableIndex]; break;
-			case 6: sample = wavetable6[(int)wavetableIndex]; break;
-			case 7: sample = wavetable7[(int)wavetableIndex]; break;
-			case 8: sample = wavetable8[(int)wavetableIndex]; break;
+	
+		switch(sampleSelect) {
+			case 1: 
+				sample = wavetable[(int)wavetableIndex]; 
+				break;
+			case 2: 
+				sample = wavetable2[(int)wavetableIndex]; 
+				break;
+			case 3: 
+				sample = wavetable3[(int)wavetableIndex]; 
+				break;
+			case 4: 
+				sample = wavetable4[(int)wavetableIndex]; 
+				break;
+			case 5: 
+				sample = wavetable5[(int)wavetableIndex]; 
+				break;
+			case 6: 
+				sample = wavetable6[(int)wavetableIndex]; 
+				break;
+			case 7: 
+				sample = wavetable7[(int)wavetableIndex]; 
+				break;
+			case 8: 
+				sample = wavetable8[(int)wavetableIndex]; 
+				break;
+		}
+
+		if (wavetableIndex >= tailIndex) {
+			isBanged = false;
 		}
 	
 		outputSignal = (float)sample / 128.0f;
-		float finalOutput = outputSignal * 20.0f;
-		finalOutput = clamp(finalOutput, -5.0f, 5.0f);
+		float boost = outputSignal * 20.0f; // Boost sample up to audible level 
+
+		// Highpass 	
+		float RC = 1.0f / (2.0f * M_PI * 200.f); // Last number is cutoff freq
+		float alpha = RC / (RC + args.sampleTime);
+		float finalOutput = alpha * (previousOutput + boost - previousInput);
 	
+		// Update previous input and output for next iteration
+		previousInput = boost;
+		previousOutput = finalOutput;
+		finalOutput = std::clamp(finalOutput, -3.0f, 3.0f);
+
+
+		if(isLooping || isBanged == true){
 		outputs[GMO_OUTPUT].setVoltage(finalOutput);
-		lights[LED_LIGHT].setBrightness(finalOutput * 0.2);
+		lights[LED_LIGHT].setBrightness(((finalOutput + 5.0f) * 0.1f) - 0.5f);
+		}
+		else{
+			outputs[GMO_OUTPUT].setVoltage(0);
+			lights[LED_LIGHT].setBrightness(0);
+		}
 	}
 };	
 struct GMOWidget : ModuleWidget {

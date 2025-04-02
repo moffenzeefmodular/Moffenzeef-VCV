@@ -1,5 +1,6 @@
 #include "plugin.hpp"
 
+
 struct Mito : Module {
 	enum ParamId {
 		KNOB1_PARAM,
@@ -52,25 +53,32 @@ struct Mito : Module {
 
 	Mito() {
 		config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
-		configParam(KNOB1_PARAM, 0.f, 1.f, 1.f, "Division 1");
-		configParam(KNOB2_PARAM, 0.f, 1.f, 1.f, "Division 2");
-		configParam(KNOB3_PARAM, 0.f, 1.f, 1.f, "Division 3");
-		configParam(KNOB4_PARAM, 0.f, 1.f, 1.f, "Division 6");
-		configParam(KNOB5_PARAM, 0.f, 1.f, 1.f, "Division 4");
-		configParam(KNOB6_PARAM, 0.f, 1.f, 1.f, "Division 5");
+		configParam(KNOB1_PARAM, 16.f, 1.f, 1.f, "Division 1");
+		configParam(KNOB2_PARAM, 16.f, 1.f, 1.f, "Division 2");
+		configParam(KNOB3_PARAM, 16.f, 1.f, 1.f, "Division 3");
+		configParam(KNOB5_PARAM, 16.f, 1.f, 1.f, "Division 5");
+		configParam(KNOB4_PARAM, 16.f, 1.f, 1.f, "Division 4");
+		configParam(KNOB6_PARAM, 16.f, 1.f, 1.f, "Division 6");
 
-		configSwitch(MUTE1_PARAM, 0.f, 1.f, 1.f, "Mute 1", {"Muted", "UnMuted"});
-		configSwitch(MUTE2_PARAM, 0.f, 1.f, 1.f, "Mute 2", {"Muted", "UnMuted"});
-		configSwitch(MUTE3_PARAM, 0.f, 1.f, 1.f, "Mute 3", {"Muted", "UnMuted"});
-		configSwitch(MUTE4_PARAM, 0.f, 1.f, 1.f, "Mute 4", {"Muted", "UnMuted"});
-		configSwitch(MUTE5_PARAM, 0.f, 1.f, 1.f, "Mute 5", {"Muted", "UnMuted"});
-		configSwitch(MUTE6_PARAM, 0.f, 1.f, 1.f, "Mute 6", {"Muted", "UnMuted"});
-		
-		configParam(SWING_PARAM, 0.f, 1.f, 0.f, "Swing amount");
-		configParam(WIDTH_PARAM, 0.f, 1.f, 0.f, "Width");
+		paramQuantities[KNOB1_PARAM]->snapEnabled = true; 
+		paramQuantities[KNOB2_PARAM]->snapEnabled = true; 
+		paramQuantities[KNOB3_PARAM]->snapEnabled = true; 
+		paramQuantities[KNOB4_PARAM]->snapEnabled = true; 
+		paramQuantities[KNOB5_PARAM]->snapEnabled = true; 
+		paramQuantities[KNOB6_PARAM]->snapEnabled = true; 
 
-		configInput(BANG_INPUT, "Bang!");
-		configInput(RESET_INPUT, "Reset");
+		configSwitch(MUTE1_PARAM, 0.f, 1.f, 1.f, "Mute 1", {"Mute", "Unmute"});
+		configSwitch(MUTE2_PARAM, 0.f, 1.f, 1.f, "Mute 2", {"Mute", "Unmute"});
+		configSwitch(MUTE3_PARAM, 0.f, 1.f, 1.f, "Mute 3", {"Mute", "Unmute"});
+		configSwitch(MUTE4_PARAM, 0.f, 1.f, 1.f, "Mute 4", {"Mute", "Unmute"});
+		configSwitch(MUTE5_PARAM, 0.f, 1.f, 1.f, "Mute 5", {"Mute", "Unmute"});
+		configSwitch(MUTE6_PARAM, 0.f, 1.f, 1.f, "Mute 6", {"Mute", "Unmute"});
+
+		configParam(SWING_PARAM, 0.f, 1.f, 0., "Swing amount", " %", 0.f, 100.f);
+		configParam(WIDTH_PARAM, 0.f, 1.f, 0.5f, "Width", " %", 5.f, 5.f);
+
+		configInput(BANG_INPUT, "Bang! Gate");
+		configInput(RESET_INPUT, "Reset Gate");
 
 		configInput(CH1_CVINPUT, "Division 1 CV");
 		configInput(CH2_CVINPUT, "Division 2 CV");
@@ -82,12 +90,12 @@ struct Mito : Module {
 		configInput(SWING_CVINPUT, "Swing CV");
 		configInput(WIDTH_CVINPUT, "Width CV");
 
-		configOutput(CH1_OUTPUT, "1");
-		configOutput(CH2_OUTPUT, "2");
-		configOutput(CH3_OUTPUT, "3");
-		configOutput(CH4_OUTPUT, "4");
-		configOutput(CH5_OUTPUT, "5");
-		configOutput(CH6_OUTPUT, "6");
+		configOutput(CH1_OUTPUT, "Gate 1");
+		configOutput(CH2_OUTPUT, "Gate 2");
+		configOutput(CH3_OUTPUT, "Gate 3");
+		configOutput(CH4_OUTPUT, "Gate 4");
+		configOutput(CH5_OUTPUT, "Gate 5");
+		configOutput(CH6_OUTPUT, "Gate 6");
 	}
 
 	bool prevBangState = false; 
@@ -95,26 +103,30 @@ struct Mito : Module {
 
 	int masterCount = 0;
 
-	float pw = 0.0f; 
-	float pulseWidth = 0.0f; 
+	float sinceClock = 0.0f;
+	float sinceClock2 = 0.0f;
+	float sinceClock3 = 0.0f;
+	float sinceClock4 = 0.0f;
+	float sinceClock5 = 0.0f;
+	float sinceClock6 = 0.0f;
+
+	float sinceOut = 0.0f;
+	float sinceOut2 = 0.0f;
+	float sinceOut3 = 0.0f;
+	float sinceOut4 = 0.0f;
+	float sinceOut5 = 0.0f;
+	float sinceOut6 = 0.0f;
 
 	float clockDuration = 1000.f;
-	float swing = 0.0f;
-	float swingParam = 0.0f;
 
-	float sinceClock = 0.f;
-	float sinceClock2 = 0.f;
-	float sinceClock3 = 0.f;
-	float sinceClock4 = 0.f;
-	float sinceClock5 = 0.f;
-	float sinceClock6 = 0.f;
+	bool trig1 = false;
+	bool trig2 = false;
+	bool trig3 = false;
+	bool trig4 = false;
+	bool trig5 = false;
+	bool trig6 = false;
 
-	float sinceOut = 0.f;
-	float sinceOut2 = 0.f;
-	float sinceOut3 = 0.f;
-	float sinceOut4 = 0.f;
-	float sinceOut5 = 0.f;
-	float sinceOut6 = 0.f;
+	float swing = 0; 
 
 
 	void process(const ProcessArgs& args) override {
@@ -122,68 +134,67 @@ struct Mito : Module {
         // CH 1 CV
         float cvInput = inputs[CH1_CVINPUT].getVoltage();  // Read CV input
         float normalizedCV = (cvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-        float knob1Param = params[KNOB1_PARAM].getValue();  // Original knob value
+        float knob1Param = 1.f - (params[KNOB1_PARAM].getValue() / 16.f);  // Original knob value
         float knob1Value = knob1Param + (normalizedCV - 0.5f);  // Apply the CV input as an offset
-        knob1Value = clamp(knob1Value, 0.0f, 1.0f);
+        knob1Value = std::clamp(knob1Value, 0.0f, 1.0f);
         int divisionAmount = 1 + (1.0 - knob1Value) * 15;  // Update division based on knob and CV input
 
 		// CH 2 CV
 		float cvInput2 = inputs[CH2_CVINPUT].getVoltage();  // Read CV input
 		float normalizedCV2 = (cvInput2 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-		float knob2Param = params[KNOB2_PARAM].getValue();  // Original knob value
+		float knob2Param = 1.f - (params[KNOB2_PARAM].getValue() / 16.f);  // Original knob value
 		float knob2Value = knob2Param + (normalizedCV2 - 0.5f);  // Apply the CV input as an offset
-		knob2Value = clamp(knob2Value, 0.0f, 1.0f);
+		knob2Value = std::clamp(knob2Value, 0.0f, 1.0f);
 		int divisionAmount2 = 1 + (1.0 - knob2Value) * 15;  // Update division based on knob and CV input
 
 		// CH 3 CV
 		float cvInput3 = inputs[CH3_CVINPUT].getVoltage();  // Read CV input
 		float normalizedCV3 = (cvInput3 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-		float knob3Param = params[KNOB3_PARAM].getValue();  // Original knob value
+		float knob3Param = 1.f - (params[KNOB3_PARAM].getValue() / 16.f);  // Original knob value
 		float knob3Value = knob3Param + (normalizedCV3 - 0.5f);  // Apply the CV input as an offset
-		knob3Value = clamp(knob3Value, 0.0f, 1.0f);
+		knob3Value = std::clamp(knob3Value, 0.0f, 1.0f);
 		int divisionAmount3 = 1 + (1.0 - knob3Value) * 15;  // Update division based on knob and CV input
 	   
        // CH 4 CV
 	   float cvInput4 = inputs[CH4_CVINPUT].getVoltage();  // Read CV input
 	   float normalizedCV4 = (cvInput4 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-	   float knob4Param = params[KNOB4_PARAM].getValue();  // Original knob value
+	   float knob4Param = 1.f - (params[KNOB4_PARAM].getValue() / 16.f);  // Original knob value
 	   float knob4Value = knob4Param + (normalizedCV4 - 0.5f);  // Apply the CV input as an offset
-	   knob4Value = clamp(knob4Value, 0.0f, 1.0f);
+	   knob4Value = std::clamp(knob4Value, 0.0f, 1.0f);
 	   int divisionAmount4 = 1 + (1.0 - knob4Value) * 15;  // Update division based on knob and CV input
 
 	    // CH 5 CV
 		float cvInput5 = inputs[CH5_CVINPUT].getVoltage();  // Read CV input
 		float normalizedCV5 = (cvInput5 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-		float knob5Param = params[KNOB5_PARAM].getValue();  // Original knob value
+		float knob5Param = 1.f - (params[KNOB5_PARAM].getValue() / 16.f);  // Original knob value
 		float knob5Value = knob5Param + (normalizedCV5 - 0.5f);  // Apply the CV input as an offset
-		knob5Value = clamp(knob5Value, 0.0f, 1.0f);
+		knob5Value = std::clamp(knob5Value, 0.0f, 1.0f);
 		int divisionAmount5 = 1 + (1.0 - knob5Value) * 15;  // Update division based on knob and CV input
 	   
 		// CH 6 CV
 		float cvInput6 = inputs[CH6_CVINPUT].getVoltage();  // Read CV input
 		float normalizedCV6 = (cvInput6 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-		float knob6Param = params[KNOB6_PARAM].getValue();  // Original knob value
+		float knob6Param = 1.f - (params[KNOB6_PARAM].getValue() / 16.f);  // Original knob value
 		float knob6Value = knob6Param + (normalizedCV6 - 0.5f);  // Apply the CV input as an offset
-		knob6Value = clamp(knob6Value, 0.0f, 1.0f);
+		knob6Value = std::clamp(knob6Value, 0.0f, 1.0f);
 		int divisionAmount6 = 1 + (1.0 - knob6Value) * 15;  // Update division based on knob and CV input
 
-				// Pulsewidth CV and knob scale
+		// Pulsewidth CV and knob scale
 		float widthCvInput = inputs[WIDTH_CVINPUT].getVoltage();  // Read CV input for WIDTH
 		float normalizedWidthCV = (widthCvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
 		float widthParam = params[WIDTH_PARAM].getValue();  // Original WIDTH_PARAM value
 		float widthValue = widthParam + (normalizedWidthCV - 0.5f);  // Apply the CV input as an offset
-		widthValue = clamp(widthValue, 0.0f, 1.0f);
-
-		pulseWidth = widthValue * 0.2f + 0.05f;  // Scale pulse width
-		pw = (clockDuration * pulseWidth);
+		widthValue = std::clamp(widthValue, 0.0f, 1.0f);
+		float pulseWidthParam = widthValue * 0.2f + 0.05f;  // Scale pulse width
+		float pw = (clockDuration * pulseWidthParam);
 				
 		// Swing CV and knob scale 
-		float swingCvInput = inputs[SWING_CVINPUT].getVoltage();  // Read CV input for SWING
+	 	float swingCvInput = inputs[SWING_CVINPUT].getVoltage();  // Read CV input for SWING
 		float normalizedSwingCV = (swingCvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
 		float swingValue = params[SWING_PARAM].getValue();  // Original SWING_PARAM value
 		float swingParamValue = swingValue + (normalizedSwingCV - 0.5f);  // Apply the CV input as an offset
-		swingParamValue = clamp(swingParamValue, 0.0f, 1.0f);
-		swingParam = swingParamValue * 100.0f; // The max value of the swing parameter is scaled to 100ms
+		swingParamValue = std::clamp(swingParamValue, 0.0f, 1.0f);
+		float swingParam = swingParamValue * 100.0f; // The max value of the swing parameter is scaled to 100ms
 		   
 		// Update clock timer (accumulate time in samples)
 		sinceClock += args.sampleTime * 1000.0f;
@@ -245,18 +256,18 @@ struct Mito : Module {
 	    // Out channel 1 
 		bool mute1 = params[MUTE1_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 		if (!mute1) {
-			outputs[CH1_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
-			lights[LED1_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
+		trig1 = false;
+		outputs[CH1_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
 		} else {
 			if (sinceClock < (pw + swing) && sinceClock > swing) {
 				if (masterCount % divisionAmount == 0) {
-					outputs[CH1_OUTPUT].setVoltage(5.0f);  // Turn on CH1 output voltage
-					lights[LED1_LIGHT].setBrightness(5.0f); // Turn on the LED for CH1
+					trig1 = true;
+					outputs[CH1_OUTPUT].setVoltage(5.0f);  // Mute CH1 (output off)
 				}
 			} else {
 				if (sinceOut > ((pw * divisionAmount) + swing)) {
-					outputs[CH1_OUTPUT].setVoltage(0.0f);  // Turn CH1 output off
-					lights[LED1_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
+					trig1 = false;
+					outputs[CH1_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
 				}
 			}
 		}
@@ -264,18 +275,18 @@ struct Mito : Module {
 			    // Out channel 2
 				bool mute2 = params[MUTE2_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 				if (!mute2) {
-					outputs[CH2_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
-					lights[LED2_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
+				trig2 = false;
+				outputs[CH2_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
 				} else {
 					if (sinceClock2 < (pw + swing) && sinceClock2 > swing) {
 						if (masterCount % divisionAmount2 == 0) {
-							outputs[CH2_OUTPUT].setVoltage(5.0f);  // Turn on CH1 output voltage
-							lights[LED2_LIGHT].setBrightness(5.0f); // Turn on the LED for CH1
+							trig2 = true;
+							outputs[CH2_OUTPUT].setVoltage(5.0f);  // Mute CH1 (output off)
 						}
 					} else {
 						if (sinceOut2 > ((pw * divisionAmount2) + swing)) {
-							outputs[CH2_OUTPUT].setVoltage(0.0f);  // Turn CH1 output off
-							lights[LED2_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
+							trig2 = false; 
+							outputs[CH2_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
 						}
 					}
 				}
@@ -283,36 +294,36 @@ struct Mito : Module {
 			    // Out channel 3
 				bool mute3 = params[MUTE3_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 				if (!mute3) {
+					trig3 = false;
 					outputs[CH3_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
-					lights[LED3_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
 				} else {
 					if (sinceClock3 < (pw + swing) && sinceClock3 > swing) {
 						if (masterCount % divisionAmount3 == 0) {
+							trig3 = true;
 							outputs[CH3_OUTPUT].setVoltage(5.0f);  // Turn on CH1 output voltage
-							lights[LED3_LIGHT].setBrightness(5.0f); // Turn on the LED for CH1
 						}
 					} else {
 						if (sinceOut3 > ((pw * divisionAmount3) + swing)) {
+							trig3 = false;
 							outputs[CH3_OUTPUT].setVoltage(0.0f);  // Turn CH1 output off
-							lights[LED3_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
 						}
 					}
 				}
 					    // Out channel 4
 						bool mute4 = params[MUTE4_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 						if (!mute4) {
+							trig4 = false;
 							outputs[CH4_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
-							lights[LED4_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
 						} else {
 							if (sinceClock4 < (pw + swing) && sinceClock4 > swing) {
 								if (masterCount % divisionAmount4 == 0) {
+									trig4 = true;
 									outputs[CH4_OUTPUT].setVoltage(5.0f);  // Turn on CH1 output voltage
-									lights[LED4_LIGHT].setBrightness(5.0f); // Turn on the LED for CH1
 								}
 							} else {
 								if (sinceOut4 > ((pw * divisionAmount4) + swing)) {
+									trig4 = false; 
 									outputs[CH4_OUTPUT].setVoltage(0.0f);  // Turn CH1 output off
-									lights[LED4_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
 								}
 							}
 						}
@@ -320,40 +331,47 @@ struct Mito : Module {
 						   // Out channel 5
 						   bool mute5 = params[MUTE5_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 						   if (!mute5) {
+							trig5 = false;
 							   outputs[CH5_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
-							   lights[LED5_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
 						   } else {
 							   if (sinceClock5 < (pw + swing) && sinceClock5 > swing) {
 								   if (masterCount % divisionAmount5 == 0) {
+									trig5 = true;
 									   outputs[CH5_OUTPUT].setVoltage(5.0f);  // Turn on CH1 output voltage
-									   lights[LED5_LIGHT].setBrightness(5.0f); // Turn on the LED for CH1
 								   }
 							   } else {
 								   if (sinceOut5 > ((pw * divisionAmount5) + swing)) {
+									trig5 = false;
 									   outputs[CH5_OUTPUT].setVoltage(0.0f);  // Turn CH1 output off
-									   lights[LED5_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
 								   }
 							   }
 						   }
 
 						     // Out channel 6
-							 bool mute6 = params[MUTE6_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
+							bool mute6 = params[MUTE6_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 							 if (!mute6) {
+								trig6 = false;
 								 outputs[CH6_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
-								 lights[LED6_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
 							 } else {
 								 if (sinceClock6 < (pw + swing) && sinceClock6 > swing) {
 									 if (masterCount % divisionAmount6 == 0) {
+										trig6 = true;
 										 outputs[CH6_OUTPUT].setVoltage(5.0f);  // Turn on CH1 output voltage
-										 lights[LED6_LIGHT].setBrightness(5.0f); // Turn on the LED for CH1
 									 }
 								 } else {
 									 if (sinceOut6 > ((pw * divisionAmount6) + swing)) {
+										trig6 = false; 
 										 outputs[CH6_OUTPUT].setVoltage(0.0f);  // Turn CH1 output off
-										 lights[LED6_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
 									 }
 								 }
 							 }
+
+							 lights[LED1_LIGHT].setBrightnessSmooth(trig1, args.sampleTime); // Turn on the LED for CH1
+							 lights[LED2_LIGHT].setBrightnessSmooth(trig2, args.sampleTime); // Turn on the LED for CH1
+							 lights[LED3_LIGHT].setBrightnessSmooth(trig3, args.sampleTime); // Turn on the LED for CH1
+							 lights[LED4_LIGHT].setBrightnessSmooth(trig4, args.sampleTime); // Turn on the LED for CH1
+							 lights[LED5_LIGHT].setBrightnessSmooth(trig5, args.sampleTime); // Turn on the LED for CH1
+							 lights[LED6_LIGHT].setBrightnessSmooth(trig6, args.sampleTime); // Turn on the LED for CH1
 	}
 };
 	

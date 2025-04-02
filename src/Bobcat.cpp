@@ -18,7 +18,7 @@ struct Bobcat : Module {
 		BANG_1_INPUT,
 		TAIL_1_CV_INPUT,
 		HISS_1_CV_INPUT,
-		BANG_2__INPUT,
+		BANG_2_INPUT,
 		TAIL_2_CV_INPUT,
 		HISS_2_CV_INPUT,
 		INPUTS_LEN
@@ -34,18 +34,18 @@ struct Bobcat : Module {
 
 	Bobcat() {
 		config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
-		configParam(TAIL_1__PARAM, 0.f, 1.f, 0.f, "Tail 1");
-		configParam(HISS_1__PARAM, 0.f, 1.f, 0.f, "Hiss 1");
-		configParam(SNARL_PARAM, 0.f, 1.f, 0.f, "Snarl");
-		configParam(TAIL_2_PARAM, 0.f, 1.f, 0.f, "Tail 2");
-		configParam(HISS_2__PARAM, 0.f, 1.f, 0.f, "Hiss 2");
-		configInput(BANG_1_INPUT, "Bang! 1");
+		configParam(TAIL_1__PARAM, 0.f, 1.f, 0.f, "Decay Time 1", " %", 0.f, 100.f);
+		configParam(HISS_1__PARAM, 0.f, 1.f, 0.f, "Pitch 1", " %", 0.f, 100.f);
+		configSwitch(SNARL_PARAM, 0.f, 1.f, 0.f, "Decay Time Range", {"Short", "Long"});
+		configParam(TAIL_2_PARAM, 0.f, 1.f, 0.f, "Decay Time 2", " %", 0.f, 100.f);
+		configParam(HISS_2__PARAM, 0.f, 1.f, 0.f, "Pitch 2", " %", 0.f, 100.f);
+		configInput(BANG_1_INPUT, "Bang! 1 Gate");
 		configInput(TAIL_1_CV_INPUT, "Tail 1 CV");
 		configInput(HISS_1_CV_INPUT, "Hiss 1 CV");
-		configInput(BANG_2__INPUT, "Bang! 2");
+		configInput(BANG_2_INPUT, "Bang! 2 Gate");
 		configInput(TAIL_2_CV_INPUT, "Tail 2 CV");
 		configInput(HISS_2_CV_INPUT, "Hiss 2 CV");
-		configOutput(BOBCAT_OUTPUT, "Bobcat");
+		configOutput(BOBCAT_OUTPUT, "Bobcat Audio");
 	}
     
 
@@ -62,6 +62,7 @@ struct Bobcat : Module {
 	static bool lastBangState1;
 	float filterB01 = 0.0f, filterB11 = 0.0f, filterB21 = 0.0f, filterA01 = 0.0f, filterA11 = 0.0f, filterA21 = 0.0f;
     float filterX11 = 0.0f, filterX21 = 0.0f, filterY11 = 0.0f, filterY21 = 0.0f;
+	bool triggerStates1[2] = {false, false};  // triggerStates[0] = last state, triggerStates[1] = current state
 
 	//Ch. 2
     float hiss2Value = 0.0f;          // HISS_1 parameter value
@@ -76,6 +77,7 @@ struct Bobcat : Module {
 	static bool lastBangState2;
 	float filterB02 = 0.0f, filterB12 = 0.0f, filterB22 = 0.0f, filterA02 = 0.0f, filterA12 = 0.0f, filterA22 = 0.0f;
     float filterX12 = 0.0f, filterX22 = 0.0f, filterY12 = 0.0f, filterY22 = 0.0f;
+	bool triggerStates2[2] = {false, false};  // triggerStates[0] = last state, triggerStates[1] = current state
 
     // Function to generate white noise
     float whiteNoise1() {
@@ -213,17 +215,18 @@ struct Bobcat : Module {
 		float decayTime2 = 5 + mapToRange(controlValue4, 0.0f, 1.0f, 5.0f, maxTail);
         decayAlpha2 = exp(-1.0f / (args.sampleRate * (decayTime2 / 1000.0f)));
 
-        // Detect rising edge of Bang or trigger event
-        static bool lastBangState1 = false;
-        bool currentBangState1 = inputs[BANG_1_INPUT].getVoltage() > 0.5f;  // Assume an input at index 0 triggers
-        bool bangRisingEdge1 = !lastBangState1 && currentBangState1;
-        lastBangState1 = currentBangState1;
+    		// Check if the trigger input is high
+		bool currentTriggerState1 = inputs[BANG_1_INPUT].getVoltage() > 0.5f;
+		bool bangRisingEdge1 = !triggerStates1[0] && currentTriggerState1;
+		triggerStates1[0] = triggerStates1[1];
+		triggerStates1[1] = currentTriggerState1;
 
-		  // Detect rising edge of Bang or trigger event
-		  static bool lastBangState2 = false;
-		  bool currentBangState2 = inputs[BANG_2__INPUT].getVoltage() > 0.5f;  // Assume an input at index 0 triggers
-		  bool bangRisingEdge2 = !lastBangState2 && currentBangState2;
-		  lastBangState2 = currentBangState2;
+ 		// Check if the trigger input is high
+		 bool currentTriggerState2 = inputs[BANG_2_INPUT].getVoltage() > 0.5f;
+		 bool bangRisingEdge2 = !triggerStates2[0] && currentTriggerState2;
+		 triggerStates2[0] = triggerStates2[1];
+		 triggerStates2[1] = currentTriggerState2;
+ 
 
         // Envelope logic
         if (bangRisingEdge1) {
@@ -288,7 +291,7 @@ struct Bobcat : Module {
         outputs[BOBCAT_OUTPUT].setVoltage(finalOutput);
 
 		float ledBrightness = (envelopeValue1 + envelopeValue2);  // Map -5V to +5V range to 0-1
-		lights[LED_LIGHT].setBrightness(ledBrightness);  // Set LED brightness	
+		lights[LED_LIGHT].setBrightnessSmooth(ledBrightness, args.sampleTime);  // Set LED brightness	
     }
 };
 
@@ -312,7 +315,7 @@ struct BobcatWidget : ModuleWidget {
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(10.194, 95.853)), module, Bobcat::BANG_1_INPUT));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(25.061, 95.853)), module, Bobcat::TAIL_1_CV_INPUT));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(39.761, 95.87)), module, Bobcat::HISS_1_CV_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(10.194, 109.016)), module, Bobcat::BANG_2__INPUT));
+		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(10.194, 109.016)), module, Bobcat::BANG_2_INPUT));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(25.077, 109.066)), module, Bobcat::TAIL_2_CV_INPUT));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(39.695, 108.967)), module, Bobcat::HISS_2_CV_INPUT));
 

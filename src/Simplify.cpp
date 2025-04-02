@@ -23,11 +23,12 @@ struct Simplify : Module {
 
 	Simplify() {
 		config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
-		configParam(SELECT_PARAM, 0.f, 1.f, 0.f, "Select");
-		configInput(BANG_INPUT, "Bang!");
-		configInput(RESET_INPUT, "Reset");
+		configParam(SELECT_PARAM, 1.f, 137.f, 0.f, "Pattern"); // Figure out how to truncate decimals from display 
+		paramQuantities[SELECT_PARAM]->snapEnabled = true; 
+		configInput(BANG_INPUT, "Bang! Gate");
+		configInput(RESET_INPUT, "Reset Gate");
 		configInput(SELECT_CV_INPUT, "Select CV");
-		configOutput(SIMPLIFY_OUTPUT, "Simplify");
+		configOutput(SIMPLIFY_OUTPUT, "Simplify Gate");
 	}
 
 	// Always skip first and always have seq1 = all 0s
@@ -185,12 +186,13 @@ int pulseWidth = 10; // 5ms pulse width
 int seqSelect = 0;
 int seqOut = 0;
 
+bool trig1 = false; 
 
 	void process(const ProcessArgs& args) override {
         // CH 1 CV
         float cvInput = inputs[SELECT_CV_INPUT].getVoltage();  // Read CV input
         float normalizedCV = (cvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-        float knob1Param = params[SELECT_PARAM].getValue();  // Original knob value
+        float knob1Param = params[SELECT_PARAM].getValue() / 137.f;  // Original knob value
         float knob1Value = knob1Param + (normalizedCV - 0.5f);  // Apply the CV input as an offset
         knob1Value = clamp(knob1Value, 0.0f, 1.0f);
 
@@ -227,12 +229,15 @@ int seqOut = 0;
 					// Lookup + AND + PWM + PRINT OUTPUTS
 					if (seqOut == 0 && bangState == 1 && sinceClock < pulseWidth) {
 						outputs[SIMPLIFY_OUTPUT].setVoltage(5.0f);  // Turn on CH_1 output voltage
-						lights[LED_LIGHT].setBrightness(5.0f); // Turn on the LED for CH_1
+						trig1 = true;
 						}
 					else {
 						outputs[SIMPLIFY_OUTPUT].setVoltage(0.0f);  // Turn on CH_1 output voltage
-						lights[LED_LIGHT].setBrightness(0.0f); // Turn on the LED for CH_1
+						trig1 = false;
 						}
+
+						lights[LED_LIGHT].setBrightnessSmooth(trig1, args.sampleTime); // Turn on the LED for CH_1
+
 	}
 };
 

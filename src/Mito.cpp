@@ -59,14 +59,14 @@ struct Mito : Module {
 		configParam(KNOB5_PARAM, 0.f, 1.f, 1.f, "Division 4");
 		configParam(KNOB6_PARAM, 0.f, 1.f, 1.f, "Division 5");
 
-		configParam(MUTE1_PARAM, 0.f, 1.f, 0.f, "Mute 1");
-		configParam(MUTE2_PARAM, 0.f, 1.f, 0.f, "Mute 2");
-		configParam(MUTE3_PARAM, 0.f, 1.f, 0.f, "Mute 3");
-		configParam(MUTE4_PARAM, 0.f, 1.f, 0.f, "Mute 4");
-		configParam(MUTE5_PARAM, 0.f, 1.f, 0.f, "Mute 5");
-		configParam(MUTE6_PARAM, 0.f, 1.f, 0.f, "Mute 6");
+		configSwitch(MUTE1_PARAM, 0.f, 1.f, 1.f, "Mute 1", {"Off", "On"});
+		configSwitch(MUTE2_PARAM, 0.f, 1.f, 1.f, "Mute 2", {"Off", "On"});
+		configSwitch(MUTE3_PARAM, 0.f, 1.f, 1.f, "Mute 3", {"Off", "On"});
+		configSwitch(MUTE4_PARAM, 0.f, 1.f, 1.f, "Mute 4", {"Off", "On"});
+		configSwitch(MUTE5_PARAM, 0.f, 1.f, 1.f, "Mute 5", {"Off", "On"});
+		configSwitch(MUTE6_PARAM, 0.f, 1.f, 1.f, "Mute 6", {"Off", "On"});
 
-		configParam(SWING_PARAM, 0.f, 1.f, 0., "Swing amount");
+		configParam(SWING_PARAM, 0.f, 1.f, 0.f, "Swing amount");
 		configParam(WIDTH_PARAM, 0.f, 1.f, 0.f, "Width");
 
 		configInput(BANG_INPUT, "Bang!");
@@ -96,9 +96,11 @@ struct Mito : Module {
 	int masterCount = 0;
 
 	float pw = 0.0f; 
+	float pulseWidth = 0.0f; 
 
 	float clockDuration = 1000.f;
 	float swing = 0.0f;
+	float swingParam = 0.0f;
 
 	float sinceClock = 0.f;
 	float sinceClock2 = 0.f;
@@ -172,8 +174,8 @@ struct Mito : Module {
 		float widthValue = widthParam + (normalizedWidthCV - 0.5f);  // Apply the CV input as an offset
 		widthValue = clamp(widthValue, 0.0f, 1.0f);
 
-		float pulseWidth = widthValue * 0.2f + 0.05f;  // Scale pulse width
-		float pw = (clockDuration * pulseWidth);
+		pulseWidth = widthValue * 0.2f + 0.05f;  // Scale pulse width
+		pw = (clockDuration * pulseWidth);
 				
 		// Swing CV and knob scale 
 		float swingCvInput = inputs[SWING_CVINPUT].getVoltage();  // Read CV input for SWING
@@ -181,7 +183,7 @@ struct Mito : Module {
 		float swingValue = params[SWING_PARAM].getValue();  // Original SWING_PARAM value
 		float swingParamValue = swingValue + (normalizedSwingCV - 0.5f);  // Apply the CV input as an offset
 		swingParamValue = clamp(swingParamValue, 0.0f, 1.0f);
-		float swingParam = swingParamValue * 100.0f; // The max value of the swing parameter is scaled to 100ms
+		swingParam = swingParamValue * 100.0f; // The max value of the swing parameter is scaled to 100ms
 		   
 		// Update clock timer (accumulate time in samples)
 		sinceClock += args.sampleTime * 1000.0f;
@@ -241,7 +243,7 @@ struct Mito : Module {
        
 
 	    // Out channel 1 
-		bool mute1 = params[MUTE1_PARAM].getValue() < 0.5f; // Mute is active if value is > 0.5
+		bool mute1 = params[MUTE1_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 		if (!mute1) {
 			outputs[CH1_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
 			lights[LED1_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
@@ -260,7 +262,7 @@ struct Mito : Module {
 		}
 
 			    // Out channel 2
-				bool mute2 = params[MUTE2_PARAM].getValue() < 0.5f; // Mute is active if value is > 0.5
+				bool mute2 = params[MUTE2_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 				if (!mute2) {
 					outputs[CH2_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
 					lights[LED2_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
@@ -279,7 +281,7 @@ struct Mito : Module {
 				}
 
 			    // Out channel 3
-				bool mute3 = params[MUTE3_PARAM].getValue() < 0.5f; // Mute is active if value is > 0.5
+				bool mute3 = params[MUTE3_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 				if (!mute3) {
 					outputs[CH3_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
 					lights[LED3_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
@@ -297,7 +299,7 @@ struct Mito : Module {
 					}
 				}
 					    // Out channel 4
-						bool mute4 = params[MUTE4_PARAM].getValue() < 0.5f; // Mute is active if value is > 0.5
+						bool mute4 = params[MUTE4_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 						if (!mute4) {
 							outputs[CH4_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
 							lights[LED4_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
@@ -316,7 +318,7 @@ struct Mito : Module {
 						}
 
 						   // Out channel 5
-						   bool mute5 = params[MUTE5_PARAM].getValue() < 0.5f; // Mute is active if value is > 0.5
+						   bool mute5 = params[MUTE5_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 						   if (!mute5) {
 							   outputs[CH5_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
 							   lights[LED5_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
@@ -335,7 +337,7 @@ struct Mito : Module {
 						   }
 
 						     // Out channel 6
-							 bool mute6 = params[MUTE6_PARAM].getValue() < 0.5f; // Mute is active if value is > 0.5
+							 bool mute6 = params[MUTE6_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
 							 if (!mute6) {
 								 outputs[CH6_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
 								 lights[LED6_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1

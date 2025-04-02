@@ -1,6 +1,5 @@
 #include "plugin.hpp"
 
-
 struct Mito : Module {
 	enum ParamId {
 		KNOB1_PARAM,
@@ -60,15 +59,15 @@ struct Mito : Module {
 		configParam(KNOB5_PARAM, 0.f, 1.f, 1.f, "Division 4");
 		configParam(KNOB6_PARAM, 0.f, 1.f, 1.f, "Division 5");
 
-		configParam(MUTE1_PARAM, 0.f, 1.f, 1.f, "Mute 1");
-		configParam(MUTE2_PARAM, 0.f, 1.f, 1.f, "Mute 2");
-		configParam(MUTE3_PARAM, 0.f, 1.f, 1.f, "Mute 3");
-		configParam(MUTE4_PARAM, 0.f, 1.f, 1.f, "Mute 4");
-		configParam(MUTE5_PARAM, 0.f, 1.f, 1.f, "Mute 5");
-		configParam(MUTE6_PARAM, 0.f, 1.f, 1.f, "Mute 6");
+		configParam(MUTE1_PARAM, 0.f, 1.f, 0.f, "Mute 1");
+		configParam(MUTE2_PARAM, 0.f, 1.f, 0.f, "Mute 2");
+		configParam(MUTE3_PARAM, 0.f, 1.f, 0.f, "Mute 3");
+		configParam(MUTE4_PARAM, 0.f, 1.f, 0.f, "Mute 4");
+		configParam(MUTE5_PARAM, 0.f, 1.f, 0.f, "Mute 5");
+		configParam(MUTE6_PARAM, 0.f, 1.f, 0.f, "Mute 6");
 
 		configParam(SWING_PARAM, 0.f, 1.f, 0., "Swing amount");
-		configParam(WIDTH_PARAM, 0.f, 1.f, 0.5f, "Width");
+		configParam(WIDTH_PARAM, 0.f, 1.f, 0.f, "Width");
 
 		configInput(BANG_INPUT, "Bang!");
 		configInput(RESET_INPUT, "Reset");
@@ -91,160 +90,98 @@ struct Mito : Module {
 		configOutput(CH6_OUTPUT, "6");
 	}
 
-	bool prevBangState = 0; 
-	bool prevResetState = 0; 
+	bool prevBangState = false; 
+	bool prevResetState = false; 
+
 	int masterCount = 0;
-	float clockTimer = 0.0f;
-	bool isOutputOn = false;
-	float onTime = 0.f; 
-	float offTime = 0.f;
-	float onTimeSamples = 0.f;
-	float offTimeSamples = 0.0f;
-	float lastBangTime = 0.0f;  // To track the last bang time
-	float cycleTime = 0.0f;     // Duration between two BANG pulses
-
-	float sinceClock = 0.0f;
-	float sinceClock2 = 0.0f;
-	float sinceClock3 = 0.0f;
-	float sinceClock4 = 0.0f;
-	float sinceClock5 = 0.0f;
-	float sinceClock6 = 0.0f;
-
-	float sinceOut = 0.0f;
-	float sinceOut2 = 0.0f;
-	float sinceOut3 = 0.0f;
-	float sinceOut4 = 0.0f;
-	float sinceOut5 = 0.0f;
-	float sinceOut6 = 0.0f;
 
 	float pw = 0.0f; 
-	int divisionAmount = 0; 
-	int divisionAmount2 = 0; 
-	int divisionAmount3 = 0; 
-	int divisionAmount4 = 0; 
-	int divisionAmount5 = 0; 
-	int divisionAmount6 = 0; 
+
 	float clockDuration = 1000.f;
-	float pulseWidth = 0.5f; 
 	float swing = 0.0f;
 
-	float pulseWidthParam = 0.0f;
-	float widthCvInput = 0.0f;
-	float normalizedWidthCV = 0.0f;
-	float widthParam = 0.0f;
-	float widthValue = 0.0f;
+	float sinceClock = 0.f;
+	float sinceClock2 = 0.f;
+	float sinceClock3 = 0.f;
+	float sinceClock4 = 0.f;
+	float sinceClock5 = 0.f;
+	float sinceClock6 = 0.f;
 
-	float swingCvInput = 0.0f;
-	float normalizedSwingCV = 0.0f;
-	float swingValue = 0.0f;
-	float swingParamValue = 0.0f;
-	float swingParam = 0.0f;
-
-	float cvInput = 0.0f;
-    float normalizedCV = 0.0f;
-    float knob1Param = 1.0f;
-    float knob1Value = 1.0f;
-
-	float cvInput2 = 0.0f;
-	float normalizedCV2 = 0.0f;
-	float knob2Param = 1.0f;
-	float knob2Value = 1.0f;
-
-	float cvInput3 = 0.0f;
-	float normalizedCV3 = 0.0f;
-	float knob3Param = 1.0f;
-	float knob3Value = 1.0f;
-
-	float cvInput4 = 0.0f;
-	float normalizedCV4 = 0.0f;
-	float knob4Param = 1.0f;
-	float knob4Value = 1.0f;
-
-	float cvInput5 = 0.0f;
-	float normalizedCV5 = 0.0f;
-	float knob5Param = 1.0f;
-	float knob5Value = 1.0f;
-
-	float cvInput6 = 0.0f;
-	float normalizedCV6 = 0.0f;
-	float knob6Param = 1.0f;
-	float knob6Value = 1.0f;
-
-	bool mute1 = true; 
-	bool mute2 = true; 
-	bool mute3 = true; 
-	bool mute4 = true; 
-	bool mute5 = true; 
-	bool mute6 = true; 
+	float sinceOut = 0.f;
+	float sinceOut2 = 0.f;
+	float sinceOut3 = 0.f;
+	float sinceOut4 = 0.f;
+	float sinceOut5 = 0.f;
+	float sinceOut6 = 0.f;
 
 
 	void process(const ProcessArgs& args) override {
 
         // CH 1 CV
-        cvInput = inputs[CH1_CVINPUT].getVoltage();  // Read CV input
-        normalizedCV = (cvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-        knob1Param = params[KNOB1_PARAM].getValue();  // Original knob value
-        knob1Value = knob1Param + (normalizedCV - 0.5f);  // Apply the CV input as an offset
+        float cvInput = inputs[CH1_CVINPUT].getVoltage();  // Read CV input
+        float normalizedCV = (cvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+        float knob1Param = params[KNOB1_PARAM].getValue();  // Original knob value
+        float knob1Value = knob1Param + (normalizedCV - 0.5f);  // Apply the CV input as an offset
         knob1Value = clamp(knob1Value, 0.0f, 1.0f);
-        divisionAmount = 1 + (1.0 - knob1Value) * 15;  // Update division based on knob and CV input
+        int divisionAmount = 1 + (1.0 - knob1Value) * 15;  // Update division based on knob and CV input
 
 		// CH 2 CV
-		cvInput2 = inputs[CH2_CVINPUT].getVoltage();  // Read CV input
-		normalizedCV2 = (cvInput2 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-		knob2Param = params[KNOB2_PARAM].getValue();  // Original knob value
-		knob2Value = knob2Param + (normalizedCV2 - 0.5f);  // Apply the CV input as an offset
+		float cvInput2 = inputs[CH2_CVINPUT].getVoltage();  // Read CV input
+		float normalizedCV2 = (cvInput2 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+		float knob2Param = params[KNOB2_PARAM].getValue();  // Original knob value
+		float knob2Value = knob2Param + (normalizedCV2 - 0.5f);  // Apply the CV input as an offset
 		knob2Value = clamp(knob2Value, 0.0f, 1.0f);
-		divisionAmount2 = 1 + (1.0 - knob2Value) * 15;  // Update division based on knob and CV input
+		int divisionAmount2 = 1 + (1.0 - knob2Value) * 15;  // Update division based on knob and CV input
 
 		// CH 3 CV
-		cvInput3 = inputs[CH3_CVINPUT].getVoltage();  // Read CV input
-		normalizedCV3 = (cvInput3 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-		knob3Param = params[KNOB3_PARAM].getValue();  // Original knob value
-		knob3Value = knob3Param + (normalizedCV3 - 0.5f);  // Apply the CV input as an offset
+		float cvInput3 = inputs[CH3_CVINPUT].getVoltage();  // Read CV input
+		float normalizedCV3 = (cvInput3 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+		float knob3Param = params[KNOB3_PARAM].getValue();  // Original knob value
+		float knob3Value = knob3Param + (normalizedCV3 - 0.5f);  // Apply the CV input as an offset
 		knob3Value = clamp(knob3Value, 0.0f, 1.0f);
-		divisionAmount3 = 1 + (1.0 - knob3Value) * 15;  // Update division based on knob and CV input
+		int divisionAmount3 = 1 + (1.0 - knob3Value) * 15;  // Update division based on knob and CV input
 	   
        // CH 4 CV
-	   cvInput4 = inputs[CH4_CVINPUT].getVoltage();  // Read CV input
-	   normalizedCV4 = (cvInput4 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-	   knob4Param = params[KNOB4_PARAM].getValue();  // Original knob value
-	   knob4Value = knob4Param + (normalizedCV4 - 0.5f);  // Apply the CV input as an offset
+	   float cvInput4 = inputs[CH4_CVINPUT].getVoltage();  // Read CV input
+	   float normalizedCV4 = (cvInput4 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+	   float knob4Param = params[KNOB4_PARAM].getValue();  // Original knob value
+	   float knob4Value = knob4Param + (normalizedCV4 - 0.5f);  // Apply the CV input as an offset
 	   knob4Value = clamp(knob4Value, 0.0f, 1.0f);
-	   divisionAmount4 = 1 + (1.0 - knob4Value) * 15;  // Update division based on knob and CV input
+	   int divisionAmount4 = 1 + (1.0 - knob4Value) * 15;  // Update division based on knob and CV input
 
 	    // CH 5 CV
-		cvInput5 = inputs[CH5_CVINPUT].getVoltage();  // Read CV input
-		normalizedCV5 = (cvInput5 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-		knob5Param = params[KNOB5_PARAM].getValue();  // Original knob value
-		knob5Value = knob5Param + (normalizedCV5 - 0.5f);  // Apply the CV input as an offset
+		float cvInput5 = inputs[CH5_CVINPUT].getVoltage();  // Read CV input
+		float normalizedCV5 = (cvInput5 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+		float knob5Param = params[KNOB5_PARAM].getValue();  // Original knob value
+		float knob5Value = knob5Param + (normalizedCV5 - 0.5f);  // Apply the CV input as an offset
 		knob5Value = clamp(knob5Value, 0.0f, 1.0f);
-		divisionAmount5 = 1 + (1.0 - knob5Value) * 15;  // Update division based on knob and CV input
+		int divisionAmount5 = 1 + (1.0 - knob5Value) * 15;  // Update division based on knob and CV input
 	   
 		// CH 6 CV
-		cvInput6 = inputs[CH6_CVINPUT].getVoltage();  // Read CV input
-		normalizedCV6 = (cvInput6 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-		knob6Param = params[KNOB6_PARAM].getValue();  // Original knob value
-		knob6Value = knob6Param + (normalizedCV6 - 0.5f);  // Apply the CV input as an offset
+		float cvInput6 = inputs[CH6_CVINPUT].getVoltage();  // Read CV input
+		float normalizedCV6 = (cvInput6 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+		float knob6Param = params[KNOB6_PARAM].getValue();  // Original knob value
+		float knob6Value = knob6Param + (normalizedCV6 - 0.5f);  // Apply the CV input as an offset
 		knob6Value = clamp(knob6Value, 0.0f, 1.0f);
-		divisionAmount6 = 1 + (1.0 - knob6Value) * 15;  // Update division based on knob and CV input
+		int divisionAmount6 = 1 + (1.0 - knob6Value) * 15;  // Update division based on knob and CV input
 
 				// Pulsewidth CV and knob scale
-		pulseWidthParam = params[WIDTH_PARAM].getValue() * 0.2f + 0.05f;
-		widthCvInput = inputs[WIDTH_CVINPUT].getVoltage();  // Read CV input for WIDTH
-		normalizedWidthCV = (widthCvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-		widthParam = params[WIDTH_PARAM].getValue();  // Original WIDTH_PARAM value
-		widthValue = widthParam + (normalizedWidthCV - 0.5f);  // Apply the CV input as an offset
+		float widthCvInput = inputs[WIDTH_CVINPUT].getVoltage();  // Read CV input for WIDTH
+		float normalizedWidthCV = (widthCvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+		float widthParam = params[WIDTH_PARAM].getValue();  // Original WIDTH_PARAM value
+		float widthValue = widthParam + (normalizedWidthCV - 0.5f);  // Apply the CV input as an offset
 		widthValue = clamp(widthValue, 0.0f, 1.0f);
-		pulseWidthParam = widthValue * 0.2f + 0.05f;  // Scale pulse width
-		pw = (clockDuration * pulseWidthParam);
+
+		float pulseWidth = widthValue * 0.2f + 0.05f;  // Scale pulse width
+		float pw = (clockDuration * pulseWidth);
 				
 		// Swing CV and knob scale 
-		swingCvInput = inputs[SWING_CVINPUT].getVoltage();  // Read CV input for SWING
-		normalizedSwingCV = (swingCvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-		swingValue = params[SWING_PARAM].getValue();  // Original SWING_PARAM value
-		swingParamValue = swingValue + (normalizedSwingCV - 0.5f);  // Apply the CV input as an offset
+		float swingCvInput = inputs[SWING_CVINPUT].getVoltage();  // Read CV input for SWING
+		float normalizedSwingCV = (swingCvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
+		float swingValue = params[SWING_PARAM].getValue();  // Original SWING_PARAM value
+		float swingParamValue = swingValue + (normalizedSwingCV - 0.5f);  // Apply the CV input as an offset
 		swingParamValue = clamp(swingParamValue, 0.0f, 1.0f);
-		swingParam = swingParamValue * 100.0f; // The max value of the swing parameter is scaled to 100ms
+		float swingParam = swingParamValue * 100.0f; // The max value of the swing parameter is scaled to 100ms
 		   
 		// Update clock timer (accumulate time in samples)
 		sinceClock += args.sampleTime * 1000.0f;
@@ -304,7 +241,7 @@ struct Mito : Module {
        
 
 	    // Out channel 1 
-		mute1 = params[MUTE1_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
+		bool mute1 = params[MUTE1_PARAM].getValue() < 0.5f; // Mute is active if value is > 0.5
 		if (!mute1) {
 			outputs[CH1_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
 			lights[LED1_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
@@ -323,7 +260,7 @@ struct Mito : Module {
 		}
 
 			    // Out channel 2
-				mute2 = params[MUTE2_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
+				bool mute2 = params[MUTE2_PARAM].getValue() < 0.5f; // Mute is active if value is > 0.5
 				if (!mute2) {
 					outputs[CH2_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
 					lights[LED2_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
@@ -342,7 +279,7 @@ struct Mito : Module {
 				}
 
 			    // Out channel 3
-				mute3 = params[MUTE3_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
+				bool mute3 = params[MUTE3_PARAM].getValue() < 0.5f; // Mute is active if value is > 0.5
 				if (!mute3) {
 					outputs[CH3_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
 					lights[LED3_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
@@ -360,7 +297,7 @@ struct Mito : Module {
 					}
 				}
 					    // Out channel 4
-						mute4 = params[MUTE4_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
+						bool mute4 = params[MUTE4_PARAM].getValue() < 0.5f; // Mute is active if value is > 0.5
 						if (!mute4) {
 							outputs[CH4_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
 							lights[LED4_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
@@ -379,7 +316,7 @@ struct Mito : Module {
 						}
 
 						   // Out channel 5
-						   mute5 = params[MUTE5_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
+						   bool mute5 = params[MUTE5_PARAM].getValue() < 0.5f; // Mute is active if value is > 0.5
 						   if (!mute5) {
 							   outputs[CH5_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
 							   lights[LED5_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1
@@ -398,7 +335,7 @@ struct Mito : Module {
 						   }
 
 						     // Out channel 6
-							 mute6 = params[MUTE6_PARAM].getValue() > 0.5f; // Mute is active if value is > 0.5
+							 bool mute6 = params[MUTE6_PARAM].getValue() < 0.5f; // Mute is active if value is > 0.5
 							 if (!mute6) {
 								 outputs[CH6_OUTPUT].setVoltage(0.0f);  // Mute CH1 (output off)
 								 lights[LED6_LIGHT].setBrightness(0.0f); // Turn off the LED for CH1

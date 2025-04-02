@@ -1273,7 +1273,7 @@ float granularOutput = (((outputSampleGranular * 5.f) + 2.5f) * 5.0f) * envelope
 granularOutput = std::clamp(granularOutput, -5.0f, 5.0f);
 
 
-float ratSelect = params[SELECT_PARAM].getValue(); 
+int ratSelect = params[SELECT_PARAM].getValue(); 
 
 switch (ratSelect){
 case 1: // Muskrat

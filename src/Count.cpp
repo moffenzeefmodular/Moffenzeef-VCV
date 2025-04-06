@@ -134,6 +134,13 @@ void process(const ProcessArgs& args) override {
             gate4High = false;
             gate5High = false;
 
+            lights[LED_1_LIGHT].setBrightness(0.0f);
+            lights[LED_2_LIGHT].setBrightness(0.0f);
+            lights[LED_3_LIGHT].setBrightness(0.0f);
+            lights[LED_4_LIGHT].setBrightness(0.0f);
+            lights[LED_5_LIGHT].setBrightness(0.0f);
+            lights[LED_6_LIGHT].setBrightness(0.0f);
+
             resetFlag = true;  // Mark that reset was done
         }
         outputs[MAIN_OUTPUT].setVoltage(0.0f);
@@ -141,6 +148,7 @@ void process(const ProcessArgs& args) override {
         resetFlag = false;
         if (startStop && !prevStartStop && !pulseSent) {
             outputs[START_OUTPUT].setVoltage(5.0f);
+            lights[LED_1_LIGHT].setBrightnessSmooth(5.0f, args.sampleTime);
             oneShotTimer = 100.0f;
             pulseSent = true;
         }
@@ -149,6 +157,7 @@ void process(const ProcessArgs& args) override {
             oneShotTimer -= args.sampleTime * 1000.0f;
             if (oneShotTimer <= 0.0f) {
                 outputs[START_OUTPUT].setVoltage(0.0f);
+                lights[LED_1_LIGHT].setBrightness(0.0f);
             }
         }
 

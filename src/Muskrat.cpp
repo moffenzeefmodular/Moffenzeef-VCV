@@ -52,6 +52,8 @@ struct Muskrat : Module {
 	configOutput(AUDIO_OUTPUT, "Muskrat Audio");
 
   configSwitch(SELECT_PARAM, 1.f, 4.f, 1.f, "Algorithm", {"Muskrat", "FM", "PD", "Granular"}); 
+
+  initializeWavetables();
 }
 
 const static int WAVETABLE_SIZE = 238;
@@ -1104,196 +1106,235 @@ const unsigned char msgSixteen_wav[WAVETABLE_SIZE_GRANULAR]= {
    std::mt19937 gen{rd()};
    std::uniform_real_distribution<float> dis{-amplitude, amplitude}; // Range -5V to +5V
 
-void process (const ProcessArgs &args) override {
-  //Scratch param
-	float cvInput2 = inputs[SCRATCH_CV_INPUT].getVoltage();  // Read CV input
-	float normalizedCV2 = (cvInput2 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-	float knob2Param = params[SCRATCH_PARAM].getValue() + 0.05;  // Original knob value
-	float knob2Value = knob2Param + (normalizedCV2 - 0.5f);  // Apply the CV input as an offset
-	float controlValue2 = std::clamp(knob2Value, 0.0f, 1.0f);
+// Add to the class member variables
+private:
+  // Normalized wavetables (pre-computed)
+  float normalizedWavetables[24][WAVETABLE_SIZE];
+  float normalizedWavetablesGranular[16][WAVETABLE_SIZE_GRANULAR];
+  
+  // State tracking for wavetable selection
+  int lastWavetableIndex = -1;
+  int lastGranularIndex = -1;
+  int lastWavetableLength = -1;
 
-  // DIG Param
-	float cvInput3 = inputs[DIG_CV_INPUT].getVoltage();  // Read CV input
-	float normalizedCV3 = (cvInput3 + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-	float knob3Param = params[DIG_PARAM].getValue() + 0.05;  // Original knob value
-	float knob3Value = knob3Param + (normalizedCV3 - 0.5f);  // Apply the CV input as an offset
-	float controlValue3 = std::clamp(knob3Value, 0.0f, 1.0f);
-
-  // NEED THIS TO BE 10 - 318 
-	int WAVETABLE_LENGTH = (controlValue3 * 308.0f) + 10.0f;
-  float foldThreshold = 0.25f + (controlValue3 * 0.25);
-	float distortion = foldThreshold * 500; 
-	
-	//Chew param
-	float cvInput = inputs[CHEW_CV_INPUT].getVoltage();  // Read CV input
-	float normalizedCV = (cvInput + 5.0f) / 10.0f; // Map -5V -> 0.0 and 5V -> 1.0
-	float knob1Param = params[CHEW_PARAM].getValue() + 0.05;  // Original knob value
-	float knob1Value = knob1Param + (normalizedCV - 0.5f);  // Apply the CV input as an offset
-	float controlValue = std::clamp(knob1Value, 0.0f, 1.0f);
-	float frequency = controlValue * args.sampleRate; // Scale the DIG_PARAM for frequency range
-
-    // OG
+public:
+  // Method to initialize all wavetables at startup
+  void initializeWavetables() {
     const unsigned char* wavetablesData[] = {
         one_wav, two_wav, three_wav, four_wav, five_wav,
         six_wav, seven_wav, eight_wav, nine_wav, ten_wav,
         eleven_wav, twelve_wav, thirteen_wav, fourteen_wav, fifteen_wav,
         sixteen_wav, seventeen_wav, eighteen_wav, nineteen_wav, twenty_wav,
         twentyOne_wav, twentyTwo_wav, twentyThree_wav, twentyFour_wav
-      };
-    int index = static_cast<int>(controlValue2 * 23);
-    if (index >= 0 && index < 24) {
-        // Normalize the selected wave and assign to wavetables
+    };
+    
+    const unsigned char* wavetablesDataGranular[] = {
+        msgOne_wav, msgTwo_wav, msgThree_wav, msgFour_wav, msgFive_wav,
+        msgSix_wav, msgSeven_wav, msgEight_wav, msgNine_wav, msgTen_wav,
+        msgEleven_wav, msgTwelve_wav, msgThirteen_wav, msgFourteen_wav,
+        msgFifteen_wav, msgSixteen_wav
+    };
+    
+    // Precompute all normalized wavetables
+    for (int i = 0; i < 24; i++) {
         for (int j = 0; j < WAVETABLE_SIZE; j++) {
-            wavetables[j] = (float)(wavetablesData[index][j] - 238) / 238.0f;
+            normalizedWavetables[i][j] = (float)(wavetablesData[i][j] - 128) / 128.0f;
         }
     }
     
-		// Granular 
-		const unsigned char* wavetablesDataGranular[] = {
-			msgOne_wav, msgTwo_wav, msgThree_wav, msgFour_wav, msgFive_wav,
-			msgSix_wav, msgSeven_wav, msgEight_wav, msgNine_wav, msgTen_wav,
-			msgEleven_wav, msgTwelve_wav, msgThirteen_wav, msgFourteen_wav,
-			msgFifteen_wav, msgSixteen_wav
-		  };
+    // Precompute all normalized granular wavetables
+    for (int i = 0; i < 16; i++) {
+        for (int j = 0; j < WAVETABLE_SIZE_GRANULAR; j++) {
+            normalizedWavetablesGranular[i][j] = (float)(wavetablesDataGranular[i][j] - 128) / 128.0f;
+        }
+    }
+  }
+  
+  void process(const ProcessArgs &args) override {
+    // Parameters and CV processing - same as before
+    float cvInput2 = inputs[SCRATCH_CV_INPUT].getVoltage();
+    float normalizedCV2 = (cvInput2 + 5.0f) / 10.0f;
+    float knob2Param = params[SCRATCH_PARAM].getValue() + 0.05;
+    float knob2Value = knob2Param + (normalizedCV2 - 0.5f);
+    float controlValue2 = std::clamp(knob2Value, 0.0f, 1.0f);
+
+    float cvInput3 = inputs[DIG_CV_INPUT].getVoltage();
+    float normalizedCV3 = (cvInput3 + 5.0f) / 10.0f;
+    float knob3Param = params[DIG_PARAM].getValue() + 0.05;
+    float knob3Value = knob3Param + (normalizedCV3 - 0.5f);
+    float controlValue3 = std::clamp(knob3Value, 0.0f, 1.0f);
+
+    int WAVETABLE_LENGTH = (controlValue3 * 308.0f) + 10.0f;
+    // Only update granular tables if length has changed
+    if (WAVETABLE_LENGTH != lastWavetableLength) {
+        lastWavetableLength = WAVETABLE_LENGTH;
+        lastGranularIndex = -1; // Force update of granular wavetable
+    }
+    
+    float foldThreshold = 0.25f + (controlValue3 * 0.25);
+    float distortion = foldThreshold * 500;
+    
+    float cvInput = inputs[CHEW_CV_INPUT].getVoltage();
+    float normalizedCV = (cvInput + 5.0f) / 10.0f;
+    float knob1Param = params[CHEW_PARAM].getValue() + 0.05;
+    float knob1Value = knob1Param + (normalizedCV - 0.5f);
+    float controlValue = std::clamp(knob1Value, 0.0f, 1.0f);
+    float frequency = controlValue * args.sampleRate;
+    
+    // Wavetable selection with change detection
+    int index = static_cast<int>(controlValue2 * 23);
+    index = std::clamp(index, 0, 23); // Ensure index is in valid range
+    
+    // Only copy wavetable if the index has changed
+    if (index != lastWavetableIndex) {
+        lastWavetableIndex = index;
+        // No need to copy/normalize - just point to the pre-normalized table
+    }
+    
     int indexGranular = static_cast<int>(controlValue2 * 15);
+    indexGranular = std::clamp(indexGranular, 0, 15); // Ensure granular index is in valid range
+    
+    // Only update granular wavetable if needed
+    if (indexGranular != lastGranularIndex) {
+        lastGranularIndex = indexGranular;
+        // No need to copy/normalize here either
+    }
+    
+    // Rest of code uses direct access to normalized wavetables
     float phaseGranularIncrement = frequency / args.sampleRate;
 
-// OG
-float phaseIncrement = frequency / args.sampleRate;
-phase += phaseIncrement;
-phase = fmod(phase, WAVETABLE_SIZE);
-int phaseIndex = static_cast<int>(phase);
-float outputSample = wavetables[phaseIndex];
-float foldedSample = outputSample;
-if (foldedSample > foldThreshold) {
-    foldedSample = foldThreshold - (foldedSample - foldThreshold);  // Fold back when exceeding threshold
-} else if (foldedSample < -foldThreshold) {
-    foldedSample = -foldThreshold - (foldedSample + foldThreshold); // Fold back when below threshold
-}
-
- // FM
- float fmDepth = controlValue2; 
- float pitch1 = controlValue;
- float pitch2 = controlValue3;
- phase2 += freq2 / args.sampleRate;
- if (phase2 >= 1.0f) phase2 -= 1.0f;
- float modulator = triangleWave(phase2) * 10.0f;  // Increased amplitude for more modulation
- float freq1 = pitch1 * (920.0f * pitch1) + modulator * fmDepth * 100.0f; // Increased modulation depth
- phase1 += freq1 / args.sampleRate;
- if (phase1 >= 1.0f) phase1 -= 1.0f;
- float fmOutput = triangleWave(phase1) * 5.0f;  // Output of oscillator 1 (carrier)
-
-//PD
-float pdDrive = controlValue2 * 32.f; 
-float pitch3 = controlValue; 
-int DIG = (int)(controlValue3 * 7.0f) + 1;  
-float octaveMultiplier = (float)DIG;  
-freq3 = pitch3 * octaveMultiplier * (275.0f * pitch3);  
-phase3 += freq3 / args.sampleRate;
-if (phase3 >= 1.0f) phase3 -= 1.0f;
-float waveformOutput;
-   
-// Switches
-float chaos = 0.0f; 
-bool switchState = params[RATSWITCH_PARAM].getValue() > 0.5f;
-bool gateState = inputs[MUSKRAT_INPUT].getVoltage() > 0.5f;
-if(switchState || gateState){
-  waveformOutput = triangleWave2(phase3) * 5.0f;
-  chaos = dis(gen); 
-	phaseGranular -= phaseGranularIncrement;
-    if (phaseGranular < 0) {
-        phaseGranular += WAVETABLE_LENGTH; // Wrap phaseGranular to the end of the wavetable
+    // OG
+    float phaseIncrement = frequency / args.sampleRate;
+    phase += phaseIncrement;
+    phase = fmod(phase, WAVETABLE_SIZE);
+    int phaseIndex = static_cast<int>(phase);
+    float outputSample = normalizedWavetables[index][phaseIndex]; // Use pre-normalized table
+    float foldedSample = outputSample;
+    if (foldedSample > foldThreshold) {
+        foldedSample = foldThreshold - (foldedSample - foldThreshold);
+    } else if (foldedSample < -foldThreshold) {
+        foldedSample = -foldThreshold - (foldedSample + foldThreshold);
     }
-	freq2 = pitch2 * (1.0f + (20.0f - 1.0f) * pitch1);
-}
-else{
-  chaos = 1; 
-  phaseGranular += phaseGranularIncrement;
-  phaseGranular = fmod(phaseGranular, WAVETABLE_LENGTH);
-  freq2 = pitch2 * (900.0f + (920.0f - 900.0f) * pitch1);
-  waveformOutput = sawtoothWave(phase3) * 5.0f;
-}	      
 
-//OG
-foldedSample = (foldedSample * distortion) + chaos;  // Increased amplification for more pronounced effect
-foldedSample += 1.0f;  // Apply offset to ensure the signal stays in a desired range
-foldedSample = std::clamp(foldedSample, -5.0f, 5.0f);
-const float cutoffFrequency = 8000.0f; // 10 kHz cutoff
-float alpha = 1.0f / (1.0f + (args.sampleRate / (2.0f * M_PI * cutoffFrequency)));
-static float previousOutput = 0.0f;
-float filteredSample = alpha * foldedSample + (1.0f - alpha) * previousOutput;
-previousOutput = filteredSample;
+    // FM processing - unchanged
+    float fmDepth = controlValue2;
+    float pitch1 = controlValue;
+    float pitch2 = controlValue3;
+    phase2 += freq2 / args.sampleRate;
+    if (phase2 >= 1.0f) phase2 -= 1.0f;
+    float modulator = triangleWave(phase2) * 10.0f;
+    float freq1 = pitch1 * (920.0f * pitch1) + modulator * fmDepth * 100.0f;
+    phase1 += freq1 / args.sampleRate;
+    if (phase1 >= 1.0f) phase1 -= 1.0f;
+    float fmOutput = triangleWave(phase1) * 5.0f;
 
-//Granular
-if (indexGranular >= 0 && indexGranular < 16) {
-	for (int j = 0; j < WAVETABLE_LENGTH; j++) {
-		wavetablesGranular[j] = (float)(wavetablesDataGranular[indexGranular][j] - 318) / 318.0f;
-	}
-}
-int phaseGranularIndex = static_cast<int>(phaseGranular);
-float outputSampleGranular = wavetablesGranular[phaseGranularIndex];
+    // PD and switches - unchanged
+    float pdDrive = controlValue2 * 32.f;
+    float pitch3 = controlValue;
+    int DIG = (int)(controlValue3 * 7.0f) + 1;
+    float octaveMultiplier = (float)DIG;
+    freq3 = pitch3 * octaveMultiplier * (275.0f * pitch3);
+    phase3 += freq3 / args.sampleRate;
+    if (phase3 >= 1.0f) phase3 -= 1.0f;
+    float waveformOutput;
+    
+    // Switch handling
+    bool switchState = params[RATSWITCH_PARAM].getValue() > 0.5f;
+    bool gateState = inputs[MUSKRAT_INPUT].getVoltage() > 0.5f;
+    float chaos = 0.0f;
+    
+    if(switchState || gateState) {
+        waveformOutput = triangleWave2(phase3) * 5.0f;
+        chaos = dis(gen);
+        phaseGranular -= phaseGranularIncrement;
+        if (phaseGranular < 0) {
+            phaseGranular += WAVETABLE_LENGTH;
+        }
+        freq2 = pitch2 * (1.0f + (20.0f - 1.0f) * pitch1);
+    } else {
+        chaos = 1;
+        phaseGranular += phaseGranularIncrement;
+        phaseGranular = fmod(phaseGranular, WAVETABLE_LENGTH);
+        freq2 = pitch2 * (900.0f + (920.0f - 900.0f) * pitch1);
+        waveformOutput = sawtoothWave(phase3) * 5.0f;
+    }
 
-// PD 
-float pdOutput = waveformOutput * pdDrive; 
-pdOutput = std::clamp(pdOutput, -5.0f, 5.0f);
+    // OG processing
+    foldedSample = (foldedSample * distortion) + chaos;
+    foldedSample += 1.0f;
+    foldedSample = std::clamp(foldedSample, -5.0f, 5.0f);
+    const float cutoffFrequency = 8000.0f;
+    float alpha = 1.0f / (1.0f + (args.sampleRate / (2.0f * M_PI * cutoffFrequency)));
+    static float previousOutput = 0.0f;
+    float filteredSample = alpha * foldedSample + (1.0f - alpha) * previousOutput;
+    previousOutput = filteredSample;
 
-//Master decay 
-int range = (int)params[RANGE_PARAM].getValue(); // Read the RANGE_PARAM value
-switch (range) {
-	case 0:
-		decayTime = 5.0f + (params[TAIL_PARAM].getValue() * 25.0f); // 5ms to 30ms range
-		break;
-	case 1:
-		decayTime = 30.0f + (params[TAIL_PARAM].getValue() * 170.0f); // 30ms to 200ms range
-		break;
-	case 2:
-		decayTime = 200.0f + (params[TAIL_PARAM].getValue() * 3800.0f); // 200ms to 4000ms range
-		break;
-}
-float decayAlpha = exp(-1.0f / (args.sampleRate * (decayTime / 1000.0f))); // Calculate decay coefficient based on decay time
-bool bangState = inputs[BANG_INPUT].getVoltage() > 0.5f;
-if (bangState && !lastBangState) {
-	pulseTriggered = true;
-	envelopeValue = 1.0f;  // Start the envelope with full amplitude
-	pulseTime = decayTime * (args.sampleRate / 1000.0f);
-}
-lastBangState = bangState;
-if (pulseTriggered) {
-	envelopeValue *= decayAlpha;  // Apply exponential decay
-	if (envelopeValue < 0.01f) {  // End decay when value is small enough
-		envelopeValue = 0.0f;
-		pulseTriggered = false;
-	}
-} else {
-	envelopeValue = 0.0f; // Reset envelope when no pulse is triggered
-}
+    // Granular - now using pre-normalized wavetables
+    int phaseGranularIndex = static_cast<int>(phaseGranular);
+    // Make sure we're within bounds
+    phaseGranularIndex = std::clamp(phaseGranularIndex, 0, WAVETABLE_LENGTH - 1);
+    float outputSampleGranular = normalizedWavetablesGranular[indexGranular][phaseGranularIndex];
 
-// Granular
-float granularOutput = (((outputSampleGranular * 5.f) + 2.5f) * 5.0f) * envelopeValue; 
-granularOutput = std::clamp(granularOutput, -5.0f, 5.0f);
+    // PD output
+    float pdOutput = waveformOutput * pdDrive;
+    pdOutput = std::clamp(pdOutput, -5.0f, 5.0f);
 
+    // Master decay - unchanged
+    int range = (int)params[RANGE_PARAM].getValue();
+    switch (range) {
+        case 0:
+            decayTime = 5.0f + (params[TAIL_PARAM].getValue() * 25.0f);
+            break;
+        case 1:
+            decayTime = 30.0f + (params[TAIL_PARAM].getValue() * 170.0f);
+            break;
+        case 2:
+            decayTime = 200.0f + (params[TAIL_PARAM].getValue() * 3800.0f);
+            break;
+    }
+    float decayAlpha = exp(-1.0f / (args.sampleRate * (decayTime / 1000.0f)));
+    bool bangState = inputs[BANG_INPUT].getVoltage() > 0.5f;
+    if (bangState && !lastBangState) {
+        pulseTriggered = true;
+        envelopeValue = 1.0f;
+        pulseTime = decayTime * (args.sampleRate / 1000.0f);
+    }
+    lastBangState = bangState;
+    if (pulseTriggered) {
+        envelopeValue *= decayAlpha;
+        if (envelopeValue < 0.01f) {
+            envelopeValue = 0.0f;
+            pulseTriggered = false;
+        }
+    } else {
+        envelopeValue = 0.0f;
+    }
 
-int ratSelect = params[SELECT_PARAM].getValue(); 
+    // Granular output
+    float granularOutput = (((outputSampleGranular * 5.f) + 2.5f) * 5.0f) * envelopeValue;
+    granularOutput = std::clamp(granularOutput, -5.0f, 5.0f);
 
-switch (ratSelect){
-case 1: // Muskrat
-outputs[AUDIO_OUTPUT].setVoltage(filteredSample * envelopeValue);
-break; 
-case 2: // F
-outputs[AUDIO_OUTPUT].setVoltage(fmOutput * envelopeValue);
-break;
-case 3: // G
-outputs[AUDIO_OUTPUT].setVoltage(pdOutput * envelopeValue);
-break; 
-case 4: // P
-outputs[AUDIO_OUTPUT].setVoltage(granularOutput);
-break; 
-}
+    // Output switching
+    int ratSelect = params[SELECT_PARAM].getValue();
+    switch (ratSelect) {
+        case 1: // Muskrat
+            outputs[AUDIO_OUTPUT].setVoltage(filteredSample * envelopeValue);
+            break;
+        case 2: // FM
+            outputs[AUDIO_OUTPUT].setVoltage(fmOutput * envelopeValue);
+            break;
+        case 3: // PD
+            outputs[AUDIO_OUTPUT].setVoltage(pdOutput * envelopeValue);
+            break;
+        case 4: // Granular
+            outputs[AUDIO_OUTPUT].setVoltage(granularOutput);
+            break;
+    }
 
-//LED 
-float ledBrightness = envelopeValue;  // Map -5V to +5V range to 0-1
-lights[LED_LIGHT].setBrightnessSmooth(ledBrightness, args.sampleTime);  // Set LED brightness
-}
+    // LED
+    float ledBrightness = envelopeValue;
+    lights[LED_LIGHT].setBrightnessSmooth(ledBrightness, args.sampleTime);
+  }
 
 };
 

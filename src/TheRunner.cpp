@@ -67,6 +67,8 @@ struct TheRunner : Module {
 	float chorusPhase = 0.f;
 	float hpfOut = 0.f;
 	float hpfInPrev = 0.f;
+	float drunkWalkPos = 0.5f;
+	float drunkWalkSmoothed = 0.5f;
 
 	void process(const ProcessArgs& args) override {
 		const float minFreq = 13.75f;
@@ -90,9 +92,6 @@ struct TheRunner : Module {
 		float dt = args.sampleTime;
 
 		float animate = clamp(params[ANIMATE_PARAM].getValue() + (inputs[ANIMATECVIN_INPUT].isConnected() ? clamp(inputs[ANIMATECVIN_INPUT].getVoltage() / 10.f, -1.f, 1.f) : 0.f), 0.f, 1.f);
-
-		static float drunkWalkPos = 0.5f;
-		static float drunkWalkSmoothed = 0.5f;
 
 		float stepSize = rescale(animate, 0.f, 1.f, 0.00001f, 0.00025f) * powf(10.f, params[RANGE_PARAM].getValue() * 1.2f);
 		float depth = animate * 0.8f;

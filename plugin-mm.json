@@ -59,6 +59,26 @@
     {
 		"slug": "Simplify",
 		"name": "Simplify"
+	},
+	{
+		"slug": "2hpBlank",
+		"name": "2hpBlank"
+	},
+	{
+		"slug": "14hpBlank",
+		"name": "14hpBlank"
+	},
+	{
+		"slug": "Swarm",
+		"name": "Swarm"
+	},
+	{
+		"slug": "INTENSIFIES",
+		"name": "INTENSIFIES"
+	},
+	{
+		"slug": "TheRunner",
+		"name": "The Runner"
 	}
 ]
 }

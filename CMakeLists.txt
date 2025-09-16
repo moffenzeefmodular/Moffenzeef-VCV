@@ -12,7 +12,7 @@ endif()
 
 include(${METAMODULE_SDK_DIR}/plugin.cmake)
 
-project(Moffenzeef VERSION 0.1 DESCRIPTION "Moffenzeef for MetaModule" LANGUAGES C CXX ASM)
+project(Moffenzeef VERSION 2.2.0 DESCRIPTION "Moffenzeef for MetaModule" LANGUAGES C CXX ASM)
 
 add_library(Moffenzeef STATIC)
 
@@ -34,6 +34,11 @@ target_sources(Moffenzeef PRIVATE
     ${SOURCE_DIR}/src/Mongrel.cpp
     ${SOURCE_DIR}/src/Muskrat.cpp
     ${SOURCE_DIR}/src/Simplify.cpp
+    ${SOURCE_DIR}/src/2hpBlank.cpp
+    ${SOURCE_DIR}/src/14hpBlank.cpp
+    ${SOURCE_DIR}/src/Swarm.cpp
+    ${SOURCE_DIR}/src/INTENSIFIES.cpp
+    ${SOURCE_DIR}/src/TheRunner.cpp
     ${SOURCE_DIR}/src/plugin.cpp
     ${SOURCE_DIR}/src/plugin.hpp
 ) 

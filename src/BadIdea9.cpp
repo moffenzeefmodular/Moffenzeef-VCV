@@ -1,4 +1,5 @@
 #include "plugin.hpp"
+#include <algorithm> 
 
 struct BadIdea9 : Module {
 	enum ParamId {

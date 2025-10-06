@@ -143,7 +143,7 @@ struct TheRunner : Module {
 		bp += f * hp;
 		lp += f * bp;
 
-		float filtered = clamp(lp, -5.f, 5.f);
+		float filtered = clamp(lp, -10.f, 10.f);
 
 		bool chorusEnabled = params[CHORUS_PARAM].getValue() > 0.5f;
 		if (inputs[CHORUSCVIN_INPUT].isConnected())
@@ -181,7 +181,7 @@ struct TheRunner : Module {
 
 		float signal = postChorus * gain;
 
-		signal = clamp(signal, -5.f, 5.f);
+		signal = clamp(signal, -10.f, 10.f);
 
 		float cutoffHz = 20.f;
 		float RC = 1.f / (2.f * M_PI * cutoffHz);
@@ -193,7 +193,7 @@ struct TheRunner : Module {
 		float volumeNorm = clamp(params[VOLUME_PARAM].getValue() + (inputs[VOLUMECVIN_INPUT].isConnected() ? clamp(inputs[VOLUMECVIN_INPUT].getVoltage() / 10.f, -1.f, 1.f) : 0.f), 0.f, 1.f);
 
 		signal *= volumeNorm;
-		signal = clamp(signal, -5.f, 5.f);
+		signal = clamp(signal, -10.f, 10.f);
 
 		outputs[AUDIOOUT_OUTPUT].setVoltage(signal);
 

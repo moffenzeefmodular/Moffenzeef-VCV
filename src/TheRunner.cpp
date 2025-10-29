@@ -92,6 +92,14 @@ struct TheRunner : Module {
 		
 		const Mapping::LookupTable_t<64, float> Pow10Animate =
 			Mapping::LookupTable_t<64, float>::generate<Pow10AnimateTableRange>([](float x) { return std::pow(10.f, x); });
+
+			struct SinTableRange {
+				static constexpr float min = -2.f * M_PI;
+				static constexpr float max = 2.f * M_PI;
+			};
+			
+ 		const Mapping::LookupTable_t<64, float> Sin =
+		Mapping::LookupTable_t<64, float>::generate<SinTableRange>([](float x) { return sinf(x); });
 		
 
 
@@ -182,7 +190,7 @@ struct TheRunner : Module {
 
 		float resonance = std::clamp(params[RESONANCE_PARAM].getValue() + (inputs[RESONANCECVIN_INPUT].isConnected() ? std::clamp(inputs[RESONANCECVIN_INPUT].getVoltage() / 10.f, -1.f, 1.f) : 0.f), 0.f, 0.9f);
 
-		float f = 2.f * sinf(float(M_PI) * cutoffFreq * dt);
+		float f = 2.f * Sin(float(M_PI) * cutoffFreq * dt);
 		float q = 1.f - resonance;
 
 		float hp = mix - lp - q * bp;
@@ -201,7 +209,7 @@ struct TheRunner : Module {
 		const float chorusDepth = 0.6f;
 		const float chorusDryWet = 0.5f;
 
-		float lfo = sinf(2.f * M_PI * chorusPhase);
+		float lfo = Sin(2.f * M_PI * chorusPhase);
 		chorusPhase += chorusFrequency / sampleRate;
 		if (chorusPhase >= 1.f)
 			chorusPhase -= 1.f;

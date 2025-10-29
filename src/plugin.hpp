@@ -141,3 +141,4 @@ struct StargazerLFOKnob : SvgKnob {
 		setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/StargazerLFOKnob.svg")));
 	}
 };
+

@@ -113,8 +113,6 @@ struct Kleztizer : Module {
 		configOutput(CHORDBUTTONGATEOUT5_OUTPUT, "Button 5 Gate");
 		configOutput(CHORDBUTTONGATEOUT6_OUTPUT, "Button 6 Gate");
 		configOutput(CHORDBUTTONGATEOUT7_OUTPUT, "Button 7 Gate");
-
-
 	}
 
 	bool chordButtonStates[7] = {true};
@@ -362,27 +360,13 @@ struct KleztizerWidget : ModuleWidget {
 		addParam(createParamCentered<RoundSmallBlackKnob>(mm2px(Vec(42.667, 12.888)), module, Kleztizer::KEY_PARAM));
 		addParam(createParamCentered<RoundSmallBlackKnob>(mm2px(Vec(68.488, 12.888)), module, Kleztizer::MODE_PARAM));
 
-		addParam(createParamCentered<VCVBezel>(mm2px(Vec(14.26, 46.862)), module, Kleztizer::CHORDBUTTON1_PARAM));
-   	    addParam(createLightParamCentered<VCVLightBezel<>>(mm2px(Vec(14.26, 46.862)), module, Kleztizer::CHORDBUTTON1_PARAM,Kleztizer::CHORDBUTTON1LED_LIGHT));
-
-		addParam(createParamCentered<VCVBezel>(mm2px(Vec(26.475, 46.862)), module, Kleztizer::CHORDBUTTON2_PARAM));
-		addParam(createLightParamCentered<VCVLightBezel<>>(mm2px(Vec(26.475, 46.862)), module, Kleztizer::CHORDBUTTON2_PARAM,Kleztizer::CHORDBUTTON2LED_LIGHT));
-
-		addParam(createParamCentered<VCVBezel>(mm2px(Vec(38.663, 46.862)), module, Kleztizer::CHORDBUTTON3_PARAM));
-   	    addParam(createLightParamCentered<VCVLightBezel<>>(mm2px(Vec(38.663, 46.862)), module, Kleztizer::CHORDBUTTON3_PARAM,Kleztizer::CHORDBUTTON3LED_LIGHT));
-
-		addParam(createParamCentered<VCVBezel>(mm2px(Vec(50.851, 46.862)), module, Kleztizer::CHORDBUTTON4_PARAM));
-   	    addParam(createLightParamCentered<VCVLightBezel<>>(mm2px(Vec(50.851, 46.862)), module, Kleztizer::CHORDBUTTON4_PARAM,Kleztizer::CHORDBUTTON4LED_LIGHT));
-
-		addParam(createParamCentered<VCVBezel>(mm2px(Vec(63.039, 46.862)), module, Kleztizer::CHORDBUTTON5_PARAM));
-   	    addParam(createLightParamCentered<VCVLightBezel<>>(mm2px(Vec(63.039, 46.862)), module, Kleztizer::CHORDBUTTON5_PARAM,Kleztizer::CHORDBUTTON5LED_LIGHT));
-
-		addParam(createParamCentered<VCVBezel>(mm2px(Vec(75.227, 46.862)), module, Kleztizer::CHORDBUTTON6_PARAM));
-   	    addParam(createLightParamCentered<VCVLightBezel<>>(mm2px(Vec(75.227, 46.862)), module, Kleztizer::CHORDBUTTON6_PARAM,Kleztizer::CHORDBUTTON6LED_LIGHT));
-
-		addParam(createParamCentered<VCVBezel>(mm2px(Vec(87.415, 46.862)), module, Kleztizer::CHORDBUTTON7_PARAM));
-		addParam(createLightParamCentered<VCVLightBezel<>>(mm2px(Vec(87.415, 46.862)), module, Kleztizer::CHORDBUTTON7_PARAM,Kleztizer::CHORDBUTTON7LED_LIGHT));
-
+   	    addParam(createLightParamCentered<VCVLightBezel<WhiteLight>>(mm2px(Vec(14.26, 46.862)), module, Kleztizer::CHORDBUTTON1_PARAM,Kleztizer::CHORDBUTTON1LED_LIGHT));
+		addParam(createLightParamCentered<VCVLightBezel<WhiteLight>>(mm2px(Vec(26.475, 46.862)), module, Kleztizer::CHORDBUTTON2_PARAM,Kleztizer::CHORDBUTTON2LED_LIGHT));
+   	    addParam(createLightParamCentered<VCVLightBezel<WhiteLight>>(mm2px(Vec(38.663, 46.862)), module, Kleztizer::CHORDBUTTON3_PARAM,Kleztizer::CHORDBUTTON3LED_LIGHT));
+   	    addParam(createLightParamCentered<VCVLightBezel<WhiteLight>>(mm2px(Vec(50.851, 46.862)), module, Kleztizer::CHORDBUTTON4_PARAM,Kleztizer::CHORDBUTTON4LED_LIGHT));
+   	    addParam(createLightParamCentered<VCVLightBezel<WhiteLight>>(mm2px(Vec(63.039, 46.862)), module, Kleztizer::CHORDBUTTON5_PARAM,Kleztizer::CHORDBUTTON5LED_LIGHT));
+   	    addParam(createLightParamCentered<VCVLightBezel<WhiteLight>>(mm2px(Vec(75.227, 46.862)), module, Kleztizer::CHORDBUTTON6_PARAM,Kleztizer::CHORDBUTTON6LED_LIGHT));
+		addParam(createLightParamCentered<VCVLightBezel<WhiteLight>>(mm2px(Vec(87.415, 46.862)), module, Kleztizer::CHORDBUTTON7_PARAM,Kleztizer::CHORDBUTTON7LED_LIGHT));
 
 		addParam(createParamCentered<CKSS>(mm2px(Vec(38.49, 88.284)), module, Kleztizer::LEADGATE1_PARAM));
 		addParam(createParamCentered<CKSS>(mm2px(Vec(89.465, 88.284)), module, Kleztizer::LEADGATE2_PARAM));

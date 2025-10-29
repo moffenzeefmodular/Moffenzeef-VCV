@@ -295,8 +295,7 @@ setPanel(createPanel(
 		addChild(createWidget<ThemedScrew>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 		addChild(createWidget<ThemedScrew>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
-		addParam(createParamCentered<VCVBezel>(mm2px(Vec(75.202, 25.408)), module, Tantz::RUN_PARAM));
-   	    addParam(createLightParamCentered<VCVLightBezel<>>(mm2px(Vec(75.202, 25.408)), module, Tantz::RUN_PARAM, Tantz::RUNLED_LIGHT));
+   	    addParam(createLightParamCentered<VCVLightBezel<WhiteLight>>(mm2px(Vec(75.202, 25.408)), module, Tantz::RUN_PARAM, Tantz::RUNLED_LIGHT));
 		addParam(createParamCentered<RoundSmallBlackKnob>(mm2px(Vec(91.647, 25.408)), module, Tantz::STYLE_PARAM));
 
 		addParam(createParamCentered<RoundSmallBlackKnob>(mm2px(Vec(91.647, 59.179)), module, Tantz::PW_PARAM));

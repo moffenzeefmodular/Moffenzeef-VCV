@@ -38,20 +38,6 @@ struct INTENSIFIES : Module {
 		LIGHTS_LEN
 	};
 
-	float clockPhase = 0.f;
-	bool clockState = false;
-	float heldSample = 0.f;
-	float baseFreq = 0.f;
-	float modulatorPhase = 0.f;
-	float modulatorSignal = 1.f; 
-    float carrierPhase2 = 0.f;
-    float modulatorPhase2 = 0.f;
-	float synthHPOut = 0.f;
-	float synthHPInLast = 0.f;
-	float fxHPOut = 0.f;
-	float fxHPInLast = 0.f;
-	float mainOutLevel = 0.f;
-
 	INTENSIFIES() {
 		config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
 		configParam(CARRIER_PARAM, 0.f, 1.f, 1.f, "Carrier Frequency", "%", 0.f, 100.f);
@@ -82,68 +68,63 @@ struct INTENSIFIES : Module {
 		configOutput(SYNTHOUT_OUTPUT, "Synth");
 	}
 
-	void process(const ProcessArgs& args) override {
+// --- Member variables ---
+float clockPhase = 0.f;
+bool clockState = false;
+float heldSample = 0.f;
+float baseFreq = 0.f;
+float modulatorPhase = 0.f;
+float modulatorSignal = 1.f; 
+float carrierPhase2 = 0.f;
+float modulatorPhase2 = 0.f;
+float synthHPOut = 0.f;
+float synthHPInLast = 0.f;
+float fxHPOut = 0.f;
+float fxHPInLast = 0.f;
+float mainOutLevel = 0.f;
+
+void process(const ProcessArgs& args) override {
+    // --- Carrier frequency ---
     float carrierKnob = params[CARRIER_PARAM].getValue();
     float carrierCV = inputs[CARRIERCV_INPUT].isConnected() ? inputs[CARRIERCV_INPUT].getVoltage() / 10.f : 0.f;
     float carrierControl = std::clamp(carrierKnob + carrierCV, 0.f, 1.f);
     int carrierRange = params[CARRIERRANGE_PARAM].getValue();
 
-    float carrierBaseFreq = 0.f;
-    switch (carrierRange) {
-        case 0: carrierBaseFreq = 1.f; break;
-        case 1: carrierBaseFreq = 10.f; break;
-        default: carrierBaseFreq = 100.f; break;
-    }
-    float carrierFreq = carrierBaseFreq * std::pow(100.f, carrierControl);
-    carrierFreq = std::clamp(carrierFreq, 0.f, 100000.f);
+    float carrierBaseFreq = (carrierRange == 0) ? 1.f : (carrierRange == 1) ? 10.f : 100.f;
+    float carrierFreq = std::clamp(carrierBaseFreq * std::pow(100.f, carrierControl), 0.f, 100000.f);
 
+    // --- Modulator enabled ---
     float engageCV = inputs[ENGAGECV_INPUT].isConnected() ? inputs[ENGAGECV_INPUT].getVoltage() : 0.f;
-    bool modEnabled;
-    if (engageCV > 1.f)
-        modEnabled = true;
-    else if (engageCV < -1.f)
-        modEnabled = false;
-    else
-        modEnabled = (params[MODULATORENGAGE_PARAM].getValue() > 0.5f);
+    bool modEnabled = (engageCV > 1.f) ? true : (engageCV < -1.f) ? false : (params[MODULATORENGAGE_PARAM].getValue() > 0.5f);
 
+    // --- Modulator frequency ---
     float modKnob = params[MODULATOR_PARAM].getValue();
     float modCV = inputs[MODULATORCV_INPUT].isConnected() ? inputs[MODULATORCV_INPUT].getVoltage() / 10.f : 0.f;
     float modControl = std::clamp(modKnob + modCV, 0.f, 1.f);
     int modRange = params[MODULATORRANGE_PARAM].getValue();
 
     float minFreq = 0.01f;
-    float maxFreq = 500.f;
-    switch (modRange) {
-        case 0: maxFreq = 5.f; break;
-        case 1: maxFreq = 50.f; break;
-        case 2: maxFreq = 500.f; break;
-    }
-    float modFreq = minFreq + modControl * (maxFreq - minFreq);
-    modFreq = std::clamp(modFreq, minFreq, maxFreq);
+    float maxFreq = (modRange == 0) ? 5.f : (modRange == 1) ? 50.f : 500.f;
+    float modFreq = std::clamp(minFreq + modControl * (maxFreq - minFreq), minFreq, maxFreq);
 
+    // --- Modulator phase ---
     modulatorPhase += modFreq * args.sampleTime;
     if (modulatorPhase >= 1.0f) modulatorPhase -= 1.0f;
-
     bool modulatorHigh = (modulatorPhase < 0.5f);
     bool sampleNow = (!modEnabled || modulatorHigh);
 
+    // --- FX bypass ---
     float bypassCV = inputs[BYPASSCV_INPUT].isConnected() ? inputs[BYPASSCV_INPUT].getVoltage() : 0.f;
-    bool bypassActive;
-    if (bypassCV > 1.f)
-        bypassActive = true;
-    else if (bypassCV < -1.f)
-        bypassActive = false;
-    else
-        bypassActive = (params[FXBYPASS_PARAM].getValue() > 0.5f);
+    bool bypassActive = (bypassCV > 1.f) ? true : (bypassCV < -1.f) ? false : (params[FXBYPASS_PARAM].getValue() > 0.5f);
 
+    // --- Input sample ---
     float inputSample = inputs[AUDIOIN_INPUT].getVoltage();
-
     float fxOutput = 0.f;
     float gainLedLevel = 0.f;
 
     if (bypassActive) {
-        fxOutput = inputSample;
-        gainLedLevel = 0.f;
+        if (fxOutput != inputSample) fxOutput = inputSample;
+        if (gainLedLevel != 0.f) gainLedLevel = 0.f;
     } else {
         if (sampleNow) {
             clockPhase += carrierFreq * args.sampleTime;
@@ -157,15 +138,11 @@ struct INTENSIFIES : Module {
         float gainKnob = params[GAIN_PARAM].getValue();
         float gainCV = inputs[GAINCV_INPUT].isConnected() ? inputs[GAINCV_INPUT].getVoltage() / 10.f : 0.f;
         float gainControl = std::clamp(gainKnob + gainCV, 0.f, 1.f);
-
         float gainRange = params[GAINRANGE_PARAM].getValue() > 0.5f ? 200.f : 20.f;
         float gainAmount = 1.f + gainControl * (gainRange - 1.f);
+        float newFxOutput = std::clamp(fxOutput * gainAmount, -5.f, 5.f);
 
-        fxOutput *= gainAmount;
-
-        if (fxOutput > 5.f) fxOutput = 5.f;
-        if (fxOutput < -5.f) fxOutput = -5.f;
-
+        if (fxOutput != newFxOutput) fxOutput = newFxOutput;
         gainLedLevel = std::clamp(fabsf(fxOutput) / 5.f, 0.f, 1.f);
 
         float fxVolKnob = params[FXVOLUME_PARAM].getValue();
@@ -175,10 +152,11 @@ struct INTENSIFIES : Module {
         fxOutput *= fxVolume;
     }
 
+    // --- Update lights and outputs ---
     lights[GAINLED_LIGHT].setBrightnessSmooth(gainLedLevel, args.sampleTime);
+    outputs[FXOUT_OUTPUT].setVoltage(fxOutput);
 
-    outputs[FXOUT_OUTPUT].setVoltage(std::clamp(fxOutput, -5.f, 5.f));
-
+    // --- Carrier/Modulator combined output ---
     carrierPhase2 += carrierFreq * args.sampleTime;
     if (carrierPhase2 >= 1.f) carrierPhase2 -= 1.f;
     bool carrierHigh2 = (carrierPhase2 < 0.5f);
@@ -188,7 +166,6 @@ struct INTENSIFIES : Module {
     bool modulatorHigh2 = (modulatorPhase2 < 0.5f);
 
     bool combinedHigh = carrierHigh2 || modulatorHigh2;
-
     float synthOutput = combinedHigh ? 5.f : -5.f;
 
     float synthVolKnob = params[SYNTHVOLUME_PARAM].getValue();
@@ -198,25 +175,23 @@ struct INTENSIFIES : Module {
     synthOutput *= synthVol;
     synthOutput = std::clamp(synthOutput, -5.f, 5.f);
 
+    // --- High-pass filter ---
     float cutoff = 20.f;
-    float sampleRate = args.sampleRate;
-    float dt = 1.f / sampleRate;
+    float dt = 1.f / args.sampleRate;
     float RC = 1.f / (2.f * M_PI * cutoff);
     float alpha = RC / (RC + dt);
-
     synthHPOut = alpha * (synthHPOut + synthOutput - synthHPInLast);
     synthHPInLast = synthOutput;
 
-	outputs[SYNTHOUT_OUTPUT].setVoltage(std::clamp(synthHPOut, -5.f, 5.f));
+    outputs[SYNTHOUT_OUTPUT].setVoltage(std::clamp(synthHPOut, -5.f, 5.f));
 
-    lights[MODULATORLED_LIGHT].setBrightnessSmooth((modulatorHigh ? 0.0f : 1.0f), args.sampleTime);
+    // --- Modulator LED ---
+    lights[MODULATORLED_LIGHT].setBrightnessSmooth(modulatorHigh ? 0.f : 1.f, args.sampleTime);
 
-    if (!bypassActive) {
-        mainOutLevel = std::max(fxOutput, 0.f) / 5.f;
-    } else {
-        mainOutLevel = 0.f;
-    }
-    mainOutLevel = std::clamp(mainOutLevel, 0.f, 1.f);
+    // --- Main output LED ---
+    float newMainOutLevel = bypassActive ? 0.f : std::max(fxOutput, 0.f) / 5.f;
+    newMainOutLevel = std::clamp(newMainOutLevel, 0.f, 1.f);
+    if (mainOutLevel != newMainOutLevel) mainOutLevel = newMainOutLevel;
     lights[MAINOUTLED_LIGHT].setBrightnessSmooth(mainOutLevel, args.sampleTime);
 }
 };

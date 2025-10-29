@@ -148,138 +148,177 @@ LightId drumLightIds[RhythmData::NUM_DRUMS] = {
     PERC2LED_LIGHT
 };
 
-	// Sequencer state
-	int currentStep = 0;
-	float lastClock = 0.0f;
-	float gateTimers[RhythmData::NUM_DRUMS] = {};
-	float resetGateTimer = 0.0f;
+// --- Sequencer state ---
+int currentStep = 0;
+float lastClock = 0.0f;
+float currentStepTime = 0.0f;
+float stepInterval = 0.0f;
+bool stepPending = false;
 
-	// Pulsewidth limits (seconds)
-	float minGateSec = 0.005f; // 5ms
-	float maxGateSec = 0.1f; // 1-0ms
+float gateTimers[RhythmData::NUM_DRUMS] = {};
+float resetGateTimer = 0.0f;
 
-	bool runState = true;        // current on/off state
-	bool lastRunButton = false;   // last frame button value
-	bool lastRunCV = false;       // last frame CV value
+float minGateSec = 0.005f;
+float maxGateSec = 0.1f;
 
-	// Convert PW knob 0–1 to 5–50ms gate length (seconds)
-	float getGateLength(float pw) {
-		return minGateSec + pw * (maxGateSec - minGateSec);
-	}
+bool runState = true;          // start in running state
+bool lastRunButton = false;
+bool lastRunCV = false;
+
+// Cached params / CVs for change detection
+float lastPwKnob = -1.f, lastPwCV = -1.f, lastPwFinal = -1.f;
+float lastSwingKnob = -1.f, lastSwingCV = -1.f, lastSwingAmt = -1.f;
+float lastStyleKnob = -1.f, lastStyleCV = -1.f;
+int   lastStyle = 0; // default to first style
+
+float getGateLength(float pw) {
+	return minGateSec + pw * (maxGateSec - minGateSec);
+}
 
 void process(const ProcessArgs& args) override {
-    float dt = args.sampleTime;
+	float dt = args.sampleTime;
 
-    // --- Run toggle (button OR CV) ---
+	// --- Run toggle (button or CV) ---
 	bool runButton = params[RUN_PARAM].getValue() > 0.5f;
-	bool runCV = false;
-	if (inputs[RUNCVIN_INPUT].isConnected()) {
-	    float v = inputs[RUNCVIN_INPUT].getVoltage();
-	    runCV = v > 0.0f;  // positive voltage counts as "pressed"
-	}
+	bool runCV = inputs[RUNCVIN_INPUT].isConnected() && inputs[RUNCVIN_INPUT].getVoltage() > 0.f;
+
 	if ((runButton && !lastRunButton) || (runCV && !lastRunCV))
-	    runState = !runState;
+		runState = !runState;
+
 	lastRunButton = runButton;
 	lastRunCV = runCV;
-	lights[RUNLED_LIGHT].setBrightnessSmooth(runState ? 1.0f : 0.0f, args.sampleTime);
 
+	// Light reflects current run state (starts on)
+	lights[RUNLED_LIGHT].setBrightnessSmooth(runState ? 1.f : 0.f, dt);
 
-    if (!runState) {
-        currentStep = 0;
-        for (int d = 0; d < RhythmData::NUM_DRUMS; d++) gateTimers[d] = 0.0f;
-        resetGateTimer = 0.0f;
-        for (int d = 0; d < RhythmData::NUM_DRUMS; d++)
-            lights[drumLightIds[d]].setBrightness(0.0f);
-        lights[RESETLED_LIGHT].setBrightness(0.0f);
-        return;
-    }
+	// --- If stopped, mute all outputs and lights ---
+	if (!runState) {
+		std::fill(std::begin(gateTimers), std::end(gateTimers), 0.f);
+		resetGateTimer = 0.f;
+		for (int d = 0; d < RhythmData::NUM_DRUMS; d++) {
+			lights[drumLightIds[d]].setBrightness(0.f);
+			outputs[drumOutputIds[d]].setVoltage(0.f);
+		}
+		lights[RESETLED_LIGHT].setBrightness(0.f);
+		outputs[RESET_OUTPUT].setVoltage(0.f);
+		return;
+	}
 
-    // --- Pulsewidth ---
-    float pwKnob = params[PW_PARAM].getValue() * 5.f;
-    float pwCV = inputs[PWCVIN_INPUT].isConnected() ? inputs[PWCVIN_INPUT].getVoltage() : 0.0f;
-    float pwFinal = clamp((pwKnob + pwCV) / 5.f, 0.0f, 1.0f);
+	// --- Initialize defaults once at startup ---
+	static bool initialized = false;
+	if (!initialized) {
+		lastPwKnob = params[PW_PARAM].getValue() * 5.f;
+		lastPwCV = inputs[PWCVIN_INPUT].isConnected() ? inputs[PWCVIN_INPUT].getVoltage() : 0.f;
+		lastPwFinal = std::clamp((lastPwKnob + lastPwCV) / 5.f, 0.f, 1.f);
 
-    // --- Swing ---
-    float swingKnob = params[SWING_PARAM].getValue();
-    float swingCV = inputs[SWINGCVIN_INPUT].isConnected() ? inputs[SWINGCVIN_INPUT].getVoltage() / 5.0f : 0.0f;
-    float swingAmount = clamp(swingKnob + swingCV, 0.0f, 1.0f) * 0.5f;
+		lastSwingKnob = params[SWING_PARAM].getValue();
+		lastSwingCV = inputs[SWINGCVIN_INPUT].isConnected() ? inputs[SWINGCVIN_INPUT].getVoltage() / 5.f : 0.f;
+		lastSwingAmt = std::clamp(lastSwingKnob + lastSwingCV, 0.f, 1.f) * 0.5f;
 
-	// --- Style (with CV modulation) ---
-	float styleKnob = params[STYLE_PARAM].getValue(); // 0–4
-	float styleCV = inputs[STYLECVIN_INPUT].isConnected() ? inputs[STYLECVIN_INPUT].getVoltage() : 0.0f;
-	float styleValue = clamp(styleKnob + rescale(styleCV, -5.f, 5.f, -2.5f, 2.5f), 0.f, 5.f);
+		lastStyleKnob = params[STYLE_PARAM].getValue();
+		lastStyleCV = inputs[STYLECVIN_INPUT].isConnected() ? inputs[STYLECVIN_INPUT].getVoltage() : 0.f;
+		lastStyle = (int)round(std::clamp(lastStyleKnob + rescale(lastStyleCV, -5.f, 5.f, -2.5f, 2.5f), 0.f, 5.f));
+
+		// Unmute all drums
+		for (int d = 0; d < RhythmData::NUM_DRUMS; d++)
+			params[drumMuteIds[d]].setValue(1.f);
+
+		initialized = true;
+	}
+
+	// --- Parameter + CV change detection ---
+
+	// Pulsewidth
+	float pwKnob = params[PW_PARAM].getValue() * 5.f;
+	float pwCV = inputs[PWCVIN_INPUT].isConnected() ? inputs[PWCVIN_INPUT].getVoltage() : 0.f;
+	float pwFinal = std::clamp((pwKnob + pwCV) / 5.f, 0.f, 1.f);
+	if (pwKnob != lastPwKnob || pwCV != lastPwCV) {
+		lastPwKnob = pwKnob;
+		lastPwCV = pwCV;
+		lastPwFinal = pwFinal;
+	}
+
+	// Swing
+	float swingKnob = params[SWING_PARAM].getValue();
+	float swingCV = inputs[SWINGCVIN_INPUT].isConnected() ? inputs[SWINGCVIN_INPUT].getVoltage() / 5.f : 0.f;
+	float swingAmount = std::clamp(swingKnob + swingCV, 0.f, 1.f) * 0.5f;
+	if (swingKnob != lastSwingKnob || swingCV != lastSwingCV) {
+		lastSwingKnob = swingKnob;
+		lastSwingCV = swingCV;
+		lastSwingAmt = swingAmount;
+	}
+
+	// Style
+	float styleKnob = params[STYLE_PARAM].getValue();
+	float styleCV = inputs[STYLECVIN_INPUT].isConnected() ? inputs[STYLECVIN_INPUT].getVoltage() : 0.f;
+	float styleValue = std::clamp(styleKnob + rescale(styleCV, -5.f, 5.f, -2.5f, 2.5f), 0.f, 5.f);
 	int style = (int)round(styleValue);
 	int seqLength = rhythmData.sequenceLengths[style];
+	if (styleKnob != lastStyleKnob || styleCV != lastStyleCV) {
+		lastStyleKnob = styleKnob;
+		lastStyleCV = styleCV;
+		lastStyle = style;
+	}
 
-    // --- Clock handling ---
-    float clock = inputs[CLOCKIN_INPUT].isConnected() ? inputs[CLOCKIN_INPUT].getVoltage() : 0.0f;
-    static float lastClock = 0.0f;
-    static float currentStepTime = 0.0f;
-    static float stepInterval = 0.0f;
-    static bool stepPending = false;
+	// --- Clock edge detect ---
+	float clock = inputs[CLOCKIN_INPUT].isConnected() ? inputs[CLOCKIN_INPUT].getVoltage() : 0.f;
+	currentStepTime += dt;
 
-    currentStepTime += dt;
-    if (clock > 1.0f && lastClock <= 1.0f) {
-        stepInterval = currentStepTime;
-        currentStepTime = 0.0f;
-        stepPending = true;
-    }
-    lastClock = clock;
+	if (clock > 1.0f && lastClock <= 1.0f) {
+		stepInterval = currentStepTime;
+		currentStepTime = 0.f;
+		stepPending = true;
+	}
+	lastClock = clock;
 
-    if (stepPending) {
-        float delay = (currentStep % 2 == 1) ? swingAmount * stepInterval : 0.0f;
+	// --- Step advance ---
+	if (stepPending) {
+		float delay = (currentStep % 2 == 1) ? lastSwingAmt * stepInterval : 0.f;
 
-        if (currentStepTime >= delay) {
-            // --- Step triggers per channel ---
-            for (int d = 0; d < RhythmData::NUM_DRUMS; d++) {
-                float knobVal = params[drumParamIds[d]].getValue();
-                float cvVal = 0.0f;
-                if (inputs[drumCVInputs[d]].isConnected()) {
-                    cvVal = clamp(inputs[drumCVInputs[d]].getVoltage() / 5.0f, -1.0f, 1.0f);
-                }
-                float sumVal = clamp(knobVal + cvVal * 7.0f, 0.0f, 7.0f);
-                int pattern = (int)round(sumVal);
+		if (currentStepTime >= delay) {
+			for (int d = 0; d < RhythmData::NUM_DRUMS; d++) {
+				float knobVal = params[drumParamIds[d]].getValue();
+				float cvVal = inputs[drumCVInputs[d]].isConnected()
+					? std::clamp(inputs[drumCVInputs[d]].getVoltage() / 5.f, -1.f, 1.f)
+					: 0.f;
+				float sumVal = std::clamp(knobVal + cvVal * 7.f, 0.f, 7.f);
+				int pattern = (int)round(sumVal);
 
-                if (rhythmData.rhythms[style][d][pattern][currentStep])
-                    gateTimers[d] = getGateLength(pwFinal);
-            }
+				if (rhythmData.rhythms[lastStyle][d][pattern][currentStep])
+					gateTimers[d] = getGateLength(lastPwFinal);
+			}
 
-            // Reset pulse on final step
-            if (currentStep == seqLength - 1)
-                resetGateTimer = getGateLength(pwFinal);
+			if (currentStep == seqLength - 1)
+				resetGateTimer = getGateLength(lastPwFinal);
 
-            // --- Increment step after triggering ---
-            currentStep++;
-            if (currentStep >= seqLength)
-                currentStep = 0;
+			currentStep = (currentStep + 1) % seqLength;
+			stepPending = false;
+		}
+	}
 
-            stepPending = false;
-        }
-    }
+	// --- Outputs ---
+	for (int d = 0; d < RhythmData::NUM_DRUMS; d++) {
+		bool muted = params[drumMuteIds[d]].getValue() <= 0.5f;
 
-    // --- Write outputs and LEDs with final mute ---
-    for (int d = 0; d < RhythmData::NUM_DRUMS; d++) {
-        bool muted = params[drumMuteIds[d]].getValue() <= 0.5f;
+		if (gateTimers[d] > 0.f && !muted) {
+			outputs[drumOutputIds[d]].setVoltage(5.f);
+			lights[drumLightIds[d]].setBrightnessSmooth(1.f, dt);
+			gateTimers[d] -= dt;
+		} else {
+			outputs[drumOutputIds[d]].setVoltage(0.f);
+			lights[drumLightIds[d]].setBrightnessSmooth(0.f, dt);
+		}
+	}
 
-        if (gateTimers[d] > 0.0f && !muted) {
-            outputs[drumOutputIds[d]].setVoltage(5.0f);
-            lights[drumLightIds[d]].setBrightnessSmooth(1.0f, dt);
-            gateTimers[d] -= dt;
-        } else {
-            outputs[drumOutputIds[d]].setVoltage(0.0f);
-            lights[drumLightIds[d]].setBrightnessSmooth(0.0f, dt);
-        }
-    }
-
-    // --- Reset output ---
-    if (resetGateTimer > 0.0f) {
-        outputs[RESET_OUTPUT].setVoltage(5.0f);
-        lights[RESETLED_LIGHT].setBrightnessSmooth(1.0f, dt);
-        resetGateTimer -= dt;
-    } else {
-        outputs[RESET_OUTPUT].setVoltage(0.0f);
-        lights[RESETLED_LIGHT].setBrightnessSmooth(0.0f, dt);
-    }
+	// --- Reset output ---
+	if (resetGateTimer > 0.f) {
+		outputs[RESET_OUTPUT].setVoltage(5.f);
+		lights[RESETLED_LIGHT].setBrightnessSmooth(1.f, dt);
+		resetGateTimer -= dt;
+	} else {
+		outputs[RESET_OUTPUT].setVoltage(0.f);
+		lights[RESETLED_LIGHT].setBrightnessSmooth(0.f, dt);
+	}
 }
 };
 

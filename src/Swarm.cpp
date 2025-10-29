@@ -27,7 +27,6 @@ struct Chirp {
             seqLength = (rand() % 64) + 1;
 
         lastFreeze = freeze;
-
         stepSamples += 1.0f;
 
         if (stepSamples >= stepDurationSamples) {
@@ -35,7 +34,7 @@ struct Chirp {
             currentStep = (currentStep + 1) % seqLength;
 
             if (freeze == 0) {
-                const int density = 20; // % chance
+                const int density = 20;
                 gates[rand() % seqLength] = (rand() % 100 <= density);
             }
         }
@@ -88,12 +87,22 @@ struct Swarm : Module {
     float vcoPhase = 0.f;
     float vcoFreq = 100.f;
 
+    // Cached parameters for change detection
+    float lastWidthParam = -1.f;
+    float lastCoarse = -1.f;
+    float lastFine = -1.f;
+    float lastRange = -1.f;
+    float lastTimeCV = -99.f;
+    float lastWidthCV = -99.f;
+    float lastPeriodMs = 0.f;
+    float lastSummedTime = 0.f;
+
     Swarm() {
         config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
-        configParam(TIMECOARSE_PARAM, 0.f, 1.f, 0.5f, "Coarse Speed", "%", 0.f, 100.f);
+        configParam(TIMECOARSE_PARAM, 0.f, 1.f, 0.5f, "Coarse Speed");
         configSwitch(RANGESWITCH_PARAM, 0.f, 1.f, 0.f, "Range", {"Slow", "Fast"});
-        configParam(TIMEFINE_PARAM, -1.f, 1.f, 0.f, "Fine Speed Adjust", "%", 0.f, 100.f);
-        configParam(WIDTH_PARAM, 0.f, 1.f, 0.5f, "Width", "%", 10.f, 5.f);
+        configParam(TIMEFINE_PARAM, -1.f, 1.f, 0.f, "Fine Speed Adjust");
+        configParam(WIDTH_PARAM, 0.f, 1.f, 0.5f, "Width");
         configSwitch(LOOPONE_PARAM, 0.f, 1.f, 0.f, "Loop Ch. 1", {"Off", "On"});
         configSwitch(LOOPTWO_PARAM, 0.f, 1.f, 0.f, "Loop Ch. 2", {"Off", "On"});
         configSwitch(LOOPTHREE_PARAM, 0.f, 1.f, 0.f, "Loop Ch. 3", {"Off", "On"});
@@ -103,12 +112,13 @@ struct Swarm : Module {
         configOutput(VCOOUT_OUTPUT, "VCO");
         configOutput(ONEOUT_OUTPUT, "Ch. 1");
         configOutput(TWOOUT_OUTPUT, "Ch. 2");
-        configOutput(CLOCKOUT_OUTPUT, "Clock");
         configOutput(THREEOUT_OUTPUT, "Ch. 3");
         configOutput(FOUROUT_OUTPUT, "Ch. 4");
+        configOutput(CLOCKOUT_OUTPUT, "Clock");
     }
 
     void process(const ProcessArgs& args) override {
+        // --- initialize chirps only once ---
         if (!chirpsInitialized) {
             chirps[0].timeRatio = 1.3f;
             chirps[1].timeRatio = 3.7f;
@@ -117,24 +127,37 @@ struct Swarm : Module {
             chirpsInitialized = true;
         }
 
-        float pulseWidthParam = params[WIDTH_PARAM].getValue();
+        // --- read inputs and params ---
+        float widthParam = params[WIDTH_PARAM].getValue();
         float coarse = params[TIMECOARSE_PARAM].getValue();
         float fine = params[TIMEFINE_PARAM].getValue();
         float range = params[RANGESWITCH_PARAM].getValue();
+        float timeCV = inputs[TIMECVIN_INPUT].isConnected() ? std::clamp(inputs[TIMECVIN_INPUT].getVoltage(), -5.f, 5.f) : 0.f;
+        float widthCV = inputs[WIDTHCVIN_INPUT].isConnected() ? std::clamp(inputs[WIDTHCVIN_INPUT].getVoltage(), -5.f, 5.f) : 0.f;
 
-        float timeCV = clamp(inputs[TIMECVIN_INPUT].getVoltage(), -5.f, 5.f);
-        float widthCV = clamp(inputs[WIDTHCVIN_INPUT].getVoltage(), -5.f, 5.f);
+        bool changed = (widthParam != lastWidthParam) || (coarse != lastCoarse) || (fine != lastFine)
+            || (range != lastRange) || (timeCV != lastTimeCV) || (widthCV != lastWidthCV);
 
-        float summedTime = clamp((coarse * 10.f - 5.f) + (fine * 5.f) + timeCV, -5.f, 5.f);
+        if (changed) {
+            lastWidthParam = widthParam;
+            lastCoarse = coarse;
+            lastFine = fine;
+            lastRange = range;
+            lastTimeCV = timeCV;
+            lastWidthCV = widthCV;
 
-        float periodMs = (range < 0.5f)
-            ? clamp(rescale(summedTime, -5.f, 5.f, 500.f, 150.f), 150.f, 500.f)
-            : clamp(rescale(summedTime, -5.f, 5.f, 150.f, 15.f), 15.f, 150.f);
+            lastSummedTime = std::clamp((coarse * 10.f - 5.f) + (fine * 5.f) + timeCV, -5.f, 5.f);
 
+            lastPeriodMs = (range < 0.5f)
+                ? std::clamp(rescale(lastSummedTime, -5.f, 5.f, 500.f, 150.f), 150.f, 500.f)
+                : std::clamp(rescale(lastSummedTime, -5.f, 5.f, 150.f, 15.f), 15.f, 150.f);
+
+            pulseWidth = std::clamp(widthParam + widthCV * 0.1f, 0.05f, 0.5f);
+        }
+
+        // --- master clock ---
         float samplesPerMs = args.sampleRate * 0.001f;
-        float periodSamples = periodMs * samplesPerMs;
-
-        pulseWidth = clamp(pulseWidthParam + widthCV * 0.1f, 0.05f, 0.5f);
+        float periodSamples = lastPeriodMs * samplesPerMs;
         float pulseSamples = periodSamples * pulseWidth;
 
         clockTimer += args.sampleTime * args.sampleRate;
@@ -145,23 +168,25 @@ struct Swarm : Module {
         outputs[CLOCKOUT_OUTPUT].setVoltage(mainOutputHigh ? 5.f : 0.f);
         lights[CLOCKLED_LIGHT].setBrightnessSmooth(mainOutputHigh, args.sampleTime);
 
+        // --- chirp gates ---
         for (int i = 0; i < 4; i++) {
-            chirps[i].freeze = (params[LOOPONE_PARAM + i].getValue() > 0.5f) ? 1 : 0;
-            int gate = chirps[i].update(periodMs, pulseWidth, args.sampleRate);
+            chirps[i].freeze = (params[LOOPONE_PARAM + i].getValue() > 0.5f);
+            int gate = chirps[i].update(lastPeriodMs, pulseWidth, args.sampleRate);
             outputs[ONEOUT_OUTPUT + i].setVoltage(gate ? 5.f : 0.f);
             lights[ONELED_LIGHT + i].setBrightnessSmooth(gate, args.sampleTime);
         }
 
-        vcoFreq = (range < 0.5f)
-            ? clamp(rescale(summedTime, -5.f, 5.f, 40.f, 200.f), 40.f, 200.f)
-            : clamp(rescale(summedTime, -5.f, 5.f, 1000.f, 15000.f), 1000.f, 15000.f);
+        // --- internal VCO ---
+        vcoFreq = (lastRange < 0.5f)
+            ? std::clamp(rescale(lastSummedTime, -5.f, 5.f, 40.f, 200.f), 40.f, 200.f)
+            : std::clamp(rescale(lastSummedTime, -5.f, 5.f, 1000.f, 15000.f), 1000.f, 15000.f);
 
         vcoPhase += vcoFreq * args.sampleTime;
         if (vcoPhase >= 1.f)
             vcoPhase -= 1.f;
 
         outputs[VCOOUT_OUTPUT].setVoltage((vcoPhase < 0.5f) ? 5.f : -5.f);
-        lights[VCOLED_LIGHT].setBrightness(5.f);
+        lights[VCOLED_LIGHT].setBrightnessSmooth(1.f, args.sampleTime);
     }
 };
 

@@ -245,6 +245,25 @@
         "oscillator",
         "synth voice"
       ]
+    },
+    {
+      "slug": "Kleztizer",
+      "name": "Kleztizer",
+      "description": "A quantizer that follows the harmonic structure of Klezmer modes",
+      "tags": [
+        "quantizer",
+        "sequencer"
+      ]
+    },
+    {
+      "slug": "Tantz",
+      "name": "Tantz!",
+      "description": "Klezmer preset drum sequencer",
+      "tags": [
+        "sequencer",
+        "trigger",
+        "gate"
+      ]
     }
   ]
 }

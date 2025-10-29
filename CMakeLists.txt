@@ -39,6 +39,8 @@ target_sources(Moffenzeef PRIVATE
     ${SOURCE_DIR}/src/Swarm.cpp
     ${SOURCE_DIR}/src/INTENSIFIES.cpp
     ${SOURCE_DIR}/src/TheRunner.cpp
+    ${SOURCE_DIR}/src/Kleztizer.cpp
+    ${SOURCE_DIR}/src/Tantz.cpp
     ${SOURCE_DIR}/src/plugin.cpp
     ${SOURCE_DIR}/src/plugin.hpp
 ) 

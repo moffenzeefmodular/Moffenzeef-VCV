@@ -56,7 +56,7 @@ struct Kleztizer : Module {
 	};
 	enum LightId {
 		LEADLED1_LIGHT,
-		LEADLED_LIGHT,
+		LEADLED2_LIGHT,
 		CHORDBUTTON1LED_LIGHT,
 		CHORDBUTTON2LED_LIGHT,
 		CHORDBUTTON3LED_LIGHT,
@@ -120,23 +120,12 @@ struct Kleztizer : Module {
 	int chordSelect = 1;
 
 	const int chordButtonParams[7] = {
-		CHORDBUTTON1_PARAM,
-		CHORDBUTTON2_PARAM,
-		CHORDBUTTON3_PARAM,
-		CHORDBUTTON4_PARAM,
-		CHORDBUTTON5_PARAM,
-		CHORDBUTTON6_PARAM,
-		CHORDBUTTON7_PARAM
+		CHORDBUTTON1_PARAM, CHORDBUTTON2_PARAM, CHORDBUTTON3_PARAM,
+		CHORDBUTTON4_PARAM, CHORDBUTTON5_PARAM, CHORDBUTTON6_PARAM, CHORDBUTTON7_PARAM
 	};
-
 	const int chordButtonLights[7] = {
-		CHORDBUTTON1LED_LIGHT,
-		CHORDBUTTON2LED_LIGHT,
-		CHORDBUTTON3LED_LIGHT,
-		CHORDBUTTON4LED_LIGHT,
-		CHORDBUTTON5LED_LIGHT,
-		CHORDBUTTON6LED_LIGHT,
-		CHORDBUTTON7LED_LIGHT
+		CHORDBUTTON1LED_LIGHT, CHORDBUTTON2LED_LIGHT, CHORDBUTTON3LED_LIGHT,
+		CHORDBUTTON4LED_LIGHT, CHORDBUTTON5LED_LIGHT, CHORDBUTTON6LED_LIGHT, CHORDBUTTON7LED_LIGHT
 	};
 
 	float tonicVoltage = 0.f;
@@ -147,7 +136,6 @@ struct Kleztizer : Module {
 	const int MAGEIN_AVOT[7]    = {0, 2, 5, 6, 7, 9, 10};
 	const int HARMONIC_MINOR[7] = {0, 2, 3, 5, 7, 8, 11};
 
-	// --- Chords tables now have only 3 voices each ---
 	const int FREYGISH_CHORDS[7][3] = {
 		{0, 4, 7}, {1, 5, 8}, {4, 7, 10},
 		{5, 8, 0}, {7, 10, 2}, {5, 0, 2}, {10, 1, 5}
@@ -169,118 +157,107 @@ struct Kleztizer : Module {
 		{5, 8, 12}, {7, 11, 14}, {9, 0, 4}, {11, 2, 5}
 	};
 
+	// --- persistent state ---
 	float leadGateTimer[2] = {0.f, 0.f};
 	float leadLedTimer[2]  = {0.f, 0.f};
 	int lastQuantizedNote[2] = {-999, -999};
 
 	void process(const ProcessArgs& args) override {
-		// --- Chord buttons + CV ---
+
+		// --- Chord buttons ---
 		for (int i = 0; i < 7; i++) {
 			if (chordButtonTriggers[i].process(params[chordButtonParams[i]].getValue())) {
-				for (int j = 0; j < 7; j++) chordButtonStates[j] = (i == j);
+				for (int j = 0; j < 7; j++)
+					chordButtonStates[j] = (i == j);
 				chordSelect = i + 1;
 			}
 		}
+
+		// --- Chord select CV ---
 		if (inputs[CHORDSELECTCV_INPUT].isConnected()) {
-			float cv = clamp(inputs[CHORDSELECTCV_INPUT].getVoltage(), -5.f, 5.f);
+			float cv = std::clamp(inputs[CHORDSELECTCV_INPUT].getVoltage(), -5.f, 5.f);
 			int cvChord = int(roundf(((cv + 5.f) / 10.f) * 6.f)) + 1;
-			chordSelect = clamp(cvChord, 1, 7);
+			chordSelect = std::clamp(cvChord, 1, 7);
 			for (int j = 0; j < 7; j++)
 				chordButtonStates[j] = (j == chordSelect - 1);
 		}
-		for (int i = 0; i < 7; i++) {
+
+		// --- Button LEDs ---
+		for (int i = 0; i < 7; i++)
 			lights[chordButtonLights[i]].setBrightnessSmooth(chordButtonStates[i] ? 1.f : 0.f, args.sampleTime);
-		}
 
-		for (int i = 0; i < 7; i++) {
- 	   outputs[CHORDBUTTONGATEOUT1_OUTPUT + i].setVoltage(chordButtonStates[i] ? 5.f : 0.f);
-	   }
+		// --- Button Gate Outputs ---
+		for (int i = 0; i < 7; i++)
+			outputs[CHORDBUTTONGATEOUT1_OUTPUT + i].setVoltage(chordButtonStates[i] ? 5.f : 0.f);
 
-		// --- Key & Mode ---
+		// --- Key ---
 		float keyCV = inputs[KEYCV_INPUT].isConnected() ? inputs[KEYCV_INPUT].getVoltage() : 0.f;
 		float keyNorm = params[KEY_PARAM].getValue() / 11.f + keyCV / 10.f;
-		int keyIndex = clamp(int(roundf(keyNorm * 11.f)), 0, 11);
+		int keyIndex = std::clamp(int(roundf(keyNorm * 11.f)), 0, 11);
 		tonicVoltage = keyIndex / 12.f;
 		outputs[PEDALOUT_OUTPUT].setVoltage(tonicVoltage - 2.f);
 
+		// --- Mode ---
 		float modeCV = inputs[MODECV_INPUT].isConnected() ? inputs[MODECV_INPUT].getVoltage() : 0.f;
 		float modeNorm = params[MODE_PARAM].getValue() / 4.f + modeCV / 10.f;
-		int modeIndex = clamp(int(roundf(modeNorm * 4.f)), 0, 4);
+		int modeIndex = std::clamp(int(roundf(modeNorm * 4.f)), 0, 4);
 
 		const int* currentScale = nullptr;
-		switch(modeIndex) {
-			case 0: currentScale = FREYGISH; break;
-			case 1: currentScale = MI_SHEBERACH; break;
-			case 2: currentScale = ADONAI_MALAKH; break;
-			case 3: currentScale = MAGEIN_AVOT; break;
-			case 4: currentScale = HARMONIC_MINOR; break;
-		}
-
 		const int (*chordTable)[3] = nullptr;
 		switch (modeIndex) {
-			case 0: chordTable = FREYGISH_CHORDS; break;
-			case 1: chordTable = MI_SHEBERACH_CHORDS; break;
-			case 2: chordTable = ADONAI_MALAKH_CHORDS; break;
-			case 3: chordTable = MAGEIN_AVOT_CHORDS; break;
-			case 4: chordTable = HARMONIC_MINOR_CHORDS; break;
+			case 0: currentScale = FREYGISH; chordTable = FREYGISH_CHORDS; break;
+			case 1: currentScale = MI_SHEBERACH; chordTable = MI_SHEBERACH_CHORDS; break;
+			case 2: currentScale = ADONAI_MALAKH; chordTable = ADONAI_MALAKH_CHORDS; break;
+			case 3: currentScale = MAGEIN_AVOT; chordTable = MAGEIN_AVOT_CHORDS; break;
+			case 4: currentScale = HARMONIC_MINOR; chordTable = HARMONIC_MINOR_CHORDS; break;
 		}
-if (chordSelect > 0 && chordTable) {
-    int chordIndex = chordSelect - 1;
 
-    // --- Root (always first note of chord table, no inversion/voicing) ---
-    float rootVoltage = tonicVoltage + chordTable[chordIndex][0] / 12.f - 2.f; // Two octaves below chord
-	// --- Drop an additional octave if Chord 7 is selected ---
-	if (chordSelect == 7) {
-    rootVoltage -= 1.f; // minus 1V = 1 octave
-	}
-    outputs[CHORDROOTOUT_OUTPUT].setVoltage(rootVoltage);
+		if (chordSelect > 0 && chordTable) {
+			int chordIndex = chordSelect - 1;
 
-    // --- Inversion knob + CV ---
-    float invParam = params[INVERSION_PARAM].getValue();
-    if (inputs[CHORDINVERSIONCV_INPUT].isConnected())
-        invParam += (inputs[CHORDINVERSIONCV_INPUT].getVoltage() / 5.f) * 2.f;
-    int inversion = clamp((int)roundf(invParam), 0, 2);
+			float rootVoltage = tonicVoltage + chordTable[chordIndex][0] / 12.f - 2.f;
+			if (chordSelect == 7)
+				rootVoltage -= 1.f;
+			outputs[CHORDROOTOUT_OUTPUT].setVoltage(rootVoltage);
 
-    // --- Voicing knob + CV ---
-    float voiceParam = params[CHORDVOICING_PARAM].getValue();
-    if (inputs[CHORDVOICINGCV_INPUT].isConnected())
-        voiceParam += (inputs[CHORDVOICINGCV_INPUT].getVoltage() / 5.f) * 3.f;
-    int voicing = clamp((int)roundf(voiceParam), 0, 3);
+			float invParam = params[INVERSION_PARAM].getValue();
+			if (inputs[CHORDINVERSIONCV_INPUT].isConnected())
+				invParam += (inputs[CHORDINVERSIONCV_INPUT].getVoltage() / 5.f) * 2.f;
+			int inversion = std::clamp((int)roundf(invParam), 0, 2);
 
-    // --- Apply inversion ---
-    int chordVoices[3];
-    for (int v = 0; v < 3; v++)
-        chordVoices[v] = chordTable[chordIndex][(v + inversion) % 3];
+			float voiceParam = params[CHORDVOICING_PARAM].getValue();
+			if (inputs[CHORDVOICINGCV_INPUT].isConnected())
+				voiceParam += (inputs[CHORDVOICINGCV_INPUT].getVoltage() / 5.f) * 3.f;
+			int voicing = std::clamp((int)roundf(voiceParam), 0, 3);
 
-    // --- Apply voicing ---
-    int finalVoices[3];
-    switch (voicing) {
-        case 0: for (int v = 0; v < 3; v++) finalVoices[v] = chordVoices[v]; break;
-        case 1: finalVoices[0] = chordVoices[1] - 12; finalVoices[1] = chordVoices[0]; finalVoices[2] = chordVoices[2]; break;
-        case 2: finalVoices[0] = chordVoices[2] - 12; finalVoices[1] = chordVoices[0]; finalVoices[2] = chordVoices[1]; break;
-        case 3: finalVoices[0] = chordVoices[0] - 12; finalVoices[1] = chordVoices[1]; finalVoices[2] = chordVoices[2] - 12; break;
-    }
+			int chordVoices[3];
+			for (int v = 0; v < 3; v++)
+				chordVoices[v] = chordTable[chordIndex][(v + inversion) % 3];
 
-    // --- Output chord voices (mono) ---
-    for (int v = 0; v < 3; v++)
-        outputs[CHORDOUT1_OUTPUT + v].setVoltage(tonicVoltage + finalVoices[v] / 12.f);
+			int finalVoices[3];
+			switch (voicing) {
+				case 0: for (int v = 0; v < 3; v++) finalVoices[v] = chordVoices[v]; break;
+				case 1: finalVoices[0] = chordVoices[1] - 12; finalVoices[1] = chordVoices[0]; finalVoices[2] = chordVoices[2]; break;
+				case 2: finalVoices[0] = chordVoices[2] - 12; finalVoices[1] = chordVoices[0]; finalVoices[2] = chordVoices[1]; break;
+				case 3: finalVoices[0] = chordVoices[0] - 12; finalVoices[1] = chordVoices[1]; finalVoices[2] = chordVoices[2] - 12; break;
+			}
 
-    // --- CHORDOUT1 as polyphonic output: 3 voices only ---
-    outputs[CHORDOUT1_OUTPUT].setChannels(3);
-    for (int v = 0; v < 3; v++)
-        outputs[CHORDOUT1_OUTPUT].setVoltage(tonicVoltage + finalVoices[v] / 12.f, v);
+			for (int v = 0; v < 3; v++)
+				outputs[CHORDOUT1_OUTPUT + v].setVoltage(tonicVoltage + finalVoices[v] / 12.f);
 
-} else {
-    outputs[CHORDROOTOUT_OUTPUT].setVoltage(0.f);
-    for (int v = 0; v < 3; v++)
-        outputs[CHORDOUT1_OUTPUT + v].setVoltage(0.f);
+			outputs[CHORDOUT1_OUTPUT].setChannels(3);
+			for (int v = 0; v < 3; v++)
+				outputs[CHORDOUT1_OUTPUT].setVoltage(tonicVoltage + finalVoices[v] / 12.f, v);
+		} else {
+			outputs[CHORDROOTOUT_OUTPUT].setVoltage(0.f);
+			for (int v = 0; v < 3; v++)
+				outputs[CHORDOUT1_OUTPUT + v].setVoltage(0.f);
+			outputs[CHORDOUT1_OUTPUT].setChannels(3);
+			for (int i = 0; i < 3; i++)
+				outputs[CHORDOUT1_OUTPUT].setVoltage(0.f, i);
+		}
 
-    outputs[CHORDOUT1_OUTPUT].setChannels(3);
-    for (int i = 0; i < 3; i++)
-        outputs[CHORDOUT1_OUTPUT].setVoltage(0.f, i);
-}
-
-		// --- Lead processing (unchanged) ---
+		// --- Lead section uses member vars only (no static state) ---
 		for (int lead = 0; lead < 2; lead++) {
 			int LEADCV_INPUT_ID       = (lead == 0) ? LEADCV1_INPUT       : LEADCV2_INPUT;
 			int LEADOCTAVECV_INPUT_ID = (lead == 0) ? LEADOCTAVECV1_INPUT : LEADOCTAVECV2_INPUT;
@@ -290,7 +267,7 @@ if (chordSelect > 0 && chordTable) {
 			int LEADGATE_PARAM_ID     = (lead == 0) ? LEADGATE1_PARAM     : LEADGATE2_PARAM;
 			int LEADOUT_OUTPUT_ID     = (lead == 0) ? LEADOUT1_OUTPUT     : LEADOUT2_OUTPUT;
 			int LEADGATEOUT_OUTPUT_ID = (lead == 0) ? LEADGATEOUT1_OUTPUT : LEADGATEOUT2_OUTPUT;
-			int LEADLED_LIGHT_ID      = (lead == 0) ? LEADLED1_LIGHT      : LEADLED_LIGHT;
+			int LEADLED_LIGHT_ID      = (lead == 0) ? LEADLED1_LIGHT      : LEADLED2_LIGHT;
 
 			float rawCV = inputs[LEADCV_INPUT_ID].isConnected() ? inputs[LEADCV_INPUT_ID].getVoltage() : 0.f;
 			float leadCVAtt = rawCV * params[LEADCV_PARAM_ID].getValue();
@@ -313,15 +290,15 @@ if (chordSelect > 0 && chordTable) {
 			float octaveParam = params[LEADOCTAVE_PARAM_ID].getValue();
 			if (inputs[LEADOCTAVECV_INPUT_ID].isConnected())
 				octaveParam += (inputs[LEADOCTAVECV_INPUT_ID].getVoltage() / 5.f) * 4.f;
-			octaveParam = clamp(octaveParam, 0.f, 4.f);
+			octaveParam = std::clamp(octaveParam, 0.f, 4.f);
 			int octaveShift = (int)roundf(octaveParam) - 2;
 			closestNote += octaveShift * 12;
 
 			outputs[LEADOUT_OUTPUT_ID].setVoltage(tonicVoltage + closestNote / 12.f);
 
 			bool isTrigMode = (params[LEADGATE_PARAM_ID].getValue() > 0.5f);
-			float trigDur  = 0.005f;
-			float gateDur  = 0.5f;
+			float trigDur = 0.005f;
+			float gateDur = 0.5f;
 
 			if (closestNote != lastQuantizedNote[lead]) {
 				lastQuantizedNote[lead] = closestNote;
@@ -411,7 +388,7 @@ struct KleztizerWidget : ModuleWidget {
 		addOutput(createOutputCentered<ThemedPJ301MPort>(mm2px(Vec(87.415, 37.16)), module, Kleztizer::CHORDBUTTONGATEOUT7_OUTPUT));
 
 		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(46.38, 80.836)), module, Kleztizer::LEADLED1_LIGHT));
-		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(97.354, 80.836)), module, Kleztizer::LEADLED_LIGHT));
+		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(97.354, 80.836)), module, Kleztizer::LEADLED2_LIGHT));
 	}
 };
 

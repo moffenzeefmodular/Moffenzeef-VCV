@@ -164,7 +164,7 @@ struct Deviant : Module {
 struct DeviantWidget : ModuleWidget {
 	DeviantWidget(Deviant* module) {
 		setModule(module);
-		setPanel(createPanel(asset::plugin(pluginInstance, "res/Deviant.svg")));
+		setPanel(createPanel(asset::plugin(pluginInstance, "res/panels/Deviant.svg")));
 
 		addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, 0)));
 		addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, 0)));

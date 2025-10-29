@@ -204,9 +204,7 @@ struct TheRunnerWidget : ModuleWidget {
 	TheRunnerWidget(TheRunner* module) {
 		setModule(module);
 	setPanel(createPanel(
-		asset::plugin(pluginInstance, "res/TheRunner.svg"),
-		asset::plugin(pluginInstance, "res/TheRunner-dark.svg")
-		));
+		asset::plugin(pluginInstance, "res/panels/TheRunner.svg")));
         
 		addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, 0)));
 		addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, 0)));
@@ -215,9 +213,9 @@ struct TheRunnerWidget : ModuleWidget {
 
 		addParam(createParamCentered<Davies1900hLargeBlackKnob>(mm2px(Vec(28.141, 108.921)), module, TheRunner::PITCH_PARAM));
 
-		addParam(createParamCentered<_2Pos>(mm2px(Vec(40.936, 49.41)), module, TheRunner::RANGE_PARAM));
-		addParam(createParamCentered<_2Pos>(mm2px(Vec(66.526, 49.41)), module, TheRunner::CHORUS_PARAM));
-		addParam(createParamCentered<_2Pos>(mm2px(Vec(53.754, 108.921)), module, TheRunner::NOTESHZ_PARAM));
+		addParam(createParamCentered<TwoPos>(mm2px(Vec(40.936, 49.41)), module, TheRunner::RANGE_PARAM));
+		addParam(createParamCentered<TwoPos>(mm2px(Vec(66.526, 49.41)), module, TheRunner::CHORUS_PARAM));
+		addParam(createParamCentered<TwoPos>(mm2px(Vec(53.754, 108.921)), module, TheRunner::NOTESHZ_PARAM));
 
 		addParam(createParamCentered<Davies1900hBlackKnob>(mm2px(Vec(15.173, 19.704)), module, TheRunner::GAIN_PARAM));
 		addParam(createParamCentered<Davies1900hBlackKnob>(mm2px(Vec(40.79, 19.704)), module, TheRunner::VOLUME_PARAM));

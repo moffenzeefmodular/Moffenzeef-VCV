@@ -34,8 +34,8 @@ target_sources(Moffenzeef PRIVATE
     ${SOURCE_DIR}/src/Mongrel.cpp
     ${SOURCE_DIR}/src/Muskrat.cpp
     ${SOURCE_DIR}/src/Simplify.cpp
-    ${SOURCE_DIR}/src/2hpBlank.cpp
-    ${SOURCE_DIR}/src/14hpBlank.cpp
+    ${SOURCE_DIR}/src/TwoHPBlank.cpp
+    ${SOURCE_DIR}/src/FourteenHPBlank.cpp
     ${SOURCE_DIR}/src/Swarm.cpp
     ${SOURCE_DIR}/src/INTENSIFIES.cpp
     ${SOURCE_DIR}/src/TheRunner.cpp

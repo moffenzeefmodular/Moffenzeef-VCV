@@ -187,8 +187,8 @@
       ]
     },
     {
-      "slug": "2hpBlank",
-      "name": "2hpBlank",
+      "slug": "TwoHPBlank",
+      "name": "TwoHPBlank",
       "modularGridUrl": "https://modulargrid.net/e/moffenzeef-modular-blank-panel",
       "manualUrl": "https://www.moffenzeefmodular.com/store1/blankpanels",
       "description": "2hp blank panel",
@@ -198,8 +198,8 @@
       ]
     },
     {
-      "slug": "14hpBlank",
-      "name": "14hpBlank",
+      "slug": "FourteenHPBlank",
+      "name": "FourteenHPBlank",
       "modularGridUrl": "https://modulargrid.net/e/moffenzeef-modular-14hp-blank",
       "manualUrl": "https://www.moffenzeefmodular.com/store1/blankpanels",
       "description": "14hp blank panel",

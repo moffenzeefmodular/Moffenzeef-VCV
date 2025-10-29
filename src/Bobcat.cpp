@@ -298,7 +298,7 @@ struct Bobcat : Module {
 struct BobcatWidget : ModuleWidget {
 	BobcatWidget(Bobcat* module) {
 		setModule(module);
-		setPanel(createPanel(asset::plugin(pluginInstance, "res/Bobcat.svg")));
+		setPanel(createPanel(asset::plugin(pluginInstance, "res/panels/Bobcat.svg")));
 
 		addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, 0)));
 		addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, 0)));

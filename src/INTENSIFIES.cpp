@@ -225,9 +225,7 @@ struct INTENSIFIESWidget : ModuleWidget {
 	INTENSIFIESWidget(INTENSIFIES* module) {
 		setModule(module);
 	setPanel(createPanel(
-		asset::plugin(pluginInstance, "res/INTENSIFIES.svg"),
-		asset::plugin(pluginInstance, "res/INTENSIFIES-dark.svg")
-		));
+		asset::plugin(pluginInstance, "res/panels/INTENSIFIES.svg")));
         
 		addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, 0)));
 		addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, 0)));
@@ -237,12 +235,12 @@ struct INTENSIFIESWidget : ModuleWidget {
 		addParam(createParamCentered<Davies1900hLargeBlackKnob>(mm2px(Vec(22.855, 39.741)), module, INTENSIFIES::CARRIER_PARAM));
 		addParam(createParamCentered<Davies1900hLargeBlackKnob>(mm2px(Vec(35.823, 87.83)), module, INTENSIFIES::MODULATOR_PARAM));
 
-		addParam(createParamCentered<_2Pos>(mm2px(Vec(38.99, 62.038)), module, INTENSIFIES::MODULATORENGAGE_PARAM));
-		addParam(createParamCentered<_2Pos>(mm2px(Vec(82.287, 35.832)), module, INTENSIFIES::FXBYPASS_PARAM));
-		addParam(createParamCentered<_2Pos>(mm2px(Vec(87.182, 77.145)), module, INTENSIFIES::GAINRANGE_PARAM));
+		addParam(createParamCentered<TwoPos>(mm2px(Vec(38.99, 62.038)), module, INTENSIFIES::MODULATORENGAGE_PARAM));
+		addParam(createParamCentered<TwoPos>(mm2px(Vec(82.287, 35.832)), module, INTENSIFIES::FXBYPASS_PARAM));
+		addParam(createParamCentered<TwoPos>(mm2px(Vec(87.182, 77.145)), module, INTENSIFIES::GAINRANGE_PARAM));
 
-		addParam(createParamCentered<_3Pos>(mm2px(Vec(48.122, 35.871)), module, INTENSIFIES::CARRIERRANGE_PARAM));
-		addParam(createParamCentered<_3Pos>(mm2px(Vec(65.957, 93.144)), module, INTENSIFIES::MODULATORRANGE_PARAM));
+		addParam(createParamCentered<ThreePos>(mm2px(Vec(48.122, 35.871)), module, INTENSIFIES::CARRIERRANGE_PARAM));
+		addParam(createParamCentered<ThreePos>(mm2px(Vec(65.957, 93.144)), module, INTENSIFIES::MODULATORRANGE_PARAM));
 
 		addParam(createParamCentered<Davies1900hBlackKnob>(mm2px(Vec(107.163, 50.988)), module, INTENSIFIES::FXVOLUME_PARAM));
 		addParam(createParamCentered<Davies1900hBlackKnob>(mm2px(Vec(67.346, 59.976)), module, INTENSIFIES::GAIN_PARAM));

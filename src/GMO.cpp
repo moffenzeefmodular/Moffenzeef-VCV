@@ -1,5 +1,5 @@
 #include "plugin.hpp"
-#include "GMO_tables.hh"
+#include "../res/wavetables/GMO_tables.hh"
 
 struct GMO : Module {
 	enum ParamId {
@@ -206,7 +206,7 @@ GMO() {
 struct GMOWidget : ModuleWidget {
 	GMOWidget(GMO* module) {
 		setModule(module);
-		setPanel(createPanel(asset::plugin(pluginInstance, "res/GMO.svg")));
+		setPanel(createPanel(asset::plugin(pluginInstance, "res/panels/GMO.svg")));
 
 		addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, 0)));
 		addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, 0)));

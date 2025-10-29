@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 25.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   version="1.0"
+   id="svg113936"
+   x="0px"
+   y="0px"
+   width="14mm"
+   height="14mm"
+   viewBox="0 0 52.913388 52.913385"
+   enable-background="new 0 0 73.7008 73.70403"
+   xml:space="preserve"
+   sodipodi:docname="MediumKnob_bg.svg"
+   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs4" />
+<sodipodi:namedview
+   bordercolor="#666666"
+   borderopacity="1.0"
+   fit-margin-bottom="0"
+   fit-margin-left="0"
+   fit-margin-right="0"
+   fit-margin-top="0"
+   id="base"
+   inkscape:current-layer="svg113936"
+   inkscape:cx="13.571429"
+   inkscape:cy="28.482143"
+   inkscape:document-units="mm"
+   inkscape:pageopacity="0.0"
+   inkscape:pageshadow="2"
+   inkscape:window-height="1302"
+   inkscape:window-maximized="0"
+   inkscape:window-width="2560"
+   inkscape:window-x="0"
+   inkscape:window-y="25"
+   inkscape:zoom="5.6"
+   pagecolor="#ffffff"
+   showgrid="false"
+   inkscape:showpageshadow="2"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1">
+	</sodipodi:namedview>
+<linearGradient
+   id="path109718_2_"
+   gradientUnits="userSpaceOnUse"
+   x1="36.850399"
+   y1="0.35042"
+   x2="36.850399"
+   y2="73.353607">
+	<stop
+   offset="0"
+   style="stop-color:#FFFFFF"
+   id="stop1" />
+	<stop
+   offset="1"
+   style="stop-color:#858585"
+   id="stop2" />
+</linearGradient>
+<path
+   id="path109718_1_"
+   inkscape:connector-curvature="0"
+   fill="url(#path109718_2_)"
+   d="m 52.913384,26.45553 c 0,14.611312 -11.84473,26.457855 -26.456702,26.457855 C 11.844733,52.913385 0,41.066842 0,26.45553 0,11.846514 11.844718,0 26.456682,0 41.068647,0 52.913384,11.846514 52.913384,26.45553"
+   style="opacity:1;fill:#404040;fill-opacity:1;stroke-width:0.999995" />
+<linearGradient
+   id="SVGID_1_"
+   gradientUnits="userSpaceOnUse"
+   x1="131.08357"
+   y1="214.05496"
+   x2="131.08357"
+   y2="245.84731"
+   gradientTransform="matrix(-0.99999999,0,0,0.50870999,167.93398,-94.893806)">
+	<stop
+   offset="0"
+   style="stop-color:#FDFDFF"
+   id="stop3" />
+	<stop
+   offset="1"
+   style="stop-color:#FCFEFF;stop-opacity:0"
+   id="stop4" />
+</linearGradient>
+<ellipse
+   fill="url(#SVGID_1_)"
+   cx="26.456696"
+   cy="15.753714"
+   rx="11.795298"
+   ry="5.8612423"
+   id="ellipse4"
+   style="opacity:0.2;fill:url(#SVGID_1_);stroke-width:0.999995" />
+</svg>

@@ -85,6 +85,15 @@ struct TheRunner : Module {
 	const Mapping::LookupTable_t<64, float> Log2Notes =
 		Mapping::LookupTable_t<64, float>::generate<Log2NotesTableRange>([](float x) { return std::log2f(x); });
 
+		struct Pow10AnimateTableRange {
+			static constexpr float min = 0.f;
+			static constexpr float max = 1.f;
+		};
+		
+		const Mapping::LookupTable_t<64, float> Pow10Animate =
+			Mapping::LookupTable_t<64, float>::generate<Pow10AnimateTableRange>([](float x) { return std::pow(10.f, x); });
+		
+
 
 	float phases[5] = {};
 	float lp = 0.f, bp = 0.f;
@@ -110,7 +119,6 @@ struct TheRunner : Module {
 			float cvClamped = std::clamp(cv, 0.f, 8.f);            // optional safety clamp
 			pitch *= Pow2(cvClamped);                         // 1V/oct scaling
 		}
-		
 		// Clamp pitch to range
 		pitch = std::clamp(pitch, minFreq, maxFreq);
 		
@@ -131,7 +139,7 @@ struct TheRunner : Module {
 
 		float animate = std::clamp(params[ANIMATE_PARAM].getValue() + (inputs[ANIMATECVIN_INPUT].isConnected() ? std::clamp(inputs[ANIMATECVIN_INPUT].getVoltage() / 10.f, -1.f, 1.f) : 0.f), 0.f, 1.f);
 
-		float stepSize = rescale(animate, 0.f, 1.f, 0.00001f, 0.00025f) * powf(10.f, params[RANGE_PARAM].getValue() * 1.2f);
+		float stepSize = rescale(animate, 0.f, 1.f, 0.00001f, 0.00025f) * Pow10Animate(params[RANGE_PARAM].getValue() * 1.2f);
 		float depth = animate * 0.8f;
 
 		drunkWalkPos = std::clamp(drunkWalkPos + (random::uniform() - 0.5f) * stepSize * 2.f, 0.1f, 0.9f);

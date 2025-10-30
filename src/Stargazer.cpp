@@ -320,6 +320,9 @@ float lastSample = 0.f;
 int lastReduxBitDepth = -1;
 float lastMaxVal = -1.f;
 
+// Final gain stage
+float lastGainControl = -1.f;
+float lastGain = -1.f;
 
 void process(const ProcessArgs& args) override {
 
@@ -729,15 +732,20 @@ if (mode2 != 4) {
 // --- Final output ---
 float finalOutput2 = std::clamp(y2 * 0.5f, -10.f, 10.f);
 
-// --- Final gain stage with CV (same behavior as filter CV) ---
+// --- Final gain stage with CV ---
 float gainControl = params[GAIN_PARAM].getValue();
 if (inputs[GAINCV_INPUT].isConnected())
     gainControl += inputs[GAINCV_INPUT].getVoltage() / 10.f;
 gainControl = std::clamp(gainControl, 0.f, 1.f);
-float gain = 19.f + gainControl * 100.f;
+
+// Recompute gain only if control changed
+if (gainControl != lastGainControl) {
+    lastGain = 19.f + gainControl * 100.f;
+    lastGainControl = gainControl;
+}
 
 // Apply gain and clip
-float clipped = std::clamp(finalOutput2 * gain, -10.f, 10.f);
+float clipped = std::clamp(finalOutput2 * lastGain, -10.f, 10.f);
 
 
 // --- LFO2 Tremolo (pre-volume) ---

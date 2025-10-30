@@ -225,7 +225,6 @@ std::vector<float> delayBuffer;
 int delayIndex = 0;
 float delayMs = 20.f; // adjustable delay time in milliseconds
 
-
 void process(const ProcessArgs& args) override {
 
 auto processLFO = [&](int rateParam, int depthParam, int waveParam,
@@ -237,7 +236,7 @@ auto processLFO = [&](int rateParam, int depthParam, int waveParam,
 
     float rate = params[rateParam].getValue();
     if (inputs[rateCV].isConnected()) rate += inputs[rateCV].getVoltage() / 10.f;
-    rate = clamp(rate, 0.f, 1.f);
+    rate = std::clamp(rate, 0.f, 1.f);
 
     // Determine frequency range based on range switch
     float minFreq = 0.05f;
@@ -276,15 +275,15 @@ if (paramQuantities.size() > (size_t)rateParam) {
     // Depth
     float depth = params[depthParam].getValue();
     if (inputs[depthCV].isConnected()) depth += inputs[depthCV].getVoltage() / 10.f;
-    depth = clamp(depth, 0.f, 1.f);
+    depth = std::clamp(depth, 0.f, 1.f);
 
     // Phase increment
     phase += freq * args.sampleTime;
     if (phase >= 1.f) phase -= 1.f;
 
     // Waveform selection
-    int wave = clamp((int)roundf(params[waveParam].getValue() +
-                 (inputs[waveCV].isConnected() ? clamp(inputs[waveCV].getVoltage(), -5.f, 5.f)/2.f : 0.f)), 0, 5);
+    int wave = std::clamp((int)roundf(params[waveParam].getValue() +
+                 (inputs[waveCV].isConnected() ? std::clamp(inputs[waveCV].getVoltage(), -5.f, 5.f)/2.f : 0.f)), 0, 5);
 
     float value = 0.f;
     switch (wave) {
@@ -307,8 +306,8 @@ if (paramQuantities.size() > (size_t)rateParam) {
     outputs[outId].setVoltage(value);
 
     // LED logic
-    lights[ledGreenId].setBrightnessSmooth(clamp(value / 5.f, 0.f, 1.f), args.sampleTime);
-    lights[ledRedId].setBrightnessSmooth(clamp(-value / 5.f, 0.f, 1.f), args.sampleTime);
+    lights[ledGreenId].setBrightnessSmooth(std::clamp(value / 5.f, 0.f, 1.f), args.sampleTime);
+    lights[ledRedId].setBrightnessSmooth(std::clamp(-value / 5.f, 0.f, 1.f), args.sampleTime);
 
     if (outValue)
         *outValue = value;
@@ -350,13 +349,13 @@ processLFO(RATE3_PARAM, DEPTH3_PARAM, WAVE3_PARAM,
     float totalPitchCV = pitchCV + fmCV;
 
     // final frequency (1–500 Hz)
-    float freq = clamp(baseFreq * std::pow(2.f, totalPitchCV), 1.f, 500.f);
+    float freq = std::clamp(baseFreq * std::pow(2.f, totalPitchCV), 1.f, 500.f);
 
 	float waveCV = inputs[WAVECV_INPUT].isConnected() ? inputs[WAVECV_INPUT].getVoltage() : lfo1Value;
-	float waveParam = 1.0f + clamp((params[MAINWAVE_PARAM].getValue() - 1.0f) / 87.0f +
+	float waveParam = 1.0f + std::clamp((params[MAINWAVE_PARAM].getValue() - 1.0f) / 87.0f +
 								   waveCV / 10.0f, 0.0f, 1.0f) * 87.0f;
 	
-    float wavePos = clamp(waveParam - 1.f, 0.f, numTables - 1.f);
+    float wavePos = std::clamp(waveParam - 1.f, 0.f, numTables - 1.f);
     int i0 = (int)wavePos;
     int i1 = std::min(i0 + 1, numTables - 1);
     float frac = wavePos - i0;
@@ -380,8 +379,8 @@ processLFO(RATE3_PARAM, DEPTH3_PARAM, WAVE3_PARAM,
     float detune = params[DETUNE_PARAM].getValue();
     if (inputs[DETUNECV_INPUT].isConnected())
         detune += inputs[DETUNECV_INPUT].getVoltage() / 5.f; // ±5V → ±1
-    detune = clamp(detune, -1.f, 1.f);
-    float freq2 = clamp(freq + detune * 5.f, 1.f, 500.f);
+    detune = std::clamp(detune, -1.f, 1.f);
+    float freq2 = std::clamp(freq + detune * 5.f, 1.f, 500.f);
 
     bool subEnabled = params[SUB_PARAM].getValue() > 0.5f;
     if (inputs[SUBCV_INPUT].isConnected())
@@ -407,7 +406,7 @@ processLFO(RATE3_PARAM, DEPTH3_PARAM, WAVE3_PARAM,
     float mix = params[MIX_PARAM].getValue();
     if (inputs[MIXCV_INPUT].isConnected())
         mix += inputs[MIXCV_INPUT].getVoltage() / 10.f;
-    mix = clamp(mix, 0.f, 1.f);
+    mix = std::clamp(mix, 0.f, 1.f);
 
     // --- Oscillator mixer ---
     float sample = osc1 + osc2 * mix;
@@ -417,13 +416,13 @@ processLFO(RATE3_PARAM, DEPTH3_PARAM, WAVE3_PARAM,
 	if (inputs[FREQ1CV_INPUT].isConnected()){
     	cutoff += inputs[FREQ1CV_INPUT].getVoltage() / 10.f;
 	}
-	cutoff = clamp(cutoff, 0.f, 1.f);
+	cutoff = std::clamp(cutoff, 0.f, 1.f);
 	float cutoffHz = 80.f * std::pow(16000.f / 80.f, cutoff);
 
     float res = params[RES1_PARAM].getValue();
     if (inputs[RES1CV_INPUT].isConnected())
         res += inputs[RES1CV_INPUT].getVoltage() / 10.f;
-    res = clamp(res, 0.f, 1.f);
+    res = std::clamp(res, 0.f, 1.f);
     float Q = 1.f + res * 4.f;
 
 // --- Filter 1 biquad with selectable mode + gain normalization ---
@@ -488,13 +487,13 @@ if (mode != 4) {
 
     // --- Fixed attenuator (replaces AGC) ---
     // keeps consistent output level without dynamic gain riding
-    float scaledOutput = clamp(y, -10.f, 10.f);
+    float scaledOutput = std::clamp(y, -10.f, 10.f);
 
     // --- Alias (sample rate reducer) ---
     float aliasKnob = 1.f - params[ALIAS_PARAM].getValue();
     if (inputs[ALIASCV_INPUT].isConnected())
         aliasKnob += inputs[ALIASCV_INPUT].getVoltage() / 10.f;
-    aliasKnob = clamp(aliasKnob, 0.f, 1.f);
+    aliasKnob = std::clamp(aliasKnob, 0.f, 1.f);
 
     float fadeFactor = (aliasKnob <= 0.05f) ? (aliasKnob / 0.05f) : 1.f;
     float aliasRate = 25.f + (18000.f - aliasKnob * (18000.f - 1.f));
@@ -508,26 +507,26 @@ if (mode != 4) {
 
     // --- Redux bit reduction ---
     int reduxBitDepth = 16 - (int)params[REDUX_PARAM].getValue();
-    reduxBitDepth = clamp(reduxBitDepth, 4, 16);
+    reduxBitDepth = std::clamp(reduxBitDepth, 4, 16);
     if (inputs[REDUXCV_INPUT].isConnected()) {
-        float reduxCV = clamp(inputs[REDUXCV_INPUT].getVoltage(), -5.f, 5.f);
-        reduxBitDepth = clamp((int)roundf(16.f - ((reduxCV + 5.f)/10.f)*(16.f-4.f)), 4, 16);
+        float reduxCV = std::clamp(inputs[REDUXCV_INPUT].getVoltage(), -5.f, 5.f);
+        reduxBitDepth = std::clamp((int)roundf(16.f - ((reduxCV + 5.f)/10.f)*(16.f-4.f)), 4, 16);
     }
     float maxVal = powf(2.f, reduxBitDepth - 1) - 1.f;
-    float normalized = clamp(finalOutput / 10.f, -1.f, 1.f);
+    float normalized = std::clamp(finalOutput / 10.f, -1.f, 1.f);
     float quantized = roundf(normalized * maxVal) / maxVal;
     finalOutput = quantized * 10.f;
 
     // --- Filter 2 cutoff + resonance (after bit reduction) ---
 	float freq2CV = inputs[FREQ2CV_INPUT].isConnected() ? inputs[FREQ2CV_INPUT].getVoltage() : (lfo3Value * 0.2f);
 	float cutoff2 = params[FREQ2_PARAM].getValue() + freq2CV / 10.f;
-    cutoff2 = clamp(cutoff2, 0.f, 1.f);
+    cutoff2 = std::clamp(cutoff2, 0.f, 1.f);
     float cutoffHz2 = 80.f * powf(16000.f/80.f, cutoff2);
 
     float res2 = params[RES2_PARAM].getValue();
     if (inputs[RES2CV_INPUT].isConnected())
     res2 += inputs[RES2CV_INPUT].getVoltage() / 10.f;
-    res2 = clamp(res2, 0.f, 1.f);
+    res2 = std::clamp(res2, 0.f, 1.f);
     float Q2 = 1.f + res2 * 4.f;
 
    // --- Filter 2 biquad with selectable mode + gain normalization ---
@@ -591,28 +590,28 @@ if (mode2 != 4) {
 }
 
 // --- Fixed attenuator (keeps output level consistent) ---
-float finalOutput2 = clamp(y2 * 0.5f, -10.f, 10.f);
+float finalOutput2 = std::clamp(y2 * 0.5f, -10.f, 10.f);
 
 // --- Final gain stage with CV (same behavior as filter CV) ---
 float gainControl = params[GAIN_PARAM].getValue();
 if (inputs[GAINCV_INPUT].isConnected())
     gainControl += inputs[GAINCV_INPUT].getVoltage() / 10.f;
-gainControl = clamp(gainControl, 0.f, 1.f);
+gainControl = std::clamp(gainControl, 0.f, 1.f);
 float gain = 19.f + gainControl * 100.f;
 
 // Apply gain and clip
-float clipped = clamp(finalOutput2 * gain, -10.f, 10.f);
+float clipped = std::clamp(finalOutput2 * gain, -10.f, 10.f);
 
 
 // --- LFO2 Tremolo (pre-volume) ---
 float lfo2Depth = params[DEPTH2_PARAM].getValue();
 if (inputs[LFO2DEPTHCV_INPUT].isConnected())
     lfo2Depth += inputs[LFO2DEPTHCV_INPUT].getVoltage() / 10.f;
-lfo2Depth = clamp(lfo2Depth, 0.f, 1.f);
+lfo2Depth = std::clamp(lfo2Depth, 0.f, 1.f);
 
 // LFO2 (±5 V) → 0–1 amplitude modulation
 float tremolo = 0.5f * (1.f + (lfo2Value / 5.f) * lfo2Depth);
-tremolo = clamp(tremolo, 0.f, 1.f);
+tremolo = std::clamp(tremolo, 0.f, 1.f);
 
 // Stereo width 
 float delayMs = 20.f;
@@ -632,14 +631,14 @@ float wetSignal = delayedSample * tremolo;
 float volControl = params[VOL_PARAM].getValue();
 if (inputs[VOLUMECV_INPUT].isConnected())
     volControl += inputs[VOLUMECV_INPUT].getVoltage() / 10.f;
-volControl = clamp(volControl, 0.f, 1.f);
+volControl = std::clamp(volControl, 0.f, 1.f);
 drySignal *= volControl;
 wetSignal *= volControl;
 
 float width = params[WIDTH_PARAM].getValue();
 if (inputs[WIDTHCV_INPUT].isConnected())
     width += inputs[WIDTHCV_INPUT].getVoltage() / 10.f;
-width = clamp(width, 0.f, 1.f);
+width = std::clamp(width, 0.f, 1.f);
 
 // crossfade wet signal for first 5% of knob, keep overall volume constant
 float wetFade = (width <= 0.05f) ? (width / 0.05f) : 1.f;

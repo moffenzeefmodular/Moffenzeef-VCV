@@ -264,6 +264,32 @@ std::vector<float> delayBuffer;
 int delayIndex = 0;
 float delayMs = 20.f; // adjustable delay time in milliseconds
 
+// Cached params
+float lastBaseFreqParam = -1.f;
+float lastPitchCV = -1000.f;
+float lastFMParam = -1.f;
+float lastFMCV = -1000.f;
+
+float lastWaveParam = -1.f;
+float lastWaveCV = -1000.f;
+
+// Wave table interpolation
+float wavePos = 0.f;
+int i0 = 0;
+int i1 = 0;
+float frac = 0.f;
+
+// Oscillator 2
+float lastDetune = -1000.f;
+bool lastSubEnabled = false;
+float freq2 = 1.f;
+
+// Mixer
+float lastMix = -1.f;
+
+// Audio
+float freq = 1.f;
+
 void process(const ProcessArgs& args) override {
 
 auto processLFO = [&](int rateParam, int depthParam, int waveParam,
@@ -374,32 +400,69 @@ processLFO(RATE3_PARAM, DEPTH3_PARAM, WAVE3_PARAM,
 	// START OF AUDIO SECTION 
     sampleRate = 1.f / args.sampleTime;
 
-    // --- Frequency control (1–500 Hz base + 1V/oct CV) ---
+    // --- Read inputs & params ---
     float baseFreqParam = params[PITCH_PARAM].getValue();
-    float baseFreq = 1.f + baseFreqParam * (500.f - 1.f);
     float pitchCV = inputs[PITCHCV_INPUT].isConnected() ? inputs[PITCHCV_INPUT].getVoltage() : 0.f;
-    // FM input (normalized to LFO3)
     float fmCV = inputs[FMCV_INPUT].isConnected() ? inputs[FMCV_INPUT].getVoltage() : (lfo3Value * 0.2f);
+    float fmParam = params[FM_PARAM].getValue();
 
-    // FM knob acts as attenuator
-    fmCV *= params[FM_PARAM].getValue();
+    float waveCV = inputs[WAVECV_INPUT].isConnected() ? inputs[WAVECV_INPUT].getVoltage() : lfo1Value;
+    float waveParam = 1.0f + std::clamp((params[MAINWAVE_PARAM].getValue() - 1.0f) / 87.0f + waveCV / 10.0f, 0.0f, 1.0f) * 87.0f;
 
-    // total pitch = 1V/oct + FM
-    float totalPitchCV = pitchCV + fmCV;
+    float detune = params[DETUNE_PARAM].getValue();
+    if (inputs[DETUNECV_INPUT].isConnected())
+        detune += inputs[DETUNECV_INPUT].getVoltage() / 5.f;
+    detune = std::clamp(detune, -1.f, 1.f);
 
-    // final frequency (1–500 Hz)
-    float freq = std::clamp(baseFreq * Pow2Notes(totalPitchCV), 1.f, 500.f);
+    bool subEnabled = params[SUB_PARAM].getValue() > 0.5f;
+    if (inputs[SUBCV_INPUT].isConnected())
+        subEnabled = inputs[SUBCV_INPUT].getVoltage() > 0.f;
 
-	float waveCV = inputs[WAVECV_INPUT].isConnected() ? inputs[WAVECV_INPUT].getVoltage() : lfo1Value;
-	float waveParam = 1.0f + std::clamp((params[MAINWAVE_PARAM].getValue() - 1.0f) / 87.0f +
-								   waveCV / 10.0f, 0.0f, 1.0f) * 87.0f;
-	
-    float wavePos = std::clamp(waveParam - 1.f, 0.f, numTables - 1.f);
-    int i0 = (int)wavePos;
-    int i1 = std::min(i0 + 1, numTables - 1);
-    float frac = wavePos - i0;
+    float mix = params[MIX_PARAM].getValue();
+    if (inputs[MIXCV_INPUT].isConnected())
+        mix += inputs[MIXCV_INPUT].getVoltage() / 10.f;
+    mix = std::clamp(mix, 0.f, 1.f);
 
-    // --- Oscillator 1 ---
+    // --- Frequency recalculation (cache check) ---
+    if (baseFreqParam != lastBaseFreqParam || pitchCV != lastPitchCV || fmCV != lastFMCV || fmParam != lastFMParam) {
+        float baseFreq = 1.f + baseFreqParam * (500.f - 1.f);
+        fmCV *= fmParam;
+        float totalPitchCV = pitchCV + fmCV;
+        freq = std::clamp(baseFreq * Pow2Notes(totalPitchCV), 1.f, 500.f);
+
+        lastBaseFreqParam = baseFreqParam;
+        lastPitchCV = pitchCV;
+        lastFMCV = fmCV;
+        lastFMParam = fmParam;
+    }
+
+    // --- Waveform interpolation (cache check) ---
+    if (waveParam != lastWaveParam || waveCV != lastWaveCV) {
+        wavePos = std::clamp(waveParam - 1.f, 0.f, numTables - 1.f);
+        i0 = (int)wavePos;
+        i1 = std::min(i0 + 1, numTables - 1);
+        frac = wavePos - i0;
+
+        lastWaveParam = waveParam;
+        lastWaveCV = waveCV;
+    }
+
+    // --- Oscillator 2 frequency (detune + sub) ---
+    if (detune != lastDetune || subEnabled != lastSubEnabled) {
+        freq2 = std::clamp(freq + detune * 5.f, 1.f, 500.f);
+        if (subEnabled)
+            freq2 *= 0.5f;
+
+        lastDetune = detune;
+        lastSubEnabled = subEnabled;
+    }
+
+    // --- Mix (cache check) ---
+    if (mix != lastMix) {
+        lastMix = mix;
+    }
+
+    // --- Oscillator 1 phase & waveform ---
     phase1 += freq / sampleRate;
     if (phase1 >= 1.f) phase1 -= 1.f;
     float pos1 = phase1 * (tableSize - 1);
@@ -414,19 +477,7 @@ processLFO(RATE3_PARAM, DEPTH3_PARAM, WAVE3_PARAM,
     float b = s10 + (s11 - s10) * fracPos;
     float osc1 = a + (b - a) * frac;
 
-    // --- Oscillator 2 (detuned + independent volume + sub) ---
-    float detune = params[DETUNE_PARAM].getValue();
-    if (inputs[DETUNECV_INPUT].isConnected())
-        detune += inputs[DETUNECV_INPUT].getVoltage() / 5.f; // ±5V → ±1
-    detune = std::clamp(detune, -1.f, 1.f);
-    float freq2 = std::clamp(freq + detune * 5.f, 1.f, 500.f);
-
-    bool subEnabled = params[SUB_PARAM].getValue() > 0.5f;
-    if (inputs[SUBCV_INPUT].isConnected())
-        subEnabled = inputs[SUBCV_INPUT].getVoltage() > 0.f;
-    if (subEnabled)
-        freq2 *= 0.5f;
-
+    // --- Oscillator 2 phase & waveform ---
     phase2 += freq2 / sampleRate;
     if (phase2 >= 1.f) phase2 -= 1.f;
     float pos2 = phase2 * (tableSize - 1);
@@ -441,14 +492,9 @@ processLFO(RATE3_PARAM, DEPTH3_PARAM, WAVE3_PARAM,
     float b2_osc = s10_2 + (s11_2 - s10_2) * fracPos2;
     float osc2 = a2_osc + (b2_osc - a2_osc) * frac;
 
-    // --- Mix knob 0–1 plus CV ---
-    float mix = params[MIX_PARAM].getValue();
-    if (inputs[MIXCV_INPUT].isConnected())
-        mix += inputs[MIXCV_INPUT].getVoltage() / 10.f;
-    mix = std::clamp(mix, 0.f, 1.f);
-
-    // --- Oscillator mixer ---
+    // --- Final mix ---
     float sample = osc1 + osc2 * mix;
+
 
     // --- Filter 1 cutoff + resonance ---
 	float cutoff = params[FREQ1_PARAM].getValue();

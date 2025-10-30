@@ -13,7 +13,6 @@ struct SinTableRange {
 const Mapping::LookupTable_t<64, float> Sin =
 	Mapping::LookupTable_t<64, float>::generate<SinTableRange>([](float x) { return sinf(x); });
 
-	// Lookup tables
 struct SinFilterTableRange {
 	static constexpr float min = -1.f * M_PI;
 	static constexpr float max = 1.f * M_PI;
@@ -29,6 +28,15 @@ struct CosTableRange {
 
 const Mapping::LookupTable_t<64, float> Cos =
 	Mapping::LookupTable_t<64, float>::generate<CosTableRange>([](float x) { return cosf(x); });
+
+struct Pow2NotesTableRange {
+		static constexpr float min = -10.f;
+		static constexpr float max = 10.f;
+	};
+	
+const Mapping::LookupTable_t<64, float> Pow2Notes =
+		Mapping::LookupTable_t<64, float>::generate<Pow2NotesTableRange>([](float x) { return powf(2.f, x); });
+		
 	
 
 struct Stargazer : Module {
@@ -368,7 +376,7 @@ processLFO(RATE3_PARAM, DEPTH3_PARAM, WAVE3_PARAM,
     float totalPitchCV = pitchCV + fmCV;
 
     // final frequency (1–500 Hz)
-    float freq = std::clamp(baseFreq * std::pow(2.f, totalPitchCV), 1.f, 500.f);
+    float freq = std::clamp(baseFreq * Pow2Notes(totalPitchCV), 1.f, 500.f);
 
 	float waveCV = inputs[WAVECV_INPUT].isConnected() ? inputs[WAVECV_INPUT].getVoltage() : lfo1Value;
 	float waveParam = 1.0f + std::clamp((params[MAINWAVE_PARAM].getValue() - 1.0f) / 87.0f +

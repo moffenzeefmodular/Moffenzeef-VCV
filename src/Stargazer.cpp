@@ -567,13 +567,7 @@ if (mode != 4) {
         case 3: normGain = 1.0f; break;   // HP
     }
     y *= normGain;
-
-    // soft limit before AGC (prevents overshoot)
-    y = tanhf(y * 0.8f) * 1.25f;
 }
-
-    // --- Fixed attenuator (replaces AGC) ---
-    // keeps consistent output level without dynamic gain riding
     float scaledOutput = std::clamp(y, -10.f, 10.f);
 
     // --- Alias (sample rate reducer) ---
@@ -673,9 +667,6 @@ if (mode2 != 4) {
         case 3: normGain2 = 1.0f; break;   // HP
     }
     y2 *= normGain2;
-
-    // soft limit before fixed attenuator
-    y2 = tanhf(y2 * 0.8f) * 1.25f;
 }
 
 // --- Fixed attenuator (keeps output level consistent) ---

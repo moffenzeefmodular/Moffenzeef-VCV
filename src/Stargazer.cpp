@@ -44,7 +44,13 @@ struct Pow2ReduxTableRange {
 const Mapping::LookupTable_t<64, float> Pow2Redux =
 			Mapping::LookupTable_t<64, float>::generate<Pow2ReduxTableRange>([](float x) { return powf(2.f, x); });
 			
-
+struct Pow200CutoffTableRange {
+			static constexpr float min = 0.f;
+			static constexpr float max = 1.f;
+			};
+const Mapping::LookupTable_t<64, float> Pow200Cutoff =
+			Mapping::LookupTable_t<64, float>::generate<Pow200CutoffTableRange>([](float x) { return powf(200.f, x); });
+				
 struct Stargazer : Module {
 	enum ParamId {
         WIDTH_PARAM,
@@ -450,7 +456,7 @@ processLFO(RATE3_PARAM, DEPTH3_PARAM, WAVE3_PARAM,
     	cutoff += inputs[FREQ1CV_INPUT].getVoltage() / 10.f;
 	}
 	cutoff = std::clamp(cutoff, 0.f, 1.f);
-	float cutoffHz = 80.f * std::pow(16000.f / 80.f, cutoff);
+	float cutoffHz = 80.f * Pow200Cutoff(cutoff);
 
     float res = params[RES1_PARAM].getValue();
     if (inputs[RES1CV_INPUT].isConnected())
@@ -556,7 +562,7 @@ if (mode != 4) {
 	float freq2CV = inputs[FREQ2CV_INPUT].isConnected() ? inputs[FREQ2CV_INPUT].getVoltage() : (lfo3Value * 0.2f);
 	float cutoff2 = params[FREQ2_PARAM].getValue() + freq2CV / 10.f;
     cutoff2 = std::clamp(cutoff2, 0.f, 1.f);
-    float cutoffHz2 = 80.f * powf(16000.f/80.f, cutoff2);
+    float cutoffHz2 = 80.f * Pow200Cutoff(cutoff2);
 
     float res2 = params[RES2_PARAM].getValue();
     if (inputs[RES2CV_INPUT].isConnected())

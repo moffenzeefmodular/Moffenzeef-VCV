@@ -324,6 +324,9 @@ float lastMaxVal = -1.f;
 float lastGainControl = -1.f;
 float lastGain = -1.f;
 
+// LFO2 Tremolo depth
+float lastLFO2Depth = -1.f;
+
 void process(const ProcessArgs& args) override {
 
 auto processLFO = [&](int rateParam, int depthParam, int waveParam,
@@ -754,8 +757,16 @@ if (inputs[LFO2DEPTHCV_INPUT].isConnected())
     lfo2Depth += inputs[LFO2DEPTHCV_INPUT].getVoltage() / 10.f;
 lfo2Depth = std::clamp(lfo2Depth, 0.f, 1.f);
 
+// Only update cached value if it changed
+if (lfo2Depth != lastLFO2Depth) {
+    lastLFO2Depth = lfo2Depth;
+}
+
+// Use lastLFO2Depth in downstream calculations
+float tremoloDepth = lastLFO2Depth;
+
 // LFO2 (±5 V) → 0–1 amplitude modulation
-float tremolo = 0.5f * (1.f + (lfo2Value / 5.f) * lfo2Depth);
+float tremolo = 0.5f * (1.f + (lfo2Value / 5.f) * tremoloDepth);
 tremolo = std::clamp(tremolo, 0.f, 1.f);
 
 // Stereo width 

@@ -37,7 +37,13 @@ struct Pow2NotesTableRange {
 const Mapping::LookupTable_t<64, float> Pow2Notes =
 		Mapping::LookupTable_t<64, float>::generate<Pow2NotesTableRange>([](float x) { return powf(2.f, x); });
 		
-	
+struct Pow2ReduxTableRange {
+			static constexpr float min = 3.f;
+			static constexpr float max = 15.f;
+		};
+const Mapping::LookupTable_t<64, float> Pow2Redux =
+			Mapping::LookupTable_t<64, float>::generate<Pow2ReduxTableRange>([](float x) { return powf(2.f, x); });
+			
 
 struct Stargazer : Module {
 	enum ParamId {
@@ -541,7 +547,7 @@ if (mode != 4) {
         float reduxCV = std::clamp(inputs[REDUXCV_INPUT].getVoltage(), -5.f, 5.f);
         reduxBitDepth = std::clamp((int)roundf(16.f - ((reduxCV + 5.f)/10.f)*(16.f-4.f)), 4, 16);
     }
-    float maxVal = powf(2.f, reduxBitDepth - 1) - 1.f;
+    float maxVal = Pow2Redux(reduxBitDepth - 1) - 1.f;
     float normalized = std::clamp(finalOutput / 10.f, -1.f, 1.f);
     float quantized = roundf(normalized * maxVal) / maxVal;
     finalOutput = quantized * 10.f;

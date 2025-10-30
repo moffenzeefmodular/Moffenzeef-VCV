@@ -227,15 +227,25 @@ struct Stargazer : Module {
 float phase1 = 0.f;
 float phase2 = 0.f;
 
-// --- Filter 1 state (biquad) ---
-float lp1_x1 = 0.f, lp1_x2 = 0.f, lp1_y1 = 0.f, lp1_y2 = 0.f;
+// Filter 1 cached parameters
+int lastFilterMode1 = -1;
+float lastCutoffHz = -1.f;
+float lastQ = -1.f;
+
+// Filter 1 biquad coefficients
+float lp1_b0 = 0.f, lp1_b1 = 0.f, lp1_b2 = 0.f;
+float lp1_a0 = 1.f, lp1_a1 = 0.f, lp1_a2 = 0.f;
+
+// Optional: normalize gain
+float lp1_normGain = 1.f;
+
+// Filter 1 state
+float lp1_x1 = 0.f, lp1_x2 = 0.f;
+float lp1_y1 = 0.f, lp1_y2 = 0.f;
+
 
 // --- Filter 2 state (biquad) ---
 float lp2_x1 = 0.f, lp2_x2 = 0.f, lp2_y1 = 0.f, lp2_y2 = 0.f;
-
-// --- AGC states for filter 1 ---
-float agcEnv1 = 0.f;
-float agcGain1 = 1.f;
 
 // Alias 
 float aliasCounter = 0.f;
@@ -396,7 +406,6 @@ processLFO(RATE3_PARAM, DEPTH3_PARAM, WAVE3_PARAM,
            LFO3OUT_OUTPUT, LFO3LEDRED_LIGHT, LFO3LEDGREEN_LIGHT,
            RANGE3_PARAM, &lfo3Value);
 
-
 	// START OF AUDIO SECTION 
     sampleRate = 1.f / args.sampleTime;
 
@@ -510,65 +519,79 @@ processLFO(RATE3_PARAM, DEPTH3_PARAM, WAVE3_PARAM,
     res = std::clamp(res, 0.f, 1.f);
     float Q = 1.f + res * 4.f;
 
-// --- Filter 1 biquad with selectable mode + gain normalization ---
-int mode = (int) params[FILTERMODE1_PARAM].getValue(); 
-// 0 = Lowpass, 1 = Bandpass, 2 = Notch, 3 = Highpass, 4 = Off
+///// LEFT OFF HERE 
 
+// --- Filter 1 biquad with selectable mode + gain normalization ---
 float y = sample; // default passthrough
-if (mode != 4) {
+int mode = (int) params[FILTERMODE1_PARAM].getValue(); // 0=LP,1=BP,2=Notch,3=HP,4=Off
+
+// Only recalc coefficients if mode, cutoff, or Q changed
+if (mode != 4 && (mode != lastFilterMode1 || cutoffHz != lastCutoffHz || Q != lastQ)) {
     float w0 = 2.f * float(M_PI) * cutoffHz / sampleRate;
     float cos_w0 = Cos(w0);
     float sin_w0 = SinFilter(w0);
     float alpha = sin_w0 / (2.f * Q);
 
-    float b0 = 0.f, b1 = 0.f, b2 = 0.f;
-    float a0 = 1.f, a1 = 0.f, a2 = 0.f;
-
-	switch (mode) {
+    switch (mode) {
         case 0: // Lowpass
-            b0 = (1.f - cos_w0) / 2.f;
-            b1 = 1.f - cos_w0;
-            b2 = (1.f - cos_w0) / 2.f;
+            lp1_b0 = (1.f - cos_w0) / 2.f;
+            lp1_b1 = 1.f - cos_w0;
+            lp1_b2 = (1.f - cos_w0) / 2.f;
             break;
         case 1: // Bandpass
-            b0 = sin_w0 / 2.f;
-            b1 = 0.f;
-            b2 = -sin_w0 / 2.f;
+            lp1_b0 = sin_w0 / 2.f;
+            lp1_b1 = 0.f;
+            lp1_b2 = -sin_w0 / 2.f;
             break;
         case 2: // Notch
-            b0 = 1.f;
-            b1 = -2.f * cos_w0;
-            b2 = 1.f;
+            lp1_b0 = 1.f;
+            lp1_b1 = -2.f * cos_w0;
+            lp1_b2 = 1.f;
             break;
         case 3: // Highpass
-            b0 = (1.f + cos_w0) / 2.f;
-            b1 = -(1.f + cos_w0);
-            b2 = (1.f + cos_w0) / 2.f;
+            lp1_b0 = (1.f + cos_w0) / 2.f;
+            lp1_b1 = -(1.f + cos_w0);
+            lp1_b2 = (1.f + cos_w0) / 2.f;
             break;
     }
 
-    a0 = 1.f + alpha;
-    a1 = -2.f * cos_w0;
-    a2 = 1.f - alpha;
+    lp1_a0 = 1.f + alpha;
+    lp1_a1 = -2.f * cos_w0;
+    lp1_a2 = 1.f - alpha;
 
-    // biquad process
-    y = (b0/a0)*sample + (b1/a0)*lp1_x1 + (b2/a0)*lp1_x2
-        - (a1/a0)*lp1_y1 - (a2/a0)*lp1_y2;
+    // precompute normalization gain per mode
+    switch (mode) {
+        case 0: lp1_normGain = 1.0f; break; // LP
+        case 1: lp1_normGain = 0.5f; break; // BP
+        case 2: lp1_normGain = 0.8f; break; // Notch
+        case 3: lp1_normGain = 1.0f; break; // HP
+    }
 
+    // store current params for caching
+    lastFilterMode1 = mode;
+    lastCutoffHz = cutoffHz;
+    lastQ = Q;
+}
+
+// --- biquad process ---
+if (mode != 4) {
+    y = (lp1_b0 / lp1_a0) * sample
+      + (lp1_b1 / lp1_a0) * lp1_x1
+      + (lp1_b2 / lp1_a0) * lp1_x2
+      - (lp1_a1 / lp1_a0) * lp1_y1
+      - (lp1_a2 / lp1_a0) * lp1_y2;
+
+    // shift states
     lp1_x2 = lp1_x1; lp1_x1 = sample;
     lp1_y2 = lp1_y1; lp1_y1 = y;
 
-    // --- normalize per mode to reduce internal gain differences ---
-    float normGain = 1.f;
-    switch (mode) {
-        case 0: normGain = 1.0f; break;   // LP
-        case 1: normGain = 0.5f; break;   // BP
-        case 2: normGain = 0.8f; break;   // Notch
-        case 3: normGain = 1.0f; break;   // HP
-    }
-    y *= normGain;
+    // apply normalization
+    y *= lp1_normGain;
 }
-    float scaledOutput = std::clamp(y, -10.f, 10.f);
+
+// clamp output
+float scaledOutput = std::clamp(y, -10.f, 10.f);
+
 
     // --- Alias (sample rate reducer) ---
     float aliasKnob = 1.f - params[ALIAS_PARAM].getValue();

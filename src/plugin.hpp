@@ -78,10 +78,6 @@ struct BefacoBigKnobBlack : SvgKnob {
 		minAngle = -0.85 * M_PI;
 		maxAngle = 0.85 * M_PI;
 		setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/BefacoBigKnobBlack.svg")));
-
-		bg = new widget::SvgWidget;
-		fb->addChildBelow(bg, tw);
-		bg->setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/BefacoBigKnobBlack_bg.svg")));
 	}
 };
 
@@ -91,10 +87,6 @@ struct MediumKnob : SvgKnob {
 		minAngle = -0.85 * M_PI;
 		maxAngle = 0.85 * M_PI;
 		setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/MediumKnob.svg")));
-
-		bg = new widget::SvgWidget;
-		fb->addChildBelow(bg, tw);
-		bg->setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/MediumKnob_bg.svg")));
 	}
 };
 
@@ -113,10 +105,6 @@ struct StargazerDavies : SvgKnob {
 		minAngle = -0.85 * M_PI;
 		maxAngle = 0.85 * M_PI;
 		setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/Davies1900hBlack.svg")));
-
-		bg = new widget::SvgWidget;
-		fb->addChildBelow(bg, tw);
-		bg->setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/Davies1900hBlack_bg.svg")));
 	}
 };
 
@@ -126,10 +114,6 @@ struct StargazerTinyKnob : SvgKnob {
 		minAngle = -0.85 * M_PI;
 		maxAngle = 0.85 * M_PI;
 		setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/StargazerTinyKnob.svg")));
-
-		bg = new widget::SvgWidget;
-		fb->addChildBelow(bg, tw);
-		bg->setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/StargazerTinyKnob_bg.svg")));
 	}
 };
 

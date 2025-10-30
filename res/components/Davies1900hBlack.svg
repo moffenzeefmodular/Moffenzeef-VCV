@@ -34,7 +34,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="15.839192"
      inkscape:cx="27.589791"
-     inkscape:cy="12.46907"
+     inkscape:cy="12.437503"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -43,7 +43,7 @@
      fit-margin-right="0"
      fit-margin-bottom="0"
      inkscape:window-width="1200"
-     inkscape:window-height="1186"
+     inkscape:window-height="1027"
      inkscape:window-x="624"
      inkscape:window-y="25"
      inkscape:window-maximized="0"
@@ -68,9 +68,16 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-230.09585,-123.23243)">
+    <path
+       id="path109718_1_"
+       inkscape:connector-curvature="0"
+       fill="url(#path109718_2_)"
+       d="m 239.62085,127.99472 c 0,2.6302 -2.13218,4.76271 -4.7625,4.76271 -2.63032,0 -4.7625,-2.13251 -4.7625,-4.76271 0,-2.62979 2.13218,-4.76229 4.7625,-4.76229 2.63031,0 4.7625,2.1325 4.7625,4.76229"
+       style="fill:#404040;fill-opacity:1;stroke-width:0.999995"
+       transform="translate(-9.791666e-7)" />
     <g
        id="g1"
-       transform="matrix(3.7795275,0,0,3.7795276,-639.55773,-342.52794)"
+       transform="matrix(3.7795275,0,0,3.7795276,-639.55774,-342.52794)"
        style="stroke-width:0.264583">
       <g
          id="g2012"

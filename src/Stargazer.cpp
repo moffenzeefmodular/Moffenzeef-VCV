@@ -436,8 +436,10 @@ if (mode != 4) {
     float sin_w0 = sinf(w0);
     float alpha = sin_w0 / (2.f * Q);
 
-    float b0, b1, b2, a0, a1, a2;
-    switch (mode) {
+    float b0 = 0.f, b1 = 0.f, b2 = 0.f;
+    float a0 = 1.f, a1 = 0.f, a2 = 0.f;
+
+	switch (mode) {
         case 0: // Lowpass
             b0 = (1.f - cos_w0) / 2.f;
             b1 = 1.f - cos_w0;
@@ -540,8 +542,10 @@ if (mode2 != 4) {
     float sin_w0_2 = sinf(w0_2);
     float alpha2 = sin_w0_2 / (2.f * Q2);
 
-    float b0, b1, b2, a0, a1, a2;
-    switch (mode2) {
+    float b0 = 0.f, b1 = 0.f, b2 = 0.f;
+    float a0 = 1.f, a1 = 0.f, a2 = 0.f;
+	
+	switch (mode2) {
         case 0: // Lowpass
             b0 = (1.f - cos_w0_2) / 2.f;
             b1 = 1.f - cos_w0_2;

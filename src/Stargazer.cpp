@@ -1,6 +1,35 @@
 #include "plugin.hpp"
 #include "../res/wavetables/StargazerWavetables.hpp"
 #include <vector>
+#include "helpers/math_lut.hpp"
+
+
+// Lookup tables
+struct SinTableRange {
+	static constexpr float min = -2.f * M_PI;
+	static constexpr float max = 2.f * M_PI;
+};
+
+const Mapping::LookupTable_t<64, float> Sin =
+	Mapping::LookupTable_t<64, float>::generate<SinTableRange>([](float x) { return sinf(x); });
+
+	// Lookup tables
+struct SinFilterTableRange {
+	static constexpr float min = -1.f * M_PI;
+	static constexpr float max = 1.f * M_PI;
+};
+
+const Mapping::LookupTable_t<64, float> SinFilter =
+	Mapping::LookupTable_t<64, float>::generate<SinFilterTableRange>([](float x) { return sinf(x); });
+
+struct CosTableRange {
+	static constexpr float min = -1.f * M_PI;
+	static constexpr float max = 1.f * M_PI;
+};
+
+const Mapping::LookupTable_t<64, float> Cos =
+	Mapping::LookupTable_t<64, float>::generate<CosTableRange>([](float x) { return cosf(x); });
+	
 
 struct Stargazer : Module {
 	enum ParamId {
@@ -277,7 +306,7 @@ if (paramQuantities.size() > (size_t)rateParam) {
 
     float value = 0.f;
     switch (wave) {
-        case 0: value = sinf(2.f * float(M_PI) * phase); break;
+        case 0: value = Sin(2.f * float(M_PI) * phase); break;
         case 1: value = 1.f - 4.f * fabsf(phase - 0.5f); break;
         case 2: value = 2.f * phase - 1.f; break;
         case 3: value = 1.f - 2.f * phase; break;
@@ -422,8 +451,8 @@ int mode = (int) params[FILTERMODE1_PARAM].getValue();
 float y = sample; // default passthrough
 if (mode != 4) {
     float w0 = 2.f * float(M_PI) * cutoffHz / sampleRate;
-    float cos_w0 = cosf(w0);
-    float sin_w0 = sinf(w0);
+    float cos_w0 = Cos(w0);
+    float sin_w0 = SinFilter(w0);
     float alpha = sin_w0 / (2.f * Q);
 
     float b0 = 0.f, b1 = 0.f, b2 = 0.f;
@@ -528,8 +557,8 @@ int mode2 = (int) params[FILTERMODE2_PARAM].getValue();
 float y2 = finalOutput; // default passthrough
 if (mode2 != 4) {
     float w0_2 = 2.f * float(M_PI) * cutoffHz2 / sampleRate;
-    float cos_w0_2 = cosf(w0_2);
-    float sin_w0_2 = sinf(w0_2);
+    float cos_w0_2 = Cos(w0_2);
+    float sin_w0_2 = Sin(w0_2);
     float alpha2 = sin_w0_2 / (2.f * Q2);
 
     float b0 = 0.f, b1 = 0.f, b2 = 0.f;

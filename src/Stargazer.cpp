@@ -1,8 +1,6 @@
 #include "plugin.hpp"
 #include "../res/wavetables/StargazerWavetables.hpp"
-#include <fstream>
 #include <vector>
-#include <string>
 
 struct Stargazer : Module {
 	enum ParamId {
@@ -95,8 +93,8 @@ struct Stargazer : Module {
 		configParam(FREQ1_PARAM, 0.f, 1.f, 1.f, "Filter 1 Cutoff", "hz", 200.f, 80.f); // 80hz - 16khz
 		configParam(RES1_PARAM, 0.f, 1.f, 0.f, "Filter 1 Resonance", "%", 0.f, 100.f); // Q 1-5
 
-		configSwitch(FILTERMODE1_PARAM, 0.f, 4.f, 0.f, "Filter Mode", {"Lowpass", "Bandpass", "Notch", "Highpass", "Off"});
-		configSwitch(FILTERMODE2_PARAM, 0.f, 4.f, 0.f, "Filter Mode", {"Lowpass", "Bandpass", "Notch", "Highpass", "Off"});
+		configSwitch(FILTERMODE1_PARAM, 0.f, 4.f, 0.f, "Filter Mode 1", {"Lowpass", "Bandpass", "Notch", "Highpass", "Off"});
+		configSwitch(FILTERMODE2_PARAM, 0.f, 4.f, 0.f, "Filter Mode 2", {"Lowpass", "Bandpass", "Notch", "Highpass", "Off"});
 
 		configParam(ALIAS_PARAM, 1.f, 0.f, 1.f, "Sample Rate", "hz", 878.04f, 20.5f); // 18khz - 1hz 
 		configSwitch(REDUX_PARAM, 0.f, 12.f, 0.f, "Bit Depth", {"16", "15", "14", "13", "12", "11", "10", "9", "8", "7", "6", "5", "4"});
@@ -190,32 +188,24 @@ float lp2_x1 = 0.f, lp2_x2 = 0.f, lp2_y1 = 0.f, lp2_y2 = 0.f;
 float agcEnv1 = 0.f;
 float agcGain1 = 1.f;
 
-// --- AGC parameters (shared) ---
-const float agcAttack = 0.001f;   // smoothing when signal rises
-const float agcRelease = 0.01f;   // smoothing when signal falls
-const float targetPeak = 0.8f;    // target normalized peak
-
 // Alias 
 float aliasCounter = 0.f;
 float lastSample = 0.f;
 
 // LFO1 member variables
 float lfo1Phase = 0.f;
-float lfo1LastValue = 0.f;      // last output (already exists)
 float lfo1StepCounter = 1.f;    // for stepped random waveform
 float lfo1RandValue = 0.f;      // for stepped random waveform
 float lfo1Value = 0.f;
 
 // LFO2 member variables
 float lfo2Phase = 0.f;
-float lfo2LastValue = 0.f;      // last output (already exists)
 float lfo2StepCounter = 1.f;    // for stepped random waveform
 float lfo2RandValue = 0.f;      // for stepped random waveform
 float lfo2Value = 0.f;
 
 // LFO3 member variables
 float lfo3Phase = 0.f;
-float lfo3LastValue = 0.f;      // last output (already exists)
 float lfo3StepCounter = 1.f;    // for stepped random waveform
 float lfo3RandValue = 0.f;      // for stepped random waveform
 float lfo3Value = 0.f;
@@ -618,7 +608,6 @@ float tremolo = 0.5f * (1.f + (lfo2Value / 5.f) * lfo2Depth);
 tremolo = std::clamp(tremolo, 0.f, 1.f);
 
 // Stereo width 
-float delayMs = 20.f;
 int delaySamples = (int)(delayMs * 0.001f * args.sampleRate);
 if ((int)delayBuffer.size() < delaySamples + 1)
     delayBuffer.assign(delaySamples + 1, 0.f);

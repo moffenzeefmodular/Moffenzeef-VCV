@@ -260,11 +260,6 @@ float lp2_normGain = 1.f;
 float lp2_x1 = 0.f, lp2_x2 = 0.f;
 float lp2_y1 = 0.f, lp2_y2 = 0.f;
 
-
-// Alias 
-float aliasCounter = 0.f;
-float lastSample = 0.f;
-
 // LFO1 member variables
 float lfo1Phase = 0.f;
 float lfo1StepCounter = 1.f;    // for stepped random waveform
@@ -313,6 +308,18 @@ float lastMix = -1.f;
 
 // Audio
 float freq = 1.f;
+
+// Alias / sample rate reducer
+float lastAliasKnob = -1.f;
+float lastFadeFactor = -1.f;
+float lastAliasRate = -1.f;
+float aliasCounter = 0.f;
+float lastSample = 0.f;
+
+// Redux bit reduction
+int lastReduxBitDepth = -1;
+float lastMaxVal = -1.f;
+
 
 void process(const ProcessArgs& args) override {
 
@@ -604,34 +611,43 @@ if (mode != 4) {
 // clamp output
 float scaledOutput = std::clamp(y, -10.f, 10.f);
 
+   // --- Alias (sample rate reducer) ---
+float aliasKnob = 1.f - params[ALIAS_PARAM].getValue();
+if (inputs[ALIASCV_INPUT].isConnected())
+    aliasKnob += inputs[ALIASCV_INPUT].getVoltage() / 10.f;
+aliasKnob = std::clamp(aliasKnob, 0.f, 1.f);
 
-    // --- Alias (sample rate reducer) ---
-    float aliasKnob = 1.f - params[ALIAS_PARAM].getValue();
-    if (inputs[ALIASCV_INPUT].isConnected())
-        aliasKnob += inputs[ALIASCV_INPUT].getVoltage() / 10.f;
-    aliasKnob = std::clamp(aliasKnob, 0.f, 1.f);
+// Recompute fadeFactor & aliasRate only if aliasKnob changed
+if (aliasKnob != lastAliasKnob) {
+    lastFadeFactor = (aliasKnob <= 0.05f) ? (aliasKnob / 0.05f) : 1.f;
+    lastAliasRate = 25.f + (18000.f - aliasKnob * (18000.f - 1.f));
+    lastAliasKnob = aliasKnob;
+}
 
-    float fadeFactor = (aliasKnob <= 0.05f) ? (aliasKnob / 0.05f) : 1.f;
-    float aliasRate = 25.f + (18000.f - aliasKnob * (18000.f - 1.f));
+aliasCounter += lastAliasRate * args.sampleTime;
+if (aliasCounter >= 1.f) {
+    lastSample = scaledOutput;
+    aliasCounter -= 1.f;
+}
+float finalOutput = scaledOutput * (1.f - lastFadeFactor) + lastSample * lastFadeFactor;
 
-    aliasCounter += aliasRate * args.sampleTime;
-    if (aliasCounter >= 1.f) {
-        lastSample = scaledOutput;
-        aliasCounter -= 1.f;
-    }
-    float finalOutput = scaledOutput * (1.f - fadeFactor) + lastSample * fadeFactor;
+// --- Redux bit reduction ---
+int reduxBitDepth = 16 - (int)params[REDUX_PARAM].getValue();
+reduxBitDepth = std::clamp(reduxBitDepth, 4, 16);
+if (inputs[REDUXCV_INPUT].isConnected()) {
+    float reduxCV = std::clamp(inputs[REDUXCV_INPUT].getVoltage(), -5.f, 5.f);
+    reduxBitDepth = std::clamp((int)roundf(16.f - ((reduxCV + 5.f)/10.f)*(16.f-4.f)), 4, 16);
+}
+// Only recalc maxVal if reduxBitDepth changed
+if (reduxBitDepth != lastReduxBitDepth) {
+    lastMaxVal = Pow2Redux(reduxBitDepth - 1) - 1.f;
+    lastReduxBitDepth = reduxBitDepth;
+}
 
-    // --- Redux bit reduction ---
-    int reduxBitDepth = 16 - (int)params[REDUX_PARAM].getValue();
-    reduxBitDepth = std::clamp(reduxBitDepth, 4, 16);
-    if (inputs[REDUXCV_INPUT].isConnected()) {
-        float reduxCV = std::clamp(inputs[REDUXCV_INPUT].getVoltage(), -5.f, 5.f);
-        reduxBitDepth = std::clamp((int)roundf(16.f - ((reduxCV + 5.f)/10.f)*(16.f-4.f)), 4, 16);
-    }
-    float maxVal = Pow2Redux(reduxBitDepth - 1) - 1.f;
-    float normalized = std::clamp(finalOutput / 10.f, -1.f, 1.f);
-    float quantized = roundf(normalized * maxVal) / maxVal;
-    finalOutput = quantized * 10.f;
+float normalized = std::clamp(finalOutput / 10.f, -1.f, 1.f);
+float quantized = roundf(normalized * lastMaxVal) / lastMaxVal;
+finalOutput = quantized * 10.f;
+
 
 	// --- Filter 2 cutoff + resonance ---
 float freq2CV = inputs[FREQ2CV_INPUT].isConnected() ? inputs[FREQ2CV_INPUT].getVoltage() : (lfo3Value * 0.2f);

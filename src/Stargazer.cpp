@@ -215,6 +215,14 @@ struct Stargazer : Module {
 			const float* src = &StargazerWavetables[i * tableSize];
 			wavetables[i].assign(src, src + tableSize);
 		}
+		// Initialize all knob parameters so they act as if already touched
+for (int i = 0; i < PARAMS_LEN; i++) {
+    // Only mark knobs (continuous parameters, not switches)
+    if (paramQuantities[i] && !paramQuantities[i]) {
+        paramQuantities[i]->setValue(paramQuantities[i]->getValue());
+    }
+}
+
 	}
 
 	// Main wavetable

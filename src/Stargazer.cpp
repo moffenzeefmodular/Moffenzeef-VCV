@@ -420,22 +420,22 @@ for (int i = 0; i < PARAMS_LEN; i++) {
 	// --- START OF AUDIO SECTION ---
 	sampleRate = 1.f / args.sampleTime;
 
-	// --- Root frequency (1–500 Hz base + 1V/oct CV + FM) ---
-	float baseFreqParam = params[PITCH_PARAM].getValue();
-	float pitchCV = inputs[PITCHCV_INPUT].isConnected() ? inputs[PITCHCV_INPUT].getVoltage() : 0.f;
+// --- Frequency control (1–500 Hz base + 1V/oct CV) ---
+float baseFreqParam = params[PITCH_PARAM].getValue();
+float baseFreq = 1.f + baseFreqParam * (500.f - 1.f);
+float pitchCV = inputs[PITCHCV_INPUT].isConnected() ? inputs[PITCHCV_INPUT].getVoltage() : 0.f;
+// FM input (normalized to LFO3)
+float fmCV = inputs[FMCV_INPUT].isConnected() ? inputs[FMCV_INPUT].getVoltage() : (lfo3Value * 0.2f);
 
-	// FM input
-	float fmCV = 0.f;
-	if (inputs[FMCV_INPUT].isConnected()) {
-	    fmCV = inputs[FMCV_INPUT].getVoltage(); // 1V/oct FM CV
-	} else {
-	    fmCV = lfo3Value * 0.2f;              // LFO3 default modulation
-	}
+// FM knob acts as attenuator
+fmCV *= params[FM_PARAM].getValue();
 
-	fmCV *= params[FM_PARAM].getValue();
+// total pitch = 1V/oct + FM
+float totalPitchCV = pitchCV + fmCV;
 
-	// Compute root frequency (1 Hz – 500 Hz), always responds to pitch knob/CV
-	float freqRoot = std::clamp((1.f + baseFreqParam * 499.f) * powf(2.f, pitchCV + fmCV), 1.f, 500.f);
+// final frequency (1–500 Hz)
+float freqRoot = std::clamp(baseFreq * Pow2Notes(totalPitchCV), 1.f, 500.f);
+
 
 	// --- Waveform morphing (for the single oscillator) ---
 	float waveCV = inputs[WAVECV_INPUT].isConnected() ? inputs[WAVECV_INPUT].getVoltage() : lfo1Value;

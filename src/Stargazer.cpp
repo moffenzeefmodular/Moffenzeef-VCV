@@ -424,8 +424,7 @@ struct Stargazer : Module {
 	    fmCV = lfo3Value * 0.2f;              // LFO3 default modulation
 	}
 
-	// Apply FM knob as linear gain (scales FM influence without zeroing pitch)
-	fmCV *= 1.f + params[FM_PARAM].getValue() * 10.f;
+	fmCV *= params[FM_PARAM].getValue();
 
 	// Compute root frequency (1 Hz – 500 Hz), always responds to pitch knob/CV
 	float freqRoot = std::clamp((1.f + baseFreqParam * 499.f) * powf(2.f, pitchCV + fmCV), 1.f, 500.f);

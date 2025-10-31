@@ -225,6 +225,7 @@ struct Stargazer : Module {
 
 	// --- Oscillator phase (only one main oscillator now) ---
 	float phase1 = 0.f;
+	float phase2 = 0.f; 
 
 	// Filter 1 cached parameters
 	int lastFilterMode1 = -1;
@@ -299,6 +300,8 @@ struct Stargazer : Module {
 
 	// LFO2 Tremolo depth
 	float lastLFO2Depth = -1.f;
+
+	float oscFreq2 = 0.f; 
 	 
 	void process(const ProcessArgs& args) override {
 
@@ -455,11 +458,46 @@ struct Stargazer : Module {
 	if (phase1 >= 1.f) phase1 -= 1.f;
 	float osc1 = interpWave(phase1);
 
-	// --- Note: Oscillator 2 removed. Any parameters/inputs for it are retained for compatibility but not used. ---
+// Detune (in Hz)
+float detune = params[DETUNE_PARAM].getValue();
+if (inputs[DETUNECV_INPUT].isConnected())
+    detune += inputs[DETUNECV_INPUT].getVoltage() * 5.f; // ±5 Hz typical range
+
+bool subActive = (params[SUB_PARAM].getValue() > 0.5f);
+	if (inputs[SUBCV_INPUT].isConnected()) {
+		if (inputs[SUBCV_INPUT].getVoltage() >= 1.f)
+			subActive = !subActive;
+	}
+		
+	// Apply sub mode (after detune)
+	if (subActive) {
+		oscFreq2 = ((freqRoot * 0.5f) + detune);
+	}
+	else {
+		oscFreq2 = freqRoot + detune; 
+	}
+
+
+// Advance oscillator 2 phase
+phase2 += oscFreq2 / sampleRate;
+if (phase2 >= 1.f)
+    phase2 -= 1.f;
+
+// Use identical wavetable lookup as oscillator 1
+float osc2 = interpWave(phase2);
+
+// --- Mix control ---
+float mix = params[MIX_PARAM].getValue();
+if (inputs[MIXCV_INPUT].isConnected())
+    mix += inputs[MIXCV_INPUT].getVoltage() / 10.f;
+mix = std::clamp(mix, 0.f, 1.f);
+
+// Crossfade between osc1 and osc2
+float oscMix = osc1 + (osc2 * mix);
 
 	// --- Mix / final sample (only osc1 now) ---
-	float sample = osc1;
-	
+	float sample = oscMix;
+
     // --- Filter 1 cutoff + resonance ---
 	float cutoff = params[FREQ1_PARAM].getValue();
 	if (inputs[FREQ1CV_INPUT].isConnected()){

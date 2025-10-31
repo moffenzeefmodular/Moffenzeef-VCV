@@ -458,10 +458,14 @@ struct Stargazer : Module {
 	if (phase1 >= 1.f) phase1 -= 1.f;
 	float osc1 = interpWave(phase1);
 
-// Detune (in Hz)
-float detune = params[DETUNE_PARAM].getValue();
+
+// Detune
+float detuneKnob = params[DETUNE_PARAM].getValue() * 5.f;
+float detuneCV = 0.f;
 if (inputs[DETUNECV_INPUT].isConnected())
-    detune += inputs[DETUNECV_INPUT].getVoltage() * 5.f; // ±5 Hz typical range
+detuneCV = inputs[DETUNECV_INPUT].getVoltage();
+float detuneCombined = std::clamp(detuneKnob + detuneCV, -5.f, 5.f);
+float detune = detuneCombined;  // ±5 Hz total range
 
 bool subActive = (params[SUB_PARAM].getValue() > 0.5f);
 	if (inputs[SUBCV_INPUT].isConnected()) {

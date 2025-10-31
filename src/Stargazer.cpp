@@ -283,32 +283,6 @@ std::vector<float> delayBuffer;
 int delayIndex = 0;
 float delayMs = 20.f; // adjustable delay time in milliseconds
 
-// Cached params
-float lastBaseFreqParam = -1.f;
-float lastPitchCV = -1000.f;
-float lastFMParam = -1.f;
-float lastFMCV = -1000.f;
-
-float lastWaveParam = -1.f;
-float lastWaveCV = -1000.f;
-
-// Wave table interpolation
-float wavePos = 0.f;
-int i0 = 0;
-int i1 = 0;
-float frac = 0.f;
-
-// Oscillator 2
-float lastDetune = -1000.f;
-bool lastSubEnabled = false;
-float freq2 = 1.f;
-
-// Mixer
-float lastMix = -1.f;
-
-// Audio
-float freq = 1.f;
-
 // Alias / sample rate reducer
 float lastAliasKnob = -1.f;
 float lastFadeFactor = -1.f;
@@ -326,7 +300,7 @@ float lastGain = -1.f;
 
 // LFO2 Tremolo depth
 float lastLFO2Depth = -1.f;
-
+ 
 void process(const ProcessArgs& args) override {
 
 auto processLFO = [&](int rateParam, int depthParam, int waveParam,
@@ -432,105 +406,85 @@ processLFO(RATE3_PARAM, DEPTH3_PARAM, WAVE3_PARAM,
            lfo3Phase, lfo3StepCounter, lfo3RandValue,
            LFO3OUT_OUTPUT, LFO3LEDRED_LIGHT, LFO3LEDGREEN_LIGHT,
            RANGE3_PARAM, &lfo3Value);
+		   
+// --- START OF AUDIO SECTION ---
+sampleRate = 1.f / args.sampleTime;
 
-	// START OF AUDIO SECTION 
-    sampleRate = 1.f / args.sampleTime;
+// --- Root frequency (1–500 Hz base + 1V/oct CV + FM) ---
+float baseFreqParam = params[PITCH_PARAM].getValue();
+float pitchCV = inputs[PITCHCV_INPUT].isConnected() ? inputs[PITCHCV_INPUT].getVoltage() : 0.f;
 
-    // --- Read inputs & params ---
-    float baseFreqParam = params[PITCH_PARAM].getValue();
-    float pitchCV = inputs[PITCHCV_INPUT].isConnected() ? inputs[PITCHCV_INPUT].getVoltage() : 0.f;
-    float fmCV = inputs[FMCV_INPUT].isConnected() ? inputs[FMCV_INPUT].getVoltage() : (lfo3Value * 0.2f);
-    float fmParam = params[FM_PARAM].getValue();
+// FM input
+float fmCV = 0.f;
+if (inputs[FMCV_INPUT].isConnected()) {
+    fmCV = inputs[FMCV_INPUT].getVoltage(); // 1V/oct FM CV
+} else {
+    fmCV = lfo3Value * 0.2f;              // LFO3 default modulation
+}
 
-    float waveCV = inputs[WAVECV_INPUT].isConnected() ? inputs[WAVECV_INPUT].getVoltage() : lfo1Value;
-    float waveParam = 1.0f + std::clamp((params[MAINWAVE_PARAM].getValue() - 1.0f) / 87.0f + waveCV / 10.0f, 0.0f, 1.0f) * 87.0f;
+// Apply FM knob as linear gain (scales FM influence without zeroing pitch)
+fmCV *= 1.f + params[FM_PARAM].getValue() * 10.f;
 
-    float detune = params[DETUNE_PARAM].getValue();
-    if (inputs[DETUNECV_INPUT].isConnected())
-        detune += inputs[DETUNECV_INPUT].getVoltage() / 5.f;
-    detune = std::clamp(detune, -1.f, 1.f);
+// Compute root frequency (1 Hz – 500 Hz), always responds to pitch knob/CV
+float freqRoot = std::clamp((1.f + baseFreqParam * 499.f) * powf(2.f, pitchCV + fmCV), 1.f, 500.f);
 
-    bool subEnabled = params[SUB_PARAM].getValue() > 0.5f;
-    if (inputs[SUBCV_INPUT].isConnected())
-        subEnabled = inputs[SUBCV_INPUT].getVoltage() > 0.f;
+// --- Waveform morphing (shared for both oscillators) ---
+float waveCV = inputs[WAVECV_INPUT].isConnected() ? inputs[WAVECV_INPUT].getVoltage() : lfo1Value;
+float waveParam = 1.0f + std::clamp((params[MAINWAVE_PARAM].getValue() - 1.0f) / 87.0f + waveCV / 10.0f, 0.f, 1.f) * 87.f;
+float wavePos = std::clamp(waveParam - 1.f, 0.f, numTables - 1.f);
+int i0 = (int)wavePos;
+int i1 = std::min(i0 + 1, numTables - 1);
+float frac = wavePos - i0;
 
-    float mix = params[MIX_PARAM].getValue();
-    if (inputs[MIXCV_INPUT].isConnected())
-        mix += inputs[MIXCV_INPUT].getVoltage() / 10.f;
-    mix = std::clamp(mix, 0.f, 1.f);
-
-    // --- Frequency recalculation (cache check) ---
-    if (baseFreqParam != lastBaseFreqParam || pitchCV != lastPitchCV || fmCV != lastFMCV || fmParam != lastFMParam) {
-        float baseFreq = 1.f + baseFreqParam * (500.f - 1.f);
-        fmCV *= fmParam;
-        float totalPitchCV = pitchCV + fmCV;
-        freq = std::clamp(baseFreq * Pow2Notes(totalPitchCV), 1.f, 500.f);
-
-        lastBaseFreqParam = baseFreqParam;
-        lastPitchCV = pitchCV;
-        lastFMCV = fmCV;
-        lastFMParam = fmParam;
-    }
-
-    // --- Waveform interpolation (cache check) ---
-    if (waveParam != lastWaveParam || waveCV != lastWaveCV) {
-        wavePos = std::clamp(waveParam - 1.f, 0.f, numTables - 1.f);
-        i0 = (int)wavePos;
-        i1 = std::min(i0 + 1, numTables - 1);
-        frac = wavePos - i0;
-
-        lastWaveParam = waveParam;
-        lastWaveCV = waveCV;
-    }
-
-    // --- Oscillator 2 frequency (detune + sub) ---
-    if (detune != lastDetune || subEnabled != lastSubEnabled) {
-        freq2 = std::clamp(freq + detune * 5.f, 1.f, 500.f);
-        if (subEnabled)
-            freq2 *= 0.5f;
-
-        lastDetune = detune;
-        lastSubEnabled = subEnabled;
-    }
-
-    // --- Mix (cache check) ---
-    if (mix != lastMix) {
-        lastMix = mix;
-    }
-
-    // --- Oscillator 1 phase & waveform ---
-    phase1 += freq / sampleRate;
-    if (phase1 >= 1.f) phase1 -= 1.f;
-    float pos1 = phase1 * (tableSize - 1);
-    int idx0 = (int)pos1;
+// --- Helper for wavetable interpolation ---
+auto interpWave = [&](float phase) {
+    float pos = phase * (tableSize - 1);
+    int idx0 = (int)pos;
     int idx1 = (idx0 + 1) % tableSize;
-    float fracPos = pos1 - idx0;
+    float fracPos = pos - idx0;
     float s00 = wavetables[i0][idx0];
     float s01 = wavetables[i0][idx1];
     float s10 = wavetables[i1][idx0];
     float s11 = wavetables[i1][idx1];
     float a = s00 + (s01 - s00) * fracPos;
     float b = s10 + (s11 - s10) * fracPos;
-    float osc1 = a + (b - a) * frac;
+    return a + (b - a) * frac;
+};
 
-    // --- Oscillator 2 phase & waveform ---
-    phase2 += freq2 / sampleRate;
-    if (phase2 >= 1.f) phase2 -= 1.f;
-    float pos2 = phase2 * (tableSize - 1);
-    int idx20 = (int)pos2;
-    int idx21 = (idx20 + 1) % tableSize;
-    float fracPos2 = pos2 - idx20;
-    float s00_2 = wavetables[i0][idx20];
-    float s01_2 = wavetables[i0][idx21];
-    float s10_2 = wavetables[i1][idx20];
-    float s11_2 = wavetables[i1][idx21];
-    float a2_osc = s00_2 + (s01_2 - s00_2) * fracPos2;
-    float b2_osc = s10_2 + (s11_2 - s10_2) * fracPos2;
-    float osc2 = a2_osc + (b2_osc - a2_osc) * frac;
+// --- Oscillator 1 (main) ---
+phase1 += freqRoot / sampleRate;
+if (phase1 >= 1.f) phase1 -= 1.f;
+float osc1 = interpWave(phase1);
 
-    // --- Final mix ---
-    float sample = osc1 + osc2 * mix;
+// --- Oscillator 2 (follows root with detune/sub) ---
+float freq2 = freqRoot; // start with root every sample
 
+// Apply detune ±5 Hz relative to root
+float detune = params[DETUNE_PARAM].getValue();
+if (inputs[DETUNECV_INPUT].isConnected())
+    detune += inputs[DETUNECV_INPUT].getVoltage() / 5.f; // ±1
+detune = std::clamp(detune, -1.f, 1.f);
+freq2 += detune * 5.f;
+
+// Apply sub-octave
+bool subEnabled = params[SUB_PARAM].getValue() > 0.5f;
+if (inputs[SUBCV_INPUT].isConnected())
+    subEnabled = inputs[SUBCV_INPUT].getVoltage() > 0.f;
+if (subEnabled)
+    freq2 *= 0.5f;
+
+// Increment phase every sample using final frequency
+phase2 += freq2 / sampleRate;
+if (phase2 >= 1.f) phase2 -= 1.f;
+float osc2 = interpWave(phase2);
+
+// --- Mix ---
+float mix = params[MIX_PARAM].getValue();
+if (inputs[MIXCV_INPUT].isConnected())
+    mix += inputs[MIXCV_INPUT].getVoltage() / 10.f;
+mix = std::clamp(mix, 0.f, 1.f);
+
+float sample = osc1 + osc2 * mix;
 
     // --- Filter 1 cutoff + resonance ---
 	float cutoff = params[FREQ1_PARAM].getValue();

@@ -22,8 +22,6 @@ void init(Plugin* p) {
 	p->addModel(modelMongrel);
 	p->addModel(modelMuskrat);
 	p->addModel(modelSimplify);
-	p->addModel(modelTwoHPBlank);
-	p->addModel(modelFourteenHPBlank);
 	p->addModel(modelSwarm);
 	p->addModel(modelINTENSIFIES);
 	p->addModel(modelTheRunner);

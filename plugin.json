@@ -1,7 +1,7 @@
 {
   "slug": "Moffenzeef",
   "name": "Moffenzeef",
-  "version": "2.0.6",
+  "version": "2.0.8",
   "license": "GPL-3.0+",
   "brand": "Moffenzeef",
   "author": "Ross Fish",
@@ -184,28 +184,6 @@
         "sequencer",
         "clock modulator",
         "hardware clone"
-      ]
-    },
-    {
-      "slug": "TwoHPBlank",
-      "name": "TwoHPBlank",
-      "modularGridUrl": "https://modulargrid.net/e/moffenzeef-modular-blank-panel",
-      "manualUrl": "https://www.moffenzeefmodular.com/store1/blankpanels",
-      "description": "2hp blank panel",
-      "tags": [
-        "Hardware clone",
-        "blank"
-      ]
-    },
-    {
-      "slug": "FourteenHPBlank",
-      "name": "FourteenHPBlank",
-      "modularGridUrl": "https://modulargrid.net/e/moffenzeef-modular-14hp-blank",
-      "manualUrl": "https://www.moffenzeefmodular.com/store1/blankpanels",
-      "description": "14hp blank panel",
-      "tags": [
-        "Hardware clone",
-        "blank"
       ]
     },
     {

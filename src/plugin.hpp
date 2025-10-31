@@ -21,8 +21,6 @@ extern Model* modelMoffenmix;
 extern Model* modelMongrel;
 extern Model* modelMuskrat;
 extern Model* modelSimplify;
-extern Model* modelTwoHPBlank;
-extern Model* modelFourteenHPBlank;
 extern Model* modelSwarm;
 extern Model* modelINTENSIFIES;
 extern Model* modelTheRunner;

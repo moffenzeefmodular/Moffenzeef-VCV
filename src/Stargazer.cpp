@@ -134,7 +134,7 @@ struct Stargazer : Module {
 		configParam(PITCH_PARAM, 0.f, 1.f, 0.1f, "Pitch", "hz", 500.f, 1.f); // 1hz - 500hz
         configParam(FM_PARAM, 0.f, 1.f, 0.f, "FM", "%", 0.f, 100.f); // FM Attenuator
 
-		configSwitch(SUB_PARAM, 0.f, 1.f, 0.f, "Sub Oscillator", {"Off", "On"}); // Turn osc2 into sub oscillator
+		configSwitch(SUB_PARAM, 0.f, 1.f, 0.f, "Sub Oscillator", {"Off", "On"}); // Turn osc2 into sub oscillator (kept for compatibility)
 		configParam(MAINWAVE_PARAM, 1.f, 88.f, 0.f, "Wavetable Select"); // 1 - 88 morphing wavetable select
 		configParam(MIX_PARAM, 0.f, 1.f, 0.f, "Oscillator 2 Volume", "%", 0.f, 100.f); 
 		configParam(DETUNE_PARAM, -1.f, 1.f, 0.f, "Oscillator 2 Detune", "hz", 0.f, 5.f); // +/-5hz 
@@ -223,269 +223,243 @@ struct Stargazer : Module {
 	int numTables = 88;        // total tables
 	float sampleRate = 44100.f; // default fallback
 
-	// --- Oscillator phases ---
-float phase1 = 0.f;
-float phase2 = 0.f;
+	// --- Oscillator phase (only one main oscillator now) ---
+	float phase1 = 0.f;
 
-// Filter 1 cached parameters
-int lastFilterMode1 = -1;
-float lastCutoffHz = -1.f;
-float lastQ = -1.f;
+	// Filter 1 cached parameters
+	int lastFilterMode1 = -1;
+	float lastCutoffHz = -1.f;
+	float lastQ = -1.f;
 
-// Filter 1 biquad coefficients
-float lp1_b0 = 0.f, lp1_b1 = 0.f, lp1_b2 = 0.f;
-float lp1_a0 = 1.f, lp1_a1 = 0.f, lp1_a2 = 0.f;
+	// Filter 1 biquad coefficients
+	float lp1_b0 = 0.f, lp1_b1 = 0.f, lp1_b2 = 0.f;
+	float lp1_a0 = 1.f, lp1_a1 = 0.f, lp1_a2 = 0.f;
 
-// Optional: normalize gain
-float lp1_normGain = 1.f;
+	// Optional: normalize gain
+	float lp1_normGain = 1.f;
 
-// Filter 1 state
-float lp1_x1 = 0.f, lp1_x2 = 0.f;
-float lp1_y1 = 0.f, lp1_y2 = 0.f;
+	// Filter 1 state
+	float lp1_x1 = 0.f, lp1_x2 = 0.f;
+	float lp1_y1 = 0.f, lp1_y2 = 0.f;
 
 
-// Filter 2 cached params
-int lastFilterMode2 = -1;
-float lastCutoffHz2 = -1.f;
-float lastQ2 = -1.f;
+	// Filter 2 cached params
+	int lastFilterMode2 = -1;
+	float lastCutoffHz2 = -1.f;
+	float lastQ2 = -1.f;
 
-// Filter 2 biquad coefficients
-float lp2_b0 = 0.f, lp2_b1 = 0.f, lp2_b2 = 0.f;
-float lp2_a0 = 1.f, lp2_a1 = 0.f, lp2_a2 = 0.f;
+	// Filter 2 biquad coefficients
+	float lp2_b0 = 0.f, lp2_b1 = 0.f, lp2_b2 = 0.f;
+	float lp2_a0 = 1.f, lp2_a1 = 0.f, lp2_a2 = 0.f;
 
-// Normalization gain
-float lp2_normGain = 1.f;
+	// Normalization gain
+	float lp2_normGain = 1.f;
 
-// Filter 2 state
-float lp2_x1 = 0.f, lp2_x2 = 0.f;
-float lp2_y1 = 0.f, lp2_y2 = 0.f;
+	// Filter 2 state
+	float lp2_x1 = 0.f, lp2_x2 = 0.f;
+	float lp2_y1 = 0.f, lp2_y2 = 0.f;
 
-// LFO1 member variables
-float lfo1Phase = 0.f;
-float lfo1StepCounter = 1.f;    // for stepped random waveform
-float lfo1RandValue = 0.f;      // for stepped random waveform
-float lfo1Value = 0.f;
+	// LFO1 member variables
+	float lfo1Phase = 0.f;
+	float lfo1StepCounter = 1.f;    // for stepped random waveform
+	float lfo1RandValue = 0.f;      // for stepped random waveform
+	float lfo1Value = 0.f;
 
-// LFO2 member variables
-float lfo2Phase = 0.f;
-float lfo2StepCounter = 1.f;    // for stepped random waveform
-float lfo2RandValue = 0.f;      // for stepped random waveform
-float lfo2Value = 0.f;
+	// LFO2 member variables
+	float lfo2Phase = 0.f;
+	float lfo2StepCounter = 1.f;    // for stepped random waveform
+	float lfo2RandValue = 0.f;      // for stepped random waveform
+	float lfo2Value = 0.f;
 
-// LFO3 member variables
-float lfo3Phase = 0.f;
-float lfo3StepCounter = 1.f;    // for stepped random waveform
-float lfo3RandValue = 0.f;      // for stepped random waveform
-float lfo3Value = 0.f;
+	// LFO3 member variables
+	float lfo3Phase = 0.f;
+	float lfo3StepCounter = 1.f;    // for stepped random waveform
+	float lfo3RandValue = 0.f;      // for stepped random waveform
+	float lfo3Value = 0.f;
 
-// --- Simple delay state ---
-std::vector<float> delayBuffer;
-int delayIndex = 0;
-float delayMs = 20.f; // adjustable delay time in milliseconds
+	// --- Simple delay state ---
+	std::vector<float> delayBuffer;
+	int delayIndex = 0;
+	float delayMs = 20.f; // adjustable delay time in milliseconds
 
-// Alias / sample rate reducer
-float lastAliasKnob = -1.f;
-float lastFadeFactor = -1.f;
-float lastAliasRate = -1.f;
-float aliasCounter = 0.f;
-float lastSample = 0.f;
+	// Alias / sample rate reducer
+	float lastAliasKnob = -1.f;
+	float lastFadeFactor = -1.f;
+	float lastAliasRate = -1.f;
+	float aliasCounter = 0.f;
+	float lastSample = 0.f;
 
-// Redux bit reduction
-int lastReduxBitDepth = -1;
-float lastMaxVal = -1.f;
+	// Redux bit reduction
+	int lastReduxBitDepth = -1;
+	float lastMaxVal = -1.f;
 
-// Final gain stage
-float lastGainControl = -1.f;
-float lastGain = -1.f;
+	// Final gain stage
+	float lastGainControl = -1.f;
+	float lastGain = -1.f;
 
-// LFO2 Tremolo depth
-float lastLFO2Depth = -1.f;
- 
-void process(const ProcessArgs& args) override {
+	// LFO2 Tremolo depth
+	float lastLFO2Depth = -1.f;
+	 
+	void process(const ProcessArgs& args) override {
 
-auto processLFO = [&](int rateParam, int depthParam, int waveParam,
-                      int rateCV, int depthCV, int waveCV,
-                      float& phase, float& stepCounter, float& randValue,
-                      int outId, int ledRedId, int ledGreenId,
-                      int rangeParam, // new: LFO range switch
-                      float* outValue = nullptr) {
+	auto processLFO = [&](int rateParam, int depthParam, int waveParam,
+	                      int rateCV, int depthCV, int waveCV,
+	                      float& phase, float& stepCounter, float& randValue,
+	                      int outId, int ledRedId, int ledGreenId,
+	                      int rangeParam, // new: LFO range switch
+	                      float* outValue = nullptr) {
 
-    float rate = params[rateParam].getValue();
-    if (inputs[rateCV].isConnected()) rate += inputs[rateCV].getVoltage() / 10.f;
-    rate = std::clamp(rate, 0.f, 1.f);
+	    float rate = params[rateParam].getValue();
+	    if (inputs[rateCV].isConnected()) rate += inputs[rateCV].getVoltage() / 10.f;
+	    rate = std::clamp(rate, 0.f, 1.f);
 
-    // Determine frequency range based on range switch
-    float minFreq = 0.05f;
-    float maxFreq = 50.f;
-    int range = (int)params[rangeParam].getValue(); // 0,1,2 for three positions
-    switch (range) {
-        case 0: minFreq = 0.01f; maxFreq = 0.1f; break;   // Range1
-        case 1: minFreq = 0.01f; maxFreq = 10.f; break;   // Range2
-        case 2: minFreq = 0.05f; maxFreq = 50.f; break;   // Range3
-    }
-    float freq = minFreq * powf(maxFreq / minFreq, rate);
+	    // Determine frequency range based on range switch
+	    float minFreq = 0.05f;
+	    float maxFreq = 50.f;
+	    int range = (int)params[rangeParam].getValue(); // 0,1,2 for three positions
+	    switch (range) {
+	        case 0: minFreq = 0.01f; maxFreq = 0.1f; break;   // Range1
+	        case 1: minFreq = 0.01f; maxFreq = 10.f; break;   // Range2
+	        case 2: minFreq = 0.05f; maxFreq = 50.f; break;   // Range3
+	    }
+	    float freq = minFreq * powf(maxFreq / minFreq, rate);
 
-// --- Dynamically update knob display based on LFO's range switch ---
-if (paramQuantities.size() > (size_t)rateParam) {
-    auto* q = paramQuantities[rateParam];
+	// --- Dynamically update knob display based on LFO's range switch ---
+	if (paramQuantities.size() > (size_t)rateParam) {
+	    auto* q = paramQuantities[rateParam];
 
-    // Read the LFO's range switch
-    int lfoRange = (int)params[rangeParam].getValue();
+	    // Read the LFO's range switch
+	    int lfoRange = (int)params[rangeParam].getValue();
 
-    switch (lfoRange) {
-        case 0: // Slow range
-            q->displayBase = 10.f;
-            q->displayMultiplier = 0.01f; 
-            break;
-        case 1: // Medium range
-            q->displayBase = 200.f;
-            q->displayMultiplier = 0.05f;
-            break;
-        case 2: // Fast range
-            q->displayBase = 1000.f;
-            q->displayMultiplier = 0.05f;
-            break;
-    }
-}
+	    switch (lfoRange) {
+	        case 0: // Slow range
+	            q->displayBase = 10.f;
+	            q->displayMultiplier = 0.01f; 
+	            break;
+	        case 1: // Medium range
+	            q->displayBase = 200.f;
+	            q->displayMultiplier = 0.05f;
+	            break;
+	        case 2: // Fast range
+	            q->displayBase = 1000.f;
+	            q->displayMultiplier = 0.05f;
+	            break;
+	    }
+	}
 
-    // Depth
-    float depth = params[depthParam].getValue();
-    if (inputs[depthCV].isConnected()) depth += inputs[depthCV].getVoltage() / 10.f;
-    depth = std::clamp(depth, 0.f, 1.f);
+	    // Depth
+	    float depth = params[depthParam].getValue();
+	    if (inputs[depthCV].isConnected()) depth += inputs[depthCV].getVoltage() / 10.f;
+	    depth = std::clamp(depth, 0.f, 1.f);
 
-    // Phase increment
-    phase += freq * args.sampleTime;
-    if (phase >= 1.f) phase -= 1.f;
+	    // Phase increment
+	    phase += freq * args.sampleTime;
+	    if (phase >= 1.f) phase -= 1.f;
 
-    // Waveform selection
-    int wave = std::clamp((int)roundf(params[waveParam].getValue() +
-                 (inputs[waveCV].isConnected() ? std::clamp(inputs[waveCV].getVoltage(), -5.f, 5.f)/2.f : 0.f)), 0, 5);
+	    // Waveform selection
+	    int wave = std::clamp((int)roundf(params[waveParam].getValue() +
+	                 (inputs[waveCV].isConnected() ? std::clamp(inputs[waveCV].getVoltage(), -5.f, 5.f)/2.f : 0.f)), 0, 5);
 
-    float value = 0.f;
-    switch (wave) {
-        case 0: value = Sin(2.f * float(M_PI) * phase); break;
-        case 1: value = 1.f - 4.f * fabsf(phase - 0.5f); break;
-        case 2: value = 2.f * phase - 1.f; break;
-        case 3: value = 1.f - 2.f * phase; break;
-        case 4: value = (phase < 0.5f) ? 1.f : -1.f; break;
-        case 5:
-            if (stepCounter >= 1.f) {
-                randValue = 2.f*((float)rand()/RAND_MAX)-1.f;
-                stepCounter -= 1.f;
-            }
-            stepCounter += freq * args.sampleTime * 2.f;
-            value = randValue;
-            break;
-    }
+	    float value = 0.f;
+	    switch (wave) {
+	        case 0: value = Sin(2.f * float(M_PI) * phase); break;
+	        case 1: value = 1.f - 4.f * fabsf(phase - 0.5f); break;
+	        case 2: value = 2.f * phase - 1.f; break;
+	        case 3: value = 1.f - 2.f * phase; break;
+	        case 4: value = (phase < 0.5f) ? 1.f : -1.f; break;
+	        case 5:
+	            if (stepCounter >= 1.f) {
+	                randValue = 2.f*((float)rand()/RAND_MAX)-1.f;
+	                stepCounter -= 1.f;
+	            }
+	            stepCounter += freq * args.sampleTime * 2.f;
+	            value = randValue;
+	            break;
+	    }
 
-    value *= depth * 5.f;
-    outputs[outId].setVoltage(value);
+	    value *= depth * 5.f;
+	    outputs[outId].setVoltage(value);
 
-    // LED logic
-    lights[ledGreenId].setBrightnessSmooth(std::clamp(value / 5.f, 0.f, 1.f), args.sampleTime);
-    lights[ledRedId].setBrightnessSmooth(std::clamp(-value / 5.f, 0.f, 1.f), args.sampleTime);
+	    // LED logic
+	    lights[ledGreenId].setBrightnessSmooth(std::clamp(value / 5.f, 0.f, 1.f), args.sampleTime);
+	    lights[ledRedId].setBrightnessSmooth(std::clamp(-value / 5.f, 0.f, 1.f), args.sampleTime);
 
-    if (outValue)
-        *outValue = value;
-};
+	    if (outValue)
+	        *outValue = value;
+	};
 
-processLFO(RATE1_PARAM, DEPTH1_PARAM, WAVE1_PARAM,
-           LFO1RATECV_INPUT, LFO1DEPTHCV_INPUT, LFO1WAVECV_INPUT,
-           lfo1Phase, lfo1StepCounter, lfo1RandValue,
-           LFO1OUT_OUTPUT, LFO1LEDRED_LIGHT, LFO1LEDGREEN_LIGHT,
-           RANGE1_PARAM, &lfo1Value);
+	processLFO(RATE1_PARAM, DEPTH1_PARAM, WAVE1_PARAM,
+	           LFO1RATECV_INPUT, LFO1DEPTHCV_INPUT, LFO1WAVECV_INPUT,
+	           lfo1Phase, lfo1StepCounter, lfo1RandValue,
+	           LFO1OUT_OUTPUT, LFO1LEDRED_LIGHT, LFO1LEDGREEN_LIGHT,
+	           RANGE1_PARAM, &lfo1Value);
 
-processLFO(RATE2_PARAM, DEPTH2_PARAM, WAVE2_PARAM,
-           LFO2RATECV_INPUT, LFO2DEPTHCV_INPUT, LFO2WAVECV_INPUT,
-           lfo2Phase, lfo2StepCounter, lfo2RandValue,
-           LFO2OUT_OUTPUT, LFO2LEDRED_LIGHT, LFO2LEDGREEN_LIGHT,
-           RANGE2_PARAM, &lfo2Value);
+	processLFO(RATE2_PARAM, DEPTH2_PARAM, WAVE2_PARAM,
+	           LFO2RATECV_INPUT, LFO2DEPTHCV_INPUT, LFO2WAVECV_INPUT,
+	           lfo2Phase, lfo2StepCounter, lfo2RandValue,
+	           LFO2OUT_OUTPUT, LFO2LEDRED_LIGHT, LFO2LEDGREEN_LIGHT,
+	           RANGE2_PARAM, &lfo2Value);
 
-processLFO(RATE3_PARAM, DEPTH3_PARAM, WAVE3_PARAM,
-           LFO3RATECV_INPUT, LFO3DEPTHCV_INPUT, LFO3WAVECV_INPUT,
-           lfo3Phase, lfo3StepCounter, lfo3RandValue,
-           LFO3OUT_OUTPUT, LFO3LEDRED_LIGHT, LFO3LEDGREEN_LIGHT,
-           RANGE3_PARAM, &lfo3Value);
-		   
-// --- START OF AUDIO SECTION ---
-sampleRate = 1.f / args.sampleTime;
+	processLFO(RATE3_PARAM, DEPTH3_PARAM, WAVE3_PARAM,
+	           LFO3RATECV_INPUT, LFO3DEPTHCV_INPUT, LFO3WAVECV_INPUT,
+	           lfo3Phase, lfo3StepCounter, lfo3RandValue,
+	           LFO3OUT_OUTPUT, LFO3LEDRED_LIGHT, LFO3LEDGREEN_LIGHT,
+	           RANGE3_PARAM, &lfo3Value);
+			   
+	// --- START OF AUDIO SECTION ---
+	sampleRate = 1.f / args.sampleTime;
 
-// --- Root frequency (1–500 Hz base + 1V/oct CV + FM) ---
-float baseFreqParam = params[PITCH_PARAM].getValue();
-float pitchCV = inputs[PITCHCV_INPUT].isConnected() ? inputs[PITCHCV_INPUT].getVoltage() : 0.f;
+	// --- Root frequency (1–500 Hz base + 1V/oct CV + FM) ---
+	float baseFreqParam = params[PITCH_PARAM].getValue();
+	float pitchCV = inputs[PITCHCV_INPUT].isConnected() ? inputs[PITCHCV_INPUT].getVoltage() : 0.f;
 
-// FM input
-float fmCV = 0.f;
-if (inputs[FMCV_INPUT].isConnected()) {
-    fmCV = inputs[FMCV_INPUT].getVoltage(); // 1V/oct FM CV
-} else {
-    fmCV = lfo3Value * 0.2f;              // LFO3 default modulation
-}
+	// FM input
+	float fmCV = 0.f;
+	if (inputs[FMCV_INPUT].isConnected()) {
+	    fmCV = inputs[FMCV_INPUT].getVoltage(); // 1V/oct FM CV
+	} else {
+	    fmCV = lfo3Value * 0.2f;              // LFO3 default modulation
+	}
 
-// Apply FM knob as linear gain (scales FM influence without zeroing pitch)
-fmCV *= 1.f + params[FM_PARAM].getValue() * 10.f;
+	// Apply FM knob as linear gain (scales FM influence without zeroing pitch)
+	fmCV *= 1.f + params[FM_PARAM].getValue() * 10.f;
 
-// Compute root frequency (1 Hz – 500 Hz), always responds to pitch knob/CV
-float freqRoot = std::clamp((1.f + baseFreqParam * 499.f) * powf(2.f, pitchCV + fmCV), 1.f, 500.f);
+	// Compute root frequency (1 Hz – 500 Hz), always responds to pitch knob/CV
+	float freqRoot = std::clamp((1.f + baseFreqParam * 499.f) * powf(2.f, pitchCV + fmCV), 1.f, 500.f);
 
-// --- Waveform morphing (shared for both oscillators) ---
-float waveCV = inputs[WAVECV_INPUT].isConnected() ? inputs[WAVECV_INPUT].getVoltage() : lfo1Value;
-float waveParam = 1.0f + std::clamp((params[MAINWAVE_PARAM].getValue() - 1.0f) / 87.0f + waveCV / 10.0f, 0.f, 1.f) * 87.f;
-float wavePos = std::clamp(waveParam - 1.f, 0.f, numTables - 1.f);
-int i0 = (int)wavePos;
-int i1 = std::min(i0 + 1, numTables - 1);
-float frac = wavePos - i0;
+	// --- Waveform morphing (for the single oscillator) ---
+	float waveCV = inputs[WAVECV_INPUT].isConnected() ? inputs[WAVECV_INPUT].getVoltage() : lfo1Value;
+	float waveParam = 1.0f + std::clamp((params[MAINWAVE_PARAM].getValue() - 1.0f) / 87.0f + waveCV / 10.0f, 0.f, 1.f) * 87.f;
+	float wavePos = std::clamp(waveParam - 1.f, 0.f, numTables - 1.f);
+	int i0 = (int)wavePos;
+	int i1 = std::min(i0 + 1, numTables - 1);
+	float frac = wavePos - i0;
 
-// --- Helper for wavetable interpolation ---
-auto interpWave = [&](float phase) {
-    float pos = phase * (tableSize - 1);
-    int idx0 = (int)pos;
-    int idx1 = (idx0 + 1) % tableSize;
-    float fracPos = pos - idx0;
-    float s00 = wavetables[i0][idx0];
-    float s01 = wavetables[i0][idx1];
-    float s10 = wavetables[i1][idx0];
-    float s11 = wavetables[i1][idx1];
-    float a = s00 + (s01 - s00) * fracPos;
-    float b = s10 + (s11 - s10) * fracPos;
-    return a + (b - a) * frac;
-};
+	// --- Helper for wavetable interpolation ---
+	auto interpWave = [&](float phase) {
+	    float pos = phase * (tableSize - 1);
+	    int idx0 = (int)pos;
+	    int idx1 = (idx0 + 1) % tableSize;
+	    float fracPos = pos - idx0;
+	    float s00 = wavetables[i0][idx0];
+	    float s01 = wavetables[i0][idx1];
+	    float s10 = wavetables[i1][idx0];
+	    float s11 = wavetables[i1][idx1];
+	    float a = s00 + (s01 - s00) * fracPos;
+	    float b = s10 + (s11 - s10) * fracPos;
+	    return a + (b - a) * frac;
+	};
 
-// --- Oscillator 1 (main) ---
-phase1 += freqRoot / sampleRate;
-if (phase1 >= 1.f) phase1 -= 1.f;
-float osc1 = interpWave(phase1);
+	// --- Oscillator 1 (main) ---
+	phase1 += freqRoot / sampleRate;
+	if (phase1 >= 1.f) phase1 -= 1.f;
+	float osc1 = interpWave(phase1);
 
-// --- Oscillator 2 (follows root with detune/sub) ---
-float freq2 = freqRoot; // start with root every sample
+	// --- Note: Oscillator 2 removed. Any parameters/inputs for it are retained for compatibility but not used. ---
 
-// Apply detune ±5 Hz relative to root
-float detune = params[DETUNE_PARAM].getValue();
-if (inputs[DETUNECV_INPUT].isConnected())
-    detune += inputs[DETUNECV_INPUT].getVoltage() / 5.f; // ±1
-detune = std::clamp(detune, -1.f, 1.f);
-freq2 += detune * 5.f;
-
-// Apply sub-octave
-bool subEnabled = params[SUB_PARAM].getValue() > 0.5f;
-if (inputs[SUBCV_INPUT].isConnected())
-    subEnabled = inputs[SUBCV_INPUT].getVoltage() > 0.f;
-if (subEnabled)
-    freq2 *= 0.5f;
-
-// Increment phase every sample using final frequency
-phase2 += freq2 / sampleRate;
-if (phase2 >= 1.f) phase2 -= 1.f;
-float osc2 = interpWave(phase2);
-
-// --- Mix ---
-float mix = params[MIX_PARAM].getValue();
-if (inputs[MIXCV_INPUT].isConnected())
-    mix += inputs[MIXCV_INPUT].getVoltage() / 10.f;
-mix = std::clamp(mix, 0.f, 1.f);
-
-float sample = osc1 + osc2 * mix;
-
+	// --- Mix / final sample (only osc1 now) ---
+	float sample = osc1;
+	
     // --- Filter 1 cutoff + resonance ---
 	float cutoff = params[FREQ1_PARAM].getValue();
 	if (inputs[FREQ1CV_INPUT].isConnected()){

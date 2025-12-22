@@ -218,7 +218,7 @@ void onRandomize() override {
 // Range scaling helper
 float rangeScale(float voltage, float rangeParam) {
     float ranges[3] = {2.5f, 5.f, 10.f};  // ±2.5V, ±5V, ±10V
-    return clamp(voltage * (ranges[(int)rangeParam] / 5.f), -ranges[(int)rangeParam], ranges[(int)rangeParam]);
+    return std::clamp(voltage * (ranges[(int)rangeParam] / 5.f), -ranges[(int)rangeParam], ranges[(int)rangeParam]);
 }
 
 void process(const ProcessArgs &args) override {
@@ -256,7 +256,7 @@ void process(const ProcessArgs &args) override {
             float bottomValue = paramToVoltage(params[BOTTOM1_PARAM + i].getValue()) + inputs[BOTTOMCV1_INPUT + i].getVoltage();
             if (bottomValue >= topValue) bottomValue = topValue;
 
-            float rawVoltage = clamp(bottomValue + (topValue - bottomValue) * random::uniform(), -5.f, 5.f);
+            float rawVoltage = std::clamp(bottomValue + (topValue - bottomValue) * random::uniform(), -5.f, 5.f);
             randomVoltage[i] = rangeScale(rawVoltage, params[RANGE1_PARAM + i].getValue());
 
             // --- Channel output always active ---
@@ -276,12 +276,12 @@ float sumVoltage = 0.f;
 for (int i = 0; i < 4; i++)
     sumVoltage += busState[i] ? randomVoltage[i] : 0.f;
 
-float sumClamped = clamp(sumVoltage, -10.f, 10.f);
+float sumClamped = std::clamp(sumVoltage, -10.f, 10.f);
 outputs[SUMOUT_OUTPUT].setVoltage(sumClamped);
 lights[SUMLEDRED_LIGHT].setBrightness(std::max(-sumClamped / 10.f, 0.f));
 lights[SUMLEDGREEN_LIGHT].setBrightness(std::max(sumClamped / 10.f, 0.f));
 
-float invSum = clamp(-sumClamped, -10.f, 10.f);
+float invSum = std::clamp(-sumClamped, -10.f, 10.f);
 outputs[INVSUMOUT_OUTPUT].setVoltage(invSum);
 lights[INVLEDRED_LIGHT].setBrightness(std::max(-invSum / 10.f, 0.f));
 lights[INVLEDGREEN_LIGHT].setBrightness(std::max(invSum / 10.f, 0.f));
@@ -299,8 +299,8 @@ for (int i = 0; i < 4; i++) {
 
 if (!hasActive) maxV = minV = 0.f;
 
-maxV = clamp(maxV, -10.f, 10.f);
-minV = clamp(minV, -10.f, 10.f);
+maxV = std::clamp(maxV, -10.f, 10.f);
+minV = std::clamp(minV, -10.f, 10.f);
 
 outputs[MAXOUT_OUTPUT].setVoltage(maxV);
 outputs[MINOUT_OUTPUT].setVoltage(minV);
@@ -310,8 +310,8 @@ lights[MAXLEDGREEN_LIGHT].setBrightness(std::max(maxV / 10.f, 0.f));
 lights[MINLEDRED_LIGHT].setBrightness(std::max(-minV / 10.f, 0.f));
 lights[MINLEDGREEN_LIGHT].setBrightness(std::max(minV / 10.f, 0.f));
 
-float pos = clamp(std::max(sumClamped, 0.f), -10.f, 10.f);
-float neg = clamp(std::min(sumClamped, 0.f), -10.f, 10.f);
+float pos = std::clamp(std::max(sumClamped, 0.f), -10.f, 10.f);
+float neg = std::clamp(std::min(sumClamped, 0.f), -10.f, 10.f);
 
 outputs[POSOUT_OUTPUT].setVoltage(pos);
 outputs[NEGOUT_OUTPUT].setVoltage(neg);
@@ -319,25 +319,25 @@ outputs[NEGOUT_OUTPUT].setVoltage(neg);
 lights[POSLEDGREEN_LIGHT].setBrightness(pos / 10.f);
 lights[NEGLEDRED_LIGHT].setBrightness(-neg / 10.f);
 
-float full = clamp(std::abs(sumClamped), -10.f, 10.f);
+float full = std::clamp(std::abs(sumClamped), -10.f, 10.f);
 outputs[FULLOUT_OUTPUT].setVoltage(full);
-outputs[INVFULLOUT_OUTPUT].setVoltage(clamp(-full, -10.f, 10.f));
+outputs[INVFULLOUT_OUTPUT].setVoltage(std::clamp(-full, -10.f, 10.f));
 
 lights[FULLLEDGREEN_LIGHT].setBrightness(full / 10.f);
 lights[INVFULLLEDRED_LIGHT].setBrightness(full / 10.f);
 
 float avg = hasActive ? (sumClamped / 4.f) : 0.f;
-avg = clamp(avg, -10.f, 10.f);
+avg = std::clamp(avg, -10.f, 10.f);
 outputs[AVGOUT_OUTPUT].setVoltage(avg);
 
 lights[AVGLEDRED_LIGHT].setBrightness(std::max(-avg / 10.f, 0.f));
 lights[AVGLEDGREEN_LIGHT].setBrightness(std::max(avg / 10.f, 0.f));
 
 float delta = sumClamped - slewVoltage;
-delta = clamp(delta, -slewRate, slewRate);
+delta = std::clamp(delta, -slewRate, slewRate);
 slewVoltage += delta;
 
-slewVoltage = clamp(slewVoltage, -10.f, 10.f);
+slewVoltage = std::clamp(slewVoltage, -10.f, 10.f);
 outputs[SLEWOUT_OUTPUT].setVoltage(slewVoltage);
 
 lights[SLEWLEDRED_LIGHT].setBrightnessSmooth(std::max(-slewVoltage / 10.f, 0.f), args.sampleTime);

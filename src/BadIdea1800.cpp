@@ -140,7 +140,7 @@ void process(const ProcessArgs& args) override {
             lights[ledIndex].setBrightnessSmooth(1.0f, args.sampleTime);  // Turn on the corresponding LED
         } else {
             oscillatorOutput = 0.0f;  // Zero output when input is low
-            lights[ledIndex].setBrightnessSmooth(0.0f);  // Turn off the corresponding LED
+            lights[ledIndex].setBrightnessSmooth(0.0f, args.sampleTime);  // Turn off the corresponding LED
         }
   
         // Scale the oscillator output by 1/48 before adding it to the total sum

@@ -254,6 +254,15 @@
         "LFO",
         "Random"
       ]
+    },
+    {
+      "slug": "QuadDeviant",
+      "name": "Quad Deviant",
+      "description": "Quad version of Deviant with range switches and CV bus",
+      "tags": [
+        "random",
+        "utility"
+      ]
     }
   ]
 }

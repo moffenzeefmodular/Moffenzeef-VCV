@@ -27,6 +27,7 @@ extern Model* modelTheRunner;
 extern Model* modelKleztizer;
 extern Model* modelTantz;
 extern Model* modelStargazer;
+extern Model* modelQuadDeviant;
 
 struct CKSSHorizontal : app::SvgSwitch {
 	CKSSHorizontal() {

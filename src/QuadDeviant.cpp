@@ -362,7 +362,7 @@ struct QuadDeviantWidget : ModuleWidget {
 	QuadDeviantWidget(QuadDeviant* module) {
 		setModule(module);
 	setPanel(createPanel(
-		asset::plugin(pluginInstance, "res/panels/QuadDeviant.svg"),
+		asset::plugin(pluginInstance, "res/panels/QuadDeviant.svg")
 		));
 
 

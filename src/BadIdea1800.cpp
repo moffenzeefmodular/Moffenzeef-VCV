@@ -162,27 +162,30 @@ void process(const ProcessArgs& args) override {
 struct BadIdea1800Widget : ModuleWidget {
 	BadIdea1800Widget(BadIdea1800* module) {
 		setModule(module);
-		setPanel(createPanel(asset::plugin(pluginInstance, "res/panels/BadIdea1800.svg")));
+	setPanel(createPanel(
+		asset::plugin(pluginInstance, "res/panels/BadIdea1800.svg"),
+		asset::plugin(pluginInstance, "res/panels/BadIdea1800-dark.svg")
+		));
 
-		addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, 0)));
-		addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, 0)));
-		addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
-		addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
+		addChild(createWidget<ThemedScrew>(Vec(RACK_GRID_WIDTH, 0)));
+		addChild(createWidget<ThemedScrew>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, 0)));
+		addChild(createWidget<ThemedScrew>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
+		addChild(createWidget<ThemedScrew>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(8.502, 22.904)), module, BadIdea1800::NUM_1_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(30.595, 22.904)), module, BadIdea1800::NUM_2_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(52.555, 22.94)), module, BadIdea1800::NUM_3_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(8.541, 44.903)), module, BadIdea1800::NUM_4_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(30.559, 44.845)), module, BadIdea1800::NUM_5_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(52.576, 44.957)), module, BadIdea1800::NUM_6_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(8.541, 66.899)), module, BadIdea1800::NUM_7_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(30.575, 66.881)), module, BadIdea1800::NUM_8_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(52.553, 66.92)), module, BadIdea1800::NUM_9_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(30.576, 88.861)), module, BadIdea1800::ZERO_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(8.52, 88.824)), module, BadIdea1800::ASTERISK_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(52.555, 88.86)), module, BadIdea1800::POUND_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(8.502, 22.904)), module, BadIdea1800::NUM_1_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(30.595, 22.904)), module, BadIdea1800::NUM_2_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(52.555, 22.94)), module, BadIdea1800::NUM_3_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(8.541, 44.903)), module, BadIdea1800::NUM_4_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(30.559, 44.845)), module, BadIdea1800::NUM_5_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(52.576, 44.957)), module, BadIdea1800::NUM_6_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(8.541, 66.899)), module, BadIdea1800::NUM_7_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(30.575, 66.881)), module, BadIdea1800::NUM_8_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(52.553, 66.92)), module, BadIdea1800::NUM_9_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(30.576, 88.861)), module, BadIdea1800::ZERO_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(8.52, 88.824)), module, BadIdea1800::ASTERISK_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(52.555, 88.86)), module, BadIdea1800::POUND_INPUT));
 
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(52.517, 110.859)), module, BadIdea1800::BADIDEA_OUTPUT));
+		addOutput(createOutputCentered<ThemedPJ301MPort>(mm2px(Vec(52.517, 110.859)), module, BadIdea1800::BADIDEA_OUTPUT));
 
 		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(8.569, 11.873)), module, BadIdea1800::LED_1_LIGHT));
 		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(30.52, 11.96)), module, BadIdea1800::LED_2_LIGHT));

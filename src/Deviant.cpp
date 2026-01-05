@@ -34,20 +34,20 @@ struct Deviant : Module {
 
     Deviant() {
         config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
-        configParam(TOP_1__PARAM, 0.f, 1.f, 1.f, "Top 1");
-        configParam(TOP_2_PARAM, 0.f, 1.f, 1.f, "Top 2");
-        configParam(BOTTOM_1_PARAM, 0.f, 1.f, 0.f, "Bottom 1");
-        configParam(BOTTOM_2_PARAM, 0.f, 1.f, 0.f, "Bottom 2");
-        configParam(SMOOTH_1_PARAM, 0.f, 1.f, 0.f, "Smooth 1");
-        configParam(SMOOTH_2_PARAM, 0.f, 1.f, 0.f, "Smooth 2");
-        configInput(BANG_1_INPUT, "Bang! 1");
+        configParam(TOP_1__PARAM, -5.f, 5.f, 5.f, "Top 1", " v");
+        configParam(TOP_2_PARAM, -5.f, 5.f, 5.f, "Top 2", " v");
+        configParam(BOTTOM_1_PARAM, -5.f, 5.f, -5.f, "Bottom 1", " v");
+        configParam(BOTTOM_2_PARAM, -5.f, 5.f, -5.f, "Bottom 2", " v");
+        configParam(SMOOTH_1_PARAM, 0.f, 1.f, 0.f, "Slew Amount 1", " %", 0.f, 100.f);
+        configParam(SMOOTH_2_PARAM, 0.f, 1.f, 0.f, "Slew Amount 2", " %", 0.f, 100.f);
+        configInput(BANG_1_INPUT, "Bang! 1 Gate");
         configInput(CH__1_TOP_INPUT, "Top 1 CV");
         configInput(CH__1_BOTTOM_INPUT, "Bottom 1 CV");
-        configInput(BANG_2_INPUT, "Bang! 2");
+        configInput(BANG_2_INPUT, "Bang! 2 Gate");
         configInput(CH__2_TOP_INPUT, "Top 2 CV");
         configInput(CH__2_BOTTOM_INPUT, "Bottom 2 CV");
-        configOutput(CH__1_OUTPUT, "Deviant 1");
-        configOutput(CH__2_OUTPUT, "Deviant 2");
+        configOutput(CH__1_OUTPUT, "Deviant 1 CV");
+        configOutput(CH__2_OUTPUT, "Deviant 2 CV");
     }
 
     float lastBang1Input = 0.0f;
@@ -91,8 +91,6 @@ struct Deviant : Module {
             float bottomValue = params[BOTTOM_1_PARAM].getValue();
             float topCV = inputs[CH__1_TOP_INPUT].getVoltage();
             float bottomCV = inputs[CH__1_BOTTOM_INPUT].getVoltage();
-            topValue = -5.f + (topValue * 10.f);  // topValue will range from -5V to +5V
-            bottomValue = -5.f + (bottomValue * 10.f);  // bottomValue will range from -5V to +5V
             topValue += topCV;
             bottomValue += bottomCV;
             if (bottomValue >= topValue) {
@@ -108,8 +106,6 @@ struct Deviant : Module {
             float bottomValue = params[BOTTOM_2_PARAM].getValue();
             float topCV = inputs[CH__2_TOP_INPUT].getVoltage();
             float bottomCV = inputs[CH__2_BOTTOM_INPUT].getVoltage();
-            topValue = -5.f + (topValue * 10.f);  // topValue will range from -5V to +5V
-            bottomValue = -5.f + (bottomValue * 10.f);  // bottomValue will range from -5V to +5V
             topValue += topCV;
             bottomValue += bottomCV;
             if (bottomValue >= topValue) {
@@ -164,12 +160,15 @@ struct Deviant : Module {
 struct DeviantWidget : ModuleWidget {
 	DeviantWidget(Deviant* module) {
 		setModule(module);
-		setPanel(createPanel(asset::plugin(pluginInstance, "res/panels/Deviant.svg")));
+setPanel(createPanel(
+		asset::plugin(pluginInstance, "res/panels/Deviant.svg"),
+		asset::plugin(pluginInstance, "res/panels/Deviant-dark.svg")
+		));
 
-		addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, 0)));
-		addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, 0)));
-		addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
-		addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
+		addChild(createWidget<ThemedScrew>(Vec(RACK_GRID_WIDTH, 0)));
+		addChild(createWidget<ThemedScrew>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, 0)));
+		addChild(createWidget<ThemedScrew>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
+		addChild(createWidget<ThemedScrew>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
 		addParam(createParamCentered<RoundBlackKnob>(mm2px(Vec(11.061, 24.335)), module, Deviant::TOP_1__PARAM));
 		addParam(createParamCentered<RoundBlackKnob>(mm2px(Vec(39.798, 24.372)), module, Deviant::TOP_2_PARAM));
@@ -178,20 +177,20 @@ struct DeviantWidget : ModuleWidget {
 		addParam(createParamCentered<RoundBlackKnob>(mm2px(Vec(10.988, 71.799)), module, Deviant::SMOOTH_1_PARAM));
 		addParam(createParamCentered<RoundBlackKnob>(mm2px(Vec(39.769, 71.777)), module, Deviant::SMOOTH_2_PARAM));
 
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(8.813, 97.162)), module, Deviant::BANG_1_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(19.771, 97.058)), module, Deviant::CH__1_TOP_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(30.906, 97.007)), module, Deviant::CH__1_BOTTOM_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(8.835, 112.448)), module, Deviant::BANG_2_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(19.727, 112.435)), module, Deviant::CH__2_TOP_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(30.927, 112.369)), module, Deviant::CH__2_BOTTOM_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(8.813, 97.162)), module, Deviant::BANG_1_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(19.771, 97.058)), module, Deviant::CH__1_TOP_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(30.906, 97.007)), module, Deviant::CH__1_BOTTOM_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(8.835, 112.448)), module, Deviant::BANG_2_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(19.727, 112.435)), module, Deviant::CH__2_TOP_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(30.927, 112.369)), module, Deviant::CH__2_BOTTOM_INPUT));
 
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(41.812, 97.073)), module, Deviant::CH__1_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(41.899, 112.441)), module, Deviant::CH__2_OUTPUT));
+		addOutput(createOutputCentered<ThemedPJ301MPort>(mm2px(Vec(41.812, 97.073)), module, Deviant::CH__1_OUTPUT));
+		addOutput(createOutputCentered<ThemedPJ301MPort>(mm2px(Vec(41.899, 112.441)), module, Deviant::CH__2_OUTPUT));
 
 		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(8.57, 13.957)), module, Deviant::LED_NEG_1_LIGHT));
-		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(13.575, 13.957)), module, Deviant::LED_POS_1_LIGHT));
+		addChild(createLightCentered<MediumLight<GreenLight>>(mm2px(Vec(13.575, 13.957)), module, Deviant::LED_POS_1_LIGHT));
 		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(37.226, 13.957)), module, Deviant::LED_NEG_2_LIGHT));
-		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(42.238, 13.995)), module, Deviant::LED_POS_2_LIGHT));
+		addChild(createLightCentered<MediumLight<GreenLight>>(mm2px(Vec(42.238, 13.995)), module, Deviant::LED_POS_2_LIGHT));
 	}
 };
 

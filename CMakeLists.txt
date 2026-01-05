@@ -12,7 +12,7 @@ endif()
 
 include(${METAMODULE_SDK_DIR}/plugin.cmake)
 
-project(Moffenzeef VERSION 2.0.8 DESCRIPTION "Moffenzeef for MetaModule" LANGUAGES C CXX ASM)
+project(Moffenzeef VERSION 2.0.9 DESCRIPTION "Moffenzeef for MetaModule" LANGUAGES C CXX ASM)
 
 add_library(Moffenzeef STATIC)
 

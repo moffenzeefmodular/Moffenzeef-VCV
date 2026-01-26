@@ -220,42 +220,86 @@ struct Kleztizer : Module {
 				rootVoltage -= 1.f;
 			outputs[CHORDROOTOUT_OUTPUT].setVoltage(rootVoltage);
 
-			float invParam = params[INVERSION_PARAM].getValue();
-			if (inputs[CHORDINVERSIONCV_INPUT].isConnected())
-				invParam += (inputs[CHORDINVERSIONCV_INPUT].getVoltage() / 5.f) * 2.f;
-			int inversion = std::clamp((int)roundf(invParam), 0, 2);
-
-			float voiceParam = params[CHORDVOICING_PARAM].getValue();
-			if (inputs[CHORDVOICINGCV_INPUT].isConnected())
-				voiceParam += (inputs[CHORDVOICINGCV_INPUT].getVoltage() / 5.f) * 3.f;
-			int voicing = std::clamp((int)roundf(voiceParam), 0, 3);
-
-			int chordVoices[3];
-			for (int v = 0; v < 3; v++)
-				chordVoices[v] = chordTable[chordIndex][(v + inversion) % 3];
-
-			int finalVoices[3];
-			switch (voicing) {
-				case 0: for (int v = 0; v < 3; v++) finalVoices[v] = chordVoices[v]; break;
-				case 1: finalVoices[0] = chordVoices[1] - 12; finalVoices[1] = chordVoices[0]; finalVoices[2] = chordVoices[2]; break;
-				case 2: finalVoices[0] = chordVoices[2] - 12; finalVoices[1] = chordVoices[0]; finalVoices[2] = chordVoices[1]; break;
-				case 3: finalVoices[0] = chordVoices[0] - 12; finalVoices[1] = chordVoices[1]; finalVoices[2] = chordVoices[2] - 12; break;
-			}
-
-			for (int v = 0; v < 3; v++)
-				outputs[CHORDOUT1_OUTPUT + v].setVoltage(tonicVoltage + finalVoices[v] / 12.f);
-
-			outputs[CHORDOUT1_OUTPUT].setChannels(3);
-			for (int v = 0; v < 3; v++)
-				outputs[CHORDOUT1_OUTPUT].setVoltage(tonicVoltage + finalVoices[v] / 12.f, v);
-		} else {
-			outputs[CHORDROOTOUT_OUTPUT].setVoltage(0.f);
-			for (int v = 0; v < 3; v++)
-				outputs[CHORDOUT1_OUTPUT + v].setVoltage(0.f);
-			outputs[CHORDOUT1_OUTPUT].setChannels(3);
-			for (int i = 0; i < 3; i++)
-				outputs[CHORDOUT1_OUTPUT].setVoltage(0.f, i);
-		}
+			 // --- Inversion knob + CV ---
+			 float invParam = params[INVERSION_PARAM].getValue();
+			 if (inputs[CHORDINVERSIONCV_INPUT].isConnected())
+				 invParam += (inputs[CHORDINVERSIONCV_INPUT].getVoltage() / 5.f) * 2.f;
+			 int inversion = std::clamp((int)roundf(invParam), 0, 2);
+		 
+			 // --- Voicing knob + CV ---
+			 float voiceParam = params[CHORDVOICING_PARAM].getValue();
+			 if (inputs[CHORDVOICINGCV_INPUT].isConnected())
+				 voiceParam += (inputs[CHORDVOICINGCV_INPUT].getVoltage() / 5.f) * 3.f;
+			 int voicing = std::clamp((int)roundf(voiceParam), 0, 3);
+		 
+			 int finalVoices[3];
+		 
+			 if (voicing == 0) {
+				 // --- Special case: Close voicing (manual mapping per inversion) ---
+				 int root  = chordTable[chordIndex][0];
+				 int third = chordTable[chordIndex][1];
+				 int fifth = chordTable[chordIndex][2];
+		 
+				 switch (inversion) {
+					 case 0: // Root position: C E G
+						 finalVoices[0] = root;
+						 finalVoices[1] = third;
+						 finalVoices[2] = fifth;
+						 break;
+							 case 1: // 1st inversion: E G C+1
+								 finalVoices[0] = third;
+								 finalVoices[1] = fifth;
+								 finalVoices[2] = root + 12;
+								 break;
+							 case 2: // 2nd inversion: G C+1 E+1
+								 finalVoices[0] = fifth;
+								 finalVoices[1] = root + 12;
+								 finalVoices[2] = third + 12;
+								 break;
+						 }
+					 } else {
+						 // --- Generic inversion first, then voicing offsets for Drop/Open ---
+						 int inverted[3];
+						 for (int i = 0; i < 3; i++)
+							 inverted[i] = chordTable[chordIndex][(i + inversion) % 3];
+		 
+						 switch (voicing) {
+							 case 1: // Drop 2
+								 finalVoices[0] = inverted[0];
+								 finalVoices[1] = inverted[1] - 12; // 2nd note down an octave
+								 finalVoices[2] = inverted[2];
+								 break;
+							 case 2: // Drop 3
+								 finalVoices[0] = inverted[0];
+								 finalVoices[1] = inverted[1];
+								 finalVoices[2] = inverted[2] - 12; // 3rd note down an octave
+								 break;
+							 case 3: // Open
+								 finalVoices[0] = inverted[0] - 12; // 1st note down
+								 finalVoices[1] = inverted[1];
+								 finalVoices[2] = inverted[2] + 12; // 3rd note up
+								 break;
+						 }
+					 }
+		 
+					 // --- Output chord voices (mono) ---
+					 for (int v = 0; v < 3; v++)
+						 outputs[CHORDOUT1_OUTPUT + v].setVoltage(tonicVoltage + finalVoices[v] / 12.f);
+		 
+					 // --- CHORDOUT1 as polyphonic output: 3 voices ---
+					 outputs[CHORDOUT1_OUTPUT].setChannels(3);
+					 for (int v = 0; v < 3; v++)
+						 outputs[CHORDOUT1_OUTPUT].setVoltage(tonicVoltage + finalVoices[v] / 12.f, v);
+		 
+				 } else {
+					 outputs[CHORDROOTOUT_OUTPUT].setVoltage(0.f);
+					 for (int v = 0; v < 3; v++)
+						 outputs[CHORDOUT1_OUTPUT + v].setVoltage(0.f);
+		 
+					 outputs[CHORDOUT1_OUTPUT].setChannels(3);
+					 for (int i = 0; i < 3; i++)
+						 outputs[CHORDOUT1_OUTPUT].setVoltage(0.f, i);
+				 }	
 
 		// --- Lead section uses member vars only (no static state) ---
 		for (int lead = 0; lead < 2; lead++) {

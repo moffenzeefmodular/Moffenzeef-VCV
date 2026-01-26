@@ -1,5 +1,4 @@
 #include "plugin.hpp"
-#include <algorithm> 
 
 struct INTENSIFIES : Module {
 	enum ParamId {
@@ -20,14 +19,16 @@ struct INTENSIFIES : Module {
 		FXVOLUMECV_INPUT,
 		GAINCV_INPUT,
 		MODULATORCV_INPUT,
-		AUDIOIN_INPUT,
+		AUDIOINL_INPUT,
+        AUDIOINR_INPUT,
 		SYNTHVOLUMECV_INPUT,
 		ENGAGECV_INPUT,
 		BYPASSCV_INPUT,
 		INPUTS_LEN
 	};
 	enum OutputId {
-		FXOUT_OUTPUT,
+		FXOUTL_OUTPUT,
+        FXOUTR_OUTPUT,
 		SYNTHOUT_OUTPUT,
 		OUTPUTS_LEN
 	};
@@ -37,6 +38,23 @@ struct INTENSIFIES : Module {
 		MODULATORLED_LIGHT,
 		LIGHTS_LEN
 	};
+
+    float heldSampleL = 0.f;
+    float heldSampleR = 0.f;
+    float clockPhaseL = 0.f;
+    float clockPhaseR = 0.f;
+
+    bool clockState = false;
+	float baseFreq = 0.f;
+	float modulatorPhase = 0.f;
+	float modulatorSignal = 1.f; 
+    float carrierPhase2 = 0.f;
+    float modulatorPhase2 = 0.f;
+	float synthHPOut = 0.f;
+	float synthHPInLast = 0.f;
+	float fxHPOut = 0.f;
+	float fxHPInLast = 0.f;
+	float mainOutLevel = 0.f;
 
 	INTENSIFIES() {
 		config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
@@ -61,102 +79,133 @@ struct INTENSIFIES : Module {
 		configInput(FXVOLUMECV_INPUT, "FX Volume CV");
 		configInput(GAINCV_INPUT, "Gain CV");
 		configInput(MODULATORCV_INPUT, "Modulator CV");
-		configInput(AUDIOIN_INPUT, "Audio");
+		configInput(AUDIOINL_INPUT, "Audio Left");
+        configInput(AUDIOINR_INPUT, "Audio Right");
+
 		configInput(SYNTHVOLUMECV_INPUT, "Synth Volume CV");
 
-		configOutput(FXOUT_OUTPUT, "FX");
+		configOutput(FXOUTL_OUTPUT, "FX Left");
+        configOutput(FXOUTR_OUTPUT, "FX Right");
+
 		configOutput(SYNTHOUT_OUTPUT, "Synth");
 	}
 
-// --- Member variables ---
-float clockPhase = 0.f;
-bool clockState = false;
-float heldSample = 0.f;
-float baseFreq = 0.f;
-float modulatorPhase = 0.f;
-float modulatorSignal = 1.f; 
-float carrierPhase2 = 0.f;
-float modulatorPhase2 = 0.f;
-float synthHPOut = 0.f;
-float synthHPInLast = 0.f;
-float fxHPOut = 0.f;
-float fxHPInLast = 0.f;
-float mainOutLevel = 0.f;
-
-void process(const ProcessArgs& args) override {
-    // --- Carrier frequency ---
+	void process(const ProcessArgs& args) override {
     float carrierKnob = params[CARRIER_PARAM].getValue();
     float carrierCV = inputs[CARRIERCV_INPUT].isConnected() ? inputs[CARRIERCV_INPUT].getVoltage() / 10.f : 0.f;
     float carrierControl = std::clamp(carrierKnob + carrierCV, 0.f, 1.f);
     int carrierRange = params[CARRIERRANGE_PARAM].getValue();
 
-    float carrierBaseFreq = (carrierRange == 0) ? 1.f : (carrierRange == 1) ? 10.f : 100.f;
-    float carrierFreq = std::clamp(carrierBaseFreq * std::pow(100.f, carrierControl), 0.f, 100000.f);
+    float carrierBaseFreq = 0.f;
+    switch (carrierRange) {
+        case 0: carrierBaseFreq = 1.f; break;
+        case 1: carrierBaseFreq = 10.f; break;
+        default: carrierBaseFreq = 100.f; break;
+    }
+    float carrierFreq = carrierBaseFreq * std::pow(100.f, carrierControl);
+    carrierFreq = std::clamp(carrierFreq, 0.f, 100000.f);
 
-    // --- Modulator enabled ---
     float engageCV = inputs[ENGAGECV_INPUT].isConnected() ? inputs[ENGAGECV_INPUT].getVoltage() : 0.f;
-    bool modEnabled = (engageCV > 1.f) ? true : (engageCV < -1.f) ? false : (params[MODULATORENGAGE_PARAM].getValue() > 0.5f);
+    bool modEnabled;
+    if (engageCV > 1.f)
+        modEnabled = true;
+    else if (engageCV < -1.f)
+        modEnabled = false;
+    else
+        modEnabled = (params[MODULATORENGAGE_PARAM].getValue() > 0.5f);
 
-    // --- Modulator frequency ---
     float modKnob = params[MODULATOR_PARAM].getValue();
     float modCV = inputs[MODULATORCV_INPUT].isConnected() ? inputs[MODULATORCV_INPUT].getVoltage() / 10.f : 0.f;
     float modControl = std::clamp(modKnob + modCV, 0.f, 1.f);
     int modRange = params[MODULATORRANGE_PARAM].getValue();
 
     float minFreq = 0.01f;
-    float maxFreq = (modRange == 0) ? 5.f : (modRange == 1) ? 50.f : 500.f;
-    float modFreq = std::clamp(minFreq + modControl * (maxFreq - minFreq), minFreq, maxFreq);
+    float maxFreq = 500.f;
+    switch (modRange) {
+        case 0: maxFreq = 5.f; break;
+        case 1: maxFreq = 50.f; break;
+        case 2: maxFreq = 500.f; break;
+    }
+    float modFreq = minFreq + modControl * (maxFreq - minFreq);
+    modFreq = std::clamp(modFreq, minFreq, maxFreq);
 
-    // --- Modulator phase ---
     modulatorPhase += modFreq * args.sampleTime;
-    if (modulatorPhase >= 1.0f) modulatorPhase -= 1.0f;
+    if (modulatorPhase >= 1.f) modulatorPhase -= 1.f;
+
     bool modulatorHigh = (modulatorPhase < 0.5f);
     bool sampleNow = (!modEnabled || modulatorHigh);
 
-    // --- FX bypass ---
     float bypassCV = inputs[BYPASSCV_INPUT].isConnected() ? inputs[BYPASSCV_INPUT].getVoltage() : 0.f;
-    bool bypassActive = (bypassCV > 1.f) ? true : (bypassCV < -1.f) ? false : (params[FXBYPASS_PARAM].getValue() > 0.5f);
+    bool bypassActive;
+    if (bypassCV > 1.f)
+        bypassActive = true;
+    else if (bypassCV < -1.f)
+        bypassActive = false;
+    else
+        bypassActive = (params[FXBYPASS_PARAM].getValue() > 0.5f);
 
-    // --- Input sample ---
-    float inputSample = inputs[AUDIOIN_INPUT].getVoltage();
-    float fxOutput = 0.f;
+    // ---- FX INPUTS (stereo with normalization) ----
+    float inputL = inputs[AUDIOINL_INPUT].getVoltage();
+    float inputR = inputs[AUDIOINR_INPUT].isConnected()
+        ? inputs[AUDIOINR_INPUT].getVoltage()
+        : inputL;
+
+    float fxOutL = 0.f;
+    float fxOutR = 0.f;
     float gainLedLevel = 0.f;
 
     if (bypassActive) {
-        if (fxOutput != inputSample) fxOutput = inputSample;
-        if (gainLedLevel != 0.f) gainLedLevel = 0.f;
+        fxOutL = inputL;
+        fxOutR = inputR;
+        gainLedLevel = 0.f;
     } else {
         if (sampleNow) {
-            clockPhase += carrierFreq * args.sampleTime;
-            if (clockPhase >= 1.0f) {
-                clockPhase -= 1.0f;
-                heldSample = inputSample;
+            clockPhaseL += carrierFreq * args.sampleTime;
+            clockPhaseR += carrierFreq * args.sampleTime;
+
+            if (clockPhaseL >= 1.f) {
+                clockPhaseL -= 1.f;
+                heldSampleL = inputL;
+            }
+            if (clockPhaseR >= 1.f) {
+                clockPhaseR -= 1.f;
+                heldSampleR = inputR;
             }
         }
-        fxOutput = sampleNow ? heldSample : 0.f;
+
+        fxOutL = sampleNow ? heldSampleL : 0.f;
+        fxOutR = sampleNow ? heldSampleR : 0.f;
 
         float gainKnob = params[GAIN_PARAM].getValue();
         float gainCV = inputs[GAINCV_INPUT].isConnected() ? inputs[GAINCV_INPUT].getVoltage() / 10.f : 0.f;
         float gainControl = std::clamp(gainKnob + gainCV, 0.f, 1.f);
+
         float gainRange = params[GAINRANGE_PARAM].getValue() > 0.5f ? 200.f : 20.f;
         float gainAmount = 1.f + gainControl * (gainRange - 1.f);
-        float newFxOutput = std::clamp(fxOutput * gainAmount, -5.f, 5.f);
 
-        if (fxOutput != newFxOutput) fxOutput = newFxOutput;
-        gainLedLevel = std::clamp(fabsf(fxOutput) / 5.f, 0.f, 1.f);
+        fxOutL *= gainAmount;
+        fxOutR *= gainAmount;
+
+        fxOutL = std::clamp(fxOutL, -5.f, 5.f);
+        fxOutR = std::clamp(fxOutR, -5.f, 5.f);
+
+        gainLedLevel = std::clamp(fabsf(fxOutL) / 5.f, 0.f, 1.f);
 
         float fxVolKnob = params[FXVOLUME_PARAM].getValue();
         float fxVolCV = inputs[FXVOLUMECV_INPUT].isConnected() ? inputs[FXVOLUMECV_INPUT].getVoltage() / 10.f : 0.f;
         float fxVolume = std::clamp(fxVolKnob + fxVolCV, 0.f, 1.f);
 
-        fxOutput *= fxVolume;
+        fxOutL *= fxVolume;
+        fxOutR *= fxVolume;
     }
 
-    // --- Update lights and outputs ---
     lights[GAINLED_LIGHT].setBrightnessSmooth(gainLedLevel, args.sampleTime);
-    outputs[FXOUT_OUTPUT].setVoltage(fxOutput);
 
-    // --- Carrier/Modulator combined output ---
+    outputs[FXOUTL_OUTPUT].setVoltage(fxOutL);
+    outputs[FXOUTR_OUTPUT].setVoltage(fxOutR);
+
+    // ---- EVERYTHING BELOW IS UNCHANGED ----
+
     carrierPhase2 += carrierFreq * args.sampleTime;
     if (carrierPhase2 >= 1.f) carrierPhase2 -= 1.f;
     bool carrierHigh2 = (carrierPhase2 < 0.5f);
@@ -166,6 +215,7 @@ void process(const ProcessArgs& args) override {
     bool modulatorHigh2 = (modulatorPhase2 < 0.5f);
 
     bool combinedHigh = carrierHigh2 || modulatorHigh2;
+
     float synthOutput = combinedHigh ? 5.f : -5.f;
 
     float synthVolKnob = params[SYNTHVOLUME_PARAM].getValue();
@@ -175,24 +225,25 @@ void process(const ProcessArgs& args) override {
     synthOutput *= synthVol;
     synthOutput = std::clamp(synthOutput, -5.f, 5.f);
 
-    // --- High-pass filter ---
     float cutoff = 20.f;
     float dt = 1.f / args.sampleRate;
     float RC = 1.f / (2.f * M_PI * cutoff);
     float alpha = RC / (RC + dt);
+
     synthHPOut = alpha * (synthHPOut + synthOutput - synthHPInLast);
     synthHPInLast = synthOutput;
 
     outputs[SYNTHOUT_OUTPUT].setVoltage(std::clamp(synthHPOut, -5.f, 5.f));
 
-    // --- Modulator LED ---
     lights[MODULATORLED_LIGHT].setBrightnessSmooth(modulatorHigh ? 0.f : 1.f, args.sampleTime);
 
-    // --- Main output LED ---
-    float newMainOutLevel = bypassActive ? 0.f : std::max(fxOutput, 0.f) / 5.f;
-    newMainOutLevel = std::clamp(newMainOutLevel, 0.f, 1.f);
-    if (mainOutLevel != newMainOutLevel) mainOutLevel = newMainOutLevel;
-    lights[MAINOUTLED_LIGHT].setBrightnessSmooth(mainOutLevel, args.sampleTime);
+    if (!bypassActive) {
+        mainOutLevel = std::max(fxOutL, 0.f) / 5.f;
+    } else {
+        mainOutLevel = 0.f;
+    }
+    mainOutLevel = std::clamp(mainOutLevel, 0.f, 1.f);
+    lights[MAINOUTLED_LIGHT].setSmoothBrightness(mainOutLevel, args.sampleTime);
 }
 };
 
@@ -200,12 +251,14 @@ struct INTENSIFIESWidget : ModuleWidget {
 	INTENSIFIESWidget(INTENSIFIES* module) {
 		setModule(module);
 	setPanel(createPanel(
-		asset::plugin(pluginInstance, "res/panels/INTENSIFIES.svg")));
+		asset::plugin(pluginInstance, "res/panels/INTENSIFIES.svg"),
+		asset::plugin(pluginInstance, "res/panels/INTENSIFIES-dark.svg")
+		));
         
-		addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, 0)));
-		addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, 0)));
-		addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
-		addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
+		addChild(createWidget<ThemedScrew>(Vec(RACK_GRID_WIDTH, 0)));
+		addChild(createWidget<ThemedScrew>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, 0)));
+		addChild(createWidget<ThemedScrew>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
+		addChild(createWidget<ThemedScrew>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
 		addParam(createParamCentered<Davies1900hLargeBlackKnob>(mm2px(Vec(22.855, 39.741)), module, INTENSIFIES::CARRIER_PARAM));
 		addParam(createParamCentered<Davies1900hLargeBlackKnob>(mm2px(Vec(35.823, 87.83)), module, INTENSIFIES::MODULATOR_PARAM));
@@ -221,17 +274,21 @@ struct INTENSIFIESWidget : ModuleWidget {
 		addParam(createParamCentered<Davies1900hBlackKnob>(mm2px(Vec(67.346, 59.976)), module, INTENSIFIES::GAIN_PARAM));
 		addParam(createParamCentered<Davies1900hBlackKnob>(mm2px(Vec(98.918, 97.521)), module, INTENSIFIES::SYNTHVOLUME_PARAM));
 
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(26.707, 11.585)), module, INTENSIFIES::CARRIERCV_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(97.418, 26.501)), module, INTENSIFIES::FXVOLUMECV_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(63.064, 35.057)), module, INTENSIFIES::GAINCV_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(89.588, 50.638)), module, INTENSIFIES::BYPASSCV_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(48.824, 58.053)), module, INTENSIFIES::ENGAGECV_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(53.375, 76.187)), module, INTENSIFIES::MODULATORCV_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(107.078, 76.864)), module, INTENSIFIES::AUDIOIN_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(80.75, 101.603)), module, INTENSIFIES::SYNTHVOLUMECV_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(26.707, 11.585)), module, INTENSIFIES::CARRIERCV_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(97.418, 26.501)), module, INTENSIFIES::FXVOLUMECV_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(63.064, 35.057)), module, INTENSIFIES::GAINCV_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(89.588, 50.638)), module, INTENSIFIES::BYPASSCV_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(48.824, 58.053)), module, INTENSIFIES::ENGAGECV_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(53.375, 76.187)), module, INTENSIFIES::MODULATORCV_INPUT));
+		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(80.75, 101.603)), module, INTENSIFIES::SYNTHVOLUMECV_INPUT));
 
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(14.254, 62.619)), module, INTENSIFIES::FXOUT_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.251, 104.885)), module, INTENSIFIES::SYNTHOUT_OUTPUT));
+        addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(107.078, 76.864)), module, INTENSIFIES::AUDIOINL_INPUT));
+        addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(107.078, 66.864)), module, INTENSIFIES::AUDIOINR_INPUT));
+
+		addOutput(createOutputCentered<ThemedPJ301MPort>(mm2px(Vec(14.254, 62.619)), module, INTENSIFIES::FXOUTL_OUTPUT));
+        addOutput(createOutputCentered<ThemedPJ301MPort>(mm2px(Vec(14.254, 72.619)), module, INTENSIFIES::FXOUTR_OUTPUT));
+
+		addOutput(createOutputCentered<ThemedPJ301MPort>(mm2px(Vec(10.251, 104.885)), module, INTENSIFIES::SYNTHOUT_OUTPUT));
 
 		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(109.201, 35.91)), module, INTENSIFIES::MAINOUTLED_LIGHT));
 		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(79.581, 52.375)), module, INTENSIFIES::GAINLED_LIGHT));

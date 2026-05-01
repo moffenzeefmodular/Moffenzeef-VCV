@@ -28,6 +28,7 @@ extern Model* modelKleztizer;
 extern Model* modelTantz;
 extern Model* modelStargazer;
 extern Model* modelQuadDeviant;
+extern Model* modelTehom;
 
 struct CKSSHorizontal : app::SvgSwitch {
 	CKSSHorizontal() {
@@ -123,6 +124,67 @@ struct StargazerLFOKnob : SvgKnob {
 		minAngle = -0.85 * M_PI;
 		maxAngle = 0.85 * M_PI;
 		setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/StargazerLFOKnob.svg")));
+	}
+};
+
+struct LEDBezelSilver : SvgKnob {
+	widget::SvgWidget* bg;
+	bool lastDark = false;
+	LEDBezelSilver() {
+		lastDark = settings::preferDarkPanels;
+		setSvg(Svg::load(asset::plugin(pluginInstance, lastDark
+			? "res/components/LEDBezel-Dark.svg"
+			: "res/components/LEDBezelSilver.svg")));
+	}
+	void step() override {
+		bool dark = settings::preferDarkPanels;
+		if (dark != lastDark) {
+			setSvg(Svg::load(asset::plugin(pluginInstance, dark
+				? "res/components/LEDBezel-Dark.svg"
+				: "res/components/LEDBezelSilver.svg")));
+			lastDark = dark;
+		}
+		SvgKnob::step();
+	}
+};
+
+struct LEDBezelDark : SvgKnob {
+	widget::SvgWidget* bg;
+	LEDBezelDark() {
+		setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/LEDBezel-Dark.svg")));
+	}
+};
+
+struct TehomBigKnob : RoundBlackKnob {
+	TehomBigKnob() {
+		box.size = mm2px(Vec(11.f, 11.f));
+		shadow->box.size = box.size;
+	}
+};
+
+struct TehomKnob : SvgKnob {
+	widget::SvgWidget* bg;
+	TehomKnob() {
+		minAngle = -0.85 * M_PI;
+		maxAngle = 0.85 * M_PI;
+		setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/TehomKnob.svg")));
+
+		bg = new widget::SvgWidget;
+		fb->addChildBelow(bg, tw);
+		bg->setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/TehomKnobBG.svg")));
+	}
+};
+
+struct TehomSmallKnob : SvgKnob {
+	widget::SvgWidget* bg;
+	TehomSmallKnob() {
+		minAngle = -0.85 * M_PI;
+		maxAngle = 0.85 * M_PI;
+		setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/TehomSmallKnob.svg")));
+
+		bg = new widget::SvgWidget;
+		fb->addChildBelow(bg, tw);
+		bg->setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/TehomSmallKnobBG.svg")));
 	}
 };
 

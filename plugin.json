@@ -263,6 +263,21 @@
         "random",
         "utility"
       ]
+    },
+    {
+      "slug": "Tehom",
+      "name": "Tehom",
+      "description": "Collaboration with Omri Cohen. Quad sound on sound looper with wow & flutter + built in loops of noise sources.",
+      "manualUrl": "https://github.com/moffenzeefmodular/VCVrack-submission/blob/main/doc/manuals/Tehom%20User%20Manual.md",
+      "tags": [
+        "effect",
+        "sampler",
+        "recording",
+        "noise",
+        "granular",
+        "controller",
+        "Low-frequency oscillator"
+      ]
     }
   ]
 }

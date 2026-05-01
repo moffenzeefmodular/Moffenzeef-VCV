@@ -41,6 +41,7 @@ target_sources(Moffenzeef PRIVATE
     ${SOURCE_DIR}/src/Tantz.cpp
     ${SOURCE_DIR}/src/Stargazer.cpp
     ${SOURCE_DIR}/src/QuadDeviant.cpp
+    ${SOURCE_DIR}/src/Tehom.cpp
     ${SOURCE_DIR}/src/plugin.cpp
     ${SOURCE_DIR}/src/plugin.hpp
 ) 

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 25.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   version="1.0"
+   id="svg111794"
+   x="0px"
+   y="0px"
+   width="34.015747"
+   height="34.015747"
+   viewBox="0 0 34.015748 34.015748"
+   enable-background="new 0 0 28.34759 28.34768"
+   xml:space="preserve"
+   sodipodi:docname="TehomKnobBG.svg"
+   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs7" />
+<sodipodi:namedview
+   bordercolor="#666666"
+   borderopacity="1.0"
+   fit-margin-bottom="0"
+   fit-margin-left="0"
+   fit-margin-right="0"
+   fit-margin-top="0"
+   id="base"
+   inkscape:current-layer="svg111794"
+   inkscape:cx="14.107143"
+   inkscape:cy="0"
+   inkscape:document-units="mm"
+   inkscape:pageopacity="0.0"
+   inkscape:pageshadow="2"
+   inkscape:window-height="1387"
+   inkscape:window-maximized="0"
+   inkscape:window-width="2560"
+   inkscape:window-x="0"
+   inkscape:window-y="25"
+   inkscape:zoom="2.8"
+   pagecolor="#ffffff"
+   showgrid="false"
+   inkscape:showpageshadow="2"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1">
+	</sodipodi:namedview>
+<g
+   id="g7"
+   transform="matrix(1.1999474,0,0,1.1999474,7.2094618e-5,-2.4031539e-5)"
+   style="stroke-width:0.833369">
+	<linearGradient
+   id="SVGID_1_"
+   gradientUnits="userSpaceOnUse"
+   x1="14.17379"
+   y1="1.9999999e-05"
+   x2="14.17379"
+   y2="28.347719"
+   gradientTransform="matrix(0.83336988,0,0,0.83336988,-6.0081482e-5,2.0027161e-5)">
+		<stop
+   offset="0"
+   style="stop-color:#B0ACAE"
+   id="stop1" />
+		<stop
+   offset="1"
+   style="stop-color:#000000"
+   id="stop2" />
+	</linearGradient>
+	<circle
+   fill="url(#SVGID_1_)"
+   cx="14.17379"
+   cy="14.17387"
+   r="14.17385"
+   id="circle2"
+   style="fill:url(#SVGID_1_);stroke-width:0.833369" />
+	<path
+   fill="#ffffff"
+   d="M 14.17146,14.17088 10.50387,0.48324 C 9.30769,0.80375 8.15868,1.27969 7.08622,1.89888 6.01376,2.51807 5.02708,3.27517 4.15142,4.15084 Z"
+   id="path2"
+   style="stroke-width:0.688148" />
+	<path
+   opacity="0.25"
+   fill="#ffffff"
+   d="m 14.17382,14.17385 3.11604,11.61804 c 1.01629,-0.27205 1.99251,-0.67603 2.90368,-1.20159 0.91118,-0.52556 1.74948,-1.1682 2.49345,-1.91146 z"
+   id="path3"
+   style="stroke-width:0.688148" />
+	
+		<linearGradient
+   id="SVGID_2_"
+   gradientUnits="userSpaceOnUse"
+   x1="5.12815"
+   y1="-4117.3818"
+   x2="27.655621"
+   y2="-4117.3818"
+   gradientTransform="matrix(0,0.83336988,-0.83336988,0,-3419.49,-1.8483944)">
+		<stop
+   offset="0"
+   style="stop-color:#232223"
+   id="stop3" />
+		<stop
+   offset="1"
+   style="stop-color:#1F1E1F"
+   id="stop4" />
+	</linearGradient>
+	<ellipse
+   fill="url(#SVGID_2_)"
+   cx="14.17379"
+   cy="14.17387"
+   rx="11.28538"
+   ry="11.26374"
+   id="ellipse4"
+   style="fill:url(#SVGID_2_);stroke-width:0.833369" />
+	<path
+   opacity="0.5"
+   d="m 14.17158,14.17387 9.76597,5.63838 c 0.98967,-1.71416 1.51081,-3.65904 1.51081,-5.63838 0,-1.97934 -0.52113,-3.92423 -1.51081,-5.63838 z"
+   id="path4"
+   style="stroke-width:0.833369" />
+	<path
+   opacity="0.5"
+   d="M 14.1716,14.17387 4.40563,8.53549 c -0.98967,1.71416 -1.51081,3.65905 -1.51081,5.63838 0,1.97933 0.52113,3.92423 1.51081,5.63838 z"
+   id="path5"
+   style="stroke-width:0.833369" />
+	<path
+   opacity="0.1"
+   fill="#ffffff"
+   d="m 14.17153,14.17096 2.91756,10.87803 c 0.95156,-0.25472 1.86559,-0.63297 2.71873,-1.12505 0.85314,-0.49209 1.63804,-1.09379 2.33463,-1.78971 z"
+   id="path6"
+   style="stroke-width:0.688148" />
+	<path
+   opacity="0.1"
+   fill="#ffffff"
+   d="M 14.17158,14.17103 11.24905,3.264 C 10.29588,3.5194 9.38028,3.89865 8.52569,4.39205 7.6711,4.88545 6.88486,5.48875 6.18709,6.18653 Z"
+   id="path7"
+   style="stroke-width:0.688148" />
+</g>
+</svg>

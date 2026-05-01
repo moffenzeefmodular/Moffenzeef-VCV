@@ -340,9 +340,11 @@ struct Tehom : Module {
             wavSeekNeeded.store(false, std::memory_order_relaxed);
             wavStream.seek_frame_in_file(0);
         }
-        // Keep buffer filled
-        if (wavStream.is_loaded() && !wavStream.is_eof() && wavStream.frames_available() < 8192)
-            wavStream.read_frames_from_file();
+        // Keep buffer filled — loop until we have a large cushion so slow SD reads don't cause dropouts
+        if (wavStream.is_loaded()) {
+            while (!wavStream.is_eof() && wavStream.frames_available() < 32768)
+                wavStream.read_frames_from_file();
+        }
     });
 #endif
 }

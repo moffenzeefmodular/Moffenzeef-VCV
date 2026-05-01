@@ -1,5 +1,10 @@
 #include "plugin.hpp"
 #include <cstring>
+#ifdef METAMODULE
+#include "wav/wav_file_stream.hh"
+#include "threads/async_thread.hh"
+#include "dsp/stream_resampler.hh"
+#endif
 
 // stb_vorbis OGG decoder (compiled as C in stb_vorbis.c)
 #ifndef METAMODULE
@@ -311,6 +316,35 @@ struct Tehom : Module {
 
     loadOggFiles();
     resizeBuffers(44100.f);  // Ensure buffers are allocated before first process() to avoid audio-thread malloc
+
+#ifdef METAMODULE
+    wavThread.start([this]() {
+        // Load/change file when process() requests it
+        int toLoad = wavLoadIdx.load(std::memory_order_acquire);
+        if (toLoad >= 0) {
+            wavLoadIdx.store(-1, std::memory_order_relaxed);
+            wavStream.unload();
+            const char* fname = oggFilenames[toLoad];
+            const char* base  = strrchr(fname, '/');
+            base = base ? base + 1 : fname;
+            std::string name(base);
+            auto dot = name.rfind('.');
+            if (dot != std::string::npos) name = name.substr(0, dot);
+            wavStream.load(std::string("sdc:/") + name + ".wav");
+            wavResampler.set_sample_rate_in_out(wavStream.wav_sample_rate(), currentSampleRate);
+            wavResampler.set_num_channels(wavStream.num_channels());
+            wavResampler.flush();
+        }
+        // Seek to start when audio thread signals EOF (looping)
+        if (wavSeekNeeded.load(std::memory_order_acquire)) {
+            wavSeekNeeded.store(false, std::memory_order_relaxed);
+            wavStream.seek_frame_in_file(0);
+        }
+        // Keep buffer filled
+        if (wavStream.is_loaded() && !wavStream.is_eof() && wavStream.frames_available() < 8192)
+            wavStream.read_frames_from_file();
+    });
+#endif
 }
 
 void eraseBuffer(int i) {
@@ -348,6 +382,10 @@ void resizeBuffers(float sampleRate) {
 
 void onSampleRateChange(const SampleRateChangeEvent& e) override {
     resizeBuffers(e.sampleRate);
+#ifdef METAMODULE
+    if (wavStream.is_loaded())
+        wavResampler.set_sample_rate_in_out(wavStream.wav_sample_rate(), e.sampleRate);
+#endif
     // Apply any buffer data deferred from dataFromJson (runs before sample rate is known)
     for (int i = 0; i < 4; i++) {
         if (!pendingBuf[i].pending) continue;
@@ -644,6 +682,14 @@ struct OggLoop {
 float    oggPlayPos    = 0.f;
 int      currentOggIdx = -1;
 std::atomic<int>  mediaTypeIndex{0};
+
+#ifdef METAMODULE
+MetaModule::WavFileStream  wavStream{256 * 1024};
+MetaModule::StreamResampler wavResampler{2};
+std::atomic<int>  wavLoadIdx{-2};      // -2=needs init, 0-7=load this file, -1=loaded/idle
+std::atomic<bool> wavSeekNeeded{false};
+MetaModule::AsyncThread    wavThread{this};
+#endif
 
 // One-pole lowpass filter state (applied to main audio before noise mix)
 float    filterStateL  = 0.f;
@@ -1166,6 +1212,9 @@ void process(const ProcessArgs& args) override {
     if (mediaIdx != currentOggIdx) {
         currentOggIdx = mediaIdx;
         oggPlayPos = 0.f;
+#ifdef METAMODULE
+        wavLoadIdx.store(mediaIdx, std::memory_order_release);
+#endif
     }
 
     // Compute amount first so we can gate the OGG read when nothing uses it.
@@ -1183,6 +1232,17 @@ void process(const ProcessArgs& args) override {
     float mediaL = 0.f, mediaR = 0.f;
     bool needOgg = sendConnected || (!returnConnected && amountLog > 0.f);
     if (needOgg) {
+#ifdef METAMODULE
+        if (wavStream.is_loaded()) {
+            auto [l, r] = wavResampler.process_stereo([this]{ return wavStream.pop_sample(); });
+            mediaL = l * 5.f;
+            mediaR = r * 5.f;
+            if (wavStream.is_eof() && wavStream.frames_available() == 0) {
+                wavStream.reset_playback_to_frame(0);
+                wavSeekNeeded.store(true, std::memory_order_release);
+            }
+        }
+#else
         OggLoop& loop = oggLoops[mediaIdx];
         if (loop.loaded && loop.numSamples > 1) {
             float advance = (float)loop.nativeSampleRate / args.sampleRate;
@@ -1194,6 +1254,7 @@ void process(const ProcessArgs& args) override {
             oggPlayPos += advance;
             if (oggPlayPos >= (float)loop.numSamples) oggPlayPos -= (float)loop.numSamples;
         }
+#endif
     }
 
     // Pre-fader send: raw media before amount knob

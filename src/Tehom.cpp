@@ -202,10 +202,10 @@ struct Tehom : Module {
 
 	configParam(SLEW_PARAM, 0.f, 1.f, 0.02f, "Slew", "ms", 0.f, 1000.f);
 
-	configParam(LEDBEZEL1_PARAM, 0.f, 1.f, 0.f);
-	configParam(LEDBEZEL2_PARAM, 0.f, 1.f, 0.f);
-	configParam(LEDBEZEL3_PARAM, 0.f, 1.f, 0.f);
-	configParam(LEDBEZEL4_PARAM, 0.f, 1.f, 0.f);
+	configParam(LEDBEZEL1_PARAM, 0.f, 1.f, 0.f, "Scrub 1");
+	configParam(LEDBEZEL2_PARAM, 0.f, 1.f, 0.f, "Scrub 2");
+	configParam(LEDBEZEL3_PARAM, 0.f, 1.f, 0.f, "Scrub 3");
+	configParam(LEDBEZEL4_PARAM, 0.f, 1.f, 0.f, "Scrub 4");
 	// LEDBezel spin position should not change on Randomize or Init
 	for (int i = 0; i < 4; i++)
 		paramQuantities[LEDBEZEL1_PARAM + i]->randomizeEnabled = false;
@@ -228,34 +228,45 @@ struct Tehom : Module {
     configParam(XFADE_PARAM, 0.f, 1.f, 0.f, "Crossfade", "%", 0.f, 100.f);
 	
 	// Source params
-	configParam(SOURCE1_PARAM, -1.f, 1.f, 0.f, "Source", "%", 0.f, 100.f);
-	configParam(SOURCE2_PARAM, -1.f, 1.f, 0.f, "Source", "%", 0.f, 100.f);
-	configParam(SOURCE3_PARAM, -1.f, 1.f, 0.f, "Source", "%", 0.f, 100.f);
-	configParam(SOURCE4_PARAM, -1.f, 1.f, 0.f, "Source", "%", 0.f, 100.f);
+	// MetaModule note: the firmware sends normalized [0,1] for all knob positions
+	// regardless of the configured min/max range.  Using [0,1] here lets us read
+	// t = getValue() directly (0 = live input, 1 = loop) without the +1/2 shift.
+	// VCV Rack keeps [-1,1] so saved patch values remain compatible.
+#ifdef METAMODULE
+	configParam(SOURCE1_PARAM, 0.f, 1.f, 0.5f, "Source 1", "%", 0.f, 100.f);
+	configParam(SOURCE2_PARAM, 0.f, 1.f, 0.5f, "Source 2", "%", 0.f, 100.f);
+	configParam(SOURCE3_PARAM, 0.f, 1.f, 0.5f, "Source 3", "%", 0.f, 100.f);
+	configParam(SOURCE4_PARAM, 0.f, 1.f, 0.5f, "Source 4", "%", 0.f, 100.f);
+#else
+	configParam(SOURCE1_PARAM, -1.f, 1.f, 0.f, "Source 1", "%", 0.f, 100.f);
+	configParam(SOURCE2_PARAM, -1.f, 1.f, 0.f, "Source 2", "%", 0.f, 100.f);
+	configParam(SOURCE3_PARAM, -1.f, 1.f, 0.f, "Source 3", "%", 0.f, 100.f);
+	configParam(SOURCE4_PARAM, -1.f, 1.f, 0.f, "Source 4", "%", 0.f, 100.f);
+#endif
 
 	// Pitch params
-	configParam(SPEED1_PARAM, 0.f, 1.f, 0.5f, "Speed", "x", 0.f, 2.f);
-	configParam(SPEED2_PARAM, 0.f, 1.f, 0.5f, "Speed", "x", 0.f, 2.f);
-	configParam(SPEED3_PARAM, 0.f, 1.f, 0.5f, "Speed", "x", 0.f, 2.f);
-	configParam(SPEED4_PARAM, 0.f, 1.f, 0.5f, "Speed", "x", 0.f, 2.f);
+	configParam(SPEED1_PARAM, 0.f, 1.f, 0.5f, "Speed 1", "x", 0.f, 2.f);
+	configParam(SPEED2_PARAM, 0.f, 1.f, 0.5f, "Speed 2", "x", 0.f, 2.f);
+	configParam(SPEED3_PARAM, 0.f, 1.f, 0.5f, "Speed 3", "x", 0.f, 2.f);
+	configParam(SPEED4_PARAM, 0.f, 1.f, 0.5f, "Speed 4", "x", 0.f, 2.f);
 
 	// Record switches
-	configSwitch(RECORD1_PARAM, 0.f, 1.f, 0.f, "Record");
-	configSwitch(RECORD2_PARAM, 0.f, 1.f, 0.f, "Record");
-	configSwitch(RECORD3_PARAM, 0.f, 1.f, 0.f, "Record");
-	configSwitch(RECORD4_PARAM, 0.f, 1.f, 0.f, "Record");
+	configSwitch(RECORD1_PARAM, 0.f, 1.f, 0.f, "Record 1");
+	configSwitch(RECORD2_PARAM, 0.f, 1.f, 0.f, "Record 2");
+	configSwitch(RECORD3_PARAM, 0.f, 1.f, 0.f, "Record 3");
+	configSwitch(RECORD4_PARAM, 0.f, 1.f, 0.f, "Record 4");
 
 	// Loop switches
-	configSwitch(LOOP1_PARAM, 0.f, 1.f, 1.f, "Looping", {"Off", "On"});
-	configSwitch(LOOP2_PARAM, 0.f, 1.f, 1.f, "Looping", {"Off", "On"});
-	configSwitch(LOOP3_PARAM, 0.f, 1.f, 1.f, "Looping", {"Off", "On"});
-	configSwitch(LOOP4_PARAM, 0.f, 1.f, 1.f, "Looping", {"Off", "On"});
+	configSwitch(LOOP1_PARAM, 0.f, 1.f, 1.f, "Loop 1", {"Off", "On"});
+	configSwitch(LOOP2_PARAM, 0.f, 1.f, 1.f, "Loop 2", {"Off", "On"});
+	configSwitch(LOOP3_PARAM, 0.f, 1.f, 1.f, "Loop 3", {"Off", "On"});
+	configSwitch(LOOP4_PARAM, 0.f, 1.f, 1.f, "Loop 4", {"Off", "On"});
 
 	// Play switches
-	configSwitch(PLAY1_PARAM, 0.f, 1.f, 0.f, "Play");
-	configSwitch(PLAY2_PARAM, 0.f, 1.f, 0.f, "Play");
-	configSwitch(PLAY3_PARAM, 0.f, 1.f, 0.f, "Play");
-	configSwitch(PLAY4_PARAM, 0.f, 1.f, 0.f, "Play");
+	configSwitch(PLAY1_PARAM, 0.f, 1.f, 0.f, "Play 1");
+	configSwitch(PLAY2_PARAM, 0.f, 1.f, 0.f, "Play 2");
+	configSwitch(PLAY3_PARAM, 0.f, 1.f, 0.f, "Play 3");
+	configSwitch(PLAY4_PARAM, 0.f, 1.f, 0.f, "Play 4");
 
     // Audio inputs
     configInput(AUDIOLEFTIN_INPUT, "Audio Left");
@@ -274,28 +285,28 @@ struct Tehom : Module {
     configInput(XFADECVIN_INPUT, "Crossfade CV");
 	
 	// Source CV inputs
-	configInput(SOURCE1CVIN_INPUT, "Source CV");
-	configInput(SOURCE2CVIN_INPUT, "Source CV");
-	configInput(SOURCE3CVIN_INPUT, "Source CV");
-	configInput(SOURCE4CVIN_INPUT, "Source CV");
+	configInput(SOURCE1CVIN_INPUT, "Source 1 CV");
+	configInput(SOURCE2CVIN_INPUT, "Source 2 CV");
+	configInput(SOURCE3CVIN_INPUT, "Source 3 CV");
+	configInput(SOURCE4CVIN_INPUT, "Source 4 CV");
 
 	// Pitch CV inputs
-	configInput(SPEED1CVIN_INPUT, "Speed CV");
-	configInput(SPEED2CVIN_INPUT, "Speed CV");
-	configInput(SPEED3CVIN_INPUT, "Speed CV");
-	configInput(SPEED4CVIN_INPUT, "Speed CV");
+	configInput(SPEED1CVIN_INPUT, "Speed 1 CV");
+	configInput(SPEED2CVIN_INPUT, "Speed 2 CV");
+	configInput(SPEED3CVIN_INPUT, "Speed 3 CV");
+	configInput(SPEED4CVIN_INPUT, "Speed 4 CV");
 
 	// Record CV inputs
-	configInput(RECORD1CVIN_INPUT, "Record CV");
-	configInput(RECORD2CVIN_INPUT, "Record CV");
-	configInput(RECORD3CVIN_INPUT, "Record CV");
-	configInput(RECORD4CVIN_INPUT, "Record CV");
+	configInput(RECORD1CVIN_INPUT, "Record 1 CV");
+	configInput(RECORD2CVIN_INPUT, "Record 2 CV");
+	configInput(RECORD3CVIN_INPUT, "Record 3 CV");
+	configInput(RECORD4CVIN_INPUT, "Record 4 CV");
 
 	// Play CV inputs
-	configInput(PLAY1CVIN_INPUT, "Play CV");
-	configInput(PLAY2CVIN_INPUT, "Play CV");
-	configInput(PLAY3CVIN_INPUT, "Play CV");
-	configInput(PLAY4CVIN_INPUT, "Play CV");
+	configInput(PLAY1CVIN_INPUT, "Play 1 CV");
+	configInput(PLAY2CVIN_INPUT, "Play 2 CV");
+	configInput(PLAY3CVIN_INPUT, "Play 3 CV");
+	configInput(PLAY4CVIN_INPUT, "Play 4 CV");
 
     // Outputs
     configOutput(AUDIOLEFTOUT_OUTPUT, "Audio Left");
@@ -1126,8 +1137,16 @@ void process(const ProcessArgs& args) override {
             }
         }
 
-        float srcParam = clamp(params[SOURCE1_PARAM + i].getValue() + clamp(inputs[SOURCE1CVIN_INPUT + i].getVoltage(), -5.f, 5.f) / 5.f, -1.f, 1.f);
+#ifdef METAMODULE
+        // MetaModule param range is [0,1]: t = getValue() directly.
+        // CV: ±5 V shifts by ±0.5, covering the full range from center.
+        float t = clamp(params[SOURCE1_PARAM + i].getValue()
+                        + clamp(inputs[SOURCE1CVIN_INPUT + i].getVoltage(), -5.f, 5.f) / 10.f, 0.f, 1.f);
+#else
+        float srcParam = clamp(params[SOURCE1_PARAM + i].getValue()
+                               + clamp(inputs[SOURCE1CVIN_INPUT + i].getVoltage(), -5.f, 5.f) / 5.f, -1.f, 1.f);
         float t = (srcParam + 1.f) * 0.5f; // 0 = input, 1 = loop
+#endif
         chanMixL[i] = inL * (1.f - t) + sampL * t;
         chanMixR[i] = inR * (1.f - t) + sampR * t;
 

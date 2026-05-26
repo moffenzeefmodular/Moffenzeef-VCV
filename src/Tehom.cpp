@@ -174,30 +174,20 @@ struct Tehom : Module {
     BUFFER2LED_LIGHT,
     BUFFER3LED_LIGHT,
     BUFFER4LED_LIGHT,
-    
-    // RECORD lights (red)
-    RECORD1_LIGHT,
-    RECORD2_LIGHT,
-    RECORD3_LIGHT,
-    RECORD4_LIGHT,
-    
-    // PLAY lights (green)
-    PLAY1_LIGHT,
-    PLAY2_LIGHT,
-    PLAY3_LIGHT,
-    PLAY4_LIGHT,
 
-    // PLAY lights (blue - reverse mode)
-    PLAY1_BLUE_LIGHT,
-    PLAY2_BLUE_LIGHT,
-    PLAY3_BLUE_LIGHT,
-    PLAY4_BLUE_LIGHT,
+    // RECORD lights — interleaved pairs (red=0, white flash=1) so VCVLightBezel<RedWhiteLight>
+    // can address both colors with a single firstLightId = RECORD1_LIGHT + i*2
+    RECORD1_LIGHT, RECORD1_FLASH_LIGHT,
+    RECORD2_LIGHT, RECORD2_FLASH_LIGHT,
+    RECORD3_LIGHT, RECORD3_FLASH_LIGHT,
+    RECORD4_LIGHT, RECORD4_FLASH_LIGHT,
 
-    // Erase flash (white, overlaid on record buttons)
-    RECORD1_FLASH_LIGHT,
-    RECORD2_FLASH_LIGHT,
-    RECORD3_FLASH_LIGHT,
-    RECORD4_FLASH_LIGHT,
+    // PLAY lights — interleaved pairs (green=0, blue reverse=1) so VCVLightBezel<GreenBlueLight>
+    // can address both colors with a single firstLightId = PLAY1_LIGHT + i*2
+    PLAY1_LIGHT, PLAY1_BLUE_LIGHT,
+    PLAY2_LIGHT, PLAY2_BLUE_LIGHT,
+    PLAY3_LIGHT, PLAY3_BLUE_LIGHT,
+    PLAY4_LIGHT, PLAY4_BLUE_LIGHT,
 
     LIGHTS_LEN
 };
@@ -799,7 +789,7 @@ void process(const ProcessArgs& args) override {
             }
         }
 
-        lights[RECORD1_LIGHT + i].setBrightnessSmooth(recordState[i].load(rlx) ? 1.f : 0.f, args.sampleTime);
+        lights[RECORD1_LIGHT + i*2].setBrightnessSmooth(recordState[i].load(rlx) ? 1.f : 0.f, args.sampleTime);
 
         // Erase flash — white light fades out over 0.4s
         {
@@ -807,7 +797,7 @@ void process(const ProcessArgs& args) override {
             if (ef > 0.f) {
                 ef -= args.sampleTime;
                 eraseFlash[i].store(ef, rlx);
-                lights[RECORD1_FLASH_LIGHT + i].setBrightness(clamp(ef / 0.4f, 0.f, 1.f));
+                lights[RECORD1_FLASH_LIGHT + i*2].setBrightness(clamp(ef / 0.4f, 0.f, 1.f));
             }
             // When ef is already 0 no store or setBrightness needed — skip every sample
         }
@@ -866,8 +856,8 @@ void process(const ProcessArgs& args) override {
 
         bool pState = playState[i].load(rlx);
         bool pRev   = playReversed[i].load(rlx);
-        lights[PLAY1_LIGHT + i].setBrightnessSmooth((pState && !pRev) ? 1.f : 0.f, args.sampleTime);
-        lights[PLAY1_BLUE_LIGHT + i].setBrightnessSmooth((pState && pRev) ? 1.f : 0.f, args.sampleTime);
+        lights[PLAY1_LIGHT + i*2].setBrightnessSmooth((pState && !pRev) ? 1.f : 0.f, args.sampleTime);
+        lights[PLAY1_BLUE_LIGHT + i*2].setBrightnessSmooth((pState && pRev) ? 1.f : 0.f, args.sampleTime);
     }
 
     // --- BEZEL SPINNING / VINYL SCRUB ---
@@ -1169,7 +1159,9 @@ void process(const ProcessArgs& args) override {
             loopOutR += sampR * t * vol[i];
         }
 
-        float level = (std::abs(chanMixL[i]) + std::abs(chanMixR[i])) * 0.5f * vol[i];
+        // Drive LED from loop-only samples (already gated by playGain), not chanMix
+        // which includes live input passthrough and would stay lit even when stopped.
+        float level = (std::abs(sampL) + std::abs(sampR)) * 0.5f * vol[i];
         lights[BUFFER1LED_LIGHT + i].setBrightnessSmooth(level, args.sampleTime * 20.f);
     }
 
@@ -1570,7 +1562,25 @@ struct SpinningBezelWidget : LEDBezelSilver {
 	}
 };
 
-struct RecordWidget : LEDBezel {
+// Two-color light for record buttons: red (recording) + white (erase flash)
+struct RedWhiteLight : GrayModuleLightWidget {
+	RedWhiteLight() {
+		addBaseColor(SCHEME_RED);
+		addBaseColor(color::WHITE);
+	}
+};
+
+// Two-color light for play buttons: green (forward) + blue (reverse)
+struct GreenBlueLight : GrayModuleLightWidget {
+	GreenBlueLight() {
+		addBaseColor(SCHEME_GREEN);
+		addBaseColor(SCHEME_BLUE);
+	}
+};
+
+using RecordBase = VCVLightBezel<RedWhiteLight>;
+
+struct RecordWidget : RecordBase {
 	Tehom* tehom = nullptr;
 	int channel = 0;
 	ui::Tooltip* tooltip = nullptr;
@@ -1582,7 +1592,7 @@ struct RecordWidget : LEDBezel {
 			e.consume(this);
 			return;
 		}
-		LEDBezel::onButton(e);
+		RecordBase::onButton(e);
 	}
 
 	void onEnter(const EnterEvent& e) override { isHovered = true; }
@@ -1597,7 +1607,7 @@ struct RecordWidget : LEDBezel {
 	}
 
 	void step() override {
-		LEDBezel::step();
+		RecordBase::step();
 		if (!tehom) return;
 
 		bool flashing = tehom->eraseFlash[channel].load() > 0.f;
@@ -1637,7 +1647,9 @@ struct PlayTooltip : ui::Tooltip {
 	}
 };
 
-struct ReversePlayWidget : LEDBezel {
+using PlayBase = VCVLightBezel<GreenBlueLight>;
+
+struct ReversePlayWidget : PlayBase {
 	Tehom* tehom = nullptr;
 	int channel = 0;
 	ui::Tooltip* tooltip = nullptr;
@@ -1649,7 +1661,7 @@ struct ReversePlayWidget : LEDBezel {
 			e.consume(this);
 			return;
 		}
-		LEDBezel::onButton(e);
+		PlayBase::onButton(e);
 	}
 
 	void onEnter(const EnterEvent& e) override {
@@ -2016,12 +2028,16 @@ struct TehomWidget : ModuleWidget {
 				mm2px(Vec(113.152, 115.947)),
 			};
 			for (int i = 0; i < 4; i++) {
-				auto* rec = createParamCentered<RecordWidget>(recPos[i], module, Tehom::RECORD1_PARAM + i);
+				// createLightParamCentered sets the embedded light's firstLightId so both
+				// color channels (red=+0, white flash=+1) are driven by the correct light slots.
+				auto* rec = createLightParamCentered<RecordWidget>(recPos[i], module, Tehom::RECORD1_PARAM + i, Tehom::RECORD1_LIGHT + i*2);
 				rec->tehom = module;
 				rec->channel = i;
+#ifdef METAMODULE
+				addLightSwitch(rec, rec->getLight());
+#else
 				addParam(rec);
-				addChild(createLightCentered<LEDBezelLight<RedLight>>(recPos[i], module, Tehom::RECORD1_LIGHT + i));
-				addChild(createLightCentered<LEDBezelLight<WhiteLight>>(recPos[i], module, Tehom::RECORD1_FLASH_LIGHT + i));
+#endif
 			}
 		}
 
@@ -2033,12 +2049,16 @@ struct TehomWidget : ModuleWidget {
 				mm2px(Vec(137.441, 115.947)),
 			};
 			for (int i = 0; i < 4; i++) {
-				auto* play = createParamCentered<ReversePlayWidget>(playPos[i], module, Tehom::PLAY1_PARAM + i);
+				// createLightParamCentered sets the embedded light's firstLightId so both
+				// color channels (green=+0, blue reverse=+1) are driven by the correct light slots.
+				auto* play = createLightParamCentered<ReversePlayWidget>(playPos[i], module, Tehom::PLAY1_PARAM + i, Tehom::PLAY1_LIGHT + i*2);
 				play->tehom = module;
 				play->channel = i;
+#ifdef METAMODULE
+				addLightSwitch(play, play->getLight());
+#else
 				addParam(play);
-				addChild(createLightCentered<LEDBezelLight<GreenLight>>(playPos[i], module, Tehom::PLAY1_LIGHT + i));
-				addChild(createLightCentered<LEDBezelLight<BlueLight>>(playPos[i], module, Tehom::PLAY1_BLUE_LIGHT + i));
+#endif
 			}
 		}
 

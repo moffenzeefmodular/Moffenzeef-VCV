@@ -1780,7 +1780,7 @@ struct QuadLooperXYDisplay : Widget {
         dragging = false;
     }
 
-    // Helper: draw fish SVG centered at (cx, cy), rotated by angle, optionally flipped, scaled to fishW x fishH
+    // Helper: draw fish centered at (cx, cy), rotated by angle, optionally flipped, scaled to fishW x fishH
     void drawFish(const DrawArgs& args, float cx, float cy,
                   float fishW, float fishH, float fishSvgW,
                   float angle, bool facingRight, float alpha) {
@@ -1790,16 +1790,49 @@ struct QuadLooperXYDisplay : Widget {
         nvgTranslate(args.vg, cx, cy);
         nvgRotate(args.vg, angle);
         if (facingRight) nvgScale(args.vg, -1.f, 1.f);
+#ifndef METAMODULE
         nvgTranslate(args.vg, -fishW * 0.5f, -fishH * 0.5f);
         nvgScale(args.vg, fishW / fishSvgW, fishW / fishSvgW);
-#ifndef METAMODULE
         window::svgDraw(args.vg, fishSvg->handle);
+#else
+        // MetaModule: NanoVG vector fish, centered at (0,0), head at −x, tail at +x
+        bool dark = settings::preferDarkPanels;
+        float hw = fishW * 0.5f;
+        float hh = fishH * 0.5f;
+        NVGcolor bodyColor = dark ? nvgRGBA(20, 20, 20, 230) : nvgRGBA(235, 235, 235, 230);
+        NVGcolor eyeColor  = dark ? nvgRGBA(180, 180, 180, 255) : nvgRGBA(50, 50, 50, 255);
+
+        // Body: teardrop tapering toward tail (right)
+        nvgBeginPath(args.vg);
+        nvgMoveTo(args.vg,  -hw,  0.f);
+        nvgBezierTo(args.vg, -hw * 0.9f, -hh,  hw * 0.15f, -hh,  hw * 0.4f,  0.f);
+        nvgBezierTo(args.vg,  hw * 0.15f,  hh, -hw * 0.9f,  hh, -hw,         0.f);
+        nvgClosePath(args.vg);
+        nvgFillColor(args.vg, bodyColor);
+        nvgFill(args.vg);
+
+        // Tail: forked V-shape
+        nvgBeginPath(args.vg);
+        nvgMoveTo(args.vg,  hw * 0.35f,  0.f);
+        nvgLineTo(args.vg,  hw,          -hh * 0.9f);
+        nvgLineTo(args.vg,  hw * 0.65f,  0.f);
+        nvgLineTo(args.vg,  hw,           hh * 0.9f);
+        nvgClosePath(args.vg);
+        nvgFillColor(args.vg, bodyColor);
+        nvgFill(args.vg);
+
+        // Eye
+        nvgBeginPath(args.vg);
+        nvgCircle(args.vg, -hw * 0.45f, -hh * 0.2f, fishH * 0.11f);
+        nvgFillColor(args.vg, eyeColor);
+        nvgFill(args.vg);
 #endif
         nvgRestore(args.vg);
     }
 
     void step() override {
         Widget::step();
+#ifndef METAMODULE
         bool dark = settings::preferDarkPanels;
         if (!fishSvg || dark != lastFishDark) {
             fishSvg = window::Svg::load(asset::plugin(pluginInstance, dark
@@ -1807,6 +1840,7 @@ struct QuadLooperXYDisplay : Widget {
                 : "res/components/Fish.svg"));
             lastFishDark = dark;
         }
+#endif
     }
 
     void draw(const DrawArgs &args) override {
@@ -1820,16 +1854,20 @@ struct QuadLooperXYDisplay : Widget {
 
         if (!module) return;
 
-        bool useFish = (module->cursorStyle == 0) && fishSvg && fishSvg->handle;
+        bool useFish = (module->cursorStyle == 0);
         float fishW = 0.f, fishH = 0.f, fishSvgW = 0.f;
 #ifndef METAMODULE
+        useFish = useFish && fishSvg && fishSvg->handle;
         if (useFish) {
             fishSvgW = fishSvg->handle->width;
             fishW    = radius * 2.5f;
             fishH    = fishSvg->handle->height * (fishW / fishSvgW);
         }
 #else
-        useFish = false;
+        if (useFish) {
+            fishW = radius * 2.5f;
+            fishH = fishW * 0.48f;  // ~2:1 aspect ratio matching the SVG
+        }
 #endif
 
         float px = module->xyFinalX.load(std::memory_order_relaxed) * box.size.x;

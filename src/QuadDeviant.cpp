@@ -346,6 +346,17 @@ lights[SLEWLEDGREEN_LIGHT].setBrightnessSmooth(std::max(slewVoltage / 10.f, 0.f)
 };
 
 
+// Single two-channel LED (red + green) so the two colors render as one widget.
+// Two stacked single-color lights render in separate layers on MetaModule, which
+// makes the red show as a ring beneath the green. Base-color order must match the
+// consecutive light-id order in the enum: RED first, then GREEN.
+struct QuadDeviantRedGreenLight : GrayModuleLightWidget {
+	QuadDeviantRedGreenLight() {
+		addBaseColor(SCHEME_RED);
+		addBaseColor(SCHEME_GREEN);
+	}
+};
+
 struct QuadDeviantWidget : ModuleWidget {
 
     // Store pointers to ParamQuantities for dynamic labels
@@ -431,35 +442,16 @@ struct QuadDeviantWidget : ModuleWidget {
 		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(86.801, 13.745)), module, QuadDeviant::LED4RED_LIGHT));
 		addChild(createLightCentered<MediumLight<GreenLight>>(mm2px(Vec(92.189, 13.745)), module, QuadDeviant::LED4GREEN_LIGHT));
 
-		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(108.324, 38.165)), module, QuadDeviant::SUMLEDRED_LIGHT));
-		addChild(createLightCentered<MediumLight<GreenLight>>(mm2px(Vec(108.324, 38.165)), module, QuadDeviant::SUMLEDGREEN_LIGHT));
-
-		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(121.633, 38.162)), module, QuadDeviant::INVLEDRED_LIGHT));
-		addChild(createLightCentered<MediumLight<GreenLight>>(mm2px(Vec(121.633, 38.162)), module, QuadDeviant::INVLEDGREEN_LIGHT));
-
-		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(108.324, 54.841)), module, QuadDeviant::MAXLEDRED_LIGHT));
-		addChild(createLightCentered<MediumLight<GreenLight>>(mm2px(Vec(108.324, 54.841)), module, QuadDeviant::MAXLEDGREEN_LIGHT));
-
-		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(121.633, 54.78)), module, QuadDeviant::MINLEDRED_LIGHT));
-		addChild(createLightCentered<MediumLight<GreenLight>>(mm2px(Vec(121.633, 54.78)), module, QuadDeviant::MINLEDGREEN_LIGHT));
-
-		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(108.324, 71.969)), module, QuadDeviant::POSLEDRED_LIGHT));
-		addChild(createLightCentered<MediumLight<GreenLight>>(mm2px(Vec(108.324, 71.969)), module, QuadDeviant::POSLEDGREEN_LIGHT));
-
-		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(121.633, 71.927)), module, QuadDeviant::NEGLEDRED_LIGHT));
-		addChild(createLightCentered<MediumLight<GreenLight>>(mm2px(Vec(121.633, 71.927)), module, QuadDeviant::NEGLEDGREEN_LIGHT));
-
-		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(108.324, 89.174)), module, QuadDeviant::FULLLEDRED_LIGHT));
-		addChild(createLightCentered<MediumLight<GreenLight>>(mm2px(Vec(108.324, 89.174)), module, QuadDeviant::FULLLEDGREEN_LIGHT));
-
-		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(121.633, 89.15)), module, QuadDeviant::INVFULLLEDRED_LIGHT));
-		addChild(createLightCentered<MediumLight<GreenLight>>(mm2px(Vec(121.633, 89.15)), module, QuadDeviant::INVFULLLEDGREEN_LIGHT));
-
-		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(108.324, 106.341)), module, QuadDeviant::AVGLEDRED_LIGHT));
-		addChild(createLightCentered<MediumLight<GreenLight>>(mm2px(Vec(108.324, 106.341)), module, QuadDeviant::AVGLEDGREEN_LIGHT));
-
-		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(121.633, 106.335)), module, QuadDeviant::SLEWLEDRED_LIGHT));
-		addChild(createLightCentered<MediumLight<GreenLight>>(mm2px(Vec(121.633, 106.335)), module, QuadDeviant::SLEWLEDGREEN_LIGHT));
+		addChild(createLightCentered<MediumLight<QuadDeviantRedGreenLight>>(mm2px(Vec(108.324, 38.165)), module, QuadDeviant::SUMLEDRED_LIGHT));
+		addChild(createLightCentered<MediumLight<QuadDeviantRedGreenLight>>(mm2px(Vec(121.633, 38.162)), module, QuadDeviant::INVLEDRED_LIGHT));
+		addChild(createLightCentered<MediumLight<QuadDeviantRedGreenLight>>(mm2px(Vec(108.324, 54.841)), module, QuadDeviant::MAXLEDRED_LIGHT));
+		addChild(createLightCentered<MediumLight<QuadDeviantRedGreenLight>>(mm2px(Vec(121.633, 54.78)), module, QuadDeviant::MINLEDRED_LIGHT));
+		addChild(createLightCentered<MediumLight<QuadDeviantRedGreenLight>>(mm2px(Vec(108.324, 71.969)), module, QuadDeviant::POSLEDRED_LIGHT));
+		addChild(createLightCentered<MediumLight<QuadDeviantRedGreenLight>>(mm2px(Vec(121.633, 71.927)), module, QuadDeviant::NEGLEDRED_LIGHT));
+		addChild(createLightCentered<MediumLight<QuadDeviantRedGreenLight>>(mm2px(Vec(108.324, 89.174)), module, QuadDeviant::FULLLEDRED_LIGHT));
+		addChild(createLightCentered<MediumLight<QuadDeviantRedGreenLight>>(mm2px(Vec(121.633, 89.15)), module, QuadDeviant::INVFULLLEDRED_LIGHT));
+		addChild(createLightCentered<MediumLight<QuadDeviantRedGreenLight>>(mm2px(Vec(108.324, 106.341)), module, QuadDeviant::AVGLEDRED_LIGHT));
+		addChild(createLightCentered<MediumLight<QuadDeviantRedGreenLight>>(mm2px(Vec(121.633, 106.335)), module, QuadDeviant::SLEWLEDRED_LIGHT));
 
   if (module) {
             bus1Q = module->paramQuantities[QuadDeviant::BUS1_PARAM];

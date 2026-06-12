@@ -907,6 +907,17 @@ outputs[OUTR_OUTPUT].setVoltage(rightOut);
 }
 };
 
+// Single two-channel LED (red + green) so the two colors render as one widget.
+// Two stacked single-color lights render in separate layers on MetaModule, which
+// makes the red show as a ring beneath the green. Base-color order must match the
+// consecutive light-id order in the enum: RED first, then GREEN.
+struct StargazerRedGreenLight : GrayModuleLightWidget {
+	StargazerRedGreenLight() {
+		addBaseColor(SCHEME_RED);
+		addBaseColor(SCHEME_GREEN);
+	}
+};
+
 struct StargazerWidget : ModuleWidget {
 	StargazerWidget(Stargazer* module) {
 		setModule(module);
@@ -990,14 +1001,9 @@ struct StargazerWidget : ModuleWidget {
 
         addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(13.793, 7.603)), module, Stargazer::EXTAUDIO_INPUT));
 
-		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(29.232, 91.869)), module, Stargazer::LFO1LEDRED_LIGHT));
-		addChild(createLightCentered<MediumLight<GreenLight>>(mm2px(Vec(29.232, 91.869)), module, Stargazer::LFO1LEDGREEN_LIGHT));
-
-		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(69.881, 80.617)), module, Stargazer::LFO2LEDRED_LIGHT));
-		addChild(createLightCentered<MediumLight<GreenLight>>(mm2px(Vec(69.881, 80.617)), module, Stargazer::LFO2LEDGREEN_LIGHT));
-
-		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(121.456, 105.787)), module, Stargazer::LFO3LEDRED_LIGHT));
-		addChild(createLightCentered<MediumLight<GreenLight>>(mm2px(Vec(121.456, 105.787)), module, Stargazer::LFO3LEDGREEN_LIGHT));
+		addChild(createLightCentered<MediumLight<StargazerRedGreenLight>>(mm2px(Vec(29.232, 91.869)), module, Stargazer::LFO1LEDRED_LIGHT));
+		addChild(createLightCentered<MediumLight<StargazerRedGreenLight>>(mm2px(Vec(69.881, 80.617)), module, Stargazer::LFO2LEDRED_LIGHT));
+		addChild(createLightCentered<MediumLight<StargazerRedGreenLight>>(mm2px(Vec(121.456, 105.787)), module, Stargazer::LFO3LEDRED_LIGHT));
 	}
 };
 

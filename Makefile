@@ -4,8 +4,11 @@ RACK_DIR ?= ../..
 # FLAGS will be passed to both the C and C++ compiler
 FLAGS +=
 CFLAGS +=
-# -std=c++17 must be C++-only; on shared FLAGS it breaks the C file (stb_vorbis.c)
-CXXFLAGS += -std=c++17
+CXXFLAGS +=
+# -std=c++17 must be C++-only (the C file stb_vorbis.c can't take it) AND applied
+# after Rack's own -std=c++11. EXTRA_CXXFLAGS is appended to CXXFLAGS after c++11,
+# so c++17 wins; it is never added to CFLAGS. (see Rack-SDK compile.mk)
+EXTRA_CXXFLAGS += -std=c++17
 
 # Careful about linking to shared libraries, since you can't assume much about the user's environment and library search path.
 # Static libraries are fine, but they should be added to this plugin's build system.

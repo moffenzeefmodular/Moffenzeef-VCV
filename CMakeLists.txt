@@ -58,6 +58,15 @@ configure_file(
 )
 target_sources(Moffenzeef PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/gmo_banks_data.S)
 
+# Embed the BadIdea1800 sample kits into rodata (same approach as the GMO banks).
+set(BI1800_DIR ${CMAKE_CURRENT_LIST_DIR}/res/samples/1800)
+configure_file(
+    ${BI1800_DIR}/bi1800_kits_data.S.in
+    ${CMAKE_CURRENT_BINARY_DIR}/bi1800_kits_data.S
+    @ONLY
+)
+target_sources(Moffenzeef PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/bi1800_kits_data.S)
+
 # Add includes and compile options for source repo
 target_include_directories(Moffenzeef PRIVATE ${SOURCE_DIR}/src)
 

@@ -1,0 +1,124 @@
+/* Auto-generated. Embeds BadIdea1800 sample kits into rodata via .incbin.
+   @BI1800_DIR@ substituted by CMake configure_file(). */
+	.section .rodata
+	.align 4
+
+	.global bi1800_kit_blob_0
+bi1800_kit_blob_0:
+	.incbin "@BI1800_DIR@/1800_AcetoneRhythmAce.bin"
+	.align 4
+
+	.global bi1800_kit_blob_1
+bi1800_kit_blob_1:
+	.incbin "@BI1800_DIR@/1800_AcetoneRhythmKing.bin"
+	.align 4
+
+	.global bi1800_kit_blob_2
+bi1800_kit_blob_2:
+	.incbin "@BI1800_DIR@/1800_AkaiMPC2000.bin"
+	.align 4
+
+	.global bi1800_kit_blob_3
+bi1800_kit_blob_3:
+	.incbin "@BI1800_DIR@/1800_AlesisHR16.bin"
+	.align 4
+
+	.global bi1800_kit_blob_4
+bi1800_kit_blob_4:
+	.incbin "@BI1800_DIR@/1800_ArpAxxe.bin"
+	.align 4
+
+	.global bi1800_kit_blob_5
+bi1800_kit_blob_5:
+	.incbin "@BI1800_DIR@/1800_CasioCZ230S.bin"
+	.align 4
+
+	.global bi1800_kit_blob_6
+bi1800_kit_blob_6:
+	.incbin "@BI1800_DIR@/1800_CasioRZ1.bin"
+	.align 4
+
+	.global bi1800_kit_blob_7
+bi1800_kit_blob_7:
+	.incbin "@BI1800_DIR@/1800_CheetahMD16.bin"
+	.align 4
+
+	.global bi1800_kit_blob_8
+bi1800_kit_blob_8:
+	.incbin "@BI1800_DIR@/1800_DrBohmS78.bin"
+	.align 4
+
+	.global bi1800_kit_blob_9
+bi1800_kit_blob_9:
+	.incbin "@BI1800_DIR@/1800_ElectroHarmonixDRM15.bin"
+	.align 4
+
+	.global bi1800_kit_blob_10
+bi1800_kit_blob_10:
+	.incbin "@BI1800_DIR@/1800_EmuProteus3.bin"
+	.align 4
+
+	.global bi1800_kit_blob_11
+bi1800_kit_blob_11:
+	.incbin "@BI1800_DIR@/1800_FrickeMFB712.bin"
+	.align 4
+
+	.global bi1800_kit_blob_12
+bi1800_kit_blob_12:
+	.incbin "@BI1800_DIR@/1800_KawaiR50e.bin"
+	.align 4
+
+	.global bi1800_kit_blob_13
+bi1800_kit_blob_13:
+	.incbin "@BI1800_DIR@/1800_KorgMinipops.bin"
+	.align 4
+
+	.global bi1800_kit_blob_14
+bi1800_kit_blob_14:
+	.incbin "@BI1800_DIR@/1800_LinnLM1.bin"
+	.align 4
+
+	.global bi1800_kit_blob_15
+bi1800_kit_blob_15:
+	.incbin "@BI1800_DIR@/1800_Roland606DR55.bin"
+	.align 4
+
+	.global bi1800_kit_blob_16
+bi1800_kit_blob_16:
+	.incbin "@BI1800_DIR@/1800_Roland727.bin"
+	.align 4
+
+	.global bi1800_kit_blob_17
+bi1800_kit_blob_17:
+	.incbin "@BI1800_DIR@/1800_Roland808.bin"
+	.align 4
+
+	.global bi1800_kit_blob_18
+bi1800_kit_blob_18:
+	.incbin "@BI1800_DIR@/1800_Roland909.bin"
+	.align 4
+
+	.global bi1800_kit_blob_19
+bi1800_kit_blob_19:
+	.incbin "@BI1800_DIR@/1800_RolandCR78.bin"
+	.align 4
+
+	.global bi1800_kit_blob_20
+bi1800_kit_blob_20:
+	.incbin "@BI1800_DIR@/1800_SequentialDrumtraks.bin"
+	.align 4
+
+	.global bi1800_kit_blob_21
+bi1800_kit_blob_21:
+	.incbin "@BI1800_DIR@/1800_SimmonsSDS100.bin"
+	.align 4
+
+	.global bi1800_kit_blob_22
+bi1800_kit_blob_22:
+	.incbin "@BI1800_DIR@/1800_VermonaDRM1.bin"
+	.align 4
+
+	.global bi1800_kit_blob_23
+bi1800_kit_blob_23:
+	.incbin "@BI1800_DIR@/1800_YamahaDD5.bin"
+	.align 4

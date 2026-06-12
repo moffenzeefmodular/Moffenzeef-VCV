@@ -1,8 +1,101 @@
 #include "plugin.hpp"
 #include "../res/wavetables/StargazerWavetables.hpp"
 #include <vector>
+#include <string>
+#include <algorithm>
+#include <cctype>
+#include <cmath>
+#include <cstdlib>
 #include "helpers/math_lut.hpp"
 
+
+// =====================
+// Pitch helpers (1V/oct)
+// =====================
+static constexpr float MIN_HZ = 1.f;
+static constexpr float MAX_HZ = 500.f;
+static constexpr float REF_HZ = 440.f;
+// Runtime constants (C++17-safe)
+static const float MIN_V = std::log2(MIN_HZ / REF_HZ);
+static const float MAX_V = std::log2(MAX_HZ / REF_HZ);
+
+// Display-time only (never called on the audio thread).
+static inline float voltsToHz(float v) {
+	return REF_HZ * std::pow(2.f, v);
+}
+static inline float hzToVolts(float hz) {
+	return std::log2(hz / REF_HZ);
+}
+
+// =====================
+// Note parser (C0, C#1, Db3, etc)
+// =====================
+static bool parseNoteString(const std::string& s, float& outVolts) {
+	if (s.empty())
+		return false;
+	char n = std::toupper(s[0]);
+	int note = -1;
+	switch (n) {
+		case 'C': note = 0; break;
+		case 'D': note = 2; break;
+		case 'E': note = 4; break;
+		case 'F': note = 5; break;
+		case 'G': note = 7; break;
+		case 'A': note = 9; break;
+		case 'B': note = 11; break;
+		default: return false;
+	}
+	int i = 1;
+	if (i < (int)s.size()) {
+		if (s[i] == '#') { note++; i++; }
+		else if (s[i] == 'b') { note--; i++; }
+	}
+	int octave = 4;
+	if (i < (int)s.size()) {
+		// Exception-free parse (MetaModule builds with -fno-exceptions)
+		const char* start = s.c_str() + i;
+		char* end = nullptr;
+		long parsed = std::strtol(start, &end, 10);
+		if (end == start) // no digits consumed
+			return false;
+		octave = (int)parsed;
+	}
+	int midi = (octave + 1) * 12 + note;
+	outVolts = (midi - 69) / 12.f; // A4 = 440 Hz
+	return true;
+}
+
+struct PitchParamQuantity : rack::engine::ParamQuantity {
+	float getDisplayValue() override {
+		return std::clamp(voltsToHz(getValue()), MIN_HZ, MAX_HZ);
+	}
+	std::string getDisplayValueString() override {
+		char buf[16];
+		snprintf(buf, sizeof(buf), "%.2f Hz", getDisplayValue());
+		return std::string(buf);
+	}
+	void setDisplayValueString(std::string s) override {
+		// Remove whitespace
+		s.erase(std::remove_if(s.begin(), s.end(), ::isspace), s.end());
+		if (s.empty())
+			return;
+		// Try numeric Hz (exception-free; MetaModule builds with -fno-exceptions)
+		const char* cstr = s.c_str();
+		char* end = nullptr;
+		float hz = std::strtof(cstr, &end);
+		if (end != cstr) { // parsed at least one numeric char
+			hz = std::clamp(hz, MIN_HZ, MAX_HZ);
+			setValue(hzToVolts(hz));
+			return;
+		}
+		// Try note name
+		float v;
+		if (parseNoteString(s, v)) {
+			v = std::clamp(v, MIN_V, MAX_V);
+			setValue(v);
+		}
+	}
+};
 
 // Lookup tables
 struct SinTableRange {
@@ -109,6 +202,7 @@ struct Stargazer : Module {
         WIDTHCV_INPUT,
 		GAINCV_INPUT,
 		VOLUMECV_INPUT,
+		EXTAUDIO_INPUT,
 		INPUTS_LEN
 	};
 	enum OutputId {
@@ -131,7 +225,13 @@ struct Stargazer : Module {
 
 	Stargazer() {
 		config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
-		configParam(PITCH_PARAM, 0.f, 1.f, 0.1f, "Pitch", "hz", 500.f, 1.f); // 1hz - 500hz
+		configParam<PitchParamQuantity>(
+			PITCH_PARAM,
+			MIN_V,           // ≈ -8.78 (1 Hz)
+			MAX_V,           // ≈ +0.18 (500 Hz)
+			hzToVolts(110.f), // default ≈ A2
+			"Pitch"
+		); // true 1V/oct, 1hz - 500hz
         configParam(FM_PARAM, 0.f, 1.f, 0.f, "FM", "%", 0.f, 100.f); // FM Attenuator
 
 		configSwitch(SUB_PARAM, 0.f, 1.f, 0.f, "Sub Oscillator", {"Off", "On"}); // Turn osc2 into sub oscillator (kept for compatibility)
@@ -151,15 +251,15 @@ struct Stargazer : Module {
 		configParam(FREQ2_PARAM, 0.f, 1.f, 1.f, "Filter 2 Cutoff", "hz", 200.f, 80.f); // 80hz - 5khz
 		configParam(RES2_PARAM, 0.f, 1.f, 0.f, "Filter 2 Resonance", "%", 0.f, 100.f); // Q 1-5
 
-		configSwitch(WAVE1_PARAM, 0.f, 5.f, 0.f, "LFO 1 Waveshape", {"Sine", "Triangle", "Ramp Up", "Ramp Down", "Square", "Random"} );
+		configSwitch(WAVE1_PARAM, 0.f, 6.f, 0.f, "LFO 1 Waveshape", {"Sine", "Triangle", "Ramp Up", "Ramp Down", "Square", "Stepped Random", "Smooth Random"} );
 		configParam(RATE1_PARAM, 0.f, 1.f, 0.f, "LFO 1 Frequency", "hz"); // 0.05hz - 50hz
 		configParam(DEPTH1_PARAM, 0.f, 1.f, 0.f, "LFO 1 Depth", "%", 0.f, 100.f);
 
-		configSwitch(WAVE2_PARAM, 0.f, 5.f, 0.f, "LFO 2 Waveshape", {"Sine", "Triangle", "Ramp Up", "Ramp Down", "Square", "Random"});
+		configSwitch(WAVE2_PARAM, 0.f, 6.f, 0.f, "LFO 2 Waveshape", {"Sine", "Triangle", "Ramp Up", "Ramp Down", "Square", "Stepped Random", "Smooth Random"});
 		configParam(RATE2_PARAM, 0.f, 1.f, 0.f, "LFO 2 Frequency", "hz"); // 0.05hz - 50hz
 		configParam(DEPTH2_PARAM, 0.f, 1.f, 0.f, "LFO 2 Depth", "%", 0.f, 100.f);
 
-		configSwitch(WAVE3_PARAM, 0.f, 5.f, 0.f, "LFO 3 Waveshape", {"Sine", "Triangle", "Ramp Up", "Ramp Down", "Square", "Random"});
+		configSwitch(WAVE3_PARAM, 0.f, 6.f, 0.f, "LFO 3 Waveshape", {"Sine", "Triangle", "Ramp Up", "Ramp Down", "Square", "Stepped Random", "Smooth Random"});
 		configParam(RATE3_PARAM, 0.f, 1.f, 0.f, "LFO 3 Frequency", "hz"); // 0.05hz - 50hz
 		configParam(DEPTH3_PARAM, 0.f, 1.f, 0.f, "LFO 3 Depth", "%", 0.f, 100.f);
 
@@ -195,6 +295,7 @@ struct Stargazer : Module {
         configInput(WIDTHCV_INPUT, "Spread CV");
 		configInput(GAINCV_INPUT, "Gain CV");
 		configInput(VOLUMECV_INPUT, "Volume CV");
+		configInput(EXTAUDIO_INPUT, "External Audio");
 		configOutput(OUTL_OUTPUT, "Audio Left");
         configOutput(OUTR_OUTPUT, "Audio Right");
 		configOutput(LFO1OUT_OUTPUT, "LFO 1");
@@ -273,18 +374,24 @@ for (int i = 0; i < PARAMS_LEN; i++) {
 	float lfo1StepCounter = 1.f;    // for stepped random waveform
 	float lfo1RandValue = 0.f;      // for stepped random waveform
 	float lfo1Value = 0.f;
+	float lfo1FreqDrift = 1.f;      // for smooth random waveform
+	float lfo1FreqTarget = 1.f;     // for smooth random waveform
 
 	// LFO2 member variables
 	float lfo2Phase = 0.f;
 	float lfo2StepCounter = 1.f;    // for stepped random waveform
 	float lfo2RandValue = 0.f;      // for stepped random waveform
 	float lfo2Value = 0.f;
+	float lfo2FreqDrift = 1.f;      // for smooth random waveform
+	float lfo2FreqTarget = 1.f;     // for smooth random waveform
 
 	// LFO3 member variables
 	float lfo3Phase = 0.f;
 	float lfo3StepCounter = 1.f;    // for stepped random waveform
 	float lfo3RandValue = 0.f;      // for stepped random waveform
 	float lfo3Value = 0.f;
+	float lfo3FreqDrift = 1.f;      // for smooth random waveform
+	float lfo3FreqTarget = 1.f;     // for smooth random waveform
 
 	// --- Simple delay state ---
 	std::vector<float> delayBuffer;
@@ -309,13 +416,12 @@ for (int i = 0; i < PARAMS_LEN; i++) {
 	// LFO2 Tremolo depth
 	float lastLFO2Depth = -1.f;
 
-	float oscFreq2 = 0.f; 
-	 
 	void process(const ProcessArgs& args) override {
 
 	auto processLFO = [&](int rateParam, int depthParam, int waveParam,
 	                      int rateCV, int depthCV, int waveCV,
 	                      float& phase, float& stepCounter, float& randValue,
+	                      float& freqDrift, float& freqTarget,
 	                      int outId, int ledRedId, int ledGreenId,
 	                      int rangeParam, // new: LFO range switch
 	                      float* outValue = nullptr) {
@@ -369,7 +475,7 @@ for (int i = 0; i < PARAMS_LEN; i++) {
 
 	    // Waveform selection
 	    int wave = std::clamp((int)roundf(params[waveParam].getValue() +
-	                 (inputs[waveCV].isConnected() ? std::clamp(inputs[waveCV].getVoltage(), -5.f, 5.f)/2.f : 0.f)), 0, 5);
+	                 (inputs[waveCV].isConnected() ? std::clamp(inputs[waveCV].getVoltage(), -5.f, 5.f)/2.f : 0.f)), 0, 6);
 
 	    float value = 0.f;
 	    switch (wave) {
@@ -378,7 +484,7 @@ for (int i = 0; i < PARAMS_LEN; i++) {
 	        case 2: value = 2.f * phase - 1.f; break;
 	        case 3: value = 1.f - 2.f * phase; break;
 	        case 4: value = (phase < 0.5f) ? 1.f : -1.f; break;
-	        case 5:
+	        case 5: // Stepped Random
 	            if (stepCounter >= 1.f) {
 	                randValue = 2.f*((float)rand()/RAND_MAX)-1.f;
 	                stepCounter -= 1.f;
@@ -386,6 +492,23 @@ for (int i = 0; i < PARAMS_LEN; i++) {
 	            stepCounter += freq * args.sampleTime * 2.f;
 	            value = randValue;
 	            break;
+	        case 6: // Smooth Random (ultra chaotic, speed-independent)
+	        {
+	            float baseFreq = freq * 0.1f;
+	            stepCounter += args.sampleTime * (5.f + (float)rand() / RAND_MAX * 15.f); // 5 → 20 jumps/sec
+	            if (stepCounter >= 1.f) {
+	                freqTarget = baseFreq * (0.05f + ((float)rand() / RAND_MAX) * 11.95f); // extreme range
+	                if (rand() % 2 == 0) freqTarget = -freqTarget; // allow negative jumps
+	                stepCounter -= 1.f;
+	            }
+	            float slew = 0.3f + ((float)rand() / RAND_MAX) * 2.0f; // 0.3 → 2.3
+	            freqDrift += (freqTarget - freqDrift) * slew * args.sampleTime * 200.f;
+	            phase += freqDrift * args.sampleTime;
+	            if (phase >= 1.f) phase -= 1.f;
+	            else if (phase < 0.f) phase += 1.f;
+	            value = Sin(2.f * float(M_PI) * phase);
+	            break;
+	        }
 	    }
 
 	    value *= depth * 5.f;
@@ -402,39 +525,41 @@ for (int i = 0; i < PARAMS_LEN; i++) {
 	processLFO(RATE1_PARAM, DEPTH1_PARAM, WAVE1_PARAM,
 	           LFO1RATECV_INPUT, LFO1DEPTHCV_INPUT, LFO1WAVECV_INPUT,
 	           lfo1Phase, lfo1StepCounter, lfo1RandValue,
+	           lfo1FreqDrift, lfo1FreqTarget,
 	           LFO1OUT_OUTPUT, LFO1LEDRED_LIGHT, LFO1LEDGREEN_LIGHT,
 	           RANGE1_PARAM, &lfo1Value);
 
 	processLFO(RATE2_PARAM, DEPTH2_PARAM, WAVE2_PARAM,
 	           LFO2RATECV_INPUT, LFO2DEPTHCV_INPUT, LFO2WAVECV_INPUT,
 	           lfo2Phase, lfo2StepCounter, lfo2RandValue,
+	           lfo2FreqDrift, lfo2FreqTarget,
 	           LFO2OUT_OUTPUT, LFO2LEDRED_LIGHT, LFO2LEDGREEN_LIGHT,
 	           RANGE2_PARAM, &lfo2Value);
 
 	processLFO(RATE3_PARAM, DEPTH3_PARAM, WAVE3_PARAM,
 	           LFO3RATECV_INPUT, LFO3DEPTHCV_INPUT, LFO3WAVECV_INPUT,
 	           lfo3Phase, lfo3StepCounter, lfo3RandValue,
+	           lfo3FreqDrift, lfo3FreqTarget,
 	           LFO3OUT_OUTPUT, LFO3LEDRED_LIGHT, LFO3LEDGREEN_LIGHT,
 	           RANGE3_PARAM, &lfo3Value);
 			   
 	// --- START OF AUDIO SECTION ---
 	sampleRate = 1.f / args.sampleTime;
 
-// --- Frequency control (1–500 Hz base + 1V/oct CV) ---
-float baseFreqParam = params[PITCH_PARAM].getValue();
-float baseFreq = 1.f + baseFreqParam * (500.f - 1.f);
-float pitchCV = inputs[PITCHCV_INPUT].isConnected() ? inputs[PITCHCV_INPUT].getVoltage() : 0.f;
-// FM input (normalized to LFO3)
-float fmCV = inputs[FMCV_INPUT].isConnected() ? inputs[FMCV_INPUT].getVoltage() : (lfo3Value * 0.2f);
-
-// FM knob acts as attenuator
-fmCV *= params[FM_PARAM].getValue();
-
-// total pitch = 1V/oct + FM
-float totalPitchCV = pitchCV + fmCV;
-
-// final frequency (1–500 Hz)
-float freqRoot = std::clamp(baseFreq * Pow2Notes(totalPitchCV), 1.f, 500.f);
+// --- Pitch (true 1V/oct, clamped to 1–500 Hz) ---
+float pitchV = params[PITCH_PARAM].getValue();
+// 1V/oct CV
+if (inputs[PITCHCV_INPUT].isConnected())
+	pitchV += inputs[PITCHCV_INPUT].getVoltage();
+// FM (attenuated, treated as pitch modulation; normalized to LFO3)
+float fmV = inputs[FMCV_INPUT].isConnected()
+	? inputs[FMCV_INPUT].getVoltage()
+	: (lfo3Value * 0.2f);
+pitchV += fmV * params[FM_PARAM].getValue();
+// Hard clamp pitch range
+pitchV = std::clamp(pitchV, MIN_V, MAX_V);
+// Convert to Hz via lookup table: REF_HZ * 2^pitchV (== voltsToHz)
+float freqRoot = REF_HZ * Pow2Notes(pitchV);
 
 
 	// --- Waveform morphing (for the single oscillator) ---
@@ -466,31 +591,21 @@ float freqRoot = std::clamp(baseFreq * Pow2Notes(totalPitchCV), 1.f, 500.f);
 	float osc1 = interpWave(phase1);
 
 
-// Detune
-float detuneKnob = params[DETUNE_PARAM].getValue() * 5.f;
-float detuneCV = 0.f;
+// --- Oscillator 2 (detuned + independent volume + sub) ---
+float detune = params[DETUNE_PARAM].getValue();
 if (inputs[DETUNECV_INPUT].isConnected())
-detuneCV = inputs[DETUNECV_INPUT].getVoltage();
-float detuneCombined = std::clamp(detuneKnob + detuneCV, -5.f, 5.f);
-float detune = detuneCombined;  // ±5 Hz total range
+	detune += inputs[DETUNECV_INPUT].getVoltage() / 5.f; // ±5V → ±1
+detune = std::clamp(detune, -1.f, 1.f);
+float freq2 = std::clamp(freqRoot + detune * 5.f, 1.f, 500.f); // ±5 Hz total range
 
-bool subActive = (params[SUB_PARAM].getValue() > 0.5f);
-	if (inputs[SUBCV_INPUT].isConnected()) {
-		if (inputs[SUBCV_INPUT].getVoltage() >= 1.f)
-			subActive = !subActive;
-	}
-		
-	// Apply sub mode (after detune)
-	if (subActive) {
-		oscFreq2 = ((freqRoot * 0.5f) + detune);
-	}
-	else {
-		oscFreq2 = freqRoot + detune; 
-	}
-
+bool subEnabled = params[SUB_PARAM].getValue() > 0.5f;
+if (inputs[SUBCV_INPUT].isConnected())
+	subEnabled = inputs[SUBCV_INPUT].getVoltage() > 0.f;
+if (subEnabled)
+	freq2 *= 0.5f;
 
 // Advance oscillator 2 phase
-phase2 += oscFreq2 / sampleRate;
+phase2 += freq2 / sampleRate;
 if (phase2 >= 1.f)
     phase2 -= 1.f;
 
@@ -503,11 +618,13 @@ if (inputs[MIXCV_INPUT].isConnected())
     mix += inputs[MIXCV_INPUT].getVoltage() / 10.f;
 mix = std::clamp(mix, 0.f, 1.f);
 
-// Crossfade between osc1 and osc2
-float oscMix = osc1 + (osc2 * mix);
-
-	// --- Mix / final sample (only osc1 now) ---
-	float sample = oscMix;
+	// --- Oscillator mixer OR external audio ---
+	float sample;
+	if (inputs[EXTAUDIO_INPUT].isConnected()) {
+		sample = inputs[EXTAUDIO_INPUT].getVoltage();
+	} else {
+		sample = osc1 + osc2 * mix;
+	}
 
     // --- Filter 1 cutoff + resonance ---
 	float cutoff = params[FREQ1_PARAM].getValue();
@@ -589,6 +706,9 @@ if (mode != 4) {
 
     // apply normalization
     y *= lp1_normGain;
+
+    // soft limit before output (prevents overshoot)
+    y = tanhf(y * 0.8f) * 1.25f;
 }
 
 // clamp output
@@ -707,6 +827,9 @@ if (mode2 != 4) {
     lp2_y2 = lp2_y1; lp2_y1 = y2;
 
     y2 *= lp2_normGain;
+
+    // soft limit before fixed attenuator
+    y2 = tanhf(y2 * 0.8f) * 1.25f;
 }
 
 // --- Final output ---
@@ -864,6 +987,8 @@ struct StargazerWidget : ModuleWidget {
 
         addOutput(createOutputCentered<ThemedPJ301MPort>(mm2px(Vec(110.173, 6.085)), module, Stargazer::OUTL_OUTPUT));
         addOutput(createOutputCentered<ThemedPJ301MPort>(mm2px(Vec(121.641, 8.975)), module, Stargazer::OUTR_OUTPUT));
+
+        addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(13.793, 7.603)), module, Stargazer::EXTAUDIO_INPUT));
 
 		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(29.232, 91.869)), module, Stargazer::LFO1LEDRED_LIGHT));
 		addChild(createLightCentered<MediumLight<GreenLight>>(mm2px(Vec(29.232, 91.869)), module, Stargazer::LFO1LEDGREEN_LIGHT));

@@ -78,7 +78,7 @@ struct Kleztizer : Module {
 		configSwitch(CHORDBUTTON5_PARAM, 0.f, 1.f, 0.f, "Chord 5");
 		configSwitch(CHORDBUTTON6_PARAM, 0.f, 1.f, 0.f, "Chord 6");
 		configSwitch(CHORDBUTTON7_PARAM, 0.f, 1.f, 0.f, "Chord 7");
-		configSwitch(CHORDVOICING_PARAM, 0.f, 3.f, 0.f, "Voicing", {"Close", "Drop 2", "Drop 3", "Open"});
+		configSwitch(CHORDVOICING_PARAM, 0.f, 3.f, 0.f, "Voicing", {"Closed", "Drop 2", "Drop 3", "Open"});
 		configSwitch(INVERSION_PARAM, 0.f, 2.f, 0.f, "Inversion", {"Root", "1st", "2nd"}); // only 3-note inversions
 		configParam(LEADCV1_PARAM, 0.f, 1.f, 1.f, "Lead 1 CV Amount", "%", 0.f, 100.f);
 		configSwitch(LEADOCTAVE1_PARAM, 0.f, 4.f, 2.f, "Lead 1 Octave", {"-2", "-1", "0", "+1", "+2"});

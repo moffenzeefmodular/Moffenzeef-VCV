@@ -270,9 +270,9 @@ struct INTENSIFIESWidget : ModuleWidget {
 		addParam(createParamCentered<ThreePos>(mm2px(Vec(48.122, 35.871)), module, INTENSIFIES::CARRIERRANGE_PARAM));
 		addParam(createParamCentered<ThreePos>(mm2px(Vec(65.957, 93.144)), module, INTENSIFIES::MODULATORRANGE_PARAM));
 
-		addParam(createParamCentered<Davies1900hBlackKnob>(mm2px(Vec(107.163, 50.988)), module, INTENSIFIES::FXVOLUME_PARAM));
-		addParam(createParamCentered<Davies1900hBlackKnob>(mm2px(Vec(67.346, 59.976)), module, INTENSIFIES::GAIN_PARAM));
-		addParam(createParamCentered<Davies1900hBlackKnob>(mm2px(Vec(98.918, 97.521)), module, INTENSIFIES::SYNTHVOLUME_PARAM));
+		addParam(createParamCentered<MediumKnob>(mm2px(Vec(107.163, 50.988)), module, INTENSIFIES::FXVOLUME_PARAM));
+		addParam(createParamCentered<MediumKnob>(mm2px(Vec(67.346, 59.976)), module, INTENSIFIES::GAIN_PARAM));
+		addParam(createParamCentered<MediumKnob>(mm2px(Vec(98.918, 97.521)), module, INTENSIFIES::SYNTHVOLUME_PARAM));
 
 		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(26.707, 11.585)), module, INTENSIFIES::CARRIERCV_INPUT));
 		addInput(createInputCentered<ThemedPJ301MPort>(mm2px(Vec(97.418, 26.501)), module, INTENSIFIES::FXVOLUMECV_INPUT));

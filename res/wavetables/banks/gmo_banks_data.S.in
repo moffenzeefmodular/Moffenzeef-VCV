@@ -1,0 +1,219 @@
+/* Auto-generated. Embeds GMO sample banks into rodata via .incbin.
+   @GMO_BANK_DIR@ is substituted by CMake configure_file(). */
+	.section .rodata
+	.align 4
+
+	.global gmo_bank_blob_0
+gmo_bank_blob_0:
+	.incbin "@GMO_BANK_DIR@/GMO_ANIMALS.bin"
+	.align 4
+
+	.global gmo_bank_blob_1
+gmo_bank_blob_1:
+	.incbin "@GMO_BANK_DIR@/GMO_Acetone_Rhythm_King.bin"
+	.align 4
+
+	.global gmo_bank_blob_2
+gmo_bank_blob_2:
+	.incbin "@GMO_BANK_DIR@/GMO_Artist_Series_Baseck_Dogs_And_Lasers.bin"
+	.align 4
+
+	.global gmo_bank_blob_3
+gmo_bank_blob_3:
+	.incbin "@GMO_BANK_DIR@/GMO_Artist_Series_Chad_Mossholder_808.bin"
+	.align 4
+
+	.global gmo_bank_blob_4
+gmo_bank_blob_4:
+	.incbin "@GMO_BANK_DIR@/GMO_Artist_Series_Chad_Mossholder_EMI.bin"
+	.align 4
+
+	.global gmo_bank_blob_5
+gmo_bank_blob_5:
+	.incbin "@GMO_BANK_DIR@/GMO_Artist_Series_Chad_Mossholder_Monkeyballs.bin"
+	.align 4
+
+	.global gmo_bank_blob_6
+gmo_bank_blob_6:
+	.incbin "@GMO_BANK_DIR@/GMO_Artist_Series_Chad_Mossholder_SpeakNSpell.bin"
+	.align 4
+
+	.global gmo_bank_blob_7
+gmo_bank_blob_7:
+	.incbin "@GMO_BANK_DIR@/GMO_Artist_Series_Chad_Mossholder_Static.bin"
+	.align 4
+
+	.global gmo_bank_blob_8
+gmo_bank_blob_8:
+	.incbin "@GMO_BANK_DIR@/GMO_Artist_Series_Detroit_Underground_A.bin"
+	.align 4
+
+	.global gmo_bank_blob_9
+gmo_bank_blob_9:
+	.incbin "@GMO_BANK_DIR@/GMO_Artist_Series_Detroit_Underground_B.bin"
+	.align 4
+
+	.global gmo_bank_blob_10
+gmo_bank_blob_10:
+	.incbin "@GMO_BANK_DIR@/GMO_Artist_Series_Divkid.bin"
+	.align 4
+
+	.global gmo_bank_blob_11
+gmo_bank_blob_11:
+	.incbin "@GMO_BANK_DIR@/GMO_Artist_Series_Mario_Schambon.bin"
+	.align 4
+
+	.global gmo_bank_blob_12
+gmo_bank_blob_12:
+	.incbin "@GMO_BANK_DIR@/GMO_Artist_Series_Rupert_Lally.bin"
+	.align 4
+
+	.global gmo_bank_blob_13
+gmo_bank_blob_13:
+	.incbin "@GMO_BANK_DIR@/GMO_Artist_Series_Thomas_Fang.bin"
+	.align 4
+
+	.global gmo_bank_blob_14
+gmo_bank_blob_14:
+	.incbin "@GMO_BANK_DIR@/GMO_Boss_DR_55.bin"
+	.align 4
+
+	.global gmo_bank_blob_15
+gmo_bank_blob_15:
+	.incbin "@GMO_BANK_DIR@/GMO_Casio_MT_500.bin"
+	.align 4
+
+	.global gmo_bank_blob_16
+gmo_bank_blob_16:
+	.incbin "@GMO_BANK_DIR@/GMO_Casio_RZ_1.bin"
+	.align 4
+
+	.global gmo_bank_blob_17
+gmo_bank_blob_17:
+	.incbin "@GMO_BANK_DIR@/GMO_Casio_Sk_1.bin"
+	.align 4
+
+	.global gmo_bank_blob_18
+gmo_bank_blob_18:
+	.incbin "@GMO_BANK_DIR@/GMO_Clocks.bin"
+	.align 4
+
+	.global gmo_bank_blob_19
+gmo_bank_blob_19:
+	.incbin "@GMO_BANK_DIR@/GMO_Commodore_64.bin"
+	.align 4
+
+	.global gmo_bank_blob_20
+gmo_bank_blob_20:
+	.incbin "@GMO_BANK_DIR@/GMO_Congas.bin"
+	.align 4
+
+	.global gmo_bank_blob_21
+gmo_bank_blob_21:
+	.incbin "@GMO_BANK_DIR@/GMO_Denon_CRB_90.bin"
+	.align 4
+
+	.global gmo_bank_blob_22
+gmo_bank_blob_22:
+	.incbin "@GMO_BANK_DIR@/GMO_EMU_E_Drum.bin"
+	.align 4
+
+	.global gmo_bank_blob_23
+gmo_bank_blob_23:
+	.incbin "@GMO_BANK_DIR@/GMO_Eat_Static.bin"
+	.align 4
+
+	.global gmo_bank_blob_24
+gmo_bank_blob_24:
+	.incbin "@GMO_BANK_DIR@/GMO_Farts.bin"
+	.align 4
+
+	.global gmo_bank_blob_25
+gmo_bank_blob_25:
+	.incbin "@GMO_BANK_DIR@/GMO_GLASS.bin"
+	.align 4
+
+	.global gmo_bank_blob_26
+gmo_bank_blob_26:
+	.incbin "@GMO_BANK_DIR@/GMO_Jazz_kit.bin"
+	.align 4
+
+	.global gmo_bank_blob_27
+gmo_bank_blob_27:
+	.incbin "@GMO_BANK_DIR@/GMO_Kalimba.bin"
+	.align 4
+
+	.global gmo_bank_blob_28
+gmo_bank_blob_28:
+	.incbin "@GMO_BANK_DIR@/GMO_Korg_DDM_220.bin"
+	.align 4
+
+	.global gmo_bank_blob_29
+gmo_bank_blob_29:
+	.incbin "@GMO_BANK_DIR@/GMO_Linn_LM_1.bin"
+	.align 4
+
+	.global gmo_bank_blob_30
+gmo_bank_blob_30:
+	.incbin "@GMO_BANK_DIR@/GMO_METAL.bin"
+	.align 4
+
+	.global gmo_bank_blob_31
+gmo_bank_blob_31:
+	.incbin "@GMO_BANK_DIR@/GMO_MOUTH_BANK_A.bin"
+	.align 4
+
+	.global gmo_bank_blob_32
+gmo_bank_blob_32:
+	.incbin "@GMO_BANK_DIR@/GMO_MOUTH_BANK_B.bin"
+	.align 4
+
+	.global gmo_bank_blob_33
+gmo_bank_blob_33:
+	.incbin "@GMO_BANK_DIR@/GMO_Marimba.bin"
+	.align 4
+
+	.global gmo_bank_blob_34
+gmo_bank_blob_34:
+	.incbin "@GMO_BANK_DIR@/GMO_Roland_CR_78.bin"
+	.align 4
+
+	.global gmo_bank_blob_35
+gmo_bank_blob_35:
+	.incbin "@GMO_BANK_DIR@/GMO_SNARES.bin"
+	.align 4
+
+	.global gmo_bank_blob_36
+gmo_bank_blob_36:
+	.incbin "@GMO_BANK_DIR@/GMO_Sequential_Circuits_Drumtraks.bin"
+	.align 4
+
+	.global gmo_bank_blob_37
+gmo_bank_blob_37:
+	.incbin "@GMO_BANK_DIR@/GMO_TABLA.bin"
+	.align 4
+
+	.global gmo_bank_blob_38
+gmo_bank_blob_38:
+	.incbin "@GMO_BANK_DIR@/GMO_TABLABOLMOUTH.bin"
+	.align 4
+
+	.global gmo_bank_blob_39
+gmo_bank_blob_39:
+	.incbin "@GMO_BANK_DIR@/GMO_TOM.bin"
+	.align 4
+
+	.global gmo_bank_blob_40
+gmo_bank_blob_40:
+	.incbin "@GMO_BANK_DIR@/GMO_Vermona_DRM_1.bin"
+	.align 4
+
+	.global gmo_bank_blob_41
+gmo_bank_blob_41:
+	.incbin "@GMO_BANK_DIR@/GMO_WOOD.bin"
+	.align 4
+
+	.global gmo_bank_blob_42
+gmo_bank_blob_42:
+	.incbin "@GMO_BANK_DIR@/GMO_kicks.bin"
+	.align 4

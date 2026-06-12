@@ -46,6 +46,18 @@ target_sources(Moffenzeef PRIVATE
     ${SOURCE_DIR}/src/plugin.hpp
 ) 
 
+# Embed the GMO sample banks directly into the plugin's rodata via .incbin.
+# configure_file() bakes the absolute bank directory into the .incbin paths so they
+# resolve regardless of the assembler's working directory. The data is shared const
+# (one copy for all GMO instances) and indexed in place — no per-instance buffer.
+set(GMO_BANK_DIR ${CMAKE_CURRENT_LIST_DIR}/res/wavetables/banks)
+configure_file(
+    ${GMO_BANK_DIR}/gmo_banks_data.S.in
+    ${CMAKE_CURRENT_BINARY_DIR}/gmo_banks_data.S
+    @ONLY
+)
+target_sources(Moffenzeef PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/gmo_banks_data.S)
+
 # Add includes and compile options for source repo
 target_include_directories(Moffenzeef PRIVATE ${SOURCE_DIR}/src)
 

@@ -1242,8 +1242,14 @@ void process(const ProcessArgs& args) override {
     // Only read OGG when something will actually use it: pre-fader send needs raw OGG,
     // post-fader paths need it when amount > 0 and no return is replacing it.
     // This avoids ~2 cache-cold array reads per sample when the module is idle.
+    // On MetaModule, output isConnected() always returns false (hardware doesn't track cable
+    // connections), so we always read — pop_sample() from the async-backed buffer is cheap.
     float mediaL = 0.f, mediaR = 0.f;
+#ifdef METAMODULE
+    bool needOgg = true;  // SEND is always a live pre-fader feed; output isConnected() unreliable on hardware
+#else
     bool needOgg = sendConnected || (!returnConnected && amountLog > 0.f);
+#endif
     if (needOgg) {
 #ifdef METAMODULE
         if (wavStream.is_loaded()) {

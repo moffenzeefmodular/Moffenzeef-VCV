@@ -28,7 +28,6 @@ extern Model* modelKleztizer;
 extern Model* modelTantz;
 extern Model* modelStargazer;
 extern Model* modelQuadDeviant;
-extern Model* modelTehom;
 
 struct CKSSHorizontal : app::SvgSwitch {
 	CKSSHorizontal() {
@@ -155,26 +154,4 @@ struct LEDBezelDark : SvgKnob {
 	}
 };
 
-struct TehomBigKnob : RoundBlackKnob {
-	TehomBigKnob() {
-		box.size = mm2px(Vec(11.f, 11.f));
-		shadow->box.size = box.size;
-	}
-};
-
-struct TehomKnob : SvgKnob {
-	TehomKnob() {
-		minAngle = -0.85 * M_PI;
-		maxAngle = 0.85 * M_PI;
-		setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/TehomKnob.svg")));
-	}
-};
-
-struct TehomSmallKnob : SvgKnob {
-	TehomSmallKnob() {
-		minAngle = -0.85 * M_PI;
-		maxAngle = 0.85 * M_PI;
-		setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/TehomSmallKnob.svg")));
-	}
-};
 
